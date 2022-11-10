@@ -1,0 +1,42 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "importHelpers": true,
+    "jsx": "preserve",
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "experimentalDecorators": true,
+    "sourceMap": true,
+    "baseUrl": "./",
+    "strict": true,
+    "suppressImplicitAnyIndexErrors": true,
+    "paths": {
+      "@render/*": [
+        "src/render/*"
+      ],
+      "@main/*": [
+        "src/main/*"
+      ],
+      "@libs/*": [
+        "src/libs/*"
+      ],
+      "@decorators/*": [
+        "src/decorators/*"
+      ],
+      "@src/*": [
+        "src/*"
+      ],
+      "@root/*": [
+        "./*"
+      ]
+    },
+    "allowSyntheticDefaultImports": true
+  },
+  "ts-node": {
+    "compilerOptions": {
+      "module": "CommonJS"
+    }
+  }
+}
