@@ -15,8 +15,6 @@ class Transformable extends AActor {
 
     private delta = new Vector2(0, 0)
 
-    private size = new Vector2(0, 0)
-
     private result = new Vector2(0, 0)
 
     private scale = 1
@@ -28,7 +26,6 @@ class Transformable extends AActor {
     public InitStates() {
         return {
             dom: this.dom,
-            UpdateSize: this.UpdateSize.bind(this),
         }
     }
 
@@ -38,7 +35,6 @@ class Transformable extends AActor {
 
     public Run() {
         onMounted(() => {
-            this.UpdateSize()
             this.ListenEvents()
         })
 
@@ -51,12 +47,6 @@ class Transformable extends AActor {
 
     }
 
-    public UpdateSize() {
-        if (this.dom.value) {
-            this.size.x = this.dom.value.offsetWidth
-            this.size.y = this.dom.value.offsetHeight
-        }
-    }
 
     private ListenEvents() {
         if (this.dom.value) {
@@ -100,9 +90,10 @@ class Transformable extends AActor {
             else {
                 this.scale = _scale;
             }
+            // this.dom.value.offsetWidth  this.dom.value.offsetHeight 可能会有问题
             const origin = {
-                x: (ratio - 1) * this.size.x * 0.5,
-                y: (ratio - 1) * this.size.y * 0.5
+                x: (ratio - 1) * this.dom.value.offsetWidth * 0.5,
+                y: (ratio - 1) * this.dom.value.offsetHeight * 0.5
             };
             // 计算偏移量
             this.result.x -= (ratio - 1) * (e.clientX - this.result.x) - origin.x;

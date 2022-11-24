@@ -5,17 +5,9 @@ const instance = new Transformable()
 
 const {
     dom,
-    UpdateSize
 } = instance.InitStates()
 instance.InitHooks()
 instance.Run()
-
-defineExpose({
-    /**
-     * 如果容器改变大小 调一下这个方法
-     */
-    UpdateSize
-})
 </script>
 
 <template>
