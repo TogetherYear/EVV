@@ -26,8 +26,8 @@ class Vessel extends AActor {
     }
 
     public Test() {
-        window.EN_Vibe.Max()
-        window.NE_Message.success("Together丨233")
+        General.Widget.Max()
+        Message.success("Together丨233")
     }
 }
 

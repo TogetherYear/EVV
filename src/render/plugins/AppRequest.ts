@@ -54,7 +54,7 @@ class AppRequest extends EventSystem {
                 }
                 if (response.data.code && response.data.code !== 0) {
                     console.error(response.data.message)
-                    window.NE_Message?.error(response.data.message)
+                    Message.error(response.data.message)
                 }
                 return response
             },
@@ -62,8 +62,8 @@ class AppRequest extends EventSystem {
                 // console.log(err.config)
                 // console.log(err.response)
                 if (err.response?.status == AppRequest.outCode) {
-                    window.NE_Dialog.destroyAll()
-                    window.NE_Dialog.error({
+                    Dialog.destroyAll()
+                    Dialog.error({
                         title: 'Token过期',
                         content: '请重新登录更新Token',
                         positiveText: '确定',

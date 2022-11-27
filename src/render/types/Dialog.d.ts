@@ -1,14 +1,8 @@
-export interface IDialog {
-    destroyAll: () => void
-    create: (...args: any) => void
-    success: (...args: any) => void
-    warning: (...args: any) => void
-    error: (...args: any) => void
-    info: (...args: any) => void
-}
-
-declare global {
-    interface Window {
-        NE_Dialog: IDialog
-    }
+declare namespace Dialog {
+    export function destroyAll(): void
+    export function create(...args: any): void
+    export function success(...args: any): void
+    export function warning(...args: any): void
+    export function error(...args: any): void
+    export function info(...args: any): void
 }

@@ -38,7 +38,7 @@ class AppMainWindow {
                 // 设为false则禁用devtool开发者调试工具
                 devTools: true,
                 // 预加载脚本 仅为示例
-                preload: ResourceLoad.Instance.GetPreloadByName('Vibe')
+                preload: ResourceLoad.Instance.GetPreloadByName('General')
             }
         })
         if (Configuration.Instance.configs.DEBUG) {

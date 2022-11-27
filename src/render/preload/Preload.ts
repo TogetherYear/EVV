@@ -19,13 +19,13 @@ class Preload extends EventSystem {
     }
 
     private CreateNaive() {
-        if (!window.NE_Message) {
+        if (!window.Message) {
             this.message = useMessage();
-            (window as any).NE_Message = this.message
+            (window as any).Message = this.message
         }
-        if (!window.NE_Dialog) {
+        if (!window.Dialog) {
             this.dialog = useDialog();
-            (window as any).NE_Dialog = this.dialog
+            (window as any).Dialog = this.dialog
         }
     }
 }

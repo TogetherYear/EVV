@@ -1,9 +1,5 @@
-export interface IVibe {
-    Max: () => void,
-}
-
-declare global {
-    interface Window {
-        EN_Vibe: IVibe
+declare namespace General {
+    export namespace Widget {
+        export function Max(): void
     }
 }

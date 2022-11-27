@@ -1,14 +1,9 @@
-export interface IMessage {
-    info: (content: string, ...args: any) => void
-    success: (content: string, ...args: any) => void
-    warning: (content: string, ...args: any) => void
-    error: (content: string, ...args: any) => void
-    loading: (content: string, ...args: any) => void
-    destroyAll: () => void
-}
+declare namespace Message {
+    export function info(content: string, ...args: any): void
+    export function success(content: string, ...args: any): void
+    export function warning(content: string, ...args: any): void
+    export function error(content: string, ...args: any): void
+    export function loading(content: string, ...args: any): void
+    export function destroyAll(): void
 
-declare global {
-    interface Window {
-        NE_Message: IMessage
-    }
 }
