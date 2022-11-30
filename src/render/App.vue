@@ -1,13 +1,14 @@
 <script lang="ts" setup>
 import PreloadVue from './preload/Preload.vue';
-import { darkTheme, zhCN, dateZhCN } from 'naive-ui'
+import { zhCN, dateZhCN } from 'naive-ui'
+import { themeOverrides } from './naive/index'
 import { App } from './App'
 
 App.Instance.Run()
 </script>
 
 <template>
-    <n-config-provider :locale="zhCN" :date-locale="dateZhCN" :theme="darkTheme">
+    <n-config-provider :locale="zhCN" :date-locale="dateZhCN" :theme-overrides="themeOverrides">
         <n-message-provider>
             <n-dialog-provider>
                 <PreloadVue></PreloadVue>

@@ -3,11 +3,13 @@ import {
     NConfigProvider,
     NMessageProvider,
     NDialogProvider,
-    NButton
+    NButton,
+    GlobalThemeOverrides,
+    darkTheme
 } from 'naive-ui'
 
 /**
- * naive-Ui 
+ * components
  */
 const naive = create({
     components: [
@@ -18,4 +20,20 @@ const naive = create({
     ]
 })
 
-export default naive
+/**
+ * theme
+ */
+const themeOverrides: GlobalThemeOverrides = {
+    common: {
+        primaryColor: '#333333',
+        primaryColorHover: '#333333',
+        primaryColorPressed: '#333333',
+    },
+    Message: darkTheme.Message,
+    Dialog: darkTheme.Dialog,
+    // Button: {
+    //     textColor: '#FF0000'
+    // }
+}
+
+export { naive, themeOverrides }

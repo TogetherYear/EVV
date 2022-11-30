@@ -21,7 +21,7 @@ instance.Run()
 <template>
     <div class="Vessel">
         <HeaderVue></HeaderVue>
-        <n-button strong secondary type="primary" class="Btn" @click="instance.Test()">
+        <n-button type="primary" class="Btn" @click="instance.Test()">
             Emit
         </n-button>
     </div>
