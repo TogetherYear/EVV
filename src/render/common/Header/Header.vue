@@ -1,10 +1,12 @@
 <script lang="ts" setup>
-import { inject } from 'vue';
 import { HeaderBar } from './Header'
 
-const view = inject('view') as string
-
-const bgc = inject('bgc', '#212121')
+const attribute = withDefaults(defineProps<{
+    view: string,
+    bgc?: string
+}>(), {
+    bgc: '#212121',
+})
 
 const instance = new HeaderBar()
 
@@ -14,10 +16,10 @@ const {
 </script>
 
 <template>
-    <div class="Header" :style="{ background: bgc }">
+    <div class="Header" :style="{ background: attribute.bgc }">
         <span class="MCBtns">
             <span class="btn_item" v-for="item in options" :key="item.type"
-                @click="instance.OptionClick(view, item.type)">
+                @click="instance.OptionClick(attribute.view, item.type)">
                 <img :src="item.icon" :title="item.label" class="btn_icon" />
             </span>
         </span>

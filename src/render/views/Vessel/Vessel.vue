@@ -3,8 +3,6 @@ import { provide } from 'vue';
 import HeaderVue from "@render/common/Header/Header.vue"
 import { Vessel } from './Vessel'
 
-provide('view', 'Vessel')
-
 const instance = new Vessel()
 
 provide('instance', instance)
@@ -20,7 +18,7 @@ instance.Run()
 
 <template>
     <div class="Vessel">
-        <HeaderVue></HeaderVue>
+        <HeaderVue :view="'Vessel'"></HeaderVue>
         <n-button type="primary" class="Btn" @click="instance.Test()">
             Emit
         </n-button>
