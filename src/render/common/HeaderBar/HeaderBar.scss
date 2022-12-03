@@ -1,4 +1,4 @@
-.Header {
+.HeaderBar {
     position: absolute;
     height: 26px;
     top: 0;
@@ -6,7 +6,7 @@
     width: 100%;
     -webkit-app-region: drag;
 
-    .MCBtns {
+    .Btn {
         position: absolute;
         width: 110px;
         height: 100%;
@@ -16,7 +16,7 @@
         justify-content: space-between;
         -webkit-app-region: no-drag;
 
-        .btn_item {
+        .Item {
             position: relative;
             height: 100%;
             top: 0;
@@ -31,7 +31,7 @@
                 background-color: #d61425;
             }
 
-            .btn_icon {
+            .Icon {
                 position: absolute;
                 left: 0;
                 right: 0;

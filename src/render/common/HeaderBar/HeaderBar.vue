@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { HeaderBar } from './Header'
+import { HeaderBar } from './HeaderBar'
 
 const attribute = withDefaults(defineProps<{
     view: string,
@@ -16,16 +16,16 @@ const {
 </script>
 
 <template>
-    <div class="Header" :style="{ background: attribute.bgc }">
-        <span class="MCBtns">
-            <span class="btn_item" v-for="item in options" :key="item.type"
+    <div class="HeaderBar" :style="{ background: attribute.bgc }">
+        <span class="Btn">
+            <span class="Item" v-for="item in options" :key="item.type"
                 @click="instance.OptionClick(attribute.view, item.type)">
-                <img :src="item.icon" :title="item.label" class="btn_icon" />
+                <img :src="item.icon" :title="item.label" class="Icon" />
             </span>
         </span>
     </div>
 </template>
 
 <style lang="scss" scoped>
-@import "./Header.scss";
+@import "./HeaderBar.scss";
 </style>

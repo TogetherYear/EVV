@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { provide } from 'vue';
-import HeaderVue from "@render/common/Header/Header.vue"
+import HeaderBarVue from '@render/common/HeaderBar/HeaderBar.vue';
 import { Vessel } from './Vessel'
 
 const instance = new Vessel()
@@ -18,7 +18,7 @@ instance.Run()
 
 <template>
     <div class="Vessel">
-        <HeaderVue :view="'Vessel'"></HeaderVue>
+        <HeaderBarVue :view="'Vessel'"></HeaderBarVue>
         <n-button type="primary" class="Btn" @click="instance.Test()">
             Emit
         </n-button>
