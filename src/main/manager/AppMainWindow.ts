@@ -44,7 +44,7 @@ class AppMainWindow {
         if (Configuration.Instance.configs.DEBUG) {
             this.widget.webContents.toggleDevTools()
         }
-        this.widget.loadURL(ResourceLoad.Instance.GetPageByName('/'))
+        this.widget.loadURL(ResourceLoad.Instance.GetPageByName('/Vessel'))
         // 我这里取消了默认的菜单栏 你可以自定义
         Menu.setApplicationMenu(null)
 
