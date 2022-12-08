@@ -5,5 +5,6 @@ window.General = {
         Max: () => {
             ipcRenderer.send("VesselMax")
         }
-    }
+    },
+    ipcRenderer: ipcRenderer
 }

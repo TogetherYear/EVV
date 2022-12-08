@@ -14,9 +14,6 @@ import pinia from './pinia'
 import { AppRequest } from './plugins/AppRequest'
 AppRequest.Instance.Run()
 
-import { IpcRendererHandle } from './plugins/IpcRendererHandle'
-IpcRendererHandle.Instance.Run()
-
 createApp(AppVue)
   .use(router)
   .use(naive)
