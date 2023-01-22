@@ -50,7 +50,7 @@
       "installerHeaderIcon": "./Need/Images/icon.ico",
       "createDesktopShortcut": true,
       "createStartMenuShortcut": true,
-      "shortcutName": "demo"
+      "shortcutName": "Fracture"
     }
   },
   "dependencies": {

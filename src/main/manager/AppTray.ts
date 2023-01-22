@@ -43,7 +43,7 @@ class AppTray {
                 }
             ]
             //系统托盘图标
-            this.widget = new Tray(ResourceLoad.Instance.GetImageByName('window.png'))
+            this.widget = new Tray(ResourceLoad.Instance.GetImageByName('tray.png'))
 
             //图标的上下文菜单
             const contextMenu = Menu.buildFromTemplate(trayMenuTemplate)
