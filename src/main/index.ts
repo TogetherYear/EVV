@@ -7,6 +7,8 @@ import { GlobalShortcut } from './plugins/GlobalShortcut'
 import { IpcMainHandle } from './plugins/IpcMainHandle'
 import { ResourceLoad } from './plugins/ResourceLoad'
 
+app.commandLine.appendSwitch('disable-web-security')
+
 ResourceLoad.Instance.Run()
 
 Configuration.Instance.Run()

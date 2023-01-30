@@ -31,6 +31,8 @@ class AppMainWindow {
             opacity: 1.0,
             icon: ResourceLoad.Instance.GetImageByName('window.png'),
             webPreferences: {
+                // 同源
+                webSecurity: false,
                 // elecrton v5.0.0 以后该选项默认为false,需手动设为true
                 nodeIntegration: true,
                 // elecrton v12.0.0 以后该选项默认为true,需手动设为false       与上一个合作消除require提示错误
