@@ -43,7 +43,7 @@ class AppMainWindow {
                 preload: ResourceLoad.Instance.GetPreloadByName('General')
             }
         })
-        if (Configuration.Instance.configs.DEBUG) {
+        if (Configuration.Instance.configs.Debug) {
             this.widget.webContents.toggleDevTools()
         }
         this.widget.loadURL(ResourceLoad.Instance.GetPageByName('/Vessel'))

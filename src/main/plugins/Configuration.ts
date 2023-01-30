@@ -3,9 +3,9 @@ import { ResourceLoad } from './ResourceLoad'
 
 interface IConfigs {
     /**
-     * 是否开启 DEBUG
+     * 是否开启 Debug
      */
-    DEBUG: boolean
+    Debug: boolean
 }
 
 /**
@@ -17,7 +17,7 @@ class Configuration {
     private static instance = new Configuration()
 
     public configs: IConfigs = {
-        DEBUG: false
+        Debug: false
     }
 
     public static get Instance() {
