@@ -18,23 +18,21 @@ class IpcMainHandle {
     }
 
     private ListenMainWindowIpc() {
-        ipcMain.on('VesselMin', () => {
-            AppMainWindow.Instance.widget?.minimize()
+        ipcMain.on('ApplicationMin', () => {
+            AppMainWindow.Instance.widget.minimize()
         })
 
-        ipcMain.on('VesselMax', () => {
-            if (AppMainWindow.Instance.widget) {
-                if (AppMainWindow.Instance.widget.isMaximized()) {
-                    AppMainWindow.Instance.widget.restore()
-                }
-                else {
-                    AppMainWindow.Instance.widget.maximize()
-                }
+        ipcMain.on('ApplicationMax', () => {
+            if (AppMainWindow.Instance.widget.isMaximized()) {
+                AppMainWindow.Instance.widget.restore()
+            }
+            else {
+                AppMainWindow.Instance.widget.maximize()
             }
         })
 
-        ipcMain.on('VesselClose', () => {
-            AppMainWindow.Instance.widget?.hide()
+        ipcMain.on('ApplicationClose', () => {
+            AppMainWindow.Instance.widget.hide()
         })
     }
 }

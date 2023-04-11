@@ -1,5 +1,5 @@
 import { ResourceLoad } from '@main/plugins/ResourceLoad'
-import { app, Menu, Tray } from 'electron'
+import { app, Menu, Tray, MenuItemConstructorOptions, MenuItem } from 'electron'
 import { AppMainWindow } from './AppMainWindow'
 
 class AppTray {
@@ -11,7 +11,9 @@ class AppTray {
         return this.instance
     }
 
-    public widget: Tray | null = null
+    public widget!: Tray
+
+    public menu!: Menu
 
     public Run() {
         this.CreateTray()
@@ -20,18 +22,19 @@ class AppTray {
     private CreateTray() {
         if (process.platform === 'win32') {
             //设置托盘图标和菜单
-            let trayMenuTemplate: any = [
+            let trayMenuTemplate: Array<(MenuItemConstructorOptions) | (MenuItem)> = [
                 {
                     label: 'Together丨233',
                     enabled: false
                 },
                 {
-                    type: 'separator'
+                    type: 'separator',
+
                 },
                 {
                     label: '显示主界面',
                     click: () => {
-                        AppMainWindow.Instance.widget?.show()
+                        AppMainWindow.Instance.widget.show()
                     }
                 },
                 {
@@ -46,24 +49,17 @@ class AppTray {
             this.widget = new Tray(ResourceLoad.Instance.GetImageByName('tray.png'))
 
             //图标的上下文菜单
-            const contextMenu = Menu.buildFromTemplate(trayMenuTemplate)
+            this.menu = Menu.buildFromTemplate(trayMenuTemplate)
 
             //设置此托盘图标的悬停提示内容
             this.widget.setToolTip('Electron-Vue-Vite')
 
             //设置此图标的上下文菜单
-            this.widget.setContextMenu(contextMenu)
+            this.widget.setContextMenu(this.menu)
 
-            this.widget.on('click', () => {
-
-            })
-
-            this.widget.on('double-click', () => {
-                AppMainWindow.Instance.widget?.show()
-            })
             //右键
             this.widget.on('right-click', () => {
-                this.widget?.popUpContextMenu(trayMenuTemplate)
+                this.widget.popUpContextMenu(this.menu)
             })
         }
     }

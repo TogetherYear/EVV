@@ -1,16 +1,16 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
 
-import VesselVue from '@render/views/Vessel/Vessel.vue'
+import ApplicationVue from '@render/views/Application/Application.vue'
 
 const routes: Array<RouteRecordRaw> = [
     {
         path: '/',
-        redirect: '/Vessel'
+        redirect: '/Application'
     },
     {
-        path: '/Vessel',
-        name: 'Vessel',
-        component: VesselVue
+        path: '/Application',
+        name: 'Application',
+        component: ApplicationVue
     }
 ]
 

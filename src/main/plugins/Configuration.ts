@@ -6,6 +6,10 @@ interface IConfigs {
      * 是否开启 Debug
      */
     Debug: boolean
+    /**
+     * 软件版本
+     */
+    Version: string
 }
 
 /**
@@ -17,7 +21,8 @@ class Configuration {
     private static instance = new Configuration()
 
     public configs: IConfigs = {
-        Debug: false
+        Debug: false,
+        Version: ""
     }
 
     public static get Instance() {

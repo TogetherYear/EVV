@@ -1,8 +1,8 @@
 {
-  "name": "Fracture",
+  "name": "Application",
   "version": "0.0.0",
   "main": "dist/main/index.js",
-  "description": "Fracture",
+  "description": "Application",
   "author": "Together",
   "license": "MIT",
   "scripts": {
@@ -15,8 +15,8 @@
     "build": "rimraf dist && npm run build:vue && npm run build:ele && electron-builder"
   },
   "build": {
-    "productName": "Fracture",
-    "appId": "Fracture.together.Fracture",
+    "productName": "Application",
+    "appId": "Application.together.Application",
     "asar": true,
     "directories": {
       "output": "build"
@@ -50,7 +50,7 @@
       "installerHeaderIcon": "./Need/Images/icon.ico",
       "createDesktopShortcut": true,
       "createStartMenuShortcut": true,
-      "shortcutName": "Fracture"
+      "shortcutName": "Application"
     }
   },
   "dependencies": {

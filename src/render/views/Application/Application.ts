@@ -1,7 +1,10 @@
 import { AActor } from "@libs/AActor"
 import { onMounted, onUnmounted } from "vue"
 
-class Vessel extends AActor {
+/**
+ * 这个类和我在主进程挂在到渲染进程的重名了 注意 注释重名了
+ */
+class Application extends AActor {
     public constructor() { super() }
 
     public InitStates() {
@@ -26,9 +29,8 @@ class Vessel extends AActor {
     }
 
     public Test() {
-        General.Widget.Max()
         Message.success("Together丨233")
     }
 }
 
-export { Vessel }
+export { Application }

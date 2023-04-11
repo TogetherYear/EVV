@@ -1,9 +1,9 @@
 <script lang="ts" setup>
 import { provide } from 'vue';
 import HeaderBarVue from '@render/common/HeaderBar/HeaderBar.vue';
-import { Vessel } from './Vessel'
+import { Application } from './Application'
 
-const instance = new Vessel()
+const instance = new Application()
 
 provide('instance', instance)
 
@@ -17,8 +17,8 @@ instance.Run()
 </script>
 
 <template>
-    <div class="Vessel">
-        <HeaderBarVue :view="'Vessel'"></HeaderBarVue>
+    <div class="Application">
+        <HeaderBarVue :view="'Application'"></HeaderBarVue>
         <n-button type="primary" class="Btn" @click="instance.Test()">
             Emit
         </n-button>
@@ -26,5 +26,5 @@ instance.Run()
 </template>
 
 <style lang="scss" scoped>
-@import "./Vessel.scss";
+@import "./Application.scss";
 </style>

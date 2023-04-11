@@ -11,7 +11,7 @@ class AppMainWindow {
         return this.instance
     }
 
-    public widget: BrowserWindow | null = null
+    public widget!: BrowserWindow
 
     public Run() {
         this.CreateWidget()
@@ -19,7 +19,7 @@ class AppMainWindow {
 
     private CreateWidget() {
         this.widget = new BrowserWindow({
-            title: 'Vessel',
+            title: 'Application',
             width: 1000,
             minWidth: 1000,
             height: 560,
@@ -40,19 +40,17 @@ class AppMainWindow {
                 // 设为false则禁用devtool开发者调试工具
                 devTools: true,
                 // 预加载脚本 仅为示例
-                preload: ResourceLoad.Instance.GetPreloadByName('General')
+                preload: ResourceLoad.Instance.GetPreloadByName('Application')
             }
         })
         if (Configuration.Instance.configs.Debug) {
             this.widget.webContents.toggleDevTools()
         }
-        this.widget.loadURL(ResourceLoad.Instance.GetPageByName('/Vessel'))
+
+        this.widget.loadURL(ResourceLoad.Instance.GetPageByName('/Application'))
+
         // 我这里取消了默认的菜单栏 你可以自定义
         Menu.setApplicationMenu(null)
-
-        this.widget.on('closed', () => {
-            this.widget = null
-        })
     }
 }
 

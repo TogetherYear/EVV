@@ -1,7 +1,8 @@
-import { ref } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 import minIcon from '@render/assets/mc/min.png'
 import maxIcon from '@render/assets/mc/max.png'
 import closeIcon from '@render/assets/mc/close.png'
+import { AActor } from '@libs/AActor'
 
 interface IOptionItem {
     type: string,
@@ -9,8 +10,10 @@ interface IOptionItem {
     label: string
 }
 
-class HeaderBar {
-    public constructor() { }
+class HeaderBar extends AActor {
+    public constructor() {
+        super()
+    }
 
     private options = ref<Array<IOptionItem>>([
         { type: 'Min', icon: minIcon, label: '最小化' },
@@ -19,14 +22,31 @@ class HeaderBar {
     ])
 
     public OptionClick(view: string, type: string) {
-        console.log(`${view}${type}`)
-        General.ipcRenderer.send(`${view}${type}`)
+        Application.ipcRenderer.send(`${view}${type}`)
     }
 
     public InitStates() {
         return {
             options: this.options,
         }
+    }
+
+    public InitHooks() {
+
+    }
+
+    public Run() {
+        onMounted(() => {
+
+        })
+
+        onUnmounted(() => {
+            this.Destroy()
+        })
+    }
+
+    protected Destroy() {
+
     }
 }
 

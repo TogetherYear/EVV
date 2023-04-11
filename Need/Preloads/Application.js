@@ -1,9 +1,9 @@
 const { ipcRenderer } = require("electron")
 
-window.General = {
+window.Application = {
     Widget: {
         Max: () => {
-            ipcRenderer.send("VesselMax")
+            ipcRenderer.send("ApplicationMax")
         }
     },
     ipcRenderer: ipcRenderer
