@@ -2,7 +2,7 @@ import { ref, onMounted, onUnmounted } from 'vue'
 import minIcon from '@render/assets/mc/min.png'
 import maxIcon from '@render/assets/mc/max.png'
 import closeIcon from '@render/assets/mc/close.png'
-import { AActor } from '@libs/AActor'
+import { AActor } from '@render/libs/AActor'
 
 interface IOptionItem {
     type: string,

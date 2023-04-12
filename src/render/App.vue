@@ -4,6 +4,10 @@ import { zhCN, dateZhCN } from 'naive-ui'
 import { themeOverrides } from './naive/index'
 import { App } from './App'
 
+const {
+
+} = App.Instance.InitStates()
+App.Instance.InitHooks()
 App.Instance.Run()
 </script>
 

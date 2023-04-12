@@ -1,4 +1,4 @@
-import { AActor } from "@libs/AActor"
+import { AActor } from "@render/libs/AActor"
 import { Vector2 } from "three"
 import { onMounted, onUnmounted, ref } from "vue"
 

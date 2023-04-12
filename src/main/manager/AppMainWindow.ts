@@ -1,17 +1,18 @@
 import { BrowserWindow, Menu } from 'electron'
 import { ResourceLoad } from '@main/plugins/ResourceLoad'
 import { Configuration } from '@main/plugins/Configuration'
+import { TWindow } from '@main/libs/TWindow'
 
-class AppMainWindow {
-    private constructor() { }
+class AppMainWindow extends TWindow {
+    private constructor() {
+        super()
+    }
 
     private static instance: AppMainWindow = new AppMainWindow()
 
     public static get Instance(): AppMainWindow {
         return this.instance
     }
-
-    public widget!: BrowserWindow
 
     public Run() {
         this.CreateWidget()
