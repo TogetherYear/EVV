@@ -1,4 +1,3 @@
-import { AppMainWindow } from "@main/manager/AppMainWindow"
 import { ipcMain } from "electron"
 
 /**
@@ -18,22 +17,7 @@ class IpcMainHandle {
     }
 
     private ListenMainWindowIpc() {
-        ipcMain.on('ApplicationMin', () => {
-            AppMainWindow.Instance.widget.minimize()
-        })
 
-        ipcMain.on('ApplicationMax', () => {
-            if (AppMainWindow.Instance.widget.isMaximized()) {
-                AppMainWindow.Instance.widget.restore()
-            }
-            else {
-                AppMainWindow.Instance.widget.maximize()
-            }
-        })
-
-        ipcMain.on('ApplicationClose', () => {
-            AppMainWindow.Instance.widget.hide()
-        })
     }
 }
 

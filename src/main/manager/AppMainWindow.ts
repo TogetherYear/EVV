@@ -1,4 +1,4 @@
-import { BrowserWindow, Menu } from 'electron'
+import { BrowserWindow, Menu, ipcMain } from 'electron'
 import { ResourceLoad } from '@main/plugins/ResourceLoad'
 import { Configuration } from '@main/plugins/Configuration'
 import { TWindow } from '@main/libs/TWindow'
@@ -14,8 +14,10 @@ class AppMainWindow extends TWindow {
         return this.instance
     }
 
-    public Run() {
+    public async Run() {
         this.CreateWidget()
+        await this.SetValues()
+        this.ListenEvents()
     }
 
     private CreateWidget() {
@@ -41,17 +43,44 @@ class AppMainWindow extends TWindow {
                 // 设为false则禁用devtool开发者调试工具
                 devTools: true,
                 // 预加载脚本 仅为示例
-                preload: ResourceLoad.Instance.GetPreloadByName('Application')
+                preload: ResourceLoad.Instance.GetPreloadByName('Renderer')
             }
         })
         if (Configuration.Instance.configs.Debug) {
             this.widget.webContents.toggleDevTools()
         }
-
         this.widget.loadURL(ResourceLoad.Instance.GetPageByName('/Application'))
 
         // 我这里取消了默认的菜单栏 你可以自定义
         Menu.setApplicationMenu(null)
+    }
+
+    private SetValues() {
+        return new Promise((resolve, reject) => {
+            this.widget.webContents.executeJavaScript(`window.Renderer.widget.id = ${this.widget.id}`, true)
+                .then((result) => {
+                    resolve('success')
+                })
+        })
+    }
+
+    private ListenEvents() {
+        ipcMain.on(`ApplicationMin?${this.widget.id}`, () => {
+            this.widget.minimize()
+        })
+
+        ipcMain.on(`ApplicationMax?${this.widget.id}`, () => {
+            if (this.widget.isMaximized()) {
+                this.widget.restore()
+            }
+            else {
+                this.widget.maximize()
+            }
+        })
+
+        ipcMain.on(`ApplicationClose?${this.widget.id}`, () => {
+            this.widget.hide()
+        })
     }
 }
 
