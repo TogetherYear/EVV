@@ -82,7 +82,7 @@ function configFactory(env = 'production') {
         ]
       })
     ],
-    external: [...builtins(), 'electron']
+    external: [...builtins(), 'electron', 'screenshot-desktop']
   }
 
   return options

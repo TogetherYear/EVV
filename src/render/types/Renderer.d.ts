@@ -4,4 +4,6 @@ declare namespace Renderer {
     }
 
     export const ipcRenderer: Electron.IpcRenderer
+
+    export function Screenshot(): Promise<Buffer>;
 }
