@@ -22,7 +22,7 @@ class HeaderBar extends AActor {
     ])
 
     public OptionClick(view: string, type: string) {
-        Renderer.ipcRenderer.send(`${view}${type}?${Renderer.widget.id}`)
+        Renderer.ipcRenderer.send(`Widget:${view}${type}?${Renderer.widget.id}`)
     }
 
     public InitStates() {

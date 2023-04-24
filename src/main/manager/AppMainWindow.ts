@@ -65,11 +65,11 @@ class AppMainWindow extends TWindow {
     }
 
     private ListenEvents() {
-        ipcMain.on(`ApplicationMin?${this.widget.id}`, () => {
+        ipcMain.on(`Widget:ApplicationMin?${this.widget.id}`, () => {
             this.widget.minimize()
         })
 
-        ipcMain.on(`ApplicationMax?${this.widget.id}`, () => {
+        ipcMain.on(`Widget:ApplicationMax?${this.widget.id}`, () => {
             if (this.widget.isMaximized()) {
                 this.widget.restore()
             }
@@ -78,7 +78,7 @@ class AppMainWindow extends TWindow {
             }
         })
 
-        ipcMain.on(`ApplicationClose?${this.widget.id}`, () => {
+        ipcMain.on(`Widget:ApplicationClose?${this.widget.id}`, () => {
             this.widget.hide()
         })
     }
