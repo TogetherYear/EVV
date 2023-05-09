@@ -46,7 +46,7 @@ class AppMainWindow extends TWindow {
                 preload: ResourceLoad.Instance.GetPreloadByName('Renderer')
             }
         })
-        if (Configuration.Instance.configs.Debug) {
+        if (Configuration.Instance.configs.debug) {
             this.widget.webContents.toggleDevTools()
         }
         this.widget.loadURL(ResourceLoad.Instance.GetPageByName('/Application'))
