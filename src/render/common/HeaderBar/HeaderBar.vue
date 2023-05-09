@@ -2,7 +2,6 @@
 import { HeaderBar } from './HeaderBar'
 
 const attribute = withDefaults(defineProps<{
-    view: string,
     bgc?: string
 }>(), {
     bgc: '#212121',
@@ -20,8 +19,7 @@ instance.Run()
 <template>
     <div class="HeaderBar" :style="{ background: attribute.bgc }">
         <span class="Btn">
-            <span class="Item" v-for="item in options" :key="item.type"
-                @click="instance.OptionClick(attribute.view, item.type)">
+            <span class="Item" v-for="item in options" :key="item.type" @click="instance.OptionClick(item.type)">
                 <img :src="item.icon" :title="item.label" class="Icon" />
             </span>
         </span>

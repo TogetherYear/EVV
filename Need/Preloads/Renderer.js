@@ -5,18 +5,26 @@ window.Renderer = {
     widget: {
         id: -1
     },
-    ipcRenderer: ipcRenderer,
-    Screenshot: () => {
-        return new Promise((resolve, reject) => {
-            ipcRenderer.invoke('Tool:Screenshot').then(buffer => {
-                // setTimeout(() => {
-                //     fs.writeFile('文件位置/文件名.png', buffer, (err) => {
-                //         if (err) throw err;
-                //         console.log('The file has been saved!');
-                //     });
-                // }, 2000);
-                resolve(buffer)
-            })
-        })
-    }
+    Ipc: {
+        Send: (channel, ...args) => {
+            return ipcRenderer.send(channel, ...args)
+        },
+        Invoke: (channel, ...args) => {
+            return ipcRenderer.invoke(channel, ...args)
+        },
+    },
+    Screenshot: {
+        GetFocus: async () => {
+            const buffer = await ipcRenderer.invoke('Tool:Screenshot:Focus')
+            return buffer
+        },
+        GetByIndex: async (index) => {
+            const buffer = await ipcRenderer.invoke(`Tool:Screenshot:Index`, index)
+            return buffer
+        },
+        GetAll: async () => {
+            const buffers = await ipcRenderer.invoke("Tool:Screenshot:All")
+            return buffers
+        }
+    },
 }

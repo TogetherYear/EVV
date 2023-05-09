@@ -21,8 +21,8 @@ class HeaderBar extends AActor {
         { type: 'Close', icon: closeIcon, label: '隐藏' }
     ])
 
-    public OptionClick(view: string, type: string) {
-        Renderer.ipcRenderer.send(`Widget:${view}${type}?${Renderer.widget.id}`)
+    public OptionClick(type: string) {
+        Renderer.Ipc.Send(`Widget:${type}:${Renderer.widget.id}`)
     }
 
     public InitStates() {
