@@ -9,7 +9,7 @@ export default defineConfig({
     plugins: [
         vue({
             script: {
-                reactivityTransform: true
+
             }
         }),
         electron()
