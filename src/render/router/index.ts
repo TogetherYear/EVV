@@ -1,16 +1,24 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
 
-import ApplicationVue from '@render/views/Application/Application.vue'
-
 const routes: Array<RouteRecordRaw> = [
     {
         path: '/',
         redirect: '/Application'
     },
     {
+        path: '/:pathMatch(.*)',
+        name: 'Empty',
+        redirect: '/404'
+    },
+    {
+        path: '/404',
+        name: '404',
+        component: () => import('@render/views/Empty/Empty.vue')
+    },
+    {
         path: '/Application',
         name: 'Application',
-        component: ApplicationVue
+        component: () => import('@render/views/Application/Application.vue'),
     }
 ]
 
