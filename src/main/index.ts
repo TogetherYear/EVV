@@ -7,27 +7,40 @@ import { GlobalShortcut } from './plugins/GlobalShortcut'
 import { IpcMainHandle } from './plugins/IpcMainHandle'
 import { ResourceLoad } from './plugins/ResourceLoad'
 
-app.commandLine.appendSwitch('disable-web-security')
+const additionalData = { key: "Together" }
+const lock = app.requestSingleInstanceLock(additionalData)
 
-ResourceLoad.Instance.Run()
+// 只允许唯一实例
+if (!lock) {
+    app.quit()
+}
+else {
+    app.commandLine.appendSwitch('disable-web-security')
 
-Configuration.Instance.Run()
+    ResourceLoad.Instance.Run()
 
-IpcMainHandle.Instance.Run()
+    Configuration.Instance.Run()
 
-app.on('ready', () => {
-    GlobalShortcut.Instance.Run()
-    CustomProtocol.Instance.Run()
-    AppMainWindow.Instance.Run()
-    AppTray.Instance.Run()
-})
+    IpcMainHandle.Instance.Run()
 
-app.on('window-all-closed', () => {
-    if (process.platform !== 'darwin') {
-        app.quit()
-    }
-})
+    app.on('ready', () => {
+        GlobalShortcut.Instance.Run()
+        CustomProtocol.Instance.Run()
+        AppMainWindow.Instance.Run()
+        AppTray.Instance.Run()
+    })
 
-app.on('will-quit', () => {
-    globalShortcut.unregisterAll()
-})
+    app.on('window-all-closed', () => {
+        if (process.platform !== 'darwin') {
+            app.quit()
+        }
+    })
+
+    app.on('will-quit', () => {
+        globalShortcut.unregisterAll()
+    })
+
+    app.on('second-instance', () => {
+
+    })
+}
