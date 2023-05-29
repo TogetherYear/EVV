@@ -55,6 +55,7 @@
   },
   "dependencies": {
     "axios": "^0.21.4",
+    "electron-edge-js": "^23.0.0",
     "pinia": "^2.0.18",
     "screenshot-desktop": "^0.0.0-development",
     "three": "^0.139.2"

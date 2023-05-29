@@ -1,7 +1,6 @@
 const { ipcRenderer } = require("electron")
-// const fs = require("fs")
 
-window.Renderer = {
+const Renderer = {
     widget: {
         id: -1
     },
@@ -27,4 +26,12 @@ window.Renderer = {
             return buffers
         }
     },
+    Edge: {
+        ExeFromCode: async (options) => {
+            const result = await ipcRenderer.invoke('Tool:Edge:Code', options)
+            return result
+        },
+    }
 }
+
+window.Renderer = Renderer

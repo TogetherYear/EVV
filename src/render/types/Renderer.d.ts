@@ -40,4 +40,15 @@ declare namespace Renderer {
          */
         export function GetAll(): Promise<Array<Buffer>>
     }
+
+    /**
+     * C# 代码 CLR
+     */
+    export namespace Edge {
+        /**
+         * 从代码执行
+         */
+        export function ExeFromCode(options: { code: string, input: any }): Promise<any>
+    }
+
 }
