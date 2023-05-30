@@ -26,12 +26,6 @@ const Renderer = {
             return buffers
         }
     },
-    Edge: {
-        ExeFromCode: async (options) => {
-            const result = await ipcRenderer.invoke('Tool:Edge:Code', options)
-            return result
-        },
-    }
 }
 
 window.Renderer = Renderer

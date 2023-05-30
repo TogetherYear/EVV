@@ -26,18 +26,7 @@ class Application extends AActor {
     }
 
     public Test() {
-        // Message.success("Together丨233")
-
-        Renderer.Edge.ExeFromCode({
-            code: `
-                    async (input) => { 
-                        return ".NET Welcomes " + input.ToString(); 
-                    }
-                `,
-            input: 'Together'
-        }).then(res => {
-            console.log(res)
-        })
+        Message.success("Together丨233")
     }
 }
 
