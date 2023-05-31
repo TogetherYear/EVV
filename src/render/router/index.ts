@@ -1,7 +1,4 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
-import EmptyVue from '@render/views/Empty/Empty.vue'
-import ApplicationVue from '@render/views/Application/Application.vue'
-import ScreenshotVue from '@render/views/Screenshot/Screenshot.vue'
 
 const routes: Array<RouteRecordRaw> = [
     {
@@ -17,17 +14,17 @@ const routes: Array<RouteRecordRaw> = [
     {
         path: '/404',
         name: '404',
-        component: EmptyVue,
+        component: () => import('@render/views/Empty/Empty.vue'),
     },
     {
         path: '/Application',
         name: 'Application',
-        component: ApplicationVue,
+        component: () => import('@render/views/Application/Application.vue'),
     },
     {
         path: '/Screenshot',
         name: 'Screenshot',
-        component: ScreenshotVue,
+        component: () => import('@render/views/Screenshot/Screenshot.vue'),
     },
 ]
 

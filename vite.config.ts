@@ -3,18 +3,16 @@ import vue from '@vitejs/plugin-vue'
 import { join } from 'path'
 import electron from 'vitejs-plugin-electron'
 
-const root = join(__dirname, 'src/render')
-// https://vitejs.dev/config/
 export default defineConfig({
     plugins: [
         vue(),
         electron()
     ],
-    root,
-    base: './', // index.html 中静态资源加载位置
+    root: join(__dirname, 'src/render'),
+    base: './',
     envDir: join(__dirname, 'env'),
     server: {
-        port: 6768 // 开发环境的启动端口
+        port: 6768
     },
     resolve: {
         alias: {
@@ -29,18 +27,13 @@ export default defineConfig({
     build: {
         outDir: join(__dirname, 'dist/render'),
         emptyOutDir: true,
-        // minify: false,
-        // commonjsOptions: {},
+        minify: 'esbuild',
         assetsDir: '', // 相对路径 加载问题
         sourcemap: false,
-        rollupOptions: {
-            output: {
-                format: 'cjs'
-            },
-            external: ['electron']
-        }
+        target: 'esnext',
     },
-    optimizeDeps: {
-        exclude: ['electron']
-    }
+    // optimizeDeps: {
+    //     include: ['axios'],
+    //     exclude: ['electron']
+    // }
 })

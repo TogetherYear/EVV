@@ -63,7 +63,10 @@ class AppMainWindow extends TWindow {
 
     private SetValues() {
         return new Promise((resolve, reject) => {
-            this.widget.webContents.executeJavaScript(`window.Renderer.widget.id = ${this.widget.id}`, true)
+            this.widget.webContents.executeJavaScript(
+                `
+                    window.Renderer.widget.id = ${this.widget.id};
+                `, true)
                 .then((result) => {
                     resolve('success')
                 })
