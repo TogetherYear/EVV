@@ -23,6 +23,7 @@ class AppMainWindow extends TWindow {
     private CreateWidget() {
         this.widget = new BrowserWindow({
             title: 'Application',
+            show: false,
             width: 1000,
             minWidth: 1000,
             height: 560,
@@ -46,6 +47,11 @@ class AppMainWindow extends TWindow {
                 preload: ResourceLoad.Instance.GetPreloadByName('Renderer')
             }
         })
+
+        this.widget.once('ready-to-show', () => {
+            this.widget.show()
+        })
+
         if (Configuration.Instance.configs.debug) {
             this.widget.webContents.toggleDevTools()
         }
