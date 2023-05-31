@@ -7,11 +7,7 @@ const root = join(__dirname, 'src/render')
 // https://vitejs.dev/config/
 export default defineConfig({
     plugins: [
-        vue({
-            script: {
-
-            }
-        }),
+        vue(),
         electron()
     ],
     root,
