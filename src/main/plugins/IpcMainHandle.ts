@@ -1,7 +1,8 @@
 import { Screenshot } from "@main/common/Screenshot"
 import { AppMainWindow } from "@main/manager/AppMainWindow"
-import { BrowserWindow, ipcMain, screen } from "electron"
+import { BrowserWindow, Notification, app, ipcMain, nativeImage, screen, shell } from "electron"
 import ScreenshotDesktop from 'screenshot-desktop'
+import { ResourceLoad } from "./ResourceLoad"
 
 /**
  * 主线程 Ipc 监听 
@@ -30,15 +31,21 @@ class IpcMainHandle {
                 case AppMainWindow.Instance.widget.webContents.id: AppMainWindow.Instance.OnMin(); return;
             }
         })
+
         ipcMain.on(`Renderer:Widget:Max:id`, (e) => {
             switch (e.sender.id) {
                 case AppMainWindow.Instance.widget.webContents.id: AppMainWindow.Instance.OnMax(); return;
             }
         })
+
         ipcMain.on(`Renderer:Widget:Close:id`, (e) => {
             switch (e.sender.id) {
                 case AppMainWindow.Instance.widget.webContents.id: AppMainWindow.Instance.OnClose(); return;
             }
+        })
+
+        ipcMain.on(`Renderer:Tool:Shell:Beep`, () => {
+            shell.beep()
         })
     }
 
@@ -86,6 +93,28 @@ class IpcMainHandle {
         ipcMain.handle(`Renderer:Tool:Widget:Bounds`, (e) => {
             const widget = BrowserWindow.fromWebContents(e.sender) as BrowserWindow
             return widget.getBounds()
+        })
+
+        ipcMain.handle(`Renderer:Tool:Notification:Show`, async (e, options: { title?: string, body?: string, silent?: boolean }) => {
+            return await new Promise((resolve, reject) => {
+                if (Notification.isSupported()) {
+                    const icon = ResourceLoad.Instance.GetImageByName('tray.png')
+                    const n = new Notification({ ...options, icon })
+                    n.once('click', () => {
+                        resolve('click')
+                    })
+                    n.once('close', () => {
+                        resolve("close")
+                    })
+                    n.once('failed', () => {
+                        resolve('fail')
+                    })
+                    n.show()
+                }
+                else {
+                    resolve("fail")
+                }
+            })
         })
     }
 }

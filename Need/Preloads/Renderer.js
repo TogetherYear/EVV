@@ -48,6 +48,16 @@ const Renderer = {
             return buffer
         }
     },
+    Notification: {
+        Show: async (options = {}) => {
+            return ipcRenderer.invoke(`Renderer:Tool:Notification:Show`, options)
+        }
+    },
+    Shell: {
+        Beep: () => {
+            return ipcRenderer.send(`Renderer:Tool:Shell:Beep`)
+        },
+    }
 }
 
 window.Renderer = Renderer

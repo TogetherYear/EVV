@@ -1,5 +1,6 @@
 import { app } from 'electron'
 import path from 'path'
+import fs from 'fs'
 
 class ResourceLoad {
     private constructor() { }
@@ -11,7 +12,15 @@ class ResourceLoad {
     }
 
     public Run() {
+        this.InitBat()
+    }
 
+    private InitBat() {
+        const std = path.join(app.getPath('temp'), '/screenCapture')
+        const files = fs.readdirSync(std)
+        if (files.length == 0) {
+            fs.rmdirSync(std)
+        }
     }
 
     public GetImageByName(name: string) {

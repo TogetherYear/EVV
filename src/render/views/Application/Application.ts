@@ -29,6 +29,16 @@ class Application extends AActor {
         Renderer.Screenshot.GetEdit().then(res => {
             console.log(res)
         })
+        // Renderer.Notification.Show({
+        //     title: 'Together',
+        //     body: '一条简短的通知一条简短的通知一条简短的通知一条简短的通知一条简短的通知一条简短的通知一条简短的通知一条简短的通知',
+        // }).then((type) => {
+        //     console.log(type)
+        // })
+        // Renderer.Shell.Beep()
+        // Renderer.Screenshot.GetFocus().then(res => {
+        //     console.log(res)
+        // })
         Message.success("Together丨233")
     }
 }

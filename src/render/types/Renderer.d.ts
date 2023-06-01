@@ -66,4 +66,24 @@ declare namespace Renderer {
          */
         export function GetEdit(): Promise<Buffer | undefined>
     }
+
+    /**
+     * 通知
+     */
+    export namespace Notification {
+        /**
+         * 生成新的操作系统通知
+         */
+        export function Show(options?: { title?: string, body?: string, silent?: boolean }): Promise<'fail' | 'click' | 'close'>
+    }
+
+    /**
+     * 额外集成
+     */
+    export namespace Shell {
+        /**
+         * 播放提示音
+         */
+        export function Beep(): void
+    }
 }
