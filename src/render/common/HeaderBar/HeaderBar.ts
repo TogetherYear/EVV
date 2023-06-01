@@ -22,7 +22,15 @@ class HeaderBar extends AActor {
     ])
 
     public OptionClick(type: string) {
-        Renderer.Ipc.Send(`Widget:${type}:${Renderer.widget.id}`)
+        if (type == 'Min') {
+            Renderer.widget.Min()
+        }
+        else if (type == 'Max') {
+            Renderer.widget.Max()
+        }
+        else if (type == 'Close') {
+            Renderer.widget.Close()
+        }
     }
 
     public InitStates() {

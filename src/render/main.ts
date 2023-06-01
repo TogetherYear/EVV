@@ -4,9 +4,13 @@ import AppVue from './App.vue'
 
 import router from './router'
 
-//防止一些控制台的Warning提示：比较碍眼
+import { Browser, Electron } from './Config'
+
 if (window.process) {
-    window.process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true'
+    Electron()
+}
+else {
+    Browser()
 }
 
 import { naive } from "./naive"

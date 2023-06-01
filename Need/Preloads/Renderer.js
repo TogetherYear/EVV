@@ -2,7 +2,15 @@ const { ipcRenderer } = require("electron")
 
 const Renderer = {
     widget: {
-        id: -1
+        Min: () => {
+            return ipcRenderer.send(`Renderer:Widget:Min:id`)
+        },
+        Max: () => {
+            return ipcRenderer.send(`Renderer:Widget:Max:id`)
+        },
+        Close: () => {
+            return ipcRenderer.send(`Renderer:Widget:Close:id`)
+        }
     },
     Ipc: {
         Send: (channel, ...args) => {
@@ -14,19 +22,19 @@ const Renderer = {
     },
     Screenshot: {
         GetFocus: async () => {
-            const buffer = await ipcRenderer.invoke('Tool:Screenshot:Focus')
+            const buffer = await ipcRenderer.invoke('Renderer:Tool:Screenshot:Focus')
             return buffer
         },
         GetByIndex: async (index) => {
-            const buffer = await ipcRenderer.invoke(`Tool:Screenshot:Index`, index)
+            const buffer = await ipcRenderer.invoke(`Renderer:Tool:Screenshot:Index`, index)
             return buffer
         },
         GetAll: async () => {
-            const buffers = await ipcRenderer.invoke("Tool:Screenshot:All")
+            const buffers = await ipcRenderer.invoke("Renderer:Tool:Screenshot:All")
             return buffers
         },
         GetEdit: async () => {
-            const buffer = await ipcRenderer.invoke("Tool:Screenshot:Edit")
+            const buffer = await ipcRenderer.invoke("Renderer:Tool:Screenshot:Edit")
             return buffer
         }
     },

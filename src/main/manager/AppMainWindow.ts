@@ -16,8 +16,6 @@ class AppMainWindow extends TWindow {
 
     public async Run() {
         this.CreateWidget()
-        await this.SetValues()
-        this.ListenEvents()
     }
 
     private CreateWidget() {
@@ -61,35 +59,21 @@ class AppMainWindow extends TWindow {
         Menu.setApplicationMenu(null)
     }
 
-    private SetValues() {
-        return new Promise((resolve, reject) => {
-            this.widget.webContents.executeJavaScript(
-                `
-                    window.Renderer.widget.id = ${this.widget.id};
-                `, true)
-                .then((result) => {
-                    resolve('success')
-                })
-        })
+    public OnMin() {
+        this.widget.minimize()
     }
 
-    private ListenEvents() {
-        ipcMain.on(`Widget:Min:${this.widget.id}`, () => {
-            this.widget.minimize()
-        })
+    public OnMax() {
+        if (this.widget.isMaximized()) {
+            this.widget.restore()
+        }
+        else {
+            this.widget.maximize()
+        }
+    }
 
-        ipcMain.on(`Widget:Max:${this.widget.id}`, () => {
-            if (this.widget.isMaximized()) {
-                this.widget.restore()
-            }
-            else {
-                this.widget.maximize()
-            }
-        })
-
-        ipcMain.on(`Widget:Close:${this.widget.id}`, () => {
-            this.widget.hide()
-        })
+    public OnClose() {
+        this.widget.hide()
     }
 }
 

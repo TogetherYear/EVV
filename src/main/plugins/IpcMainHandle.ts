@@ -1,3 +1,4 @@
+import { AppMainWindow } from "@main/manager/AppMainWindow"
 import { ipcMain, screen } from "electron"
 import Screenshot from 'screenshot-desktop'
 
@@ -18,22 +19,41 @@ class IpcMainHandle {
     }
 
     public Run() {
-        this.ListenMainWindowIpc()
+        this.ListenIpcSend()
+        this.ListenIpcHandle()
     }
 
-    private ListenMainWindowIpc() {
-        ipcMain.handle(`Tool:Screenshot:All`, async (e) => {
+    private ListenIpcSend() {
+        ipcMain.on(`Renderer:Widget:Min:id`, (e) => {
+            switch (e.sender.id) {
+                case AppMainWindow.Instance.widget.webContents.id: AppMainWindow.Instance.OnMin(); return;
+            }
+        })
+        ipcMain.on(`Renderer:Widget:Max:id`, (e) => {
+            switch (e.sender.id) {
+                case AppMainWindow.Instance.widget.webContents.id: AppMainWindow.Instance.OnMax(); return;
+            }
+        })
+        ipcMain.on(`Renderer:Widget:Close:id`, (e) => {
+            switch (e.sender.id) {
+                case AppMainWindow.Instance.widget.webContents.id: AppMainWindow.Instance.OnClose(); return;
+            }
+        })
+    }
+
+    private ListenIpcHandle() {
+        ipcMain.handle(`Renderer:Tool:Screenshot:All`, async (e) => {
             const buffers = await Screenshot.all()
             return buffers
         })
 
-        ipcMain.handle(`Tool:Screenshot:Index`, async (e, index: number) => {
+        ipcMain.handle(`Renderer:Tool:Screenshot:Index`, async (e, index: number) => {
             const list = await Screenshot.listDisplays()
             const buffer = await Screenshot({ format: 'png', screen: list[index].id })
             return buffer
         })
 
-        ipcMain.handle(`Tool:Screenshot:Focus`, async (e) => {
+        ipcMain.handle(`Renderer:Tool:Screenshot:Focus`, async (e) => {
             const current = screen.getDisplayNearestPoint(screen.getCursorScreenPoint())
             const list = await Screenshot.listDisplays()
             const id = list.find(l => l.left == current.bounds.x && l.top == current.bounds.y)?.id
@@ -41,8 +61,21 @@ class IpcMainHandle {
             return buffer
         })
 
-        ipcMain.handle(`Tool:Screenshot:Edit`, async () => {
-            return "Tool:Screenshot:Edit"
+        ipcMain.handle(`Renderer:Tool:Screenshot:Edit`, async (e) => {
+            if (this.signal.screenshotEdit) {
+                return undefined
+            }
+            else {
+                this.signal.screenshotEdit = true
+                const result = await new Promise((resolve, reject) => {
+                    setTimeout(() => {
+                        resolve("Renderer:Tool:Screenshot:Edit")
+                    }, 5000);
+                })
+                this.signal.screenshotEdit = false
+                return result
+            }
+
         })
     }
 }

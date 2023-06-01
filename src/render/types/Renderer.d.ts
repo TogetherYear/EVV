@@ -4,9 +4,17 @@ declare namespace Renderer {
      */
     export namespace widget {
         /**
-         * 当前渲染进程窗口的唯一id
+         * 最小化
          */
-        export const id: number
+        export function Min(): void
+        /**
+         * 最大化或者恢复最大化之前状态
+         */
+        export function Max(): void
+        /**
+         * 关闭
+         */
+        export function Close(): void
     }
 
     /**
