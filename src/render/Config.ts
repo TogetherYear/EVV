@@ -17,7 +17,10 @@ function Browser() {
             },
             Close: () => {
                 return CB()
-            }
+            },
+            GetBounds: async () => {
+                return RB()
+            },
         },
         Ipc: {
             Send: (channel: string, ...args: Array<any>) => {
@@ -26,6 +29,11 @@ function Browser() {
             Invoke: (channel: string, ...args: Array<any>) => {
                 return RB()
             },
+        },
+        Screen: {
+            GetHoldCursor: async () => {
+                return RB()
+            }
         },
         Screenshot: {
             GetFocus: async () => {

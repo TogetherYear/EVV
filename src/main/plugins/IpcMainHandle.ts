@@ -1,6 +1,7 @@
+import { Screenshot } from "@main/common/Screenshot"
 import { AppMainWindow } from "@main/manager/AppMainWindow"
-import { ipcMain, screen } from "electron"
-import Screenshot from 'screenshot-desktop'
+import { BrowserWindow, ipcMain, screen } from "electron"
+import ScreenshotDesktop from 'screenshot-desktop'
 
 /**
  * 主线程 Ipc 监听 
@@ -43,21 +44,21 @@ class IpcMainHandle {
 
     private ListenIpcHandle() {
         ipcMain.handle(`Renderer:Tool:Screenshot:All`, async (e) => {
-            const buffers = await Screenshot.all()
+            const buffers = await ScreenshotDesktop.all()
             return buffers
         })
 
         ipcMain.handle(`Renderer:Tool:Screenshot:Index`, async (e, index: number) => {
-            const list = await Screenshot.listDisplays()
-            const buffer = await Screenshot({ format: 'png', screen: list[index].id })
+            const list = await ScreenshotDesktop.listDisplays()
+            const buffer = await ScreenshotDesktop({ format: 'png', screen: list[index].id })
             return buffer
         })
 
         ipcMain.handle(`Renderer:Tool:Screenshot:Focus`, async (e) => {
             const current = screen.getDisplayNearestPoint(screen.getCursorScreenPoint())
-            const list = await Screenshot.listDisplays()
-            const id = list.find(l => l.left == current.bounds.x && l.top == current.bounds.y)?.id
-            const buffer = await Screenshot({ format: 'png', screen: id })
+            const list = await ScreenshotDesktop.listDisplays()
+            const id = list.find(l => l.left == current.bounds.x)?.id
+            const buffer = await ScreenshotDesktop({ format: 'png', screen: id })
             return buffer
         })
 
@@ -68,14 +69,23 @@ class IpcMainHandle {
             else {
                 this.signal.screenshotEdit = true
                 const result = await new Promise((resolve, reject) => {
-                    setTimeout(() => {
-                        resolve("Renderer:Tool:Screenshot:Edit")
-                    }, 5000);
+                    const st = new Screenshot((r) => {
+                        resolve(r)
+                    })
                 })
                 this.signal.screenshotEdit = false
                 return result
             }
 
+        })
+
+        ipcMain.handle(`Renderer:Tool:Screen:Cursor`, (e) => {
+            return screen.getDisplayNearestPoint(screen.getCursorScreenPoint())
+        })
+
+        ipcMain.handle(`Renderer:Tool:Widget:Bounds`, (e) => {
+            const widget = BrowserWindow.fromWebContents(e.sender) as BrowserWindow
+            return widget.getBounds()
         })
     }
 }

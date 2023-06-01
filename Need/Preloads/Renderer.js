@@ -10,7 +10,11 @@ const Renderer = {
         },
         Close: () => {
             return ipcRenderer.send(`Renderer:Widget:Close:id`)
-        }
+        },
+        GetBounds: async () => {
+            const bounds = await ipcRenderer.invoke('Renderer:Tool:Widget:Bounds')
+            return bounds
+        },
     },
     Ipc: {
         Send: (channel, ...args) => {
@@ -19,6 +23,12 @@ const Renderer = {
         Invoke: (channel, ...args) => {
             return ipcRenderer.invoke(channel, ...args)
         },
+    },
+    Screen: {
+        GetHoldCursor: async () => {
+            const screen = await ipcRenderer.invoke('Renderer:Tool:Screen:Cursor')
+            return screen
+        }
     },
     Screenshot: {
         GetFocus: async () => {

@@ -15,6 +15,10 @@ declare namespace Renderer {
          * 关闭
          */
         export function Close(): void
+        /**
+         * 获取当前窗口的Bounds
+         */
+        export function GetBounds(): Promise<Electron.Rectangle>
     }
 
     /**
@@ -29,6 +33,16 @@ declare namespace Renderer {
          * 发送 需要回应
          */
         export function Invoke(channel: string, ...args: any[]): Promise<any>
+    }
+
+    /**
+     * 屏幕
+     */
+    export namespace Screen {
+        /**
+         * 获取当前鼠标位置的屏幕
+         */
+        export function GetHoldCursor(): Promise<Electron.Display>
     }
 
     /**

@@ -11,7 +11,7 @@ instance.Run()
 
 <template>
     <div class="Screenshot">
-
+        <span class="Rect"></span>
     </div>
 </template>
 
