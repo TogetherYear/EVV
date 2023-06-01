@@ -19,7 +19,7 @@ npm run build
 ```
 需要底层操作的通过 Ipc 发送给主进程去处理 别用渲染进程处理 ( 为了逻辑清晰 当然不强求 )
 
-在渲染进程我没有配置 node 和 electron 的方法 尽量在主进程用 preload 暴露方法给渲染进程用 ( 在渲染进程自己填写类型说明 在 Renderer.d.ts )
+在渲染进程我没有配置 node 和 electron 的方法 ( 别用 ) 在主进程用 preload 暴露方法给渲染进程用 ( 在渲染进程自己填写类型说明 在 Renderer.d.ts )
 ```
 
 ```
