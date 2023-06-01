@@ -13,6 +13,10 @@ class IpcMainHandle {
         return this.instance
     }
 
+    private signal = {
+        screenshotEdit: false
+    }
+
     public Run() {
         this.ListenMainWindowIpc()
     }
@@ -35,6 +39,10 @@ class IpcMainHandle {
             const id = list.find(l => l.left == current.bounds.x && l.top == current.bounds.y)?.id
             const buffer = await Screenshot({ format: 'png', screen: id })
             return buffer
+        })
+
+        ipcMain.handle(`Tool:Screenshot:Edit`, async () => {
+            return "Tool:Screenshot:Edit"
         })
     }
 }

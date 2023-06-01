@@ -26,6 +26,9 @@ class Application extends AActor {
     }
 
     public Test() {
+        Renderer.Screenshot.GetEdit().then(res => {
+            console.log(res)
+        })
         Message.success("Together丨233")
     }
 }

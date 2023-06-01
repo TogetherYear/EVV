@@ -24,6 +24,10 @@ const Renderer = {
         GetAll: async () => {
             const buffers = await ipcRenderer.invoke("Tool:Screenshot:All")
             return buffers
+        },
+        GetEdit: async () => {
+            const buffer = await ipcRenderer.invoke("Tool:Screenshot:Edit")
+            return buffer
         }
     },
 }
