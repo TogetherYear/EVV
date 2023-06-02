@@ -77,10 +77,10 @@ class IpcMainHandle {
             return widget.getBounds()
         })
 
-        ipcMain.handle(`Renderer:Tool:Notification:Show`, async (e, options: { title?: string, body?: string, silent?: boolean }) => {
+        ipcMain.handle(`Renderer:Tool:Notification:Show`, async (e, options: { title: string, body: string, silent?: boolean }) => {
             return await new Promise((resolve, reject) => {
                 if (Notification.isSupported()) {
-                    const icon = ResourceLoad.Instance.GetImageByName('tray.png')
+                    const icon = ResourceLoad.Instance.GetImageByName('notificationEn.png')
                     const n = new Notification({ ...options, icon })
                     n.once('click', () => {
                         resolve('click')

@@ -70,7 +70,7 @@ declare namespace Renderer {
         /**
          * 生成新的操作系统通知
          */
-        export function Show(options?: { title?: string, body?: string, silent?: boolean }): Promise<'fail' | 'click' | 'close'>
+        export function Show(options: { title: string, body: string, silent?: boolean }): Promise<'fail' | 'click' | 'close'>
     }
 
     /**

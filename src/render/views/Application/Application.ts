@@ -28,7 +28,7 @@ class Application extends AActor {
     public Test() {
         Renderer.Notification.Show({
             title: 'Together',
-            body: '一条简短的通知一条简短的通知一条简短的通知一条简短的通知一条简短的通知一条简短的通知一条简短的通知一条简短的通知',
+            body: '一条简短的通知',
         }).then((type) => {
             console.log(type)
         })
