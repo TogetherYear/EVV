@@ -23,7 +23,6 @@ class ResourceLoad {
                 fs.rmdirSync(std)
             }
         }
-
     }
 
     public GetImageByName(name: string) {

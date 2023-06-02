@@ -45,9 +45,6 @@ function Browser() {
             GetAll: async () => {
                 return RB()
             },
-            GetEdit: async () => {
-                return RB()
-            }
         },
         Notification: {
             Show: async (options?: { title?: string, body?: string, silent?: boolean }) => {

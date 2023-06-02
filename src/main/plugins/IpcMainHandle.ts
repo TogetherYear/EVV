@@ -1,6 +1,5 @@
-import { Screenshot } from "@main/common/Screenshot"
 import { AppMainWindow } from "@main/manager/AppMainWindow"
-import { BrowserWindow, Notification, app, ipcMain, nativeImage, screen, shell } from "electron"
+import { BrowserWindow, Notification, ipcMain, screen, shell } from "electron"
 import ScreenshotDesktop from 'screenshot-desktop'
 import { ResourceLoad } from "./ResourceLoad"
 
@@ -67,23 +66,6 @@ class IpcMainHandle {
             const id = list.find(l => l.left == current.bounds.x)?.id
             const buffer = await ScreenshotDesktop({ format: 'png', screen: id })
             return buffer
-        })
-
-        ipcMain.handle(`Renderer:Tool:Screenshot:Edit`, async (e) => {
-            if (this.signal.screenshotEdit) {
-                return undefined
-            }
-            else {
-                this.signal.screenshotEdit = true
-                const result = await new Promise((resolve, reject) => {
-                    const st = new Screenshot((r) => {
-                        resolve(r)
-                    })
-                })
-                this.signal.screenshotEdit = false
-                return result
-            }
-
         })
 
         ipcMain.handle(`Renderer:Tool:Screen:Cursor`, (e) => {

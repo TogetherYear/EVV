@@ -21,11 +21,6 @@ const routes: Array<RouteRecordRaw> = [
         name: 'Application',
         component: () => import('@render/views/Application/Application.vue'),
     },
-    {
-        path: '/Screenshot',
-        name: 'Screenshot',
-        component: () => import('@render/views/Screenshot/Screenshot.vue'),
-    },
 ]
 
 const router = createRouter({

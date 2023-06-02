@@ -61,10 +61,6 @@ declare namespace Renderer {
          * 获取所有屏幕
          */
         export function GetAll(): Promise<Array<Buffer>>
-        /**
-         * 弹出截屏窗口并且结束后返回截取后的
-         */
-        export function GetEdit(): Promise<Buffer | undefined>
     }
 
     /**

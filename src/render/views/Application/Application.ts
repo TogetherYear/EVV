@@ -26,15 +26,12 @@ class Application extends AActor {
     }
 
     public Test() {
-        Renderer.Screenshot.GetEdit().then(res => {
-            console.log(res)
+        Renderer.Notification.Show({
+            title: 'Together',
+            body: '一条简短的通知一条简短的通知一条简短的通知一条简短的通知一条简短的通知一条简短的通知一条简短的通知一条简短的通知',
+        }).then((type) => {
+            console.log(type)
         })
-        // Renderer.Notification.Show({
-        //     title: 'Together',
-        //     body: '一条简短的通知一条简短的通知一条简短的通知一条简短的通知一条简短的通知一条简短的通知一条简短的通知一条简短的通知',
-        // }).then((type) => {
-        //     console.log(type)
-        // })
         // Renderer.Shell.Beep()
         // Renderer.Screenshot.GetFocus().then(res => {
         //     console.log(res)
