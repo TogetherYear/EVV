@@ -26,13 +26,7 @@ class Application extends AActor {
     }
 
     public Test() {
-        Renderer.Notification.Show({
-            title: 'Together',
-            body: '一条简短的通知',
-        }).then((type) => {
-            console.log(type)
-        })
-        // Renderer.Shell.Beep()
+        Renderer.Shell.Beep()
         // Renderer.Screenshot.GetFocus().then(res => {
         //     console.log(res)
         // })

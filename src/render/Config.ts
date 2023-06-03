@@ -46,11 +46,6 @@ function Browser() {
                 return RB()
             },
         },
-        Notification: {
-            Show: async (options?: { title?: string, body?: string, silent?: boolean }) => {
-                return RB()
-            }
-        },
         Shell: {
             Beep: () => {
                 return CB()

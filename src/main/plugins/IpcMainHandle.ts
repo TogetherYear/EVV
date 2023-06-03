@@ -15,10 +15,6 @@ class IpcMainHandle {
         return this.instance
     }
 
-    private signal = {
-        screenshotEdit: false
-    }
-
     public Run() {
         this.ListenIpcSend()
         this.ListenIpcHandle()
@@ -75,28 +71,6 @@ class IpcMainHandle {
         ipcMain.handle(`Renderer:Tool:Widget:Bounds`, (e) => {
             const widget = BrowserWindow.fromWebContents(e.sender) as BrowserWindow
             return widget.getBounds()
-        })
-
-        ipcMain.handle(`Renderer:Tool:Notification:Show`, async (e, options: { title: string, body: string, silent?: boolean }) => {
-            return await new Promise((resolve, reject) => {
-                if (Notification.isSupported()) {
-                    const icon = ResourceLoad.Instance.GetImageByName('notificationEn.png')
-                    const n = new Notification({ ...options, icon })
-                    n.once('click', () => {
-                        resolve('click')
-                    })
-                    n.once('close', () => {
-                        resolve("close")
-                    })
-                    n.once('failed', () => {
-                        resolve('fail')
-                    })
-                    n.show()
-                }
-                else {
-                    resolve("fail")
-                }
-            })
         })
     }
 }
