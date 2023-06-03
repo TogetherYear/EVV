@@ -61,6 +61,10 @@ class AppTray {
             this.widget.on('right-click', () => {
                 this.widget.popUpContextMenu(this.menu)
             })
+
+            this.widget.on('double-click', () => {
+                AppMainWindow.Instance.widget.show()
+            })
         }
     }
 }
