@@ -32,8 +32,8 @@ export default defineConfig({
         sourcemap: false,
         target: 'esnext',
     },
-    // optimizeDeps: {
-    //     include: ['axios'],
-    //     exclude: ['electron']
-    // }
+    optimizeDeps: {
+        include: ['axios'],
+        exclude: ['electron']
+    }
 })
