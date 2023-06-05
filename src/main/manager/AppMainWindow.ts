@@ -64,11 +64,11 @@ class AppMainWindow extends TWindow {
     }
 
     public OnMax() {
-        if (this.widget.isMaximized()) {
-            this.widget.restore()
+        if (this.widget.isFullScreen()) {
+            this.widget.setFullScreen(false)
         }
         else {
-            this.widget.maximize()
+            this.widget.setFullScreen(true)
         }
     }
 
