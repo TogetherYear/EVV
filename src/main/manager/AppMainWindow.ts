@@ -29,8 +29,8 @@ class AppMainWindow extends TWindow {
             resizable: true,
             useContentSize: true,
             frame: false,
-            backgroundColor: '#212121',
-            opacity: 1.0,
+            backgroundColor: '#00212121',
+            transparent: true,
             icon: ResourceLoad.Instance.GetImageByName('window.png'),
             webPreferences: {
                 // 同源
@@ -64,11 +64,11 @@ class AppMainWindow extends TWindow {
     }
 
     public OnMax() {
-        if (this.widget.isFullScreen()) {
-            this.widget.setFullScreen(false)
+        if (this.widget.isMaximized()) {
+            this.widget.unmaximize()
         }
         else {
-            this.widget.setFullScreen(true)
+            this.widget.maximize()
         }
     }
 
