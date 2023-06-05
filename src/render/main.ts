@@ -4,14 +4,9 @@ import AppVue from './App.vue'
 
 import router from './router'
 
-import { Browser, Electron } from './Config'
+import { Electron } from './Config'
 
-if (window.process) {
-    Electron()
-}
-else {
-    Browser()
-}
+Electron()
 
 import { naive } from "./naive"
 
