@@ -29,15 +29,14 @@ class AppMainWindow extends TWindow {
             resizable: true,
             useContentSize: true,
             frame: false,
-            backgroundColor: '#00212121',
-            transparent: true,
+            backgroundColor: '#212121',
             icon: ResourceLoad.Instance.GetImageByName('window.png'),
             webPreferences: {
                 // 同源
                 webSecurity: false,
                 // elecrton v5.0.0 以后该选项默认为false,需手动设为true
                 nodeIntegration: true,
-                // elecrton v12.0.0 以后该选项默认为true,需手动设为false       与上一个合作消除require提示错误
+                // elecrton v12.0.0 以后该选项默认为true,需手动设为false与上一个合作消除require提示错误
                 contextIsolation: false,
                 // 设为false则禁用devtool开发者调试工具
                 devTools: true,
@@ -48,6 +47,7 @@ class AppMainWindow extends TWindow {
 
         this.widget.once('ready-to-show', () => {
             this.widget.show()
+            this.widget.focus()
         })
 
         if (Configuration.Instance.configs.debug) {
