@@ -26,15 +26,15 @@ class ResourceLoad {
     }
 
     public GetImageByName(name: string) {
-        return process.env.NODE_ENV === 'development'
-            ? `Need/Images/${name}`
-            : path.join(app.getPath('exe'), `/../resources/Need/Images/${name}`)
+        return app.isPackaged
+            ? path.join(app.getPath('exe'), `/../resources/Need/Images/${name}`)
+            : `Need/Images/${name}`
     }
 
     public GetConfigByName(name: string) {
-        return process.env.NODE_ENV === 'development'
-            ? `Need/Configs/${name}`
-            : path.join(app.getPath('exe'), `/../resources/Need/Configs/${name}`)
+        return app.isPackaged
+            ? path.join(app.getPath('exe'), `/../resources/Need/Configs/${name}`)
+            : `Need/Configs/${name}`
     }
 
     public GetPageByName(name: string = '/') {
@@ -44,9 +44,9 @@ class ResourceLoad {
     }
 
     public GetPreloadByName(name: string) {
-        return process.env.NODE_ENV === 'development'
-            ? path.join(__dirname, `../../Need/Preloads/${name}.js`)
-            : path.join(app.getPath('exe'), `/../resources/Need/Preloads/${name}.js`)
+        return app.isPackaged
+            ? path.join(app.getPath('exe'), `/../resources/Need/Preloads/${name}.js`)
+            : path.join(__dirname, `../../Need/Preloads/${name}.js`)
     }
 }
 

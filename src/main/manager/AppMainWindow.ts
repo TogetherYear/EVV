@@ -53,6 +53,7 @@ class AppMainWindow extends TWindow {
         if (Configuration.Instance.configs.debug) {
             this.widget.webContents.toggleDevTools()
         }
+
         this.widget.loadURL(ResourceLoad.Instance.GetPageByName('/Application'))
 
         // 我这里取消了默认的菜单栏 你可以自定义
