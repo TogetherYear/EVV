@@ -129,13 +129,13 @@ class Mathf {
     /**
      * 计算多边形面积
      */
-    static CalculateArea(e: Array<{ lng: number, lat: number }>) {
+    static CalculateArea(e: Array<{ x: number, y: number }>) {
         const points = [...e, e[0]]
         let area = 0;
         for (let i = 0; i < points.length; i++) {
             let j = (i + 1) % points.length;
-            area += points[i].lng * points[j].lat;
-            area -= points[i].lat * points[j].lng;
+            area += points[i].x * points[j].y;
+            area -= points[i].y * points[j].x;
         }
         area /= 2;
         return Math.abs(area).toFixed(1);
