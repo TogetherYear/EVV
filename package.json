@@ -38,7 +38,7 @@
         }
       ],
       "icon": "Need/Images/icon.ico",
-      "artifactName": "${productName}-${version}.${ext}"
+      "artifactName": "${productName}.${ext}"
     },
     "nsis": {
       "oneClick": false,
