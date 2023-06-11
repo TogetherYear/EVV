@@ -1,11 +1,11 @@
 import { app, globalShortcut } from 'electron'
 import { AppMainWindow } from './manager/AppMainWindow'
 import { AppTray } from './manager/AppTray'
-import { Configuration } from './plugins/Configuration'
-import { CustomProtocol } from './plugins/CustomProtocol'
-import { GlobalShortcut } from './plugins/GlobalShortcut'
-import { IpcMainHandle } from './plugins/IpcMainHandle'
-import { ResourceLoad } from './plugins/ResourceLoad'
+import { Configuration } from './manager/Configuration'
+import { CustomProtocol } from './manager/CustomProtocol'
+import { GlobalShortcut } from './manager/GlobalShortcut'
+import { IpcMainHandle } from './manager/IpcMainHandle'
+import { ResourceLoad } from './manager/ResourceLoad'
 
 const additionalData = { key: "Together" }
 const lock = app.requestSingleInstanceLock(additionalData)

@@ -1,6 +1,6 @@
 import { BrowserWindow, Menu, ipcMain } from 'electron'
-import { ResourceLoad } from '@main/plugins/ResourceLoad'
-import { Configuration } from '@main/plugins/Configuration'
+import { ResourceLoad } from '@main/manager/ResourceLoad'
+import { Configuration } from '@main/manager/Configuration'
 import { TWindow } from '@main/libs/TWindow'
 
 class AppMainWindow extends TWindow {

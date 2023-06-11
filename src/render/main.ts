@@ -12,7 +12,7 @@ import { naive } from "./naive"
 
 import pinia from './pinia'
 
-import { AppRequest } from './plugins/AppRequest'
+import { AppRequest } from './libs/AppRequest'
 AppRequest.Instance.Run()
 
 createApp(AppVue)

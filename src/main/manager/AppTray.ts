@@ -1,4 +1,4 @@
-import { ResourceLoad } from '@main/plugins/ResourceLoad'
+import { ResourceLoad } from '@main/manager/ResourceLoad'
 import { app, Menu, Tray, MenuItemConstructorOptions, MenuItem } from 'electron'
 import { AppMainWindow } from './AppMainWindow'
 
