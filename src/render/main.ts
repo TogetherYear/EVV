@@ -1,3 +1,7 @@
+// 消除一些安全提示
+//@ts-ignore
+window['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true'
+
 import { createApp } from 'vue'
 
 import AppVue from './App.vue'

@@ -8,6 +8,7 @@ import { IpcMainHandle } from './manager/IpcMainHandle'
 import { ResourceLoad } from './manager/ResourceLoad'
 
 const additionalData = { key: "Together" }
+
 const lock = app.requestSingleInstanceLock(additionalData)
 
 // 只允许唯一实例
