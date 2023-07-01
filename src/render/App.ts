@@ -1,4 +1,3 @@
-import { EventSystem } from "@libs/EventSystem"
 import { AActor } from "./libs/AActor"
 import { onMounted, onUnmounted } from "vue"
 

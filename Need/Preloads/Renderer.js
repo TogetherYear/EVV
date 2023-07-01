@@ -1,7 +1,7 @@
 const { ipcRenderer } = require("electron")
 
 const Renderer = {
-    widget: {
+    Widget: {
         Min: () => {
             return ipcRenderer.send(`Renderer:Widget:Min:id`)
         },
@@ -48,7 +48,7 @@ const Renderer = {
         Beep: () => {
             return ipcRenderer.send(`Renderer:Tool:Shell:Beep`)
         },
-    }
+    },
 }
 
 window.Renderer = Renderer

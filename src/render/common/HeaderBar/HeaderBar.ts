@@ -23,13 +23,13 @@ class HeaderBar extends AActor {
 
     public OptionClick(type: string) {
         if (type == 'Min') {
-            Renderer.widget.Min()
+            Renderer.Widget.Min()
         }
         else if (type == 'Max') {
-            Renderer.widget.Max()
+            Renderer.Widget.Max()
         }
         else if (type == 'Close') {
-            Renderer.widget.Close()
+            Renderer.Widget.Close()
         }
     }
 

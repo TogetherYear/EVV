@@ -1,12 +1,14 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import { join } from 'path'
-import electron from 'vitejs-plugin-electron'
 
 export default defineConfig({
     plugins: [
-        vue(),
-        electron()
+        vue({
+            script: {
+                defineModel: true
+            }
+        }),
     ],
     root: join(__dirname, 'src/render'),
     base: './',

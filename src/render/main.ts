@@ -4,10 +4,6 @@ import AppVue from './App.vue'
 
 import router from './router'
 
-import { Electron } from './Config'
-
-Electron()
-
 import { naive } from "./naive"
 
 import pinia from './pinia'

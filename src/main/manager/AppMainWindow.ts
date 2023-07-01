@@ -34,12 +34,14 @@ class AppMainWindow extends TWindow {
             webPreferences: {
                 // 同源
                 webSecurity: false,
-                // elecrton v5.0.0 以后该选项默认为false,需手动设为true
-                nodeIntegration: true,
-                // elecrton v12.0.0 以后该选项默认为true,需手动设为false与上一个合作消除require提示错误
+                // 渲染进程集成 node
+                nodeIntegration: false,
+                // 是否独立线程运行 api 和 preload
                 contextIsolation: false,
                 // 设为false则禁用devtool开发者调试工具
                 devTools: true,
+                // https 运行 http
+                allowRunningInsecureContent: true,
                 // 预加载脚本 仅为示例
                 preload: ResourceLoad.Instance.GetPreloadByName('Renderer')
             }

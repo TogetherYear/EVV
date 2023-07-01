@@ -2,7 +2,7 @@ declare namespace Renderer {
     /**
      * 窗口
      */
-    export namespace widget {
+    export namespace Widget {
         /**
          * 最小化
          */

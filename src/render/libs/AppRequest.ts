@@ -12,7 +12,7 @@ class AppRequest extends EventSystem {
 
     public static get Instance() { return this.instance }
 
-    private request: AxiosInstance | null = null
+    private request!: AxiosInstance
 
     public get R() { return this.request }
 
@@ -31,8 +31,8 @@ class AppRequest extends EventSystem {
     }
 
     private SetRequest() {
-        this.R?.interceptors.request.use(
-            config => {
+        this.R.interceptors.request.use(
+            (config: any) => {
                 if (config && config.headers) {
                     config.headers['x-auth-token'] = this.GetAuthToken()
                     config.baseURL = import.meta.env.VITE_APP_SERVER_PORT
@@ -47,7 +47,7 @@ class AppRequest extends EventSystem {
     }
 
     private SetResponse() {
-        this.R?.interceptors.response.use(
+        this.R.interceptors.response.use(
             response => {
                 if (AppRequest.isLogSuccess) {
                     console.info('URL: ' + response.config.baseURL + response.config.url, '\nData: ', response.data, '\nResponse:', response)
