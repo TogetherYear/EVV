@@ -11,6 +11,10 @@
     "sourceMap": true,
     "baseUrl": "./",
     "strict": true,
+    "lib": [
+      "esnext",
+      "dom"
+    ],
     "paths": {
       "@render/*": [
         "src/render/*"
