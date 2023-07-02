@@ -50,17 +50,15 @@ class AppRequest extends EventSystem {
         this.R.interceptors.response.use(
             response => {
                 if (AppRequest.isLogSuccess) {
-                    console.info('URL: ' + response.config.baseURL + response.config.url, '\nData: ', response.data, '\nResponse:', response)
+                    Debug.Warn('URL: ' + response.config.baseURL + response.config.url, '\nData: ', response.data, '\nResponse:', response)
                 }
                 if (response.data.code && response.data.code !== 0) {
-                    console.error(response.data.message)
+                    Debug.Error(response.data.message)
                     Message.error(response.data.message)
                 }
                 return response
             },
             err => {
-                // console.log(err.config)
-                // console.log(err.response)
                 if (err.response?.status == AppRequest.outCode) {
                     Dialog.destroyAll()
                     Dialog.error({
