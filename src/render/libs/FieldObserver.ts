@@ -1,5 +1,8 @@
 interface IieldObserver {
     dom: HTMLElement,
+    /**
+     * 默认 true 只监听一次
+     */
     once?: boolean,
     OnShow?: () => void,
     OnHide?: () => void,
@@ -20,16 +23,16 @@ class FieldObserver {
     private CreateObserver() {
         this.observer = new IntersectionObserver((entries) => {
             if (entries[0].intersectionRatio <= 0) {
-                this.OnHide()
+                this.Hide()
             }
             else {
-                this.OnShow()
+                this.Show()
             }
         })
         this.observer.observe(this.options.dom)
     }
 
-    private OnShow() {
+    private Show() {
         if (!this.isEnter) {
             this.isEnter = true
             this.options.OnShow && this.options.OnShow()
@@ -41,7 +44,7 @@ class FieldObserver {
 
     }
 
-    private OnHide() {
+    private Hide() {
         if (this.isEnter) {
             this.isEnter = false
             this.options.OnHide && this.options.OnHide()
