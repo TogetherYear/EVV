@@ -132,7 +132,7 @@ class EventSystem extends Object {
     public ClearSingleOnce(key: string) {
         let tc = this.temporary.find(ti => ti.key === key)
         if (tc) {
-            tc.callbacks = tc.callbacks.splice(0, tc.callbacks.length)
+            tc.callbacks.splice(0, tc.callbacks.length)
         }
     }
 
@@ -145,8 +145,8 @@ class EventSystem extends Object {
         let cc = this.continue.find(ci => ci.key === key)
         let tc = this.temporary.find(ti => ti.key === key)
         if (cc && tc) {
-            cc.callbacks = cc.callbacks.splice(0, cc.callbacks.length)
-            tc.callbacks = tc.callbacks.splice(0, tc.callbacks.length)
+            cc.callbacks.splice(0, cc.callbacks.length)
+            tc.callbacks.splice(0, tc.callbacks.length)
         }
         else {
             console.error("事件不存在!")
@@ -158,8 +158,8 @@ class EventSystem extends Object {
      * @description 清空所有事件和所有监听
      */
     public Clear() {
-        this.continue = this.continue.splice(0, this.continue.length)
-        this.temporary = this.temporary.splice(0, this.temporary.length)
+        this.continue.splice(0, this.continue.length)
+        this.temporary.splice(0, this.temporary.length)
     }
 }
 
