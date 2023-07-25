@@ -37,8 +37,7 @@ class FieldObserver {
             this.isEnter = true
             this.options.OnShow && this.options.OnShow()
             if (this.options.once == undefined || this.options.once == true) {
-                this.observer?.unobserve(this.options.dom)
-                this.observer = null
+                this.Destroy()
             }
         }
 
@@ -48,6 +47,13 @@ class FieldObserver {
         if (this.isEnter) {
             this.isEnter = false
             this.options.OnHide && this.options.OnHide()
+        }
+    }
+
+    public Destroy() {
+        if (this.observer) {
+            this.observer.unobserve(this.options.dom)
+            this.observer = null
         }
     }
 }
