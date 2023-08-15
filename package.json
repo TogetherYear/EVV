@@ -83,8 +83,8 @@
     "acorn": "^8.8.0",
     "chalk": "^4.1.2",
     "concurrently": "^6.5.1",
-    "electron": "20.0.2",
-    "electron-builder": "^22.14.13",
+    "electron": "26.0.0",
+    "electron-builder": "^24.6.3",
     "minimist": "^1.2.6",
     "ora": "^5.4.1",
     "rimraf": "^3.0.2"

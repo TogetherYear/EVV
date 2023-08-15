@@ -8,7 +8,7 @@ export function waitOn(arg0: { port: string | number; interval?: number }) {
         const { port, interval = 149 } = arg0;
         const url = `http://localhost:${port}`;
         let counter = 0;
-        const timer: NodeJS.Timer = setInterval(() => {
+        const timer: NodeJS.Timeout = setInterval(() => {
             get(url, (res) => {
                 clearInterval(timer);
                 console.log(
