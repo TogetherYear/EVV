@@ -17,6 +17,7 @@ if (!lock) {
 }
 else {
     app.commandLine.appendSwitch('disable-web-security')
+    app.commandLine.appendSwitch('enable-features', 'SharedArrayBuffer')
 
     ResourceLoad.Instance.Run()
 
