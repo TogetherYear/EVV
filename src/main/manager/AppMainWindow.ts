@@ -39,7 +39,7 @@ class AppMainWindow extends TWindow {
                 // 是否独立线程运行 api 和 preload
                 contextIsolation: false,
                 // 设为false则禁用devtool开发者调试工具
-                devTools: true,
+                devTools: Configuration.Instance.configs.debug,
                 // https 运行 http
                 allowRunningInsecureContent: true,
                 // 预加载脚本 仅为示例
@@ -53,7 +53,7 @@ class AppMainWindow extends TWindow {
         })
 
         if (Configuration.Instance.configs.debug) {
-            this.widget.webContents.toggleDevTools()
+            this.widget.webContents.openDevTools()
         }
 
         this.widget.loadURL(ResourceLoad.Instance.GetPageByName('/Application'))
