@@ -48,6 +48,12 @@ class ResourceLoad {
             ? path.join(app.getPath('exe'), `/../resources/Need/Preloads/${name}.js`)
             : path.join(__dirname, `../../Need/Preloads/${name}.js`)
     }
+
+    public GetChildProcessesByName(name: string) {
+        return app.isPackaged
+            ? path.join(app.getPath('exe'), `/../resources/Need/ChildProcesses/${name}.js`)
+            : path.join(__dirname, `../../Need/ChildProcesses/${name}.js`)
+    }
 }
 
 export { ResourceLoad }

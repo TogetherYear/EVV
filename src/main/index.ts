@@ -6,8 +6,10 @@ import { CustomProtocol } from './manager/CustomProtocol'
 import { GlobalShortcut } from './manager/GlobalShortcut'
 import { IpcMainHandle } from './manager/IpcMainHandle'
 import { ResourceLoad } from './manager/ResourceLoad'
+import { Time } from '@libs/Time'
+import { ProcessPool } from './manager/ProcessPool'
 
-const additionalData = { key: "Together" }
+const additionalData = { key: "TSingleton", Time: Time.GetTime() }
 
 const lock = app.requestSingleInstanceLock(additionalData)
 
@@ -17,18 +19,24 @@ if (!lock) {
 }
 else {
     app.commandLine.appendSwitch('disable-web-security')
+
     app.commandLine.appendSwitch('enable-features', 'SharedArrayBuffer')
 
     ResourceLoad.Instance.Run()
 
     Configuration.Instance.Run()
 
+    ProcessPool.Instance.Run()
+
     IpcMainHandle.Instance.Run()
 
     app.on('ready', () => {
         GlobalShortcut.Instance.Run()
+
         CustomProtocol.Instance.Run()
+
         AppMainWindow.Instance.Run()
+
         AppTray.Instance.Run()
     })
 
