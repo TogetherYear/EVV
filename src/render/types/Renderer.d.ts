@@ -72,4 +72,14 @@ declare namespace Renderer {
          */
         export function Beep(): void
     }
+
+    /**
+     * 资源
+     */
+    export namespace Resource {
+        /**
+         * 通过名称获取文件路径
+         */
+        export function GetPathByName(e: string): Promise<string>
+    }
 }

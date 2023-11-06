@@ -8,6 +8,8 @@ class CustomProtocol {
 
     private static instance = new CustomProtocol()
 
+    public fileProtocol = 'atom'
+
     public static get Instance() {
         return this.instance
     }
@@ -17,7 +19,7 @@ class CustomProtocol {
     }
 
     private GenerateFileProtocol() {
-        protocol.registerFileProtocol('atom', (request, callback) => {
+        protocol.registerFileProtocol(this.fileProtocol, (request, callback) => {
             const url = request.url.substr(7)
             callback(decodeURI(path.normalize(url)))
         })

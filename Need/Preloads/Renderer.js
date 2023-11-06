@@ -49,6 +49,12 @@ const Renderer = {
             return ipcRenderer.send(`Renderer:Tool:Shell:Beep`)
         },
     },
+    Resource: {
+        GetPathByName: async (e) => {
+            const path = await ipcRenderer.invoke(`Renderer:Tool:Resource:Name`, e)
+            return path
+        }
+    }
 }
 
 window.Renderer = Renderer

@@ -72,6 +72,11 @@ class IpcMainHandle {
             const widget = BrowserWindow.fromWebContents(e.sender) as BrowserWindow
             return widget.getBounds()
         })
+
+        ipcMain.handle(`Renderer:Tool:Resource:Name`, (e, name: string) => {
+            const path = ResourceLoad.Instance.GetResourcePathByName(name)
+            return path
+        })
     }
 }
 

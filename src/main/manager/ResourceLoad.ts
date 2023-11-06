@@ -1,6 +1,7 @@
 import { app } from 'electron'
 import path from 'path'
 import fs from 'fs'
+import { CustomProtocol } from './CustomProtocol'
 
 class ResourceLoad {
     private constructor() { }
@@ -53,6 +54,12 @@ class ResourceLoad {
         return app.isPackaged
             ? path.join(app.getPath('exe'), `/../resources/Need/ChildProcesses/${name}.js`)
             : path.join(__dirname, `../../Need/ChildProcesses/${name}.js`)
+    }
+
+    public GetResourcePathByName(name: string) {
+        return app.isPackaged
+            ? path.join(app.getPath('exe'), `/../resources/Need/Resources/${name}`).replace('file', CustomProtocol.Instance.fileProtocol)
+            : path.join(__dirname, `../../Need/Resources/${name}`).replace('file', CustomProtocol.Instance.fileProtocol)
     }
 }
 
