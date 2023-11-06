@@ -25,22 +25,22 @@ class ResourceLoad {
         }
     }
 
+    public GetPageByName(name: string = '/') {
+        return app.isPackaged
+            ? `file://${path.join(__dirname, `../render/index.html#${name}`)}`.replaceAll('\\', '/')
+            : `http://localhost:6768#${name}`
+    }
+
     public GetImageByName(name: string) {
         return app.isPackaged
             ? path.join(app.getPath('exe'), `/../resources/Need/Images/${name}`)
-            : `Need/Images/${name}`
+            : path.join(__dirname, `../../Need/Images/${name}`)
     }
 
     public GetConfigByName(name: string) {
         return app.isPackaged
             ? path.join(app.getPath('exe'), `/../resources/Need/Configs/${name}`)
-            : `Need/Configs/${name}`
-    }
-
-    public GetPageByName(name: string = '/') {
-        return app.isPackaged
-            ? `file://${path.join(__dirname, `../render/index.html#${name}`)}`.replaceAll('\\', '/')
-            : `http://localhost:6768#${name}`
+            : path.join(__dirname, `../../Need/Configs/${name}`)
     }
 
     public GetPreloadByName(name: string) {
