@@ -1,5 +1,5 @@
-import { protocol } from "electron"
-import path from 'path'
+import { protocol, net } from "electron"
+
 /**
  * 自定义协议
  */
@@ -19,9 +19,8 @@ class CustomProtocol {
     }
 
     private GenerateFileProtocol() {
-        protocol.registerFileProtocol(this.fileProtocol, (request, callback) => {
-            const url = request.url.substr(7)
-            callback(decodeURI(path.normalize(url)))
+        protocol.handle(this.fileProtocol, (request) => {
+            return net.fetch('file://' + request.url.slice(this.fileProtocol.length))
         })
     }
 }
