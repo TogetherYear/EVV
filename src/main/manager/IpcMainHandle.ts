@@ -1,5 +1,5 @@
 import { AppMainWindow } from "@main/manager/AppMainWindow"
-import { BrowserWindow, Notification, ipcMain, screen, shell } from "electron"
+import { BrowserWindow, ipcMain, screen, shell } from "electron"
 import ScreenshotDesktop from 'screenshot-desktop'
 import { ResourceLoad } from "./ResourceLoad"
 
@@ -21,42 +21,60 @@ class IpcMainHandle {
     }
 
     private ListenIpcSend() {
-        ipcMain.on(`Renderer:Widget:Min:id`, (e) => {
+        ipcMain.on(`Renderer:Widget:Min`, (e) => {
             switch (e.sender.id) {
                 case AppMainWindow.Instance.widget.webContents.id: AppMainWindow.Instance.OnMin(); return;
             }
         })
 
-        ipcMain.on(`Renderer:Widget:Max:id`, (e) => {
+        ipcMain.on(`Renderer:Widget:Max`, (e) => {
             switch (e.sender.id) {
                 case AppMainWindow.Instance.widget.webContents.id: AppMainWindow.Instance.OnMax(); return;
             }
         })
 
-        ipcMain.on(`Renderer:Widget:Close:id`, (e) => {
+        ipcMain.on(`Renderer:Widget:Hide`, (e) => {
             switch (e.sender.id) {
-                case AppMainWindow.Instance.widget.webContents.id: AppMainWindow.Instance.OnClose(); return;
+                case AppMainWindow.Instance.widget.webContents.id: AppMainWindow.Instance.OnHide(); return;
             }
         })
 
-        ipcMain.on(`Renderer:Tool:Shell:Beep`, () => {
+        ipcMain.on(`Renderer:Widget:Center`, (e) => {
+            switch (e.sender.id) {
+                case AppMainWindow.Instance.widget.webContents.id: AppMainWindow.Instance.OnCenter(); return;
+            }
+        })
+
+        ipcMain.on(`Renderer:Widget:Position`, (e, position: { x: number, y: number }) => {
+            switch (e.sender.id) {
+                case AppMainWindow.Instance.widget.webContents.id: AppMainWindow.Instance.OnSetPosition(position); return;
+            }
+        })
+
+        ipcMain.on(`Renderer:Widget:Resize`, (e, size: { width: number, height: number }) => {
+            switch (e.sender.id) {
+                case AppMainWindow.Instance.widget.webContents.id: AppMainWindow.Instance.OnResize(size); return;
+            }
+        })
+
+        ipcMain.on(`Renderer:Shell:Beep`, () => {
             shell.beep()
         })
     }
 
     private ListenIpcHandle() {
-        ipcMain.handle(`Renderer:Tool:Screenshot:All`, async (e) => {
+        ipcMain.handle(`Renderer:Screenshot:All`, async (e) => {
             const buffers = await ScreenshotDesktop.all()
             return buffers
         })
 
-        ipcMain.handle(`Renderer:Tool:Screenshot:Index`, async (e, index: number) => {
+        ipcMain.handle(`Renderer:Screenshot:Index`, async (e, index: number) => {
             const list = await ScreenshotDesktop.listDisplays()
             const buffer = await ScreenshotDesktop({ format: 'png', screen: list[index].id })
             return buffer
         })
 
-        ipcMain.handle(`Renderer:Tool:Screenshot:Focus`, async (e) => {
+        ipcMain.handle(`Renderer:Screenshot:Focus`, async (e) => {
             const current = screen.getDisplayNearestPoint(screen.getCursorScreenPoint())
             const list = await ScreenshotDesktop.listDisplays()
             const id = list.find(l => l.left == current.bounds.x)?.id
@@ -64,16 +82,16 @@ class IpcMainHandle {
             return buffer
         })
 
-        ipcMain.handle(`Renderer:Tool:Screen:Cursor`, (e) => {
+        ipcMain.handle(`Renderer:Screen:Cursor`, (e) => {
             return screen.getDisplayNearestPoint(screen.getCursorScreenPoint())
         })
 
-        ipcMain.handle(`Renderer:Tool:Widget:Bounds`, (e) => {
+        ipcMain.handle(`Renderer:Widget:Bounds`, (e) => {
             const widget = BrowserWindow.fromWebContents(e.sender) as BrowserWindow
             return widget.getBounds()
         })
 
-        ipcMain.handle(`Renderer:Tool:Resource:Name`, (e, name: string) => {
+        ipcMain.handle(`Renderer:Resource:Name`, (e, name: string) => {
             const path = ResourceLoad.Instance.GetResourcePathByName(name)
             return path
         })

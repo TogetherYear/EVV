@@ -56,6 +56,9 @@ class ResourceLoad {
             : path.join(__dirname, `../../Need/ChildProcesses/${name}.js`)
     }
 
+    /**
+     * 渲染进程使用
+     */
     public GetResourcePathByName(name: string) {
         return app.isPackaged
             ? path.join(app.getPath('exe'), `/../resources/Need/Resources/${name}`).replace('file', CustomProtocol.Instance.fileProtocol)

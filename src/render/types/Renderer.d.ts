@@ -12,9 +12,21 @@ declare namespace Renderer {
          */
         export function Max(): void
         /**
-         * 关闭
+         * 隐藏
          */
-        export function Close(): void
+        export function Hide(): void
+        /**
+         * 窗口屏幕居中
+         */
+        export function Center(): void
+        /**
+         * 设置窗口位置
+         */
+        export function SetPosition(position: { x: number, y: number }): void
+        /**
+         * 调整大小
+         */
+        export function Resize(size: { height: number; width: number; }): void
         /**
          * 获取当前窗口的Bounds
          */
@@ -80,6 +92,6 @@ declare namespace Renderer {
         /**
          * 通过名称获取文件路径
          */
-        export function GetPathByName(e: string): Promise<string>
+        export function GetPathByName(name: string): Promise<string>
     }
 }

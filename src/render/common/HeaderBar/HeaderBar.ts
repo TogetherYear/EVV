@@ -18,7 +18,7 @@ class HeaderBar extends AActor {
     private options = ref<Array<IOptionItem>>([
         { type: 'Min', icon: minIcon, label: '最小化' },
         { type: 'Max', icon: maxIcon, label: '最大化' },
-        { type: 'Close', icon: closeIcon, label: '隐藏' }
+        { type: 'Hide', icon: closeIcon, label: '隐藏' }
     ])
 
     public OptionClick(type: string) {
@@ -28,8 +28,8 @@ class HeaderBar extends AActor {
         else if (type == 'Max') {
             Renderer.Widget.Max()
         }
-        else if (type == 'Close') {
-            Renderer.Widget.Close()
+        else if (type == 'Hide') {
+            Renderer.Widget.Hide()
         }
     }
 

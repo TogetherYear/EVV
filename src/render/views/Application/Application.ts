@@ -26,11 +26,7 @@ class Application extends AActor {
     }
 
     public Test() {
-        Renderer.Shell.Beep()
-        // Renderer.Screenshot.GetFocus().then(res => {
-        //     console.log(res)
-        // })
-        Message.success("Together丨233")
+        Renderer.Widget.Resize({ width: 600, height: 600 })
     }
 }
 

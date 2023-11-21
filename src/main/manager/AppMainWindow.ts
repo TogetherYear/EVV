@@ -1,4 +1,4 @@
-import { BrowserWindow, Menu, ipcMain } from 'electron'
+import { BrowserWindow, Menu } from 'electron'
 import { ResourceLoad } from '@main/manager/ResourceLoad'
 import { Configuration } from '@main/manager/Configuration'
 import { TWindow } from '@main/libs/TWindow'
@@ -75,8 +75,20 @@ class AppMainWindow extends TWindow {
         }
     }
 
-    public OnClose() {
+    public OnHide() {
         this.widget.hide()
+    }
+
+    public OnCenter() {
+        this.widget.center()
+    }
+
+    public OnSetPosition(position: { x: number, y: number }) {
+        this.widget.setPosition(position.x, position.y)
+    }
+
+    public OnResize(size: { width: number, height: number }) {
+        this.widget.setSize(size.width, size.height)
     }
 }
 
