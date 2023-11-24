@@ -20,10 +20,10 @@ class IpcRendererHandle {
     /**
      * 发送信息到渲染进程
      */
-    public Send(e: D.IIpcMessage) {
+    public Send(e: D.IIpcRendererMessage) {
         const contents = BrowserWindow.getAllWindows().map(w => w.webContents)
         for (let c of contents) {
-            c.send("Message", e)
+            c.send("RendererMessage", e)
         }
     }
 }

@@ -38,25 +38,27 @@ class App extends AActor {
     }
 
     private CreateEvents() {
-        this.AddKey(DR.AppEvent.Message)
+        this.AddKey(D.IpcRendererEvent.SecondInstance)
     }
 
     private ListenEvents() {
-        Renderer.Ipc.On("Message", (e) => {
+        Renderer.Ipc.On("RendererMessage", (e: any) => {
             this.OnMessage(e)
         })
     }
 
-    private OnMessage(e: D.IIpcMessage) {
+    private OnMessage(e: D.IIpcRendererMessage) {
         Debug.Log(e)
-        this.Emit(DR.AppEvent.Message, e)
+        if (e.type == 'SecondInstance') {
+            this.Emit(D.IpcRendererEvent.SecondInstance)
+        }
     }
 
-    public override AddListen(key: DR.AppEvent, scope: Object, callback: DR.AppMessageCallback, once?: boolean): void {
+    public override AddListen(key: D.IpcRendererEvent, scope: Object, callback: DR.AppMessageCallback, once?: boolean): void {
         super.AddListen(key, scope, callback, once)
     }
 
-    public override RemoveListen(key: DR.AppEvent, scope: Object, callback: DR.AppMessageCallback): void {
+    public override RemoveListen(key: D.IpcRendererEvent, scope: Object, callback: DR.AppMessageCallback): void {
         super.RemoveListen(key, scope, callback)
     }
 }

@@ -25,8 +25,13 @@ namespace D {
         }
     }
 
-    export interface IIpcMessage {
-        type: string,
+    export enum IpcRendererEvent {
+        Test = 'Test',
+        SecondInstance = 'SecondInstance',
+    }
+
+    export interface IIpcRendererMessage {
+        type: IpcRendererEvent,
         [key: string]: any
     }
 

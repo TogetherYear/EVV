@@ -3,6 +3,7 @@ import { ResourceLoad } from '@main/manager/ResourceLoad'
 import { Configuration } from '@main/manager/Configuration'
 import { TWindow } from '@main/libs/TWindow'
 import { IpcRendererHandle } from './IpcRendererHandle'
+import { D } from '@decorators/D'
 
 class AppMainWindow extends TWindow {
     private constructor() {

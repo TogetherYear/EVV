@@ -9,6 +9,7 @@ import { IpcRendererHandle } from './manager/IpcRendererHandle'
 import { ResourceLoad } from './manager/ResourceLoad'
 import { Time } from '@libs/Time'
 import { ProcessPool } from './manager/ProcessPool'
+import { D } from '@decorators/D'
 
 const additionalData = { key: "TSingleton", Time: Time.GetTime() }
 
@@ -54,6 +55,6 @@ else {
     })
 
     app.on('second-instance', () => {
-
+        IpcRendererHandle.Instance.Send({ type: D.IpcRendererEvent.SecondInstance })
     })
 }

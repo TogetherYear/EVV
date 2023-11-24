@@ -34,10 +34,6 @@ namespace DR {
         }
     }
 
-    export enum AppEvent {
-        Message = 'Message',
-    }
-
-    export type AppMessageCallback = (e: D.IIpcMessage) => void
+    export type AppMessageCallback = (e: D.IIpcRendererMessage) => void
 }
 export { DR }
