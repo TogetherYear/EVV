@@ -32,6 +32,11 @@ const Renderer = {
         Invoke: (channel, ...args) => {
             return ipcRenderer.invoke(channel, ...args)
         },
+        On: (channel, callback) => {
+            return ipcRenderer.on(channel, (e, data) => {
+                callback(data)
+            })
+        }
     },
     Screen: {
         GetHoldCursor: async () => {
@@ -63,6 +68,9 @@ const Renderer = {
             const path = await ipcRenderer.invoke(`Renderer:Resource:Name`, name)
             return path
         }
+    },
+    Message: {
+
     }
 }
 

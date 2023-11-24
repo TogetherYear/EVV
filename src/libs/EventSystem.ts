@@ -1,6 +1,3 @@
-import { Together } from "@decorators/Together"
-
-@Together.ES
 class EventSystem extends Object {
     constructor() { super() }
 

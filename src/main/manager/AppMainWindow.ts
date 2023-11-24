@@ -2,6 +2,7 @@ import { BrowserWindow, Menu } from 'electron'
 import { ResourceLoad } from '@main/manager/ResourceLoad'
 import { Configuration } from '@main/manager/Configuration'
 import { TWindow } from '@main/libs/TWindow'
+import { IpcRendererHandle } from './IpcRendererHandle'
 
 class AppMainWindow extends TWindow {
     private constructor() {
@@ -23,9 +24,9 @@ class AppMainWindow extends TWindow {
             title: 'Application',
             show: false,
             width: 1000,
-            minWidth: 1000,
+            minWidth: 180,
             height: 560,
-            minHeight: 560,
+            minHeight: 90,
             resizable: true,
             useContentSize: true,
             frame: false,

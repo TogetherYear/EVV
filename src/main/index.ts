@@ -5,6 +5,7 @@ import { Configuration } from './manager/Configuration'
 import { CustomProtocol } from './manager/CustomProtocol'
 import { GlobalShortcut } from './manager/GlobalShortcut'
 import { IpcMainHandle } from './manager/IpcMainHandle'
+import { IpcRendererHandle } from './manager/IpcRendererHandle'
 import { ResourceLoad } from './manager/ResourceLoad'
 import { Time } from '@libs/Time'
 import { ProcessPool } from './manager/ProcessPool'
@@ -29,6 +30,8 @@ else {
     ProcessPool.Instance.Run()
 
     IpcMainHandle.Instance.Run()
+
+    IpcRendererHandle.Instance.Run()
 
     app.on('ready', () => {
         GlobalShortcut.Instance.Run()
