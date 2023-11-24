@@ -21,6 +21,10 @@ declare namespace Renderer {
          */
         export function Hide(): void
         /**
+         * 显示
+         */
+        export function Show(): void
+        /**
          * 窗口屏幕居中
          */
         export function Center(): void

@@ -39,6 +39,12 @@ class IpcMainHandle {
             }
         })
 
+        ipcMain.on(`Renderer:Widget:Show`, (e) => {
+            switch (e.sender.id) {
+                case AppMainWindow.Instance.widget.webContents.id: AppMainWindow.Instance.OnShow(); return;
+            }
+        })
+
         ipcMain.on(`Renderer:Widget:Center`, (e) => {
             switch (e.sender.id) {
                 case AppMainWindow.Instance.widget.webContents.id: AppMainWindow.Instance.OnCenter(); return;

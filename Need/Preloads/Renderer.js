@@ -16,6 +16,9 @@ const Renderer = {
         Hide: () => {
             return ipcRenderer.send(`Renderer:Widget:Hide`)
         },
+        Show: () => {
+            return ipcRenderer.send(`Renderer:Widget:Show`)
+        },
         Resize: (size) => {
             return ipcRenderer.send(`Renderer:Widget:Resize`, size)
         },

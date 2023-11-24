@@ -81,6 +81,10 @@ class AppMainWindow extends TWindow {
         this.widget.hide()
     }
 
+    public OnShow() {
+        this.widget.show()
+    }
+
     public OnCenter() {
         this.widget.center()
     }
