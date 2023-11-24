@@ -1,6 +1,11 @@
 const { ipcRenderer } = require("electron")
 
 const Renderer = {
+    Listen: (callback) => {
+        return ipcRenderer.on("RendererMessage", (e, data) => {
+            callback(data)
+        })
+    },
     Widget: {
         Min: () => {
             return ipcRenderer.send(`Renderer:Widget:Min`)
@@ -24,19 +29,6 @@ const Renderer = {
             const bounds = await ipcRenderer.invoke('Renderer:Widget:Bounds')
             return bounds
         },
-    },
-    Ipc: {
-        Send: (channel, ...args) => {
-            return ipcRenderer.send(channel, ...args)
-        },
-        Invoke: (channel, ...args) => {
-            return ipcRenderer.invoke(channel, ...args)
-        },
-        On: (channel, callback) => {
-            return ipcRenderer.on(channel, (e, data) => {
-                callback(data)
-            })
-        }
     },
     Screen: {
         GetHoldCursor: async () => {
@@ -68,9 +60,6 @@ const Renderer = {
             const path = await ipcRenderer.invoke(`Renderer:Resource:Name`, name)
             return path
         }
-    },
-    Message: {
-
     }
 }
 

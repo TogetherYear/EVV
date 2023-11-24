@@ -26,7 +26,7 @@ namespace D {
     }
 
     export enum IpcRendererEvent {
-        Test = 'Test',
+        Message = 'Message',
         SecondInstance = 'SecondInstance',
     }
 

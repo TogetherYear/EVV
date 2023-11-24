@@ -1,5 +1,10 @@
 declare namespace Renderer {
     /**
+     * 内部调用事件分发 请勿使用
+     */
+    export function Listen(callback: (e: { type: string, [key: string]: any }) => void): void
+
+    /**
      * 窗口
      */
     export namespace Widget {
@@ -31,24 +36,6 @@ declare namespace Renderer {
          * 获取当前窗口的Bounds
          */
         export function GetBounds(): Promise<Electron.Rectangle>
-    }
-
-    /**
-     * 进程通信
-     */
-    export namespace Ipc {
-        /**
-         * 发送 不需要回应
-         */
-        export function Send(channel: string, ...args: Array<any>): void
-        /**
-         * 发送 需要回应
-         */
-        export function Invoke(channel: string, ...args: Array<any>): Promise<any>
-        /**
-         * 内部调用事件分发 请勿使用
-         */
-        export function On(channel: string, callback: (e: { type: string, [key: string]: any }) => void): void
     }
 
     /**
@@ -97,12 +84,5 @@ declare namespace Renderer {
          * 通过名称获取文件路径
          */
         export function GetPathByName(name: string): Promise<string>
-    }
-
-    /**
-     * 消息
-     */
-    export namespace Message {
-
     }
 }

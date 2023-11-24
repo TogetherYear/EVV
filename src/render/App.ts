@@ -38,18 +38,22 @@ class App extends AActor {
     }
 
     private CreateEvents() {
+        this.AddKey(D.IpcRendererEvent.Message)
         this.AddKey(D.IpcRendererEvent.SecondInstance)
     }
 
     private ListenEvents() {
-        Renderer.Ipc.On("RendererMessage", (e: any) => {
+        Renderer.Listen((e: any) => {
             this.OnMessage(e)
         })
     }
 
     private OnMessage(e: D.IIpcRendererMessage) {
-        Debug.Log(e)
-        if (e.type == 'SecondInstance') {
+        if (e.type == 'Message') {
+            Message.success(e.type)
+            this.Emit(D.IpcRendererEvent.Message)
+        }
+        else if (e.type == 'SecondInstance') {
             this.Emit(D.IpcRendererEvent.SecondInstance)
         }
     }
