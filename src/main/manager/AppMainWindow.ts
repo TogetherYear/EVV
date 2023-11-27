@@ -2,8 +2,9 @@ import { BrowserWindow, Menu } from 'electron'
 import { ResourceLoad } from '@main/manager/ResourceLoad'
 import { Configuration } from '@main/manager/Configuration'
 import { TWindow } from '@main/libs/TWindow'
-import { IpcRendererHandle } from './IpcRendererHandle'
+import { IpcRendererHandle } from '@main/manager/IpcRendererHandle'
 import { D } from '@decorators/D'
+import { WindowPool } from './WindowPool'
 
 class AppMainWindow extends TWindow {
     private constructor() {
@@ -62,6 +63,8 @@ class AppMainWindow extends TWindow {
 
         // 我这里取消了默认的菜单栏 你可以自定义
         Menu.setApplicationMenu(null)
+
+        WindowPool.Instance.RegisterWindow(D.IpcRendererWindow.Main, this)
     }
 
     public OnMin() {

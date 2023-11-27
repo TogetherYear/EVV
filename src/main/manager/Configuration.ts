@@ -1,5 +1,5 @@
 import fs from 'fs'
-import { ResourceLoad } from './ResourceLoad'
+import { ResourceLoad } from '@main/manager/ResourceLoad'
 
 interface IConfigs {
     /**

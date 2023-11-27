@@ -30,8 +30,14 @@ namespace D {
         SecondInstance = 'SecondInstance',
     }
 
+    export enum IpcRendererWindow {
+        Main = 'Main',
+        Tray = 'Tray',
+    }
+
     export interface IIpcRendererMessage {
         type: IpcRendererEvent,
+        widgets?: Array<IpcRendererWindow>,
         [key: string]: any
     }
 

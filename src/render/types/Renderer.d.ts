@@ -5,6 +5,16 @@ declare namespace Renderer {
     export function Listen(callback: (e: { type: string, [key: string]: any }) => void): void
 
     /**
+     * 应用
+     */
+    export namespace App {
+        /**
+         * 关闭
+         */
+        export function Close(): void
+    }
+
+    /**
      * 窗口
      */
     export namespace Widget {

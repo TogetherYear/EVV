@@ -1,7 +1,7 @@
 import { ref, onMounted, onUnmounted } from 'vue'
 import minIcon from '@render/assets/mc/min.png'
 import maxIcon from '@render/assets/mc/max.png'
-import closeIcon from '@render/assets/mc/close.png'
+import hideIcon from '@render/assets/mc/hide.png'
 import { AActor } from '@render/libs/AActor'
 
 interface IOptionItem {
@@ -18,7 +18,7 @@ class HeaderBar extends AActor {
     private options = ref<Array<IOptionItem>>([
         { type: 'Min', icon: minIcon, label: '最小化' },
         { type: 'Max', icon: maxIcon, label: '最大化' },
-        { type: 'Hide', icon: closeIcon, label: '隐藏' }
+        { type: 'Hide', icon: hideIcon, label: '隐藏' }
     ])
 
     public OptionClick(type: string) {

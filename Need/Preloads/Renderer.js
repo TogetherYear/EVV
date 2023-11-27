@@ -6,6 +6,11 @@ const Renderer = {
             callback(data)
         })
     },
+    App: {
+        Close: () => {
+            return ipcRenderer.send(`Renderer:App:Close`)
+        }
+    },
     Widget: {
         Min: () => {
             return ipcRenderer.send(`Renderer:Widget:Min`)

@@ -1,5 +1,6 @@
 import { BrowserWindow } from "electron"
 import { D } from "@decorators/D"
+import { WindowPool } from "./WindowPool"
 
 /**
  * 主进程发送消息到渲染进程处理
@@ -21,10 +22,21 @@ class IpcRendererHandle {
      * 发送信息到渲染进程
      */
     public Send(e: D.IIpcRendererMessage) {
-        const contents = BrowserWindow.getAllWindows().map(w => w.webContents)
-        for (let c of contents) {
-            c.send("RendererMessage", e)
+        if (e.widgets && e.widgets.length != 0) {
+            for (let w of e.widgets) {
+                const window = WindowPool.Instance.GetWindow(w)
+                if (window) {
+                    window.widget.webContents.send("RendererMessage", e)
+                }
+            }
         }
+        else {
+            const contents = BrowserWindow.getAllWindows().map(w => w.webContents)
+            for (let c of contents) {
+                c.send("RendererMessage", e)
+            }
+        }
+
     }
 }
 

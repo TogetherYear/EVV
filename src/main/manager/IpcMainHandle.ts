@@ -1,7 +1,8 @@
 import { AppMainWindow } from "@main/manager/AppMainWindow"
-import { BrowserWindow, ipcMain, screen, shell } from "electron"
+import { BrowserWindow, app, ipcMain, screen, shell } from "electron"
 import ScreenshotDesktop from 'screenshot-desktop'
-import { ResourceLoad } from "./ResourceLoad"
+import { ResourceLoad } from "@main/manager/ResourceLoad"
+import { AppTray } from "@main/manager/AppTray"
 
 /**
  * 主线程 Ipc 监听 
@@ -21,6 +22,11 @@ class IpcMainHandle {
     }
 
     private ListenIpcSend() {
+        ipcMain.on(`Renderer:App:Close`, (e) => {
+            app.quit()
+            app.quit()
+        })
+
         ipcMain.on(`Renderer:Widget:Min`, (e) => {
             switch (e.sender.id) {
                 case AppMainWindow.Instance.widget.webContents.id: AppMainWindow.Instance.OnMin(); return;
@@ -36,12 +42,14 @@ class IpcMainHandle {
         ipcMain.on(`Renderer:Widget:Hide`, (e) => {
             switch (e.sender.id) {
                 case AppMainWindow.Instance.widget.webContents.id: AppMainWindow.Instance.OnHide(); return;
+                case AppTray.Instance.widget.webContents.id: AppTray.Instance.OnHide(); return;
             }
         })
 
         ipcMain.on(`Renderer:Widget:Show`, (e) => {
             switch (e.sender.id) {
                 case AppMainWindow.Instance.widget.webContents.id: AppMainWindow.Instance.OnShow(); return;
+                case AppTray.Instance.widget.webContents.id: AppTray.Instance.OnShow(); return;
             }
         })
 
@@ -54,12 +62,14 @@ class IpcMainHandle {
         ipcMain.on(`Renderer:Widget:Position`, (e, position: { x: number, y: number }) => {
             switch (e.sender.id) {
                 case AppMainWindow.Instance.widget.webContents.id: AppMainWindow.Instance.OnSetPosition(position); return;
+                case AppTray.Instance.widget.webContents.id: AppTray.Instance.OnSetPosition(position); return;
             }
         })
 
         ipcMain.on(`Renderer:Widget:Resize`, (e, size: { width: number, height: number }) => {
             switch (e.sender.id) {
                 case AppMainWindow.Instance.widget.webContents.id: AppMainWindow.Instance.OnResize(size); return;
+                case AppTray.Instance.widget.webContents.id: AppTray.Instance.OnResize(size); return;
             }
         })
 

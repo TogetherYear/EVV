@@ -9,6 +9,7 @@ import { IpcRendererHandle } from './manager/IpcRendererHandle'
 import { ResourceLoad } from './manager/ResourceLoad'
 import { Time } from '@libs/Time'
 import { ProcessPool } from './manager/ProcessPool'
+import { WindowPool } from './manager/WindowPool'
 import { D } from '@decorators/D'
 
 const additionalData = { key: "TSingleton", Time: Time.GetTime() }
@@ -18,9 +19,12 @@ const lock = app.requestSingleInstanceLock(additionalData)
 // 只允许唯一实例
 if (!lock) {
     app.quit()
+    app.quit()
 }
 else {
     app.commandLine.appendSwitch('disable-web-security')
+
+    app.commandLine.appendSwitch('wm-window-animations-disabled')
 
     app.commandLine.appendSwitch('enable-features', 'SharedArrayBuffer')
 
@@ -29,6 +33,8 @@ else {
     Configuration.Instance.Run()
 
     ProcessPool.Instance.Run()
+
+    WindowPool.Instance.Run()
 
     IpcMainHandle.Instance.Run()
 
@@ -45,7 +51,8 @@ else {
     })
 
     app.on('window-all-closed', () => {
-        if (process.platform !== 'darwin') {
+        if (process.platform == 'win32') {
+            app.quit()
             app.quit()
         }
     })
@@ -55,6 +62,6 @@ else {
     })
 
     app.on('second-instance', () => {
-        IpcRendererHandle.Instance.Send({ type: D.IpcRendererEvent.SecondInstance })
+        IpcRendererHandle.Instance.Send({ type: D.IpcRendererEvent.SecondInstance, widgets: [D.IpcRendererWindow.Main] })
     })
 }

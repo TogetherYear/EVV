@@ -1,5 +1,5 @@
 import { UtilityProcess, utilityProcess } from 'electron'
-import { ResourceLoad } from './ResourceLoad'
+import { ResourceLoad } from '@main/manager/ResourceLoad'
 
 class ProcessPool {
     private constructor() { }
