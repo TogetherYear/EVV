@@ -1,4 +1,4 @@
-interface IieldObserver {
+interface IFieldObserver {
     dom: HTMLElement,
     /**
      * 默认 true 只监听一次
@@ -9,12 +9,12 @@ interface IieldObserver {
 }
 
 class FieldObserver {
-    constructor(options: IieldObserver) {
+    constructor(options: IFieldObserver) {
         this.options = options
         this.CreateObserver()
     }
 
-    private options!: IieldObserver
+    private options!: IFieldObserver
 
     private observer: IntersectionObserver | null = null
 
