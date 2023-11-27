@@ -54,6 +54,8 @@ class App extends AActor {
             this.Emit(D.IpcRendererEvent.Message)
         }
         else if (e.type == 'SecondInstance') {
+            Message.error('已关闭第二个实例')
+            Renderer.Widget.Show()
             this.Emit(D.IpcRendererEvent.SecondInstance)
         }
     }
