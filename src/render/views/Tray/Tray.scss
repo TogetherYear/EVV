@@ -4,8 +4,11 @@
     height: 300px;
     left: 0;
     top: 0;
-    user-select: none;
     background-color: #212121;
+    box-sizing: border-box;
+    border: 1px solid #333333;
+    border-radius: 5px;
+    overflow: hidden;
 
     .Content {
         position: absolute;
