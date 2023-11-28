@@ -37,7 +37,14 @@ namespace D {
 
     export interface IIpcRendererMessage {
         type: IpcRendererEvent,
+        /**
+         * 要发送消息的窗口 与 excludeWidgets 冲突 二者填一个 此参数优先级高
+         */
         widgets?: Array<IpcRendererWindow>,
+        /**
+         * 不要发送消息的窗口 与 widgets 冲突 二者填一个
+         */
+        excludeWidgets?: Array<IpcRendererWindow>,
         [key: string]: any
     }
 

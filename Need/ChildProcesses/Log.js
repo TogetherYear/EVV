@@ -1,9 +1,7 @@
-let current = 0
+process.parentPort.postMessage({
+    message: `Log.js 丨 Run`
+})
 
-setInterval(() => {
-    process.parentPort.postMessage({
-        type: 'Log',
-        message: `Log.js 丨 ${current}`
-    })
-    current++
-}, 5000);
+process.parentPort.on('message', (e) => {
+
+})

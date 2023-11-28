@@ -30,6 +30,12 @@ class IpcRendererHandle {
                 }
             }
         }
+        else if (e.excludeWidgets && e.excludeWidgets.length != 0) {
+            const need = WindowPool.Instance.GetPoolKV().filter(c => (e.excludeWidgets || []).indexOf(c.key) == -1)
+            for (let c of need) {
+                c.value.widget.webContents.send("RendererMessage", e)
+            }
+        }
         else {
             const contents = BrowserWindow.getAllWindows().map(w => w.webContents)
             for (let c of contents) {

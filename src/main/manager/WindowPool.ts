@@ -28,6 +28,14 @@ class WindowPool {
         return this.pool.get(t)
     }
 
+    public GetPoolKV() {
+        const result: Array<{ key: D.IpcRendererWindow, value: TWindow }> = []
+        for (let p of this.pool) {
+            result.push({ key: p[0], value: p[1] })
+        }
+        return result
+    }
+
 }
 
 export { WindowPool }
