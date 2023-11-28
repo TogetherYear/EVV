@@ -25,5 +25,11 @@ namespace DM {
         }
     }
 
+    export interface IChildrenProcessMessage {
+        type: string,
+        message: string,
+        [key: string]: any
+    }
+
 }
 export { DM }

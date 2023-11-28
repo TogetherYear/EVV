@@ -30,7 +30,7 @@ class Configuration {
     }
 
     public Run() {
-        const data = fs.readFileSync(process.env.NODE_ENV === 'development' ? ResourceLoad.Instance.GetConfigByName('Development.json') : ResourceLoad.Instance.GetConfigByName('Production.json'), 'utf8')
+        const data = fs.readFileSync(process.env.NODE_ENV === 'development' ? ResourceLoad.Instance.GetConfigByName('Development') : ResourceLoad.Instance.GetConfigByName('Production'), 'utf8')
         this.configs = JSON.parse(data)
     }
 }

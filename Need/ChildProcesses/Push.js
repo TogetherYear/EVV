@@ -2,7 +2,7 @@ let current = 0
 
 setInterval(() => {
     process.parentPort.postMessage({
-        type: 'Log',
+        type: 'Push',
         message: `Log.js 丨 ${current}`
     })
     current++

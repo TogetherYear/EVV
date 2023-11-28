@@ -32,37 +32,37 @@ class ResourceLoad {
             : `http://localhost:6768#${name}`
     }
 
-    public GetImageByName(name: string) {
+    public GetExtraFolder() {
         return app.isPackaged
-            ? path.join(app.getPath('exe'), `/../resources/Need/Images/${name}`)
-            : path.join(__dirname, `../../Need/Images/${name}`)
+            ? path.join(app.getPath('exe'), `/../resources/Need`)
+            : path.join(__dirname, `../../Need`)
+    }
+
+    public GetImageByName(name: string) {
+        return `${this.GetExtraFolder()}/Images/${name}`
     }
 
     public GetConfigByName(name: string) {
-        return app.isPackaged
-            ? path.join(app.getPath('exe'), `/../resources/Need/Configs/${name}`)
-            : path.join(__dirname, `../../Need/Configs/${name}`)
+        return `${this.GetExtraFolder()}/Configs/${name}.json`
     }
 
     public GetPreloadByName(name: string) {
-        return app.isPackaged
-            ? path.join(app.getPath('exe'), `/../resources/Need/Preloads/${name}.js`)
-            : path.join(__dirname, `../../Need/Preloads/${name}.js`)
+        return `${this.GetExtraFolder()}/Preloads/${name}.js`
+    }
+
+    public GetChildProcessesFolder() {
+        return `${this.GetExtraFolder()}/ChildProcesses`
     }
 
     public GetChildProcessesByName(name: string) {
-        return app.isPackaged
-            ? path.join(app.getPath('exe'), `/../resources/Need/ChildProcesses/${name}.js`)
-            : path.join(__dirname, `../../Need/ChildProcesses/${name}.js`)
+        return `${this.GetChildProcessesFolder()}/${name}.js`
     }
 
     /**
      * 渲染进程使用
      */
     public GetResourcePathByName(name: string) {
-        return app.isPackaged
-            ? path.join(app.getPath('exe'), `/../resources/Need/Resources/${name}`).replace('file', CustomProtocol.Instance.fileProtocol)
-            : path.join(__dirname, `../../Need/Resources/${name}`).replace('file', CustomProtocol.Instance.fileProtocol)
+        return `${this.GetExtraFolder()}/${name}`.replace('file', CustomProtocol.Instance.fileProtocol)
     }
 }
 
