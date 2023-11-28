@@ -12,11 +12,14 @@ import { naive } from "./naive"
 
 import pinia from './pinia'
 
-import { Debug } from './libs/Debug'
+import { Debug } from './plugins/Debug'
 Debug.Instance.Run()
 
-import { AppRequest } from './libs/AppRequest'
+import { AppRequest } from './plugins/AppRequest'
 AppRequest.Instance.Run()
+
+import { FieldObserver } from './plugins/FieldObserver'
+FieldObserver.Instance.Run()
 
 createApp(AppVue)
     .use(router)

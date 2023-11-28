@@ -1,4 +1,6 @@
-interface IFieldObserver {
+import { EventSystem } from "@libs/EventSystem"
+
+interface IObserver {
     dom: HTMLElement,
     /**
      * 默认 true 只监听一次
@@ -8,13 +10,13 @@ interface IFieldObserver {
     OnHide?: () => void,
 }
 
-class FieldObserver {
-    constructor(options: IFieldObserver) {
+class Observer {
+    constructor(options: IObserver) {
         this.options = options
         this.CreateObserver()
     }
 
-    private options!: IFieldObserver
+    private options!: IObserver
 
     private observer: IntersectionObserver | null = null
 
@@ -55,6 +57,24 @@ class FieldObserver {
             this.observer.unobserve(this.options.dom)
             this.observer = null
         }
+    }
+}
+
+class FieldObserver extends EventSystem {
+    private constructor() { super() }
+
+    private static instance = new FieldObserver()
+
+    public static get Instance() { return this.instance }
+
+    public Run() {
+        if (!window.Debug) {
+            (window as any).FieldObserver = this
+        }
+    }
+
+    public Generate(options: IObserver) {
+        return new Observer(options)
     }
 }
 

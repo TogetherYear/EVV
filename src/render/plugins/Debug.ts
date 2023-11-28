@@ -1,6 +1,3 @@
-/**
- * 调试信息
- */
 class Debug {
     private constructor() { }
 
