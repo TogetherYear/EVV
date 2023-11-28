@@ -1,5 +1,3 @@
-import { AxiosRequestConfig, AxiosResponse } from "axios";
-
 declare namespace AppRequest {
     export function ResetAccount(): void;
 
@@ -15,8 +13,8 @@ declare namespace AppRequest {
 
     export function SetRemember(b: boolean): void;
 
-    export function Get(url: string, config?: AxiosRequestConfig): Promise<AxiosResponse<any, any>>;
+    export function Get(url: string, config?: Record<any, any>): Promise<Record<any, any>>;
 
-    export function Post(url: string, data?: Record<any, any>, config?: AxiosRequestConfig): Promise<AxiosResponse<any, any>>;
+    export function Post(url: string, data?: Record<any, any>, config?: Record<any, any>): Promise<Record<any, any>>;
 
 }
