@@ -34,7 +34,7 @@ class ResourceLoad {
 
     public GetExtraFolder() {
         return app.isPackaged
-            ? path.join(app.getPath('exe'), `/../resources/Need`)
+            ? path.join(process.resourcesPath, `/Need`)
             : path.join(__dirname, `../../Need`)
     }
 
