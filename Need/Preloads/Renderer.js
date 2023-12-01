@@ -8,30 +8,30 @@ const Renderer = {
     },
     App: {
         Close: () => {
-            return ipcRenderer.send(`Renderer:App:Close`)
+            return ipcRenderer.postMessage(`Renderer:App:Close`)
         }
     },
     Widget: {
         Min: () => {
-            return ipcRenderer.send(`Renderer:Widget:Min`)
+            return ipcRenderer.postMessage(`Renderer:Widget:Min`)
         },
         Max: () => {
-            return ipcRenderer.send(`Renderer:Widget:Max`)
+            return ipcRenderer.postMessage(`Renderer:Widget:Max`)
         },
         Hide: () => {
-            return ipcRenderer.send(`Renderer:Widget:Hide`)
+            return ipcRenderer.postMessage(`Renderer:Widget:Hide`)
         },
         Show: () => {
-            return ipcRenderer.send(`Renderer:Widget:Show`)
+            return ipcRenderer.postMessage(`Renderer:Widget:Show`)
         },
         Resize: (size) => {
-            return ipcRenderer.send(`Renderer:Widget:Resize`, size)
+            return ipcRenderer.postMessage(`Renderer:Widget:Resize`, size)
         },
         Center: () => {
-            return ipcRenderer.send(`Renderer:Widget:Center`)
+            return ipcRenderer.postMessage(`Renderer:Widget:Center`)
         },
         SetPosition: (position) => {
-            return ipcRenderer.send(`Renderer:Widget:Position`, position)
+            return ipcRenderer.postMessage(`Renderer:Widget:Position`, position)
         },
         GetBounds: async () => {
             const bounds = await ipcRenderer.invoke('Renderer:Widget:Bounds')
@@ -60,7 +60,7 @@ const Renderer = {
     },
     Shell: {
         Beep: () => {
-            return ipcRenderer.send(`Renderer:Shell:Beep`)
+            return ipcRenderer.postMessage(`Renderer:Shell:Beep`)
         },
     },
     Resource: {
