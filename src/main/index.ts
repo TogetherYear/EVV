@@ -62,6 +62,6 @@ else {
     })
 
     app.on('second-instance', () => {
-        IpcRendererHandle.Instance.Send({ type: D.IpcRendererEvent.SecondInstance, widgets: [D.IpcRendererWindow.Main] })
+        IpcRendererHandle.Instance.PostMessage({ type: D.IpcRendererEvent.SecondInstance, widgets: [D.IpcRendererWindow.Main] })
     })
 }

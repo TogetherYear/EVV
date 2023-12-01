@@ -74,7 +74,7 @@ class ProcessPool {
         console.log(e)
     }
 
-    public SendMessage(e: DM.ChildrenProcessSendMessage) {
+    public PostMessage(e: DM.ChildrenProcessSendMessage) {
         if (e.processes && e.processes.length != 0) {
             for (let p of e.processes) {
                 const process = this.GetProcess(p)
