@@ -37,9 +37,8 @@ class IpcRendererHandle {
             }
         }
         else {
-            const contents = BrowserWindow.getAllWindows().map(w => w.webContents)
-            for (let c of contents) {
-                c.postMessage("RendererMessage", e)
+            for (let c of WindowPool.Instance.pool) {
+                c[1].widget.webContents.postMessage("RendererMessage", e)
             }
         }
 

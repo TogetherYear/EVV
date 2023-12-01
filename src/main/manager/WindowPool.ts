@@ -10,7 +10,7 @@ class WindowPool {
         return this.instance
     }
 
-    private pool = new Map<D.IpcRendererWindow, TWindow>()
+    public pool = new Map<D.IpcRendererWindow, TWindow>()
 
     public Run() {
 
