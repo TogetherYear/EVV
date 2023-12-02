@@ -2,7 +2,6 @@ import { BrowserWindow, Menu } from 'electron'
 import { ResourceLoad } from '@main/manager/ResourceLoad'
 import { Configuration } from '@main/manager/Configuration'
 import { TWindow } from '@main/libs/TWindow'
-import { IpcRendererHandle } from '@main/manager/IpcRendererHandle'
 import { D } from '@decorators/D'
 import { WindowPool } from './WindowPool'
 

@@ -5,7 +5,6 @@ import { TWindow } from '@main/libs/TWindow'
 import { Configuration } from '@main/manager/Configuration'
 import { WindowPool } from '@main/manager/WindowPool'
 import { D } from '@decorators/D'
-import { IpcRendererHandle } from './IpcRendererHandle'
 
 class AppTray extends TWindow {
     private constructor() {

@@ -36,6 +36,32 @@ class WindowPool {
         return result
     }
 
+    /**
+     * 发送信息到渲染进程
+     */
+    public PostMessage(e: D.IIpcRendererMessage) {
+        if (e.widgets && e.widgets.length != 0) {
+            for (let w of e.widgets) {
+                const window = WindowPool.Instance.GetWindow(w)
+                if (window) {
+                    window.widget.webContents.postMessage("RendererMessage", e)
+                }
+            }
+        }
+        else if (e.excludeWidgets && e.excludeWidgets.length != 0) {
+            const need = WindowPool.Instance.GetPoolKV().filter(c => (e.excludeWidgets || []).indexOf(c.key) == -1)
+            for (let c of need) {
+                c.value.widget.webContents.postMessage("RendererMessage", e)
+            }
+        }
+        else {
+            for (let c of WindowPool.Instance.pool) {
+                c[1].widget.webContents.postMessage("RendererMessage", e)
+            }
+        }
+
+    }
+
 }
 
 export { WindowPool }

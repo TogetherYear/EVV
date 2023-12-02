@@ -5,7 +5,6 @@ import { Configuration } from './manager/Configuration'
 import { ProcessPool } from './manager/ProcessPool'
 import { WindowPool } from './manager/WindowPool'
 import { IpcMainHandle } from './manager/IpcMainHandle'
-import { IpcRendererHandle } from './manager/IpcRendererHandle'
 import { GlobalShortcut } from './manager/GlobalShortcut'
 import { CustomProtocol } from './manager/CustomProtocol'
 import { AppMainWindow } from './manager/AppMainWindow'
@@ -38,8 +37,6 @@ else {
 
     IpcMainHandle.Instance.Run()
 
-    IpcRendererHandle.Instance.Run()
-
     app.on('ready', () => {
         GlobalShortcut.Instance.Run()
 
@@ -62,6 +59,6 @@ else {
     })
 
     app.on('second-instance', () => {
-        IpcRendererHandle.Instance.PostMessage({ type: D.IpcRendererEvent.SecondInstance, widgets: [D.IpcRendererWindow.Main] })
+        WindowPool.Instance.PostMessage({ type: D.IpcRendererEvent.SecondInstance, widgets: [D.IpcRendererWindow.Main] })
     })
 }
