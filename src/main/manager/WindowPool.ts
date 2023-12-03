@@ -42,20 +42,20 @@ class WindowPool {
     public PostMessage(e: D.IIpcRendererMessage) {
         if (e.widgets && e.widgets.length != 0) {
             for (let w of e.widgets) {
-                const window = WindowPool.Instance.GetWindow(w)
+                const window = this.GetWindow(w)
                 if (window) {
                     window.widget.webContents.postMessage("RendererMessage", e)
                 }
             }
         }
         else if (e.excludeWidgets && e.excludeWidgets.length != 0) {
-            const need = WindowPool.Instance.GetPoolKV().filter(c => (e.excludeWidgets || []).indexOf(c.key) == -1)
+            const need = this.GetPoolKV().filter(c => (e.excludeWidgets || []).indexOf(c.key) == -1)
             for (let c of need) {
                 c.value.widget.webContents.postMessage("RendererMessage", e)
             }
         }
         else {
-            for (let c of WindowPool.Instance.pool) {
+            for (let c of this.pool) {
                 c[1].widget.webContents.postMessage("RendererMessage", e)
             }
         }
