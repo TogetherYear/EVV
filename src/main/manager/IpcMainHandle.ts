@@ -3,6 +3,7 @@ import { BrowserWindow, app, ipcMain, screen, shell } from "electron"
 import ScreenshotDesktop from 'screenshot-desktop'
 import { ResourceLoad } from "@main/manager/ResourceLoad"
 import { AppTray } from "@main/manager/AppTray"
+import { D } from "@decorators/D"
 
 /**
  * 主线程 Ipc 监听 
@@ -76,6 +77,14 @@ class IpcMainHandle {
         ipcMain.on(`Renderer:Shell:Beep`, () => {
             shell.beep()
         })
+
+        ipcMain.on(`Renderer:Widget:Message`, (e, d: D.IIpcRendererReceiveMessage) => {
+            switch (e.sender.id) {
+                case AppMainWindow.Instance.widget.webContents.id: this.OnMessage({ ...d, type: D.IpcRendererWindow.Main }); return;
+                case AppTray.Instance.widget.webContents.id: this.OnMessage({ ...d, type: D.IpcRendererWindow.Tray }); return;
+                default: this.OnMessage({ ...d, type: D.IpcRendererWindow.Custom }); return;
+            }
+        })
     }
 
     private ListenIpcHandle() {
@@ -111,6 +120,19 @@ class IpcMainHandle {
             const path = ResourceLoad.Instance.GetResourcePathByName(name)
             return path
         })
+    }
+
+    private OnMessage(e: D.IIpcRendererReceiveMessage & { type: D.IpcRendererWindow }) {
+        if (e.type == D.IpcRendererWindow.Main) {
+
+        }
+        else if (e.type == D.IpcRendererWindow.Tray) {
+
+        }
+        else {
+
+        }
+        console.log(e)
     }
 }
 

@@ -79,19 +79,19 @@ class ProcessPool {
             for (let p of e.processes) {
                 const process = this.GetProcess(p)
                 if (process) {
-                    process.postMessage(e.send)
+                    process.postMessage(e)
                 }
             }
         }
         else if (e.excludeProcesses && e.excludeProcesses.length != 0) {
             const need = this.GetPoolKV().filter(c => (e.excludeProcesses || []).indexOf(c.key) == -1)
             for (let p of need) {
-                p.value.postMessage(e.send)
+                p.value.postMessage(e)
             }
         }
         else {
             for (let p of this.pool) {
-                p[1].postMessage(e.send)
+                p[1].postMessage(e)
             }
         }
     }

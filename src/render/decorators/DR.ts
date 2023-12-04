@@ -34,6 +34,6 @@ namespace DR {
         }
     }
 
-    export type AppMessageCallback = (e: D.IIpcRendererMessage) => void
+    export type AppMessageCallback = (e: D.IpcRendererSendMessage) => void
 }
 export { DR }

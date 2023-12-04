@@ -37,6 +37,9 @@ const Renderer = {
             const bounds = await ipcRenderer.invoke('Renderer:Widget:Bounds')
             return bounds
         },
+        PostMessage: (e) => {
+            return ipcRenderer.postMessage(`Renderer:Widget:Message`, e)
+        }
     },
     Screen: {
         GetHoldCursor: async () => {

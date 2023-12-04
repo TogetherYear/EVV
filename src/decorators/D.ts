@@ -33,9 +33,14 @@ namespace D {
     export enum IpcRendererWindow {
         Main = 'Main',
         Tray = 'Tray',
+        Custom = 'Custom',
     }
 
-    export interface IIpcRendererMessage {
+    export interface IIpcRendererReceiveMessage {
+        [key: string]: any
+    }
+
+    export type IpcRendererSendMessage = {
         type: IpcRendererEvent,
         /**
          * 要发送消息的窗口 与 excludeWidgets 冲突 二者填一个 此参数优先级高
@@ -45,7 +50,11 @@ namespace D {
          * 不要发送消息的窗口 与 widgets 冲突 二者填一个
          */
         excludeWidgets?: Array<IpcRendererWindow>,
-        [key: string]: any
+        send?: IIpcRendererSendMessage
+    }
+
+    export interface IIpcRendererSendMessage extends IIpcRendererReceiveMessage {
+
     }
 
 }

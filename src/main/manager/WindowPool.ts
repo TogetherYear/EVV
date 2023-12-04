@@ -39,7 +39,7 @@ class WindowPool {
     /**
      * 发送信息到渲染进程
      */
-    public PostMessage(e: D.IIpcRendererMessage) {
+    public PostMessage(e: D.IpcRendererSendMessage) {
         if (e.widgets && e.widgets.length != 0) {
             for (let w of e.widgets) {
                 const window = this.GetWindow(w)

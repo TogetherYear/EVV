@@ -48,7 +48,7 @@ class App extends AActor {
         })
     }
 
-    private OnMessage(e: D.IIpcRendererMessage) {
+    private OnMessage(e: D.IpcRendererSendMessage) {
         if (e.type == 'Message') {
             Message.success(e.type)
             this.Emit(D.IpcRendererEvent.Message)

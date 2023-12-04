@@ -13,8 +13,8 @@ declare namespace AppRequest {
 
     export function SetRemember(b: boolean): void;
 
-    export function Get(url: string, config?: Record<any, any>): Promise<Record<any, any>>;
+    export function Get(url: string, config?: Record<string, any>): Promise<Record<string, any>>;
 
-    export function Post(url: string, data?: Record<any, any>, config?: Record<any, any>): Promise<Record<any, any>>;
+    export function Post(url: string, data?: Record<string, any>, config?: Record<string, any>): Promise<Record<string, any>>;
 
 }

@@ -31,12 +31,16 @@ namespace DM {
         Custom = 'Custom',
     }
 
+    export enum ChildrenProcessEvent {
+        Message = 'Message',
+    }
+
     export interface IChildrenProcessReceiveMessage {
-        message: string,
         [key: string]: any
     }
 
     export type ChildrenProcessSendMessage = {
+        type: ChildrenProcessEvent,
         /**
          * 要发送消息的子进程 与 excludeProcesses 冲突 二者填一个 此参数优先级高
          */
@@ -45,7 +49,7 @@ namespace DM {
          * 不要发送消息的子进程 与 processes 冲突 二者填一个
          */
         excludeProcesses?: Array<ChildrenProcessType>,
-        send: IChildrenProcessSendMessage
+        send?: IChildrenProcessSendMessage
     }
 
     export interface IChildrenProcessSendMessage extends IChildrenProcessReceiveMessage {
