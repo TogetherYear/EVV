@@ -26,7 +26,7 @@ class Application extends AActor {
     }
 
     public Test() {
-        Renderer.Widget.Resize({ width: 600, height: 600 })
+        Renderer.Shell.Beep()
     }
 }
 
