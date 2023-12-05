@@ -3,19 +3,14 @@ import minIcon from '@render/assets/mc/min.png'
 import maxIcon from '@render/assets/mc/max.png'
 import hideIcon from '@render/assets/mc/hide.png'
 import { AActor } from '@render/libs/AActor'
-
-interface IOptionItem {
-    type: string,
-    icon: string,
-    label: string
-}
+import { DR } from '@render/decorators/DR'
 
 class HeaderBar extends AActor {
     public constructor() {
         super()
     }
 
-    private options = ref<Array<IOptionItem>>([
+    private options = ref<Array<DR.IHeaderBarOptionItem>>([
         { type: 'Min', icon: minIcon, label: '最小化' },
         { type: 'Max', icon: maxIcon, label: '最大化' },
         { type: 'Hide', icon: hideIcon, label: '隐藏' }
