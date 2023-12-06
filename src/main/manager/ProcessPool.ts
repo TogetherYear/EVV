@@ -12,7 +12,7 @@ class ProcessPool {
         return this.instance
     }
 
-    public pool = new Map<DM.ChildrenProcessType, UtilityProcess>()
+    private pool = new Map<DM.ChildrenProcessType, UtilityProcess>()
 
     public Run() {
         this.RunChildren()
