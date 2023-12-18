@@ -4,7 +4,6 @@
     top: 0;
     left: 0;
     width: 100%;
-    -webkit-app-region: drag;
     z-index: 14;
 
     .Btn {
@@ -15,7 +14,6 @@
         right: 0;
         display: flex;
         justify-content: space-between;
-        -webkit-app-region: no-drag;
 
         .Item {
             position: relative;
@@ -42,5 +40,14 @@
                 height: 50%;
             }
         }
+    }
+
+    .Drag {
+        position: absolute;
+        width: calc(100% - 110px);
+        height: 100%;
+        left: 0;
+        top: 0;
+        -webkit-app-region: drag;
     }
 }

@@ -23,6 +23,7 @@ instance.Run()
                 <img :src="item.icon" :title="item.label" class="Icon" />
             </span>
         </span>
+        <span class="Drag"></span>
     </div>
 </template>
 
