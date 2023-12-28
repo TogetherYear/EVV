@@ -58,7 +58,7 @@ class AppMainWindow extends TWindow {
             this.widget.webContents.openDevTools()
         }
 
-        this.widget.loadURL(ResourceLoad.Instance.GetPageByName('/Application'))
+        this.widget.loadURL(ResourceLoad.Instance.GetPageByName('Application'))
 
         // 我这里取消了默认的菜单栏 你可以自定义
         Menu.setApplicationMenu(null)

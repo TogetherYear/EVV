@@ -26,10 +26,10 @@ class ResourceLoad {
         }
     }
 
-    public GetPageByName(name: string = '/') {
+    public GetPageByName(name: string) {
         return app.isPackaged
-            ? `file://${path.join(__dirname, `../render/index.html#${name}`)}`.replaceAll('\\', '/')
-            : `http://localhost:6768#${name}`
+            ? `file://${path.join(__dirname, `../render/index.html#/${name}`)}`.replaceAll('\\', '/')
+            : `http://localhost:6768/#/${name}`
     }
 
     public GetExtraFolder() {
