@@ -36,7 +36,7 @@ namespace DM {
     }
 
     export interface IChildrenProcessReceiveMessage {
-        [key: string]: any
+        [key: string]: unknown
     }
 
     export type ChildrenProcessSendMessage = {

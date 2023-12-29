@@ -37,7 +37,7 @@ namespace D {
     }
 
     export interface IIpcRendererReceiveMessage {
-        [key: string]: any
+        [key: string]: unknown
     }
 
     export type IpcRendererSendMessage = {

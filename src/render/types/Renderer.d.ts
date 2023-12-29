@@ -2,7 +2,7 @@ declare namespace Renderer {
     /**
      * 内部调用事件分发 请勿使用
      */
-    export function Listen(callback: (e: Record<string, any>) => void): void
+    export function Listen(callback: (e: Record<string, unknown>) => void): void
 
     /**
      * 应用
@@ -53,7 +53,7 @@ declare namespace Renderer {
         /**
          * 发送自定义消息
          */
-        export function PostMessage(e: Record<string, any>): Promise<Electron.Rectangle>
+        export function PostMessage(e: Record<string, unknown>): Promise<Electron.Rectangle>
     }
 
     /**
