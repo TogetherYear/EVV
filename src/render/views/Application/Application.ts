@@ -26,7 +26,7 @@ class Application extends AActor {
     }
 
     public Test() {
-        Renderer.Shell.Beep()
+        Message.success("去码头整点薯条")
     }
 }
 
