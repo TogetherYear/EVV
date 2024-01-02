@@ -1,6 +1,5 @@
 import { AppMainWindow } from "@main/manager/AppMainWindow"
 import { BrowserWindow, app, ipcMain, screen, shell } from "electron"
-import ScreenshotDesktop from 'screenshot-desktop'
 import { ResourceLoad } from "@main/manager/ResourceLoad"
 import { AppTray } from "@main/manager/AppTray"
 import { D } from "@decorators/D"
@@ -88,25 +87,6 @@ class IpcMainHandle {
     }
 
     private ListenIpcHandle() {
-        ipcMain.handle(`Renderer:Screenshot:All`, async (e) => {
-            const buffers = await ScreenshotDesktop.all()
-            return buffers
-        })
-
-        ipcMain.handle(`Renderer:Screenshot:Index`, async (e, index: number) => {
-            const list = await ScreenshotDesktop.listDisplays()
-            const buffer = await ScreenshotDesktop({ format: 'png', screen: list[index].id })
-            return buffer
-        })
-
-        ipcMain.handle(`Renderer:Screenshot:Focus`, async (e) => {
-            const current = screen.getDisplayNearestPoint(screen.getCursorScreenPoint())
-            const list = await ScreenshotDesktop.listDisplays()
-            const id = list.find(l => l.left == current.bounds.x)?.id
-            const buffer = await ScreenshotDesktop({ format: 'png', screen: id })
-            return buffer
-        })
-
         ipcMain.handle(`Renderer:Screen:Cursor`, (e) => {
             return screen.getDisplayNearestPoint(screen.getCursorScreenPoint())
         })

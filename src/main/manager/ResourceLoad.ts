@@ -13,17 +13,7 @@ class ResourceLoad {
     }
 
     public Run() {
-        this.InitBat()
-    }
 
-    private InitBat() {
-        const std = path.join(app.getPath('temp'), '/screenCapture')
-        if (fs.existsSync(std)) {
-            const files = fs.readdirSync(std)
-            if (files.length == 0) {
-                fs.rmdirSync(std)
-            }
-        }
     }
 
     public GetPageByName(name: string) {

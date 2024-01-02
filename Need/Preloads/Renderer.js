@@ -47,20 +47,6 @@ const Renderer = {
             return screen
         }
     },
-    Screenshot: {
-        GetFocus: async () => {
-            const buffer = await ipcRenderer.invoke('Renderer:Screenshot:Focus')
-            return buffer
-        },
-        GetByIndex: async (index) => {
-            const buffer = await ipcRenderer.invoke(`Renderer:Screenshot:Index`, index)
-            return buffer
-        },
-        GetAll: async () => {
-            const buffers = await ipcRenderer.invoke("Renderer:Screenshot:All")
-            return buffers
-        }
-    },
     Shell: {
         Beep: () => {
             return ipcRenderer.postMessage(`Renderer:Shell:Beep`)

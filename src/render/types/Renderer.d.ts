@@ -67,24 +67,6 @@ declare namespace Renderer {
     }
 
     /**
-     * 截屏
-     */
-    export namespace Screenshot {
-        /**
-         * 获取当前鼠标位置的屏幕
-         */
-        export function GetFocus(): Promise<Buffer>
-        /**
-         * 根据索引获取
-         */
-        export function GetByIndex(index: number): Promise<Buffer>
-        /**
-         * 获取所有屏幕
-         */
-        export function GetAll(): Promise<Array<Buffer>>
-    }
-
-    /**
      * 额外集成
      */
     export namespace Shell {
