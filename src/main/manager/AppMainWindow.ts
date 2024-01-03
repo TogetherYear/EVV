@@ -95,7 +95,13 @@ class AppMainWindow extends TWindow {
     }
 
     public OnShow() {
-        this.widget.show()
+        if (this.widget.isMinimized()) {
+            this.widget.restore()
+            this.widget.focus()
+        }
+        else {
+            this.widget.show()
+        }
     }
 
     public OnCenter() {
