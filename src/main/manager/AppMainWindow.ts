@@ -54,6 +54,17 @@ class AppMainWindow extends TWindow {
             this.widget.focus()
         })
 
+        //这样并不会生效 详情去issues看 链接：https://github.com/electron/electron/issues/26726
+        this.widget.on('system-context-menu', (e) => {
+            e.preventDefault()
+        })
+
+        //目前临时解决方法 链接：https://github.com/electron/electron/issues/24893#issuecomment-1109262719
+        this.widget.hookWindowMessage(0x0116, () => {
+            this.widget.setEnabled(false)
+            this.widget.setEnabled(true)
+        })
+
         if (Configuration.Instance.configs.debug) {
             this.widget.webContents.openDevTools()
         }
