@@ -1,17 +1,17 @@
 const { ipcRenderer } = require("electron")
 
 const Renderer = {
-    Listen: (callback) => {
-        return ipcRenderer.on("RendererMessage", (e, data) => {
-            callback(data)
-        })
-    },
     App: {
         Close: () => {
             return ipcRenderer.postMessage(`Renderer:App:Close`)
         }
     },
     Widget: {
+        Listen: (callback) => {
+            return ipcRenderer.on("RendererMessage", (e, data) => {
+                callback(data)
+            })
+        },
         Min: () => {
             return ipcRenderer.postMessage(`Renderer:Widget:Min`)
         },

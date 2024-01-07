@@ -43,7 +43,7 @@ class App extends AActor {
     }
 
     private ListenEvents() {
-        Renderer.Listen((e: any) => {
+        Renderer.Widget.Listen((e: any) => {
             this.OnMessage(e)
         })
     }

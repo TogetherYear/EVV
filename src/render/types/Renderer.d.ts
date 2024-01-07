@@ -1,10 +1,5 @@
 declare namespace Renderer {
     /**
-     * 内部调用事件分发 请勿使用
-     */
-    export function Listen(callback: (e: Record<string, unknown>) => void): void
-
-    /**
      * 应用
      */
     export namespace App {
@@ -18,6 +13,10 @@ declare namespace Renderer {
      * 窗口
      */
     export namespace Widget {
+        /**
+         * 内部调用事件分发 请勿使用
+         */
+        export function Listen(callback: (e: Record<string, unknown>) => void): void
         /**
          * 最小化
          */
