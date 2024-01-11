@@ -112,7 +112,6 @@ class IpcMainHandle {
         else {
 
         }
-        console.log(e)
     }
 }
 

@@ -71,7 +71,6 @@ class ProcessPool {
         else {
 
         }
-        console.log(e)
     }
 
     public PostMessage(e: DM.ChildrenProcessSendMessage) {
