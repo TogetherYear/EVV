@@ -81,7 +81,7 @@ class IpcMainHandle {
             switch (e.sender.id) {
                 case AppMainWindow.Instance.widget.webContents.id: this.OnMessage({ ...d, type: D.IpcRendererWindow.Main }); return;
                 case AppTray.Instance.widget.webContents.id: this.OnMessage({ ...d, type: D.IpcRendererWindow.Tray }); return;
-                default: this.OnMessage({ ...d, type: D.IpcRendererWindow.Custom }); return;
+                default: this.OnMessage({ ...d, type: D.IpcRendererWindow.Other }); return;
             }
         })
     }

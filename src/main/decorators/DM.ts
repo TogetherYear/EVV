@@ -29,6 +29,7 @@ namespace DM {
         Log = 'Log',
         Push = 'Push',
         Custom = 'Custom',
+        Other = 'Other',
     }
 
     export enum ChildrenProcessEvent {

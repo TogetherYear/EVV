@@ -49,7 +49,8 @@ class ProcessPool {
         switch (e) {
             case 'Log': return DM.ChildrenProcessType.Log;
             case 'Push': return DM.ChildrenProcessType.Push;
-            default: return DM.ChildrenProcessType.Custom;
+            case 'Custom': return DM.ChildrenProcessType.Custom;
+            default: return DM.ChildrenProcessType.Other;
         }
     }
 
@@ -66,6 +67,9 @@ class ProcessPool {
 
         }
         else if (e.type == DM.ChildrenProcessType.Push) {
+
+        }
+        else if (e.type == DM.ChildrenProcessType.Custom) {
 
         }
         else {

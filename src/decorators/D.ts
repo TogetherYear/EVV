@@ -33,7 +33,7 @@ namespace D {
     export enum IpcRendererWindow {
         Main = 'Main',
         Tray = 'Tray',
-        Custom = 'Custom',
+        Other = 'Other',
     }
 
     export interface IIpcRendererReceiveMessage {
