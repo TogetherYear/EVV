@@ -11,7 +11,7 @@ class Debug {
 
     public Run() {
         if (!window.Debug) {
-            (window as any).Debug = this
+            window.Debug = this
         }
     }
 
