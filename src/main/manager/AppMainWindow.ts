@@ -65,6 +65,11 @@ class AppMainWindow extends TWindow {
             this.widget.setEnabled(true)
         })
 
+        this.widget.on('close', (e) => {
+            e.preventDefault()
+            this.widget.hide()
+        })
+
         if (Configuration.Instance.configs.debug) {
             this.widget.webContents.openDevTools()
         }
