@@ -27,6 +27,16 @@ class IpcMainHandle {
             app.quit()
         })
 
+        ipcMain.on(`Renderer:App:SetAutostart`, (e, enable: boolean) => {
+            app.setLoginItemSettings({
+                openAtLogin: enable
+            })
+        })
+
+        ipcMain.on(`Renderer:App:Relaunch`, (e) => {
+            app.relaunch()
+        })
+
         ipcMain.on(`Renderer:Widget:Min`, (e) => {
             switch (e.sender.id) {
                 case AppMainWindow.Instance.widget.webContents.id: AppMainWindow.Instance.OnMin(); return;
@@ -99,6 +109,11 @@ class IpcMainHandle {
         ipcMain.handle(`Renderer:Resource:Name`, (e, name: string) => {
             const path = ResourceLoad.Instance.GetResourcePathByName(name)
             return path
+        })
+
+        ipcMain.handle(`Renderer:App:IsAutostart`, (e) => {
+            const enable = app.getLoginItemSettings().openAtLogin
+            return enable
         })
     }
 

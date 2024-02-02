@@ -7,6 +7,21 @@ declare namespace Renderer {
          * 关闭
          */
         export function Close(): void
+
+        /**
+         * 重启
+         */
+        export function Relaunch(): void
+
+        /**
+         * 是否开机自启
+         */
+        export function IsAutostart(): Promise<boolean>
+
+        /**
+         * 设置是否开机自启
+         */
+        export function SetAutostart(enable: boolean): void
     }
 
     /**

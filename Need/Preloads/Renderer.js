@@ -4,6 +4,16 @@ const Renderer = {
     App: {
         Close: () => {
             return ipcRenderer.postMessage(`Renderer:App:Close`)
+        },
+        Relaunch: () => {
+            return ipcRenderer.postMessage(`Renderer:App:Relaunch`)
+        },
+        IsAutostart: async () => {
+            const enable = await ipcRenderer.invoke('Renderer:App:IsAutostart')
+            return enable
+        },
+        SetAutostart: (enable) => {
+            return ipcRenderer.postMessage(`Renderer:App:SetAutostart`, enable)
         }
     },
     Widget: {
