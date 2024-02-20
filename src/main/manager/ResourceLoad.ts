@@ -1,6 +1,5 @@
 import { app } from 'electron'
 import path from 'path'
-import fs from 'fs'
 import { CustomProtocol } from '@main/manager/CustomProtocol'
 
 class ResourceLoad {
