@@ -35,6 +35,7 @@ class IpcMainHandle {
 
         ipcMain.on(`Renderer:App:Relaunch`, (e) => {
             app.relaunch()
+            app.exit(0)
         })
 
         ipcMain.on(`Renderer:Widget:Min`, (e) => {
