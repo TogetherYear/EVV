@@ -1,6 +1,5 @@
 
 import { AActor } from "@render/libs/AActor"
-import { Vector2 } from "three"
 import { onMounted, onUnmounted, ref } from "vue"
 
 class Transformable extends AActor {
@@ -17,11 +16,20 @@ class Transformable extends AActor {
 
     private isMoveable = ref<boolean>(false)
 
-    private lastPoint = new Vector2(0, 0)
+    private lastPoint = {
+        x: 0,
+        y: 0
+    }
 
-    private delta = new Vector2(0, 0)
+    private delta = {
+        x: 0,
+        y: 0
+    }
 
-    private result = new Vector2(0, 0)
+    private result = {
+        x: 0,
+        y: 0
+    }
 
     private scale = 1
 
