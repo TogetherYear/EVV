@@ -18,8 +18,7 @@ const lock = app.requestSingleInstanceLock(additionalData)
 
 // 只允许唯一实例
 if (!lock) {
-    app.quit()
-    app.quit()
+    app.exit(0)
 }
 else {
     app.commandLine.appendSwitch('disable-web-security')
@@ -52,8 +51,7 @@ else {
 
     app.on('window-all-closed', () => {
         if (process.platform == 'win32') {
-            app.quit()
-            app.quit()
+            app.exit(0)
         }
     })
 
