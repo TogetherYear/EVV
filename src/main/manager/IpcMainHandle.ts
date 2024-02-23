@@ -117,7 +117,7 @@ class IpcMainHandle {
             return enable
         })
 
-        ipcMain.handle(`Renderer:Addon:NR`, (e, d: D.IIpcRendererAddon) => {
+        ipcMain.handle(`Renderer:NodeAddon:NR`, (e, d: D.IIpcRendererAddon) => {
             const result = NodeAddon.Instance.OnEmitNRAddon(d)
             return result
         })

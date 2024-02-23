@@ -70,7 +70,7 @@ const Renderer = {
     },
     NodeAddon: {
         EmitNR: async (options) => {
-            const result = await ipcRenderer.invoke(`Renderer:Addon:NR`, options)
+            const result = await ipcRenderer.invoke(`Renderer:NodeAddon:NR`, options)
             return result
         }
     }
