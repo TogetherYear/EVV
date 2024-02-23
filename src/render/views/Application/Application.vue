@@ -19,9 +19,6 @@ instance.Run()
 <template>
     <div class="Application">
         <HeaderBarVue></HeaderBarVue>
-        <n-button type="primary" class="Btn" @click="instance.Test()">
-            Emit
-        </n-button>
     </div>
 </template>
 

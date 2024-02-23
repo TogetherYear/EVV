@@ -18,11 +18,16 @@ class IpcMainHandle {
     }
 
     public Run() {
-        this.ListenIpcSend()
-        this.ListenIpcHandle()
+        this.OnAppIPC()
+        this.OnWidgetIPC()
+        this.OnShellIPC()
+        this.OnTrayIPC()
+        this.OnScreenIPC()
+        this.OnResourceIPC()
+        this.OnNodeAddonIPC()
     }
 
-    private ListenIpcSend() {
+    private OnAppIPC() {
         ipcMain.on(`Renderer:App:Close`, (e) => {
             app.exit(0)
         })
@@ -38,6 +43,13 @@ class IpcMainHandle {
             app.exit(0)
         })
 
+        ipcMain.handle(`Renderer:App:IsAutostart`, (e) => {
+            const enable = app.getLoginItemSettings().openAtLogin
+            return enable
+        })
+    }
+
+    private OnWidgetIPC() {
         ipcMain.on(`Renderer:Widget:Min`, (e) => {
             switch (e.sender.id) {
                 case AppMainWindow.Instance.widget.webContents.id: AppMainWindow.Instance.OnMin(); return;
@@ -84,10 +96,6 @@ class IpcMainHandle {
             }
         })
 
-        ipcMain.on(`Renderer:Shell:Beep`, () => {
-            shell.beep()
-        })
-
         ipcMain.on(`Renderer:Widget:Message`, (e, d: D.IIpcRendererReceiveMessage) => {
             switch (e.sender.id) {
                 case AppMainWindow.Instance.widget.webContents.id: this.OnMessage({ ...d, type: D.IpcRendererWindow.Main }); return;
@@ -95,28 +103,51 @@ class IpcMainHandle {
                 default: this.OnMessage({ ...d, type: D.IpcRendererWindow.Other }); return;
             }
         })
-    }
-
-    private ListenIpcHandle() {
-        ipcMain.handle(`Renderer:Screen:Cursor`, (e) => {
-            return screen.getDisplayNearestPoint(screen.getCursorScreenPoint())
-        })
 
         ipcMain.handle(`Renderer:Widget:Bounds`, (e) => {
             const widget = BrowserWindow.fromWebContents(e.sender) as BrowserWindow
             return widget.getBounds()
         })
+    }
 
+    private OnShellIPC() {
+        ipcMain.on(`Renderer:Shell:Beep`, () => {
+            shell.beep()
+        })
+    }
+
+    private OnTrayIPC() {
+        ipcMain.on(`Renderer:Tray:Icon`, (e, icon: string) => {
+            AppTray.Instance.OnSetIcon(icon)
+        })
+
+        ipcMain.on(`Renderer:Tray:Tooltip`, (e, tooltip: string) => {
+            AppTray.Instance.OnSetTooltip(tooltip)
+        })
+
+        ipcMain.on(`Renderer:Tray:Flash`, (e, icon: string) => {
+            AppTray.Instance.OnFlash(icon)
+        })
+
+        ipcMain.on(`Renderer:Tray:StopFlash`, (e, icon: string) => {
+            AppTray.Instance.OnStopFlash(icon)
+        })
+    }
+
+    private OnScreenIPC() {
+        ipcMain.handle(`Renderer:Screen:Cursor`, (e) => {
+            return screen.getDisplayNearestPoint(screen.getCursorScreenPoint())
+        })
+    }
+
+    private OnResourceIPC() {
         ipcMain.handle(`Renderer:Resource:Name`, (e, name: string) => {
             const path = ResourceLoad.Instance.GetResourcePathByName(name)
             return path
         })
+    }
 
-        ipcMain.handle(`Renderer:App:IsAutostart`, (e) => {
-            const enable = app.getLoginItemSettings().openAtLogin
-            return enable
-        })
-
+    private OnNodeAddonIPC() {
         ipcMain.handle(`Renderer:NodeAddon:NR`, (e, d: D.IIpcRendererAddon) => {
             const result = NodeAddon.Instance.OnEmitNRAddon(d)
             return result

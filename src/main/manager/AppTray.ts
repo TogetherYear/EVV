@@ -19,6 +19,8 @@ class AppTray extends TWindow {
 
     public tray!: Tray
 
+    private flashTimer: NodeJS.Timeout | null = null
+
     public Run() {
         this.CreateWidget()
         this.CreateTray()
@@ -110,6 +112,39 @@ class AppTray extends TWindow {
 
     public OnResize(size: { width: number, height: number }) {
         this.widget.setSize(size.width, size.height)
+    }
+
+    public OnSetIcon(icon: string) {
+        const showIcon = ResourceLoad.Instance.GetImageByName(icon)
+        this.tray.setImage(showIcon)
+    }
+
+    public OnSetTooltip(tooltip: string) {
+        this.tray.setToolTip(tooltip)
+    }
+
+    public OnFlash(icon: string) {
+        let show = true
+        const emptyIcon = ResourceLoad.Instance.GetImageByName("empty.ico")
+        const showIcon = ResourceLoad.Instance.GetImageByName(icon)
+        this.flashTimer = setInterval(() => {
+            if (show) {
+                this.tray.setImage(emptyIcon)
+            }
+            else {
+                this.tray.setImage(showIcon)
+            }
+            show = !show
+        }, 700)
+    }
+
+    public OnStopFlash(icon: string) {
+        const showIcon = ResourceLoad.Instance.GetImageByName(icon)
+        if (this.flashTimer) {
+            clearInterval(this.flashTimer)
+            this.flashTimer = null
+        }
+        this.tray.setImage(showIcon)
     }
 }
 

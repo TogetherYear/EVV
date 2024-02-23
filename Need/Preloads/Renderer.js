@@ -16,6 +16,20 @@ const Renderer = {
             return ipcRenderer.postMessage(`Renderer:App:SetAutostart`, enable)
         }
     },
+    Tray: {
+        SetTrayIcon: (icon) => {
+            return ipcRenderer.postMessage(`Renderer:Tray:Icon`, icon)
+        },
+        SetTrayTooltip: (tooltip) => {
+            return ipcRenderer.postMessage(`Renderer:Tray:Tooltip`, tooltip)
+        },
+        Flash: (icon) => {
+            return ipcRenderer.postMessage(`Renderer:Tray:Flash`, icon)
+        },
+        StopFlash: (icon) => {
+            return ipcRenderer.postMessage(`Renderer:Tray:StopFlash`, icon)
+        },
+    },
     Widget: {
         Listen: (callback) => {
             return ipcRenderer.on("RendererMessage", (e, data) => {

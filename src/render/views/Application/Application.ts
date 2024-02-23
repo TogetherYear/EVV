@@ -14,7 +14,7 @@ class Application extends AActor {
 
     public Run() {
         onMounted(() => {
-
+            this.Test()
         })
         onUnmounted(() => {
             this.Destroy()
@@ -26,10 +26,13 @@ class Application extends AActor {
     }
 
     public Test() {
-        setTimeout(() => {
-
+        setTimeout(async () => {
+            Renderer.Tray.Flash("new.ico")
         }, 3000);
 
+        setTimeout(() => {
+            Renderer.Tray.StopFlash("tray.ico")
+        }, 10000);
     }
 }
 

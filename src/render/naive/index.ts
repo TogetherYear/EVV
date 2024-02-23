@@ -4,7 +4,6 @@ import {
     NMessageProvider,
     NDialogProvider,
     NNotificationProvider,
-    NButton,
     GlobalThemeOverrides,
     darkTheme
 } from 'naive-ui'
@@ -18,7 +17,6 @@ const naive = create({
         NMessageProvider,
         NDialogProvider,
         NNotificationProvider,
-        NButton
     ]
 })
 
