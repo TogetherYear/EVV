@@ -20,7 +20,8 @@ class App extends AActor {
 
     public Run() {
         onMounted(() => {
-            this.InitEvents()
+            this.CreateEvents()
+            this.ListenEvents()
             this.State()
         })
 
@@ -31,11 +32,6 @@ class App extends AActor {
 
     protected Destroy() {
 
-    }
-
-    private InitEvents() {
-        this.CreateEvents()
-        this.ListenEvents()
     }
 
     private CreateEvents() {
