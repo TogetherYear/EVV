@@ -3,6 +3,7 @@ import { BrowserWindow, app, ipcMain, screen, shell } from "electron"
 import { ResourceLoad } from "@main/manager/ResourceLoad"
 import { AppTray } from "@main/manager/AppTray"
 import { D } from "@decorators/D"
+import { NodeAddon } from "./NodeAddon"
 
 /**
  * 主线程 Ipc 监听 
@@ -115,6 +116,11 @@ class IpcMainHandle {
         ipcMain.handle(`Renderer:App:IsAutostart`, (e) => {
             const enable = app.getLoginItemSettings().openAtLogin
             return enable
+        })
+
+        ipcMain.handle(`Renderer:Addon:NR`, (e, d: D.IIpcRendererAddon) => {
+            const result = NodeAddon.Instance.OnEmitNRAddon(d)
+            return result
         })
     }
 

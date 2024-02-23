@@ -47,6 +47,10 @@ class ResourceLoad {
         return `${this.GetChildProcessesFolder()}/${name}.js`
     }
 
+    public GetAddonByName(name: string) {
+        return `${this.GetExtraFolder()}/Addons/${name}.node`
+    }
+
     /**
      * 渲染进程使用
      */

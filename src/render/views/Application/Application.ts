@@ -26,7 +26,10 @@ class Application extends AActor {
     }
 
     public Test() {
-        Message.success("去码头整点薯条")
+        setTimeout(() => {
+
+        }, 3000);
+
     }
 }
 

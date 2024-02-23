@@ -4,6 +4,7 @@ import { ResourceLoad } from './manager/ResourceLoad'
 import { Configuration } from './manager/Configuration'
 import { ProcessPool } from './manager/ProcessPool'
 import { WindowPool } from './manager/WindowPool'
+import { NodeAddon } from './manager/NodeAddon'
 import { IpcMainHandle } from './manager/IpcMainHandle'
 import { GlobalShortcut } from './manager/GlobalShortcut'
 import { CustomProtocol } from './manager/CustomProtocol'
@@ -34,6 +35,8 @@ else {
     ProcessPool.Instance.Run()
 
     WindowPool.Instance.Run()
+
+    NodeAddon.Instance.Run()
 
     IpcMainHandle.Instance.Run()
 

@@ -67,6 +67,12 @@ const Renderer = {
             const path = await ipcRenderer.invoke(`Renderer:Resource:Name`, name)
             return path
         }
+    },
+    NodeAddon: {
+        EmitNR: async (options) => {
+            const result = await ipcRenderer.invoke(`Renderer:Addon:NR`, options)
+            return result
+        }
     }
 }
 

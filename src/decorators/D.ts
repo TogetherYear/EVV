@@ -40,6 +40,11 @@ namespace D {
         [key: string]: unknown
     }
 
+    export interface IIpcRendererAddon {
+        methon: string,
+        args?: Array<unknown>
+    }
+
     export type IpcRendererSendMessage = {
         type: IpcRendererEvent,
         /**

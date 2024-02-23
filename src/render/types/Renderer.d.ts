@@ -99,4 +99,14 @@ declare namespace Renderer {
          */
         export function GetPathByName(name: string): Promise<string>
     }
+
+    /**
+     * node 拓展
+     */
+    export namespace NodeAddon {
+        /**
+         * NR 拓展
+         */
+        export function EmitNR(options: { methon: string, args?: Array<unknown> }): Promise<unknown>
+    }
 }
