@@ -24,8 +24,7 @@ class IpcMainHandle {
 
     private ListenIpcSend() {
         ipcMain.on(`Renderer:App:Close`, (e) => {
-            app.quit()
-            app.quit()
+            app.exit(0)
         })
 
         ipcMain.on(`Renderer:App:SetAutostart`, (e, enable: boolean) => {

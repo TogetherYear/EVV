@@ -37,7 +37,7 @@
           ]
         }
       ],
-      "icon": "Need/Images/icon.ico",
+      "icon": "Need/Images/build.ico",
       "artifactName": "${productName}.${ext}"
     },
     "nsis": {
@@ -45,9 +45,9 @@
       "perMachine": true,
       "allowElevation": true,
       "allowToChangeInstallationDirectory": true,
-      "installerIcon": "./Need/Images/icon.ico",
-      "uninstallerIcon": "./Need/Images/icon.ico",
-      "installerHeaderIcon": "./Need/Images/icon.ico",
+      "installerIcon": "./Need/Images/build.ico",
+      "uninstallerIcon": "./Need/Images/build.ico",
+      "installerHeaderIcon": "./Need/Images/build.ico",
       "createDesktopShortcut": true,
       "createStartMenuShortcut": true,
       "shortcutName": "Application"

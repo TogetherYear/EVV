@@ -21,6 +21,7 @@ class App extends AActor {
     public Run() {
         onMounted(() => {
             this.InitEvents()
+            this.State()
         })
 
         onUnmounted(() => {
@@ -57,6 +58,20 @@ class App extends AActor {
             Message.error('已关闭第二个实例')
             Renderer.Widget.Show()
             this.Emit(D.IpcRendererEvent.SecondInstance)
+        }
+    }
+
+    private async State() {
+        if (location.href.indexOf("Application") != -1) {
+            Renderer.Widget.Resize({
+                width: parseInt(localStorage.getItem("width") || '1000'),
+                height: parseInt(localStorage.getItem("height") || '560')
+            })
+            Renderer.Widget.Center()
+            window.addEventListener('resize', (e: UIEvent) => {
+                localStorage.setItem("width", `${window.innerWidth}`)
+                localStorage.setItem("height", `${window.innerHeight}`)
+            })
         }
     }
 
