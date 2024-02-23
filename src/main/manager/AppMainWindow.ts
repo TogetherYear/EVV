@@ -32,7 +32,7 @@ class AppMainWindow extends TWindow {
             useContentSize: true,
             frame: false,
             backgroundColor: '#212121',
-            icon: ResourceLoad.Instance.GetImageByName('window.png'),
+            icon: ResourceLoad.Instance.GetImageByName('window.ico'),
             webPreferences: {
                 // 同源
                 webSecurity: false,

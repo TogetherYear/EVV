@@ -41,7 +41,7 @@ class AppTray extends TWindow {
             alwaysOnTop: true,
             transparent: true,
             skipTaskbar: true,
-            icon: ResourceLoad.Instance.GetImageByName('tray.png'),
+            icon: ResourceLoad.Instance.GetImageByName('tray.ico'),
             webPreferences: {
                 // 同源
                 webSecurity: false,
@@ -77,7 +77,7 @@ class AppTray extends TWindow {
     private CreateTray() {
         if (process.platform == 'win32') {
             //系统托盘图标
-            this.tray = new Tray(ResourceLoad.Instance.GetImageByName('tray.png'))
+            this.tray = new Tray(ResourceLoad.Instance.GetImageByName('tray.ico'))
 
             //设置此托盘图标的悬停提示内容
             this.tray.setToolTip('去码头整点薯条')
