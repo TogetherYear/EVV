@@ -48,8 +48,8 @@ const Renderer = {
         Show: () => {
             return ipcRenderer.postMessage(`Renderer:Widget:Show`)
         },
-        Resize: (size) => {
-            return ipcRenderer.postMessage(`Renderer:Widget:Resize`, size)
+        OnSetSize: (size) => {
+            return ipcRenderer.postMessage(`Renderer:Widget:Size`, size)
         },
         Center: () => {
             return ipcRenderer.postMessage(`Renderer:Widget:Center`)

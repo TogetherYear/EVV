@@ -117,7 +117,7 @@ class AppMainWindow extends TWindow {
         this.widget.setPosition(position.x, position.y)
     }
 
-    public OnResize(size: { width: number, height: number }) {
+    public OnSetSize(size: { width: number, height: number }) {
         this.widget.setSize(size.width, size.height)
     }
 }

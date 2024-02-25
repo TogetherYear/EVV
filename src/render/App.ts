@@ -59,7 +59,7 @@ class App extends AActor {
 
     private async State() {
         if (location.href.indexOf("Application") != -1) {
-            Renderer.Widget.Resize({
+            Renderer.Widget.SetSize({
                 width: parseInt(localStorage.getItem("width") || '1000'),
                 height: parseInt(localStorage.getItem("height") || '560')
             })

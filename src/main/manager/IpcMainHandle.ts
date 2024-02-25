@@ -89,10 +89,10 @@ class IpcMainHandle {
             }
         })
 
-        ipcMain.on(`Renderer:Widget:Resize`, (e, size: { width: number, height: number }) => {
+        ipcMain.on(`Renderer:Widget:Size`, (e, size: { width: number, height: number }) => {
             switch (e.sender.id) {
-                case AppMainWindow.Instance.widget.webContents.id: AppMainWindow.Instance.OnResize(size); return;
-                case AppTray.Instance.widget.webContents.id: AppTray.Instance.OnResize(size); return;
+                case AppMainWindow.Instance.widget.webContents.id: AppMainWindow.Instance.OnSetSize(size); return;
+                case AppTray.Instance.widget.webContents.id: AppTray.Instance.OnSetSize(size); return;
             }
         })
 

@@ -84,7 +84,7 @@ declare namespace Renderer {
         /**
          * 调整大小
          */
-        export function Resize(size: { height: number; width: number; }): void
+        export function SetSize(size: { height: number; width: number; }): void
         /**
          * 获取当前窗口的Bounds
          */
