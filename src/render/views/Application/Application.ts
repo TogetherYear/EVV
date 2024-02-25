@@ -27,12 +27,8 @@ class Application extends AActor {
 
     public Test() {
         setTimeout(async () => {
-            Renderer.Tray.Flash("new.ico")
-        }, 3000);
 
-        setTimeout(() => {
-            Renderer.Tray.StopFlash("tray.ico")
-        }, 10000);
+        }, 3000);
     }
 }
 

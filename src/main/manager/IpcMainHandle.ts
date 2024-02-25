@@ -3,7 +3,6 @@ import { BrowserWindow, app, ipcMain, screen, shell } from "electron"
 import { ResourceLoad } from "@main/manager/ResourceLoad"
 import { AppTray } from "@main/manager/AppTray"
 import { D } from "@decorators/D"
-import { NodeAddon } from "./NodeAddon"
 
 /**
  * 主线程 Ipc 监听 
@@ -24,7 +23,6 @@ class IpcMainHandle {
         this.OnTrayIPC()
         this.OnScreenIPC()
         this.OnResourceIPC()
-        this.OnNodeAddonIPC()
     }
 
     private OnAppIPC() {
@@ -144,13 +142,6 @@ class IpcMainHandle {
         ipcMain.handle(`Renderer:Resource:Name`, (e, name: string) => {
             const path = ResourceLoad.Instance.GetResourcePathByName(name)
             return path
-        })
-    }
-
-    private OnNodeAddonIPC() {
-        ipcMain.handle(`Renderer:NodeAddon:NR`, (e, d: D.IIpcRendererAddon) => {
-            const result = NodeAddon.Instance.OnEmitNRAddon(d)
-            return result
         })
     }
 

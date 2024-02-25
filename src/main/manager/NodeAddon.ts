@@ -1,4 +1,3 @@
-import { D } from "@decorators/D"
 import { ResourceLoad } from "@main/manager/ResourceLoad"
 
 /**
@@ -18,12 +17,6 @@ class NodeAddon {
             NR: require(`${ResourceLoad.Instance.GetAddonByName("NR.win32-x64-msvc")}`)
         }
     }
-
-    public OnEmitNRAddon(options: D.IIpcRendererAddon) {
-        //@ts-ignore
-        return global.NodeAddon.NR[options.methon](...(options.args || []))
-    }
-
 }
 
 export { NodeAddon }

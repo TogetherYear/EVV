@@ -48,7 +48,7 @@ const Renderer = {
         Show: () => {
             return ipcRenderer.postMessage(`Renderer:Widget:Show`)
         },
-        OnSetSize: (size) => {
+        SetSize: (size) => {
             return ipcRenderer.postMessage(`Renderer:Widget:Size`, size)
         },
         Center: () => {
@@ -82,12 +82,6 @@ const Renderer = {
             return path
         }
     },
-    NodeAddon: {
-        EmitNR: async (options) => {
-            const result = await ipcRenderer.invoke(`Renderer:NodeAddon:NR`, options)
-            return result
-        }
-    }
 }
 
 window.Renderer = Renderer
