@@ -14,7 +14,12 @@ class NodeAddon {
 
     public Run() {
         global.NodeAddon = {
-            NR: require(`${ResourceLoad.Instance.GetAddonByName("NR.win32-x64-msvc")}`)
+            Automatic: require(`${ResourceLoad.Instance.GetAddonByName("Automatic.win32-x64-msvc")}`),
+            Image: require(`${ResourceLoad.Instance.GetAddonByName("Image.win32-x64-msvc")}`),
+            Monitor: require(`${ResourceLoad.Instance.GetAddonByName("Monitor.win32-x64-msvc")}`),
+            Serve: require(`${ResourceLoad.Instance.GetAddonByName("Serve.win32-x64-msvc")}`),
+            Wallpaper: require(`${ResourceLoad.Instance.GetAddonByName("Wallpaper.win32-x64-msvc")}`),
+            Window: require(`${ResourceLoad.Instance.GetAddonByName("Window.win32-x64-msvc")}`),
         }
     }
 }
