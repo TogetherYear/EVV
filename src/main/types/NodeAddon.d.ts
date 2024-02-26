@@ -1,4 +1,7 @@
 declare namespace NodeAddon {
+    /**
+     * 自动化
+     */
     export namespace Automatic {
         export function GetMousePosition(): Point
         export function SetMousePosition(x: number, y: number): void
@@ -90,6 +93,10 @@ declare namespace NodeAddon {
             down: boolean
         }
     }
+
+    /**
+     * 图片
+     */
     export namespace Image {
         export function ConvertImageFormat(originPath: string, convertPath: string, options: ConvertOptions): void
         export const enum ImageFormat {
@@ -125,6 +132,10 @@ declare namespace NodeAddon {
         }
 
     }
+
+    /**
+     * 显示器
+     */
     export namespace Monitor {
         export function GetAllMonitors(): Array<Monitor>
         export function GetMonitorFromPoint(x: number, y: number): Monitor
@@ -144,9 +155,17 @@ declare namespace NodeAddon {
             Capture(path: string): boolean
         }
     }
+
+    /**
+     * 静态文件服务器
+     */
     export namespace Serve {
         export function CreateStaticFileServe(path: string, onOpen: (...args: any[]) => any): void
     }
+
+    /**
+     * 壁纸
+     */
     export namespace Wallpaper {
         export function GetWallpaper(): string
         export function SetWallpaper(path: string, mode: WallpaperMode): void
@@ -159,6 +178,10 @@ declare namespace NodeAddon {
             Tile = 5
         }
     }
+
+    /**
+     * 窗口
+     */
     export namespace Window {
         export function GetAllWindows(): Array<Window>
         export abstract class Window {
