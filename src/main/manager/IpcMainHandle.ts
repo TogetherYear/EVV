@@ -112,6 +112,14 @@ class IpcMainHandle {
         ipcMain.on(`Renderer:Shell:Beep`, () => {
             shell.beep()
         })
+
+        ipcMain.on(`Renderer:Shell:Folder`, (e, path: string) => {
+            shell.showItemInFolder(path)
+        })
+
+        ipcMain.on(`Renderer:Shell:Default`, (e, path: string) => {
+            shell.openPath(path)
+        })
     }
 
     private OnTrayIPC() {
@@ -135,6 +143,14 @@ class IpcMainHandle {
     private OnScreenIPC() {
         ipcMain.handle(`Renderer:Screen:Cursor`, (e) => {
             return screen.getDisplayNearestPoint(screen.getCursorScreenPoint())
+        })
+
+        ipcMain.handle(`Renderer:Screen:All`, () => {
+            return screen.getAllDisplays()
+        })
+
+        ipcMain.handle(`Renderer:Screen:Primary`, () => {
+            return screen.getPrimaryDisplay()
         })
     }
 

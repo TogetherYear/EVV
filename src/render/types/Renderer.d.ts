@@ -103,6 +103,16 @@ declare namespace Renderer {
          * 获取当前鼠标位置的屏幕
          */
         export function GetHoldCursor(): Promise<Electron.Display>
+
+        /**
+         * 获取所有屏幕
+         */
+        export function GetAll(): Promise<Array<Electron.Display>>
+
+        /**
+         * 获取主屏幕
+         */
+        export function GetPrimary(): Promise<Electron.Display>
     }
 
     /**
@@ -113,6 +123,16 @@ declare namespace Renderer {
          * 播放提示音
          */
         export function Beep(): void
+
+        /**
+         * 在文件管理器中打开路径
+         */
+        export function OpenInFolder(path: string): void
+
+        /**
+         * 使用默认方式打开\路径
+         */
+        export function OpenPathByDefault(path: string): void
     }
 
     /**

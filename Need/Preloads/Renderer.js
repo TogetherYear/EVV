@@ -69,11 +69,25 @@ const Renderer = {
         GetHoldCursor: async () => {
             const screen = await ipcRenderer.invoke('Renderer:Screen:Cursor')
             return screen
-        }
+        },
+        GetAll: async () => {
+            const screens = await ipcRenderer.invoke('Renderer:Screen:All')
+            return screens
+        },
+        GetPrimary: async () => {
+            const screens = await ipcRenderer.invoke('Renderer:Screen:Primary')
+            return screens
+        },
     },
     Shell: {
         Beep: () => {
             return ipcRenderer.postMessage(`Renderer:Shell:Beep`)
+        },
+        OpenInFolder: (path) => {
+            return ipcRenderer.postMessage(`Renderer:Shell:Folder`, path)
+        },
+        OpenPathByDefault: (path) => {
+            return ipcRenderer.postMessage(`Renderer:Shell:Default`, path)
         },
     },
     Resource: {
