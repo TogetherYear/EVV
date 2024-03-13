@@ -1,5 +1,4 @@
 import { app, globalShortcut } from 'electron'
-import { Time } from '@libs/Time'
 import { ResourceLoad } from './manager/ResourceLoad'
 import { Configuration } from './manager/Configuration'
 import { ProcessPool } from './manager/ProcessPool'
@@ -10,56 +9,49 @@ import { GlobalShortcut } from './manager/GlobalShortcut'
 import { CustomProtocol } from './manager/CustomProtocol'
 import { AppMainWindow } from './manager/AppMainWindow'
 import { AppTray } from './manager/AppTray'
+import { SingleInstance } from './manager/SingleInstance'
 import { D } from '@decorators/D'
 
-const additionalData = { key: "TSingleton", Time: Time.GetTime() }
+app.commandLine.appendSwitch('disable-web-security')
 
-const lock = app.requestSingleInstanceLock(additionalData)
+app.commandLine.appendSwitch('wm-window-animations-disabled')
 
-// 只允许唯一实例
-if (!lock) {
-    app.exit(0)
-}
-else {
-    app.commandLine.appendSwitch('disable-web-security')
+app.commandLine.appendSwitch('enable-features', 'SharedArrayBuffer')
 
-    app.commandLine.appendSwitch('wm-window-animations-disabled')
+SingleInstance.Instance.Run()
 
-    app.commandLine.appendSwitch('enable-features', 'SharedArrayBuffer')
+ResourceLoad.Instance.Run()
 
-    ResourceLoad.Instance.Run()
+Configuration.Instance.Run()
 
-    Configuration.Instance.Run()
+ProcessPool.Instance.Run()
 
-    ProcessPool.Instance.Run()
+WindowPool.Instance.Run()
 
-    WindowPool.Instance.Run()
+NodeAddon.Instance.Run()
 
-    NodeAddon.Instance.Run()
+IpcMainHandle.Instance.Run()
 
-    IpcMainHandle.Instance.Run()
+app.on('ready', () => {
+    GlobalShortcut.Instance.Run()
 
-    app.on('ready', () => {
-        GlobalShortcut.Instance.Run()
+    CustomProtocol.Instance.Run()
 
-        CustomProtocol.Instance.Run()
+    AppMainWindow.Instance.Run()
 
-        AppMainWindow.Instance.Run()
+    AppTray.Instance.Run()
+})
 
-        AppTray.Instance.Run()
-    })
+app.on('window-all-closed', () => {
+    if (process.platform == 'win32') {
+        app.exit(0)
+    }
+})
 
-    app.on('window-all-closed', () => {
-        if (process.platform == 'win32') {
-            app.exit(0)
-        }
-    })
+app.on('will-quit', () => {
+    globalShortcut.unregisterAll()
+})
 
-    app.on('will-quit', () => {
-        globalShortcut.unregisterAll()
-    })
-
-    app.on('second-instance', () => {
-        WindowPool.Instance.PostMessage({ type: D.IpcRendererEvent.SecondInstance, widgets: [D.IpcRendererWindow.Main] })
-    })
-}
+app.on('second-instance', () => {
+    WindowPool.Instance.PostMessage({ type: D.IpcRendererEvent.SecondInstance, widgets: [D.IpcRendererWindow.Main] })
+})
