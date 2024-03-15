@@ -1,4 +1,4 @@
-const { ipcRenderer } = require("electron")
+const { ipcRenderer, clipboard } = require("electron")
 
 const Renderer = {
     App: {
@@ -96,6 +96,14 @@ const Renderer = {
             return path
         }
     },
+    Clipboard: {
+        WriteText: (text) => {
+            clipboard.writeText(text)
+        },
+        ReadText: () => {
+            return clipboard.readText()
+        },
+    }
 }
 
 window.Renderer = Renderer

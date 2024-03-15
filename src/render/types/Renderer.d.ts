@@ -144,4 +144,19 @@ declare namespace Renderer {
          */
         export function GetPathByName(name: string): Promise<string>
     }
+
+    /**
+     * 剪切板
+     */
+    export namespace Clipboard {
+        /**
+         * 写入剪切板
+         */
+        export function WriteText(text: string): void
+
+        /**
+         * 读取剪切板
+         */
+        export function ReadText(): string
+    }
 }
