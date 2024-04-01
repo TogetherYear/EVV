@@ -28,15 +28,11 @@ class Application extends AActor {
     }
 
     public Test() {
-        Renderer.GlobalShortcut.Register("Control+T")
-        App.Instance.AddListen(D.IpcRendererEvent.GlobalShortcut, this, this.ONG)
         setTimeout(() => {
-            Renderer.GlobalShortcut.Unregister("Control+T")
+            Renderer.Resource.CopyFile("D:/Web/New/ABS/AAA.txt", "D:/Web/New/ABS/BBB.txt").then(res => {
+                Debug.Log(res)
+            })
         }, 3000);
-    }
-
-    public ONG(e: D.IpcRendererSendMessage) {
-        Debug.Log(e)
     }
 }
 

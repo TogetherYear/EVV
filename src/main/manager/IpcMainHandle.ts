@@ -1,9 +1,11 @@
 import { AppMainWindow } from "@main/manager/AppMainWindow"
-import { BrowserWindow, app, ipcMain, screen, shell } from "electron"
+import { BrowserWindow, app, ipcMain, screen, shell, dialog } from "electron"
 import { ResourceLoad } from "@main/manager/ResourceLoad"
 import { AppTray } from "@main/manager/AppTray"
 import { D } from "@decorators/D"
 import { GlobalShortcut } from "./GlobalShortcut"
+import { WindowPool } from "./WindowPool"
+import * as F from 'fs'
 
 /**
  * 主线程 Ipc 监听 
@@ -160,6 +162,108 @@ class IpcMainHandle {
         ipcMain.handle(`Renderer:Resource:Name`, (e, name: string) => {
             const path = ResourceLoad.Instance.GetResourcePathByName(name)
             return path
+        })
+
+        ipcMain.handle(`Renderer:Resource:Select`, (e, options: TSingleton.SelectOptions) => {
+            const window = WindowPool.Instance.GetWindowById(e.sender.id)
+            const features: Array<"multiSelections" | "openDirectory" | "openFile"> = []
+            if (options.multiple) {
+                features.push("multiSelections")
+            }
+            if (options.directory) {
+                features.push("openDirectory")
+            }
+            else {
+                features.push("openFile")
+            }
+            const path = dialog.showOpenDialogSync(window.widget, {
+                title: options.title,
+                defaultPath: options.defaultPath,
+                filters: options.filters,
+                properties: features
+            })
+            return path
+        })
+
+        ipcMain.handle(`Renderer:Resource:Save`, (e, options: TSingleton.SaveOptions) => {
+            const window = WindowPool.Instance.GetWindowById(e.sender.id)
+            const path = dialog.showSaveDialog(window.widget, {
+                title: options.title,
+                defaultPath: options.defaultPath,
+                filters: options.filters,
+            })
+            return path
+        })
+
+        ipcMain.handle(`Renderer:Resource:Exists`, (e, path: string) => {
+            const result = F.existsSync(path)
+            return result
+        })
+
+        ipcMain.handle(`Renderer:Resource:Read`, async (e, dir: string) => {
+            return await new Promise((resolve, reject) => {
+                F.readdir(dir, (err, files) => {
+                    if (err) {
+                        resolve([])
+                    }
+                    resolve(files)
+                })
+            })
+        })
+
+        ipcMain.handle(`Renderer:Resource:Create`, async (e, dir: string) => {
+            return await new Promise((resolve, reject) => {
+                F.mkdir(dir, (err) => {
+                    if (err) {
+                        resolve(false)
+                    }
+                    resolve(true)
+                })
+            })
+        })
+
+        ipcMain.handle(`Renderer:Resource:RemoveDir`, async (e, dir: string) => {
+            return await new Promise((resolve, reject) => {
+                F.rmdir(dir, (err) => {
+                    if (err) {
+                        resolve(false)
+                    }
+                    resolve(true)
+                })
+            })
+        })
+
+        ipcMain.handle(`Renderer:Resource:RemoveFile`, async (e, path: string) => {
+            return await new Promise((resolve, reject) => {
+                F.unlink(path, (err) => {
+                    if (err) {
+                        resolve(false)
+                    }
+                    resolve(true)
+                })
+            })
+        })
+
+        ipcMain.handle(`Renderer:Resource:Rename`, async (e, path: string, newPath: string) => {
+            return await new Promise((resolve, reject) => {
+                F.rename(path, newPath, (err) => {
+                    if (err) {
+                        resolve(false)
+                    }
+                    resolve(true)
+                })
+            })
+        })
+
+        ipcMain.handle(`Renderer:Resource:Copy`, async (e, path: string, newPath: string) => {
+            return await new Promise((resolve, reject) => {
+                F.copyFile(path, newPath, (err) => {
+                    if (err) {
+                        resolve(false)
+                    }
+                    resolve(true)
+                })
+            })
         })
     }
 

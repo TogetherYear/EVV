@@ -94,7 +94,43 @@ const Renderer = {
         GetPathByName: async (name) => {
             const path = await ipcRenderer.invoke(`Renderer:Resource:Name`, name)
             return path
-        }
+        },
+        GetSelectResourcesPath: async (options) => {
+            const path = await ipcRenderer.invoke(`Renderer:Resource:Select`, options)
+            return path
+        },
+        GetSaveResourcesPath: async (options) => {
+            const path = await ipcRenderer.invoke(`Renderer:Resource:Save`, options)
+            return path
+        },
+        IsPathExists: async (path) => {
+            const result = await ipcRenderer.invoke(`Renderer:Resource:Exists`, path)
+            return result
+        },
+        ReadDirFiles: async (dir) => {
+            const files = await ipcRenderer.invoke(`Renderer:Resource:Read`, dir)
+            return files
+        },
+        CreateDir: async (dir) => {
+            const result = await ipcRenderer.invoke(`Renderer:Resource:Create`, dir)
+            return result
+        },
+        RemoveDir: async (dir) => {
+            const result = await ipcRenderer.invoke(`Renderer:Resource:RemoveDir`, dir)
+            return result
+        },
+        RemoveFile: async (path) => {
+            const result = await ipcRenderer.invoke(`Renderer:Resource:RemoveFile`, path)
+            return result
+        },
+        Rename: async (path, newPath) => {
+            const result = await ipcRenderer.invoke(`Renderer:Resource:Rename`, path, newPath)
+            return result
+        },
+        CopyFile: async (path, newPath) => {
+            const result = await ipcRenderer.invoke(`Renderer:Resource:Copy`, path, newPath)
+            return result
+        },
     },
     Clipboard: {
         WriteText: (text) => {

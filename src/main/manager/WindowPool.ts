@@ -62,6 +62,15 @@ class WindowPool {
 
     }
 
+    public GetWindowById(id: number): TWindow {
+        for (let p of this.pool) {
+            if (p[1].widget.id == id) {
+                return p[1]
+            }
+        }
+        return this.GetWindow(D.IpcRendererWindow.Main) as TWindow
+    }
+
 }
 
 export { WindowPool }

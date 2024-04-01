@@ -29,7 +29,7 @@ declare namespace Renderer {
      */
     export namespace Tray {
         /**
-         * 修改托盘图标 不能用Tauri转换后的地址
+         * 修改托盘图标 
          */
         export function SetTrayIcon(icon: string): Promise<void>
 
@@ -130,7 +130,7 @@ declare namespace Renderer {
         export function OpenInFolder(path: string): void
 
         /**
-         * 使用默认方式打开\路径
+         * 使用默认方式打开路径
          */
         export function OpenPathByDefault(path: string): void
     }
@@ -139,10 +139,56 @@ declare namespace Renderer {
      * 资源
      */
     export namespace Resource {
+
         /**
          * 通过名称获取文件路径 ( 仅限 Need 文件夹 ) 例如: Images/window.ico
          */
         export function GetPathByName(name: string): Promise<string>
+
+        /**
+         * 从文件资源管理器选择资源
+         */
+        export function GetSelectResourcesPath(options?: TSingleton.SelectOptions): Promise<Array<string> | undefined>
+
+        /**
+         * 从文件资源管理器选择保存资源路径
+         */
+        export function GetSaveResourcesPath(options?: TSingleton.SaveOptions): Promise<Electron.SaveDialogReturnValue>
+
+        /**
+         * 判断路径是否存在 
+         */
+        export function IsPathExists(path: string): Promise<boolean>
+
+        /**
+         * 获取文件夹里所有文件列表 
+         */
+        export function ReadDirFiles(dir: string): Promise<Array<string>>
+
+        /**
+         * 创建文件夹 
+         */
+        export function CreateDir(dir: string): Promise<boolean>
+
+        /**
+         * 删除文件夹 
+         */
+        export function RemoveDir(dir: string): Promise<boolean>
+
+        /**
+         * 删除文件 
+         */
+        export function RemoveFile(path: string): Promise<boolean>
+
+        /**
+         * 重命名 
+         */
+        export function Rename(path: string, newPath: string): Promise<boolean>
+
+        /**
+         * 复制文件 
+         */
+        export function CopyFile(path: string, newPath: string): Promise<boolean>
     }
 
     /**
