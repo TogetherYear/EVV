@@ -29,7 +29,7 @@ class Application extends AActor {
 
     public Test() {
         setTimeout(() => {
-            Renderer.Resource.Download("https://media.gq.com.tw/photos/633c040882546a96d39d7886/16:9/w_2560%2Cc_limit/FeHHz_naYAYMYzf.jpeg")
+
         }, 3000);
     }
 }
