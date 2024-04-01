@@ -1,11 +1,12 @@
 import { AppMainWindow } from "@main/manager/AppMainWindow"
-import { BrowserWindow, app, ipcMain, screen, shell, dialog } from "electron"
+import { BrowserWindow, app, ipcMain, screen, shell, dialog, session } from "electron"
 import { ResourceLoad } from "@main/manager/ResourceLoad"
 import { AppTray } from "@main/manager/AppTray"
 import { D } from "@decorators/D"
 import { GlobalShortcut } from "./GlobalShortcut"
 import { WindowPool } from "./WindowPool"
 import * as F from 'fs'
+import { Download } from "./Download"
 
 /**
  * 主线程 Ipc 监听 
@@ -264,6 +265,10 @@ class IpcMainHandle {
                     resolve(true)
                 })
             })
+        })
+
+        ipcMain.on(`Renderer:Resource:Download`, (e, url: string) => {
+            Download.Instance.DownloadFromUrl(url)
         })
     }
 

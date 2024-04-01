@@ -43,6 +43,10 @@ class ResourceLoad {
         return `${this.GetExtraFolder()}/ChildProcesses`
     }
 
+    public GetDownloadsFolder() {
+        return `${this.GetExtraFolder()}/Downloads`
+    }
+
     public GetChildProcessesByName(name: string) {
         return `${this.GetChildProcessesFolder()}/${name}.js`
     }

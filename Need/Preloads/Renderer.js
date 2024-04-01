@@ -131,6 +131,9 @@ const Renderer = {
             const result = await ipcRenderer.invoke(`Renderer:Resource:Copy`, path, newPath)
             return result
         },
+        Download: (url) => {
+            return ipcRenderer.postMessage(`Renderer:Resource:Download`, url)
+        },
     },
     Clipboard: {
         WriteText: (text) => {

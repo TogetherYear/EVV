@@ -189,6 +189,11 @@ declare namespace Renderer {
          * 复制文件 
          */
         export function CopyFile(path: string, newPath: string): Promise<boolean>
+
+        /**
+         * 下载文件
+         */
+        export function Download(url: string): void
     }
 
     /**

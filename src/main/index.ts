@@ -11,6 +11,7 @@ import { AppMainWindow } from './manager/AppMainWindow'
 import { AppTray } from './manager/AppTray'
 import { SingleInstance } from './manager/SingleInstance'
 import { D } from '@decorators/D'
+import { Download } from './manager/Download'
 
 app.commandLine.appendSwitch('disable-web-security')
 
@@ -36,6 +37,8 @@ app.on('ready', () => {
     GlobalShortcut.Instance.Run()
 
     CustomProtocol.Instance.Run()
+
+    Download.Instance.Run()
 
     AppMainWindow.Instance.Run()
 
