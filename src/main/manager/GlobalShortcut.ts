@@ -19,12 +19,15 @@ class GlobalShortcut extends EventSystem {
     }
 
     public Register(accelerator: Electron.Accelerator) {
-        return globalShortcut.register(accelerator, () => {
-            WindowPool.Instance.PostMessage({
-                type: D.IpcRendererEvent.GlobalShortcut,
-                send: { accelerator }
+        if (!globalShortcut.isRegistered(accelerator)) {
+            return globalShortcut.register(accelerator, () => {
+                WindowPool.Instance.PostMessage({
+                    type: D.IpcRendererEvent.GlobalShortcut,
+                    send: { accelerator }
+                })
             })
-        })
+        }
+        return true
     }
 
     public Unregister(accelerator: Electron.Accelerator) {

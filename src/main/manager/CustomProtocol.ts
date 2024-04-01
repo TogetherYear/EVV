@@ -8,7 +8,7 @@ class CustomProtocol {
 
     private static instance = new CustomProtocol()
 
-    public fileProtocol = 'atom'
+    public fileProtocol = 'tfile'
 
     public static get Instance() {
         return this.instance
