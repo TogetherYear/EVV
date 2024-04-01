@@ -49,7 +49,7 @@ app.on('window-all-closed', () => {
 })
 
 app.on('will-quit', () => {
-    globalShortcut.unregisterAll()
+    GlobalShortcut.Instance.UnregisterAll()
 })
 
 app.on('second-instance', () => {

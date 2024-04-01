@@ -35,8 +35,8 @@ class App extends AActor {
     }
 
     private CreateEvents() {
-        this.AddKey(D.IpcRendererEvent.Message)
         this.AddKey(D.IpcRendererEvent.SecondInstance)
+        this.AddKey(D.IpcRendererEvent.GlobalShortcut)
     }
 
     private ListenEvents() {
@@ -46,15 +46,11 @@ class App extends AActor {
     }
 
     private OnMessage(e: D.IpcRendererSendMessage) {
-        if (e.type == 'Message') {
-            Message.success(e.type)
-            this.Emit(D.IpcRendererEvent.Message)
-        }
-        else if (e.type == 'SecondInstance') {
+        if (e.type == D.IpcRendererEvent.SecondInstance) {
             Message.error('已关闭第二个实例')
             Renderer.Widget.Show()
-            this.Emit(D.IpcRendererEvent.SecondInstance)
         }
+        this.Emit(e.type, e)
     }
 
     private async State() {

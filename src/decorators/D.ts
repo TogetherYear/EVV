@@ -26,8 +26,8 @@ namespace D {
     }
 
     export enum IpcRendererEvent {
-        Message = 'Message',
         SecondInstance = 'SecondInstance',
+        GlobalShortcut = 'GlobalShortcut',
     }
 
     export enum IpcRendererWindow {

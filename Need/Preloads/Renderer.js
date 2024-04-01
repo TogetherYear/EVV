@@ -98,10 +98,26 @@ const Renderer = {
     },
     Clipboard: {
         WriteText: (text) => {
-            clipboard.writeText(text)
+            return clipboard.writeText(text)
         },
         ReadText: () => {
             return clipboard.readText()
+        },
+    },
+    GlobalShortcut: {
+        Register: async (accelerator) => {
+            const result = await ipcRenderer.invoke('Renderer:GlobalShortcut:Register', accelerator)
+            return result
+        },
+        Unregister: (accelerator) => {
+            return ipcRenderer.postMessage(`Renderer:GlobalShortcut:Unregister`, accelerator)
+        },
+        IsRegistered: async (accelerator) => {
+            const result = await ipcRenderer.invoke('Renderer:GlobalShortcut:IsRegistered', accelerator)
+            return result
+        },
+        UnregisterAll: () => {
+            return ipcRenderer.postMessage(`Renderer:GlobalShortcut:UnregisterAll`)
         },
     }
 }

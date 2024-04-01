@@ -3,6 +3,7 @@ import { BrowserWindow, app, ipcMain, screen, shell } from "electron"
 import { ResourceLoad } from "@main/manager/ResourceLoad"
 import { AppTray } from "@main/manager/AppTray"
 import { D } from "@decorators/D"
+import { GlobalShortcut } from "./GlobalShortcut"
 
 /**
  * 主线程 Ipc 监听 
@@ -23,6 +24,7 @@ class IpcMainHandle {
         this.OnTrayIPC()
         this.OnScreenIPC()
         this.OnResourceIPC()
+        this.OnGlobalShortcutIPC()
     }
 
     private OnAppIPC() {
@@ -158,6 +160,26 @@ class IpcMainHandle {
         ipcMain.handle(`Renderer:Resource:Name`, (e, name: string) => {
             const path = ResourceLoad.Instance.GetResourcePathByName(name)
             return path
+        })
+    }
+
+    private OnGlobalShortcutIPC() {
+        ipcMain.handle(`Renderer:GlobalShortcut:Register`, (e, accelerator: Electron.Accelerator) => {
+            const result = GlobalShortcut.Instance.Register(accelerator)
+            return result
+        })
+
+        ipcMain.on(`Renderer:GlobalShortcut:Unregister`, (e, accelerator: Electron.Accelerator) => {
+            GlobalShortcut.Instance.Unregister(accelerator)
+        })
+
+        ipcMain.on(`Renderer:GlobalShortcut:UnregisterAll`, (e) => {
+            GlobalShortcut.Instance.UnregisterAll()
+        })
+
+        ipcMain.handle(`Renderer:GlobalShortcut:IsRegistered`, (e, accelerator: Electron.Accelerator) => {
+            const result = GlobalShortcut.Instance.IsRegistered(accelerator)
+            return result
         })
     }
 
