@@ -23,6 +23,7 @@ class App extends AActor {
             this.CreateEvents()
             this.ListenEvents()
             this.State()
+            this.FileDropHandle()
         })
 
         onUnmounted(() => {
@@ -37,6 +38,7 @@ class App extends AActor {
     private CreateEvents() {
         this.AddKey(D.IpcRendererEvent.SecondInstance)
         this.AddKey(D.IpcRendererEvent.GlobalShortcut)
+        this.AddKey(D.IpcRendererEvent.FileDrop)
     }
 
     private ListenEvents() {
@@ -67,12 +69,33 @@ class App extends AActor {
         }
     }
 
+    private FileDropHandle() {
+        document.addEventListener('drop', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            this.Emit(D.IpcRendererEvent.FileDrop, {
+                type: D.IpcRendererEvent.FileDrop,
+                send: {
+                    files: e.dataTransfer?.files
+                }
+            })
+        });
+        document.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+        });
+    }
+
     public override AddListen(key: D.IpcRendererEvent, scope: Object, callback: DR.AppMessageCallback, once?: boolean): void {
         super.AddListen(key, scope, callback, once)
     }
 
     public override RemoveListen(key: D.IpcRendererEvent, scope: Object, callback: DR.AppMessageCallback): void {
         super.RemoveListen(key, scope, callback)
+    }
+
+    public Emit(key: string, data: D.IpcRendererSendMessage): void {
+        super.Emit(key, data)
     }
 }
 

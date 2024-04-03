@@ -28,6 +28,7 @@ namespace D {
     export enum IpcRendererEvent {
         SecondInstance = 'SecondInstance',
         GlobalShortcut = 'GlobalShortcut',
+        FileDrop = 'FileDrop'
     }
 
     export enum IpcRendererWindow {
