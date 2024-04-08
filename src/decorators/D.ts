@@ -63,6 +63,15 @@ namespace D {
 
     }
 
+    export enum NodeAddonCommand {
+        Automatic,
+        Image,
+        Monitor,
+        Serve,
+        Wallpaper,
+        Window,
+    }
+
     export namespace NodeAddon {
         /**
          * 自动化

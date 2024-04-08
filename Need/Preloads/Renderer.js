@@ -160,28 +160,28 @@ const Renderer = {
         },
     },
     NodeAddon: {
-        Automatic: async (options) => {
-            const result = await ipcRenderer.invoke(`Renderer:NodeAddon:Automatic`, options)
+        Automatic: async (methon, args = []) => {
+            const result = await ipcRenderer.invoke(`Renderer:NodeAddon:Automatic`, methon, args)
             return result
         },
-        Image: async (options) => {
-            const result = await ipcRenderer.invoke(`Renderer:NodeAddon:Image`, options)
+        Image: async (methon, args = []) => {
+            const result = await ipcRenderer.invoke(`Renderer:NodeAddon:Image`, methon, args)
             return result
         },
-        Monitor: async (options) => {
-            const result = await ipcRenderer.invoke(`Renderer:NodeAddon:Monitor`, options)
+        Monitor: async (methon, args = []) => {
+            const result = await ipcRenderer.invoke(`Renderer:NodeAddon:Monitor`, methon, args)
             return result
         },
-        Serve: async (options) => {
-            const result = await ipcRenderer.invoke(`Renderer:NodeAddon:Serve`, options)
+        Serve: async (methon, args = []) => {
+            const result = await ipcRenderer.invoke(`Renderer:NodeAddon:Serve`, methon, args)
             return result
         },
-        Wallpaper: async (options) => {
-            const result = await ipcRenderer.invoke(`Renderer:NodeAddon:Wallpaper`, options)
+        Wallpaper: async (methon, args = []) => {
+            const result = await ipcRenderer.invoke(`Renderer:NodeAddon:Wallpaper`, methon, args)
             return result
         },
-        Window: async (options) => {
-            const result = await ipcRenderer.invoke(`Renderer:NodeAddon:Window`, options)
+        Window: async (methon, args = []) => {
+            const result = await ipcRenderer.invoke(`Renderer:NodeAddon:Window`, methon, args)
             return result
         },
     }

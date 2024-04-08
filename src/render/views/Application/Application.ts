@@ -28,7 +28,7 @@ class Application extends AActor {
     }
 
     public Test() {
-        setTimeout(() => {
+        setTimeout(async () => {
 
         }, 3000);
     }

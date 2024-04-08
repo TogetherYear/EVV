@@ -59,26 +59,39 @@ class NodeAddon {
         this.window = require(`${ResourceLoad.Instance.GetAddonByName("Window.win32-x64-msvc")}`)
     }
 
-    public ExeAddon(command: TSingleton.NodeAddonCommand, options: Record<string, unknown>) {
-        switch (command) {
-            case TSingleton.NodeAddonCommand.Automatic:
-                return null
-
-            case TSingleton.NodeAddonCommand.Image:
-                return null
-
-            case TSingleton.NodeAddonCommand.Monitor:
-                return null
-
-            case TSingleton.NodeAddonCommand.Serve:
-                return null
-
-            case TSingleton.NodeAddonCommand.Wallpaper:
-                return null
-
-            case TSingleton.NodeAddonCommand.Window:
-                return null
-        }
+    public ExeAddon(command: D.NodeAddonCommand, methon: TSingleton.NodeAddonMethonType, args: Array<unknown>) {
+        return new Promise((resolve, reject) => {
+            if (command == D.NodeAddonCommand.Automatic) {
+                //@ts-ignore
+                const result = this.Automatic[methon as TSingleton.AutomaticMethonType](...args)
+                resolve(result)
+            }
+            else if (command == D.NodeAddonCommand.Image) {
+                //@ts-ignore
+                const result = this.Image[methon as TSingleton.AutomaticMethonType](...args)
+                resolve(result)
+            }
+            else if (command == D.NodeAddonCommand.Monitor) {
+                //@ts-ignore
+                const result = this.Monitor[methon as TSingleton.AutomaticMethonType](...args)
+                resolve(result)
+            }
+            else if (command == D.NodeAddonCommand.Serve) {
+                //@ts-ignore
+                const result = this.Serve[methon as TSingleton.AutomaticMethonType](...args)
+                resolve(result)
+            }
+            else if (command == D.NodeAddonCommand.Wallpaper) {
+                //@ts-ignore
+                const result = this.Wallpaper[methon as TSingleton.AutomaticMethonType](...args)
+                resolve(result)
+            }
+            else if (command == D.NodeAddonCommand.Window) {
+                //@ts-ignore
+                const result = this.Window[methon as TSingleton.AutomaticMethonType](...args)
+                resolve(result)
+            }
+        })
     }
 }
 
