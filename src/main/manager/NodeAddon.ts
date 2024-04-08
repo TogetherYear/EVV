@@ -1,4 +1,5 @@
-import { DM } from "@main/decorators/DM"
+
+import { D } from "@decorators/D"
 import { ResourceLoad } from "@main/manager/ResourceLoad"
 
 /**
@@ -13,17 +14,17 @@ class NodeAddon {
         return this.instance
     }
 
-    private automatic!: DM.NodeAddon.Automatic
+    private automatic!: D.NodeAddon.Automatic
 
-    private image!: DM.NodeAddon.Image
+    private image!: D.NodeAddon.Image
 
-    private monitor!: DM.NodeAddon.Monitor
+    private monitor!: D.NodeAddon.Monitor
 
-    private serve!: DM.NodeAddon.Serve
+    private serve!: D.NodeAddon.Serve
 
-    private wallpaper!: DM.NodeAddon.Wallpaper
+    private wallpaper!: D.NodeAddon.Wallpaper
 
-    private window!: DM.NodeAddon.Window
+    private window!: D.NodeAddon.Window
 
     public get Automatic() {
         return this.automatic
@@ -56,6 +57,28 @@ class NodeAddon {
         this.serve = require(`${ResourceLoad.Instance.GetAddonByName("Serve.win32-x64-msvc")}`)
         this.wallpaper = require(`${ResourceLoad.Instance.GetAddonByName("Wallpaper.win32-x64-msvc")}`)
         this.window = require(`${ResourceLoad.Instance.GetAddonByName("Window.win32-x64-msvc")}`)
+    }
+
+    public ExeAddon(command: TSingleton.NodeAddonCommand, options: Record<string, unknown>) {
+        switch (command) {
+            case TSingleton.NodeAddonCommand.Automatic:
+                return null
+
+            case TSingleton.NodeAddonCommand.Image:
+                return null
+
+            case TSingleton.NodeAddonCommand.Monitor:
+                return null
+
+            case TSingleton.NodeAddonCommand.Serve:
+                return null
+
+            case TSingleton.NodeAddonCommand.Wallpaper:
+                return null
+
+            case TSingleton.NodeAddonCommand.Window:
+                return null
+        }
     }
 }
 

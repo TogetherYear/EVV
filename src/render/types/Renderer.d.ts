@@ -211,6 +211,9 @@ declare namespace Renderer {
         export function ReadText(): string
     }
 
+    /**
+     * 全局快捷键
+     */
     export namespace GlobalShortcut {
         /**
          * 注册快捷键
@@ -231,5 +234,36 @@ declare namespace Renderer {
          * 取消所有快捷键
          */
         export function UnregisterAll(): void
+    }
+
+    /**
+     * Node拓展
+     */
+    export namespace NodeAddon {
+        /**
+         * 自动化
+         */
+        export function Automatic(options: Record<string, unknown>): Promise<unknown>
+
+        /**
+         * 图片
+         */
+        export function Image(options: Record<string, unknown>): Promise<unknown>
+        /**
+         * 显示器
+         */
+        export function Monitor(options: Record<string, unknown>): Promise<unknown>
+        /**
+         * 静态文件服务器
+         */
+        export function Serve(options: Record<string, unknown>): Promise<unknown>
+        /**
+         * 壁纸
+         */
+        export function Wallpaper(options: Record<string, unknown>): Promise<unknown>
+        /**
+         * 应用窗口
+         */
+        export function Window(options: Record<string, unknown>): Promise<unknown>
     }
 }

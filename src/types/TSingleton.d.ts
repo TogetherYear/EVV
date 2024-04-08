@@ -18,4 +18,13 @@ declare namespace TSingleton {
             name: string;
         }>
     }
+
+    export enum NodeAddonCommand {
+        Automatic,
+        Image,
+        Monitor,
+        Serve,
+        Wallpaper,
+        Window,
+    }
 }

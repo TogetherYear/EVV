@@ -7,6 +7,7 @@ import { GlobalShortcut } from "./GlobalShortcut"
 import { WindowPool } from "./WindowPool"
 import * as F from 'fs'
 import { Download } from "./Download"
+import { NodeAddon } from "./NodeAddon"
 
 /**
  * 主线程 Ipc 监听 
@@ -28,6 +29,7 @@ class IpcMainHandle {
         this.OnScreenIPC()
         this.OnResourceIPC()
         this.OnGlobalShortcutIPC()
+        this.OnNodeAddonIPC()
     }
 
     private OnAppIPC() {
@@ -288,6 +290,38 @@ class IpcMainHandle {
 
         ipcMain.handle(`Renderer:GlobalShortcut:IsRegistered`, (e, accelerator: Electron.Accelerator) => {
             const result = GlobalShortcut.Instance.IsRegistered(accelerator)
+            return result
+        })
+    }
+
+    private OnNodeAddonIPC() {
+        ipcMain.handle(`Renderer:NodeAddon:Automatic`, (e, options: Record<string, unknown>) => {
+            const result = NodeAddon.Instance.ExeAddon(TSingleton.NodeAddonCommand.Automatic, options)
+            return result
+        })
+
+        ipcMain.handle(`Renderer:NodeAddon:Image`, (e, options: Record<string, unknown>) => {
+            const result = NodeAddon.Instance.ExeAddon(TSingleton.NodeAddonCommand.Image, options)
+            return result
+        })
+
+        ipcMain.handle(`Renderer:NodeAddon:Monitor`, (e, options: Record<string, unknown>) => {
+            const result = NodeAddon.Instance.ExeAddon(TSingleton.NodeAddonCommand.Monitor, options)
+            return result
+        })
+
+        ipcMain.handle(`Renderer:NodeAddon:Serve`, (e, options: Record<string, unknown>) => {
+            const result = NodeAddon.Instance.ExeAddon(TSingleton.NodeAddonCommand.Serve, options)
+            return result
+        })
+
+        ipcMain.handle(`Renderer:NodeAddon:Wallpaper`, (e, options: Record<string, unknown>) => {
+            const result = NodeAddon.Instance.ExeAddon(TSingleton.NodeAddonCommand.Wallpaper, options)
+            return result
+        })
+
+        ipcMain.handle(`Renderer:NodeAddon:Window`, (e, options: Record<string, unknown>) => {
+            const result = NodeAddon.Instance.ExeAddon(TSingleton.NodeAddonCommand.Window, options)
             return result
         })
     }
