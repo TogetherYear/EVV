@@ -29,7 +29,7 @@ class Application extends AActor {
 
     public Test() {
         setTimeout(async () => {
-
+            Debug.Log(await Renderer.NodeAddon.Window("GetAllWindows"))
         }, 3000);
     }
 }

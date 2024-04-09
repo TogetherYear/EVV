@@ -19,54 +19,26 @@ declare namespace TSingleton {
         }>
     }
 
-    enum AutomaticMethon {
-        GetMousePosition = "GetMousePosition",
-        SetMousePosition = "SetMousePosition",
-        SetButtonClick = "SetButtonClick",
-        SetButtonToggle = "SetButtonToggle",
-        SetMouseScroll = "SetMouseScroll",
-        GetColorFromPosition = "GetColorFromPosition",
-        GetCurrentPositionColor = "GetCurrentPositionColor",
-        WriteText = "WriteText",
-        SetKeysToggle = "SetKeysToggle",
-        SetKeysClick = "SetKeysClick",
-    }
+    export type AutomaticMethonType = "GetMousePosition" |
+        "SetMousePosition" |
+        "SetButtonClick" |
+        "SetButtonToggle" |
+        "SetMouseScroll" |
+        "GetColorFromPosition" |
+        "GetCurrentPositionColor" |
+        "WriteText" |
+        "SetKeysToggle" |
+        "SetKeysClick"
 
-    enum ImageMethon {
-        ConvertImageFormat = "ConvertImageFormat",
-    }
+    export type ImageMethonType = "ConvertImageFormat"
 
-    enum MonitorMethon {
-        GetAllMonitors = "GetAllMonitors",
-        GetMonitorFromPoint = "GetMonitorFromPoint",
-        GetCurrentMouseMonitor = "GetCurrentMouseMonitor",
-        GetPrimaryMonitor = "GetPrimaryMonitor",
-    }
+    export type MonitorMethonType = "GetAllMonitors" | "GetMonitorFromPoint" | "GetCurrentMouseMonitor" | "GetPrimaryMonitor"
 
-    enum ServeMethon {
-        CreateStaticFileServe = "CreateStaticFileServe",
-    }
+    export type ServeMethonType = "CreateStaticFileServe"
 
-    enum WallpaperMethon {
-        GetWallpaper = "GetWallpaper",
-        SetWallpaper = "SetWallpaper",
-    }
+    export type WallpaperMethonType = "GetWallpaper" | "SetWallpaper"
 
-    enum WindowMethon {
-        GetAllWindows = "GetAllWindows",
-    }
-
-    export type AutomaticMethonType = `${AutomaticMethon}`
-
-    export type ImageMethonType = `${ImageMethon}`
-
-    export type MonitorMethonType = `${MonitorMethon}`
-
-    export type ServeMethonType = `${ServeMethon}`
-
-    export type WallpaperMethonType = `${WallpaperMethon}`
-
-    export type WindowMethonType = `${WindowMethon}`
+    export type WindowMethonType = "GetAllWindows"
 
     export type NodeAddonMethonType = AutomaticMethonType | ImageMethonType | MonitorMethonType | ServeMethonType | WallpaperMethonType | WindowMethonType
 

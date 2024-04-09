@@ -60,38 +60,104 @@ class NodeAddon {
     }
 
     public ExeAddon(command: D.NodeAddonCommand, methon: TSingleton.NodeAddonMethonType, args: Array<unknown>) {
-        return new Promise((resolve, reject) => {
-            if (command == D.NodeAddonCommand.Automatic) {
-                //@ts-ignore
-                const result = this.Automatic[methon as TSingleton.AutomaticMethonType](...args)
-                resolve(result)
+        if (command == D.NodeAddonCommand.Automatic) {
+            //@ts-ignore
+            const result = this.Automatic[methon as TSingleton.AutomaticMethonType](...args)
+            return result
+        }
+        else if (command == D.NodeAddonCommand.Image) {
+            //@ts-ignore
+            const result = this.Image[methon as TSingleton.AutomaticMethonType](...args)
+            return result
+        }
+        else if (command == D.NodeAddonCommand.Monitor) {
+            if (methon == "GetAllMonitors") {
+                const r = this.Monitor.GetAllMonitors().map(c => this.TransformObjectToRenderer(c, 0))
+                return r
             }
-            else if (command == D.NodeAddonCommand.Image) {
+            else if (methon == "GetMonitorFromPoint") {
                 //@ts-ignore
-                const result = this.Image[methon as TSingleton.AutomaticMethonType](...args)
-                resolve(result)
+                const r = this.TransformObjectToRenderer(this.Monitor.GetMonitorFromPoint(...args), 0)
+                return r
             }
-            else if (command == D.NodeAddonCommand.Monitor) {
-                //@ts-ignore
-                const result = this.Monitor[methon as TSingleton.AutomaticMethonType](...args)
-                resolve(result)
+            else if (methon == "GetCurrentMouseMonitor") {
+                const r = this.TransformObjectToRenderer(this.Monitor.GetCurrentMouseMonitor(), 0)
+                return r
             }
-            else if (command == D.NodeAddonCommand.Serve) {
-                //@ts-ignore
-                const result = this.Serve[methon as TSingleton.AutomaticMethonType](...args)
-                resolve(result)
+            else if (methon == "GetPrimaryMonitor") {
+                const r = this.TransformObjectToRenderer(this.Monitor.GetPrimaryMonitor(), 0)
+                return r
             }
-            else if (command == D.NodeAddonCommand.Wallpaper) {
-                //@ts-ignore
-                const result = this.Wallpaper[methon as TSingleton.AutomaticMethonType](...args)
-                resolve(result)
+        }
+        else if (command == D.NodeAddonCommand.Serve) {
+            //@ts-ignore
+            const result = this.Serve[methon as TSingleton.AutomaticMethonType](...args)
+            return result
+        }
+        else if (command == D.NodeAddonCommand.Wallpaper) {
+            //@ts-ignore
+            const result = this.Wallpaper[methon as TSingleton.AutomaticMethonType](...args)
+            return result
+        }
+        else if (command == D.NodeAddonCommand.Window) {
+            if (methon == "GetAllWindows") {
+                const r = this.Window.GetAllWindows().map(c => this.TransformObjectToRenderer(c, 1))
+                return r
             }
-            else if (command == D.NodeAddonCommand.Window) {
-                //@ts-ignore
-                const result = this.Window[methon as TSingleton.AutomaticMethonType](...args)
-                resolve(result)
+        }
+        return null
+    }
+
+    private TransformObjectToRenderer(o: D.NodeAddon.IMonitor | D.NodeAddon.IWindow | D.NodeAddon.Color | D.NodeAddon.Point, type: number) {
+        if (type == 0) {
+            const current = o as D.NodeAddon.IMonitor
+            const result: Omit<D.NodeAddon.IMonitor, "Capture"> = {
+                id: current.id,
+                name: current.name,
+                x: current.x,
+                y: current.y,
+                width: current.width,
+                height: current.height,
+                rotation: current.rotation,
+                scaleFactor: current.scaleFactor,
+                frequency: current.frequency,
+                isPrimary: current.isPrimary,
             }
-        })
+            return result
+        }
+        else if (type == 1) {
+            const current = o as D.NodeAddon.IWindow
+            const result: Omit<D.NodeAddon.IWindow, "Capture"> = {
+                id: current.id,
+                title: current.title,
+                appName: current.appName,
+                x: current.x,
+                y: current.y,
+                width: current.width,
+                height: current.height,
+                isMinimized: current.isMinimized,
+                isMaximized: current.isMaximized,
+            }
+            return result
+        }
+        else if (type == 2) {
+            const current = o as D.NodeAddon.Color
+            const result: D.NodeAddon.Color = {
+                r: current.r,
+                g: current.g,
+                b: current.b,
+                a: current.a,
+            }
+            return result
+        }
+        else if (type == 3) {
+            const current = o as D.NodeAddon.Point
+            const result: D.NodeAddon.Point = {
+                x: current.x,
+                y: current.y,
+            }
+            return result
+        }
     }
 }
 
