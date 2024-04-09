@@ -41,5 +41,4 @@ declare namespace TSingleton {
     export type WindowMethonType = "GetAllWindows"
 
     export type NodeAddonMethonType = AutomaticMethonType | ImageMethonType | MonitorMethonType | ServeMethonType | WallpaperMethonType | WindowMethonType
-
 }

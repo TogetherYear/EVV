@@ -29,7 +29,9 @@ class Application extends AActor {
 
     public Test() {
         setTimeout(async () => {
-            Debug.Log(await Renderer.NodeAddon.Window("GetAllWindows"))
+            await Renderer.NodeAddon.Automatic("SetMousePosition", { x: 100, y: 200 })
+            await Renderer.NodeAddon.Automatic("SetButtonClick", { button: D.NodeAddon.MosueButton.Left })
+            await Renderer.NodeAddon.Automatic("WriteText", { content: "ADASDASDASDASd" })
         }, 3000);
     }
 }

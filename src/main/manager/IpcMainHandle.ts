@@ -295,33 +295,33 @@ class IpcMainHandle {
     }
 
     private OnNodeAddonIPC() {
-        ipcMain.handle(`Renderer:NodeAddon:Automatic`, async (e, methon: TSingleton.AutomaticMethonType, args: Array<unknown>) => {
-            const result = await NodeAddon.Instance.ExeAddon(D.NodeAddonCommand.Automatic, methon, args)
+        ipcMain.handle(`Renderer:NodeAddon:Automatic`, async (e, methon: TSingleton.AutomaticMethonType, arg: Record<string, unknown>) => {
+            const result = await NodeAddon.Instance.ExeAddon(D.NodeAddonCommand.Automatic, methon, arg)
             return result
         })
 
-        ipcMain.handle(`Renderer:NodeAddon:Image`, async (e, methon: TSingleton.ImageMethonType, args: Array<unknown>) => {
-            const result = await NodeAddon.Instance.ExeAddon(D.NodeAddonCommand.Image, methon, args)
+        ipcMain.handle(`Renderer:NodeAddon:Image`, async (e, methon: TSingleton.ImageMethonType, arg: Record<string, unknown>) => {
+            const result = await NodeAddon.Instance.ExeAddon(D.NodeAddonCommand.Image, methon, arg)
             return result
         })
 
-        ipcMain.handle(`Renderer:NodeAddon:Monitor`, async (e, methon: TSingleton.MonitorMethonType, args: Array<unknown>) => {
-            const result = await NodeAddon.Instance.ExeAddon(D.NodeAddonCommand.Monitor, methon, args)
+        ipcMain.handle(`Renderer:NodeAddon:Monitor`, async (e, methon: TSingleton.MonitorMethonType, arg: Record<string, unknown>) => {
+            const result = await NodeAddon.Instance.ExeAddon(D.NodeAddonCommand.Monitor, methon, arg)
             return result
         })
 
-        ipcMain.handle(`Renderer:NodeAddon:Serve`, async (e, methon: TSingleton.ServeMethonType, args: Array<unknown>) => {
-            const result = await NodeAddon.Instance.ExeAddon(D.NodeAddonCommand.Serve, methon, args)
+        ipcMain.handle(`Renderer:NodeAddon:Serve`, async (e, methon: TSingleton.ServeMethonType, arg: Record<string, unknown>) => {
+            const result = await NodeAddon.Instance.ExeAddon(D.NodeAddonCommand.Serve, methon, arg)
             return result
         })
 
-        ipcMain.handle(`Renderer:NodeAddon:Wallpaper`, async (e, methon: TSingleton.WallpaperMethonType, args: Array<unknown>) => {
-            const result = await NodeAddon.Instance.ExeAddon(D.NodeAddonCommand.Wallpaper, methon, args)
+        ipcMain.handle(`Renderer:NodeAddon:Wallpaper`, async (e, methon: TSingleton.WallpaperMethonType, arg: Record<string, unknown>) => {
+            const result = await NodeAddon.Instance.ExeAddon(D.NodeAddonCommand.Wallpaper, methon, arg)
             return result
         })
 
-        ipcMain.handle(`Renderer:NodeAddon:Window`, async (e, methon: TSingleton.WindowMethonType, args: Array<unknown>) => {
-            const result = await NodeAddon.Instance.ExeAddon(D.NodeAddonCommand.Window, methon, args)
+        ipcMain.handle(`Renderer:NodeAddon:Window`, async (e, methon: TSingleton.WindowMethonType, arg: Record<string, unknown>) => {
+            const result = await NodeAddon.Instance.ExeAddon(D.NodeAddonCommand.Window, methon, arg)
             return result
         })
     }

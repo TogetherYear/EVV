@@ -160,28 +160,28 @@ const Renderer = {
         },
     },
     NodeAddon: {
-        Automatic: async (methon, args = []) => {
-            const result = await ipcRenderer.invoke(`Renderer:NodeAddon:Automatic`, methon, args)
+        Automatic: async (methon, arg = {}) => {
+            const result = await ipcRenderer.invoke(`Renderer:NodeAddon:Automatic`, methon, arg)
             return result
         },
-        Image: async (methon, args = []) => {
-            const result = await ipcRenderer.invoke(`Renderer:NodeAddon:Image`, methon, args)
+        Image: async (methon, arg = {}) => {
+            const result = await ipcRenderer.invoke(`Renderer:NodeAddon:Image`, methon, arg)
             return result
         },
-        Monitor: async (methon, args = []) => {
-            const result = await ipcRenderer.invoke(`Renderer:NodeAddon:Monitor`, methon, args)
+        Monitor: async (methon, arg = {}) => {
+            const result = await ipcRenderer.invoke(`Renderer:NodeAddon:Monitor`, methon, arg)
             return result
         },
-        Serve: async (methon, args = []) => {
-            const result = await ipcRenderer.invoke(`Renderer:NodeAddon:Serve`, methon, args)
+        Serve: async (methon, arg = {}) => {
+            const result = await ipcRenderer.invoke(`Renderer:NodeAddon:Serve`, methon, arg)
             return result
         },
-        Wallpaper: async (methon, args = []) => {
-            const result = await ipcRenderer.invoke(`Renderer:NodeAddon:Wallpaper`, methon, args)
+        Wallpaper: async (methon, arg = {}) => {
+            const result = await ipcRenderer.invoke(`Renderer:NodeAddon:Wallpaper`, methon, arg)
             return result
         },
-        Window: async (methon, args = []) => {
-            const result = await ipcRenderer.invoke(`Renderer:NodeAddon:Window`, methon, args)
+        Window: async (methon, arg = {}) => {
+            const result = await ipcRenderer.invoke(`Renderer:NodeAddon:Window`, methon, arg)
             return result
         },
     }

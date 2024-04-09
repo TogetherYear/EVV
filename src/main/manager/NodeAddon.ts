@@ -59,105 +59,149 @@ class NodeAddon {
         this.window = require(`${ResourceLoad.Instance.GetAddonByName("Window.win32-x64-msvc")}`)
     }
 
-    public ExeAddon(command: D.NodeAddonCommand, methon: TSingleton.NodeAddonMethonType, args: Array<unknown>) {
+    public ExeAddon(command: D.NodeAddonCommand, methon: TSingleton.NodeAddonMethonType, arg: Record<string, unknown>) {
         if (command == D.NodeAddonCommand.Automatic) {
-            //@ts-ignore
-            const result = this.Automatic[methon as TSingleton.AutomaticMethonType](...args)
-            return result
+            if (methon == "GetMousePosition") {
+                const result = this.TransformPointToRenderer(this.Automatic.GetMousePosition())
+                return result
+            }
+            else if (methon == "SetMousePosition") {
+                const result = this.Automatic.SetMousePosition(arg.x as number, arg.y as number)
+                return result
+            }
+            else if (methon == "SetButtonClick") {
+                const result = this.Automatic.SetButtonClick(arg.button as D.NodeAddon.MosueButton)
+                return result
+            }
+            else if (methon == "SetButtonToggle") {
+                const result = this.Automatic.SetButtonToggle(arg.button as D.NodeAddon.MosueButton, arg.down as boolean)
+                return result
+            }
+            else if (methon == "SetMouseScroll") {
+                const result = this.Automatic.SetMouseScroll(arg.direction as D.NodeAddon.ScrollDirection, arg.clicks as number)
+                return result
+            }
+            else if (methon == "GetColorFromPosition") {
+                const result = this.TransformColorToRenderer(this.Automatic.GetColorFromPosition(arg.x as number, arg.y as number))
+                return result
+            }
+            else if (methon == "GetCurrentPositionColor") {
+                const result = this.TransformColorToRenderer(this.Automatic.GetCurrentPositionColor())
+                return result
+            }
+            else if (methon == "WriteText") {
+                const result = this.Automatic.WriteText(arg.content as string)
+                return result
+            }
+            else if (methon == "SetKeysToggle") {
+                const result = this.Automatic.SetKeysToggle(arg.keys as Array<D.NodeAddon.ToggleKey>)
+                return result
+            }
+            else if (methon == "SetKeysClick") {
+                const result = this.Automatic.SetKeysClick(arg.content as Array<D.NodeAddon.KeyboardKey>)
+                return result
+            }
         }
         else if (command == D.NodeAddonCommand.Image) {
-            //@ts-ignore
-            const result = this.Image[methon as TSingleton.AutomaticMethonType](...args)
-            return result
+            if (methon == "ConvertImageFormat") {
+                const result = this.Image.ConvertImageFormat(arg.originPath as string, arg.convertPath as string, arg.options as D.NodeAddon.ConvertOptions)
+                return result
+            }
         }
         else if (command == D.NodeAddonCommand.Monitor) {
             if (methon == "GetAllMonitors") {
-                const r = this.Monitor.GetAllMonitors().map(c => this.TransformObjectToRenderer(c, 0))
+                const r = this.Monitor.GetAllMonitors().map(c => this.TransformMonitorToRenderer(c))
                 return r
             }
             else if (methon == "GetMonitorFromPoint") {
-                //@ts-ignore
-                const r = this.TransformObjectToRenderer(this.Monitor.GetMonitorFromPoint(...args), 0)
+                const r = this.TransformMonitorToRenderer(this.Monitor.GetMonitorFromPoint(arg.x as number, arg.y as number))
                 return r
             }
             else if (methon == "GetCurrentMouseMonitor") {
-                const r = this.TransformObjectToRenderer(this.Monitor.GetCurrentMouseMonitor(), 0)
+                const r = this.TransformMonitorToRenderer(this.Monitor.GetCurrentMouseMonitor())
                 return r
             }
             else if (methon == "GetPrimaryMonitor") {
-                const r = this.TransformObjectToRenderer(this.Monitor.GetPrimaryMonitor(), 0)
+                const r = this.TransformMonitorToRenderer(this.Monitor.GetPrimaryMonitor())
                 return r
             }
         }
         else if (command == D.NodeAddonCommand.Serve) {
-            //@ts-ignore
-            const result = this.Serve[methon as TSingleton.AutomaticMethonType](...args)
-            return result
+            if (methon == "CreateStaticFileServe") {
+                const result = this.Serve.CreateStaticFileServe(arg.path as string, arg.onOpen as (...args: Array<unknown>) => unknown)
+                return result
+            }
         }
         else if (command == D.NodeAddonCommand.Wallpaper) {
-            //@ts-ignore
-            const result = this.Wallpaper[methon as TSingleton.AutomaticMethonType](...args)
-            return result
+            if (methon == "GetWallpaper") {
+                const result = this.Wallpaper.GetWallpaper()
+                return result
+            }
+            else if (methon == "SetWallpaper") {
+                const result = this.Wallpaper.SetWallpaper(arg.path as string, arg.mode as D.NodeAddon.WallpaperMode)
+                return result
+            }
         }
         else if (command == D.NodeAddonCommand.Window) {
             if (methon == "GetAllWindows") {
-                const r = this.Window.GetAllWindows().map(c => this.TransformObjectToRenderer(c, 1))
+                const r = this.Window.GetAllWindows().map(c => this.TransformWindowToRenderer(c))
                 return r
             }
         }
         return null
     }
 
-    private TransformObjectToRenderer(o: D.NodeAddon.IMonitor | D.NodeAddon.IWindow | D.NodeAddon.Color | D.NodeAddon.Point, type: number) {
-        if (type == 0) {
-            const current = o as D.NodeAddon.IMonitor
-            const result: Omit<D.NodeAddon.IMonitor, "Capture"> = {
-                id: current.id,
-                name: current.name,
-                x: current.x,
-                y: current.y,
-                width: current.width,
-                height: current.height,
-                rotation: current.rotation,
-                scaleFactor: current.scaleFactor,
-                frequency: current.frequency,
-                isPrimary: current.isPrimary,
-            }
-            return result
+    private TransformMonitorToRenderer(o: D.NodeAddon.IMonitor) {
+        const current = o as D.NodeAddon.IMonitor
+        const result: Omit<D.NodeAddon.IMonitor, "Capture"> = {
+            id: current.id,
+            name: current.name,
+            x: current.x,
+            y: current.y,
+            width: current.width,
+            height: current.height,
+            rotation: current.rotation,
+            scaleFactor: current.scaleFactor,
+            frequency: current.frequency,
+            isPrimary: current.isPrimary,
         }
-        else if (type == 1) {
-            const current = o as D.NodeAddon.IWindow
-            const result: Omit<D.NodeAddon.IWindow, "Capture"> = {
-                id: current.id,
-                title: current.title,
-                appName: current.appName,
-                x: current.x,
-                y: current.y,
-                width: current.width,
-                height: current.height,
-                isMinimized: current.isMinimized,
-                isMaximized: current.isMaximized,
-            }
-            return result
+        return result
+    }
+
+    private TransformWindowToRenderer(o: D.NodeAddon.IWindow) {
+        const current = o as D.NodeAddon.IWindow
+        const result: Omit<D.NodeAddon.IWindow, "Capture"> = {
+            id: current.id,
+            title: current.title,
+            appName: current.appName,
+            x: current.x,
+            y: current.y,
+            width: current.width,
+            height: current.height,
+            isMinimized: current.isMinimized,
+            isMaximized: current.isMaximized,
         }
-        else if (type == 2) {
-            const current = o as D.NodeAddon.Color
-            const result: D.NodeAddon.Color = {
-                r: current.r,
-                g: current.g,
-                b: current.b,
-                a: current.a,
-            }
-            return result
+        return result
+    }
+
+    private TransformColorToRenderer(o: D.NodeAddon.Color) {
+        const current = o as D.NodeAddon.Color
+        const result: D.NodeAddon.Color = {
+            r: current.r,
+            g: current.g,
+            b: current.b,
+            a: current.a,
         }
-        else if (type == 3) {
-            const current = o as D.NodeAddon.Point
-            const result: D.NodeAddon.Point = {
-                x: current.x,
-                y: current.y,
-            }
-            return result
+        return result
+    }
+
+    private TransformPointToRenderer(o: D.NodeAddon.Point) {
+        const current = o as D.NodeAddon.Point
+        const result: D.NodeAddon.Point = {
+            x: current.x,
+            y: current.y,
         }
+        return result
     }
 }
 
