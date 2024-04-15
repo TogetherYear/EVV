@@ -110,20 +110,20 @@ class NodeAddon {
         }
         else if (command == D.NodeAddonCommand.Monitor) {
             if (methon == "GetAllMonitors") {
-                const r = this.Monitor.GetAllMonitors().map(c => this.TransformMonitorToRenderer(c))
-                return r
+                const result = this.Monitor.GetAllMonitors().map(c => this.TransformMonitorToRenderer(c))
+                return result
             }
             else if (methon == "GetMonitorFromPoint") {
-                const r = this.TransformMonitorToRenderer(this.Monitor.GetMonitorFromPoint(arg.x as number, arg.y as number))
-                return r
+                const result = this.TransformMonitorToRenderer(this.Monitor.GetMonitorFromPoint(arg.x as number, arg.y as number))
+                return result
             }
             else if (methon == "GetCurrentMouseMonitor") {
-                const r = this.TransformMonitorToRenderer(this.Monitor.GetCurrentMouseMonitor())
-                return r
+                const result = this.TransformMonitorToRenderer(this.Monitor.GetCurrentMouseMonitor())
+                return result
             }
             else if (methon == "GetPrimaryMonitor") {
-                const r = this.TransformMonitorToRenderer(this.Monitor.GetPrimaryMonitor())
-                return r
+                const result = this.TransformMonitorToRenderer(this.Monitor.GetPrimaryMonitor())
+                return result
             }
         }
         else if (command == D.NodeAddonCommand.Serve) {
@@ -144,8 +144,8 @@ class NodeAddon {
         }
         else if (command == D.NodeAddonCommand.Window) {
             if (methon == "GetAllWindows") {
-                const r = this.Window.GetAllWindows().map(c => this.TransformWindowToRenderer(c))
-                return r
+                const result = this.Window.GetAllWindows().map(c => this.TransformWindowToRenderer(c))
+                return result
             }
         }
         return null

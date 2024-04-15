@@ -48,7 +48,7 @@ class IpcMainHandle {
             app.exit(0)
         })
 
-        ipcMain.handle(`Renderer:App:IsAutostart`, (e) => {
+        ipcMain.handle(`Renderer:App:IsAutostart`, async (e) => {
             const enable = app.getLoginItemSettings().openAtLogin
             return enable
         })
@@ -109,7 +109,7 @@ class IpcMainHandle {
             }
         })
 
-        ipcMain.handle(`Renderer:Widget:Bounds`, (e) => {
+        ipcMain.handle(`Renderer:Widget:Bounds`, async (e) => {
             const widget = BrowserWindow.fromWebContents(e.sender) as BrowserWindow
             return widget.getBounds()
         })
@@ -148,26 +148,26 @@ class IpcMainHandle {
     }
 
     private OnScreenIPC() {
-        ipcMain.handle(`Renderer:Screen:Cursor`, (e) => {
+        ipcMain.handle(`Renderer:Screen:Cursor`, async (e) => {
             return screen.getDisplayNearestPoint(screen.getCursorScreenPoint())
         })
 
-        ipcMain.handle(`Renderer:Screen:All`, () => {
+        ipcMain.handle(`Renderer:Screen:All`, async () => {
             return screen.getAllDisplays()
         })
 
-        ipcMain.handle(`Renderer:Screen:Primary`, () => {
+        ipcMain.handle(`Renderer:Screen:Primary`, async () => {
             return screen.getPrimaryDisplay()
         })
     }
 
     private OnResourceIPC() {
-        ipcMain.handle(`Renderer:Resource:Name`, (e, name: string) => {
+        ipcMain.handle(`Renderer:Resource:Name`, async (e, name: string) => {
             const path = ResourceLoad.Instance.GetResourcePathByName(name)
             return path
         })
 
-        ipcMain.handle(`Renderer:Resource:SelectResourcesPath`, (e, options: TSingleton.SelectOptions) => {
+        ipcMain.handle(`Renderer:Resource:SelectResourcesPath`, async (e, options: TSingleton.SelectOptions) => {
             const window = WindowPool.Instance.GetWindowById(e.sender.id)
             const features: Array<"multiSelections" | "openDirectory" | "openFile"> = []
             if (options.multiple) {
@@ -188,7 +188,7 @@ class IpcMainHandle {
             return path
         })
 
-        ipcMain.handle(`Renderer:Resource:SaveResourcesPath`, (e, options: TSingleton.SaveOptions) => {
+        ipcMain.handle(`Renderer:Resource:SaveResourcesPath`, async (e, options: TSingleton.SaveOptions) => {
             const window = WindowPool.Instance.GetWindowById(e.sender.id)
             const path = dialog.showSaveDialog(window.widget, {
                 title: options.title,
@@ -198,7 +198,7 @@ class IpcMainHandle {
             return path
         })
 
-        ipcMain.handle(`Renderer:Resource:Exists`, (e, path: string) => {
+        ipcMain.handle(`Renderer:Resource:Exists`, async (e, path: string) => {
             const result = F.existsSync(path)
             return result
         })
@@ -323,7 +323,7 @@ class IpcMainHandle {
     }
 
     private OnGlobalShortcutIPC() {
-        ipcMain.handle(`Renderer:GlobalShortcut:Register`, (e, accelerator: Electron.Accelerator) => {
+        ipcMain.handle(`Renderer:GlobalShortcut:Register`, async (e, accelerator: Electron.Accelerator) => {
             const result = GlobalShortcut.Instance.Register(accelerator)
             return result
         })
@@ -336,7 +336,7 @@ class IpcMainHandle {
             GlobalShortcut.Instance.UnregisterAll()
         })
 
-        ipcMain.handle(`Renderer:GlobalShortcut:IsRegistered`, (e, accelerator: Electron.Accelerator) => {
+        ipcMain.handle(`Renderer:GlobalShortcut:IsRegistered`, async (e, accelerator: Electron.Accelerator) => {
             const result = GlobalShortcut.Instance.IsRegistered(accelerator)
             return result
         })
@@ -344,32 +344,32 @@ class IpcMainHandle {
 
     private OnNodeAddonIPC() {
         ipcMain.handle(`Renderer:NodeAddon:Automatic`, async (e, methon: TSingleton.AutomaticMethonType, arg: Record<string, unknown>) => {
-            const result = await NodeAddon.Instance.ExeAddon(D.NodeAddonCommand.Automatic, methon, arg)
+            const result = NodeAddon.Instance.ExeAddon(D.NodeAddonCommand.Automatic, methon, arg)
             return result
         })
 
         ipcMain.handle(`Renderer:NodeAddon:Image`, async (e, methon: TSingleton.ImageMethonType, arg: Record<string, unknown>) => {
-            const result = await NodeAddon.Instance.ExeAddon(D.NodeAddonCommand.Image, methon, arg)
+            const result = NodeAddon.Instance.ExeAddon(D.NodeAddonCommand.Image, methon, arg)
             return result
         })
 
         ipcMain.handle(`Renderer:NodeAddon:Monitor`, async (e, methon: TSingleton.MonitorMethonType, arg: Record<string, unknown>) => {
-            const result = await NodeAddon.Instance.ExeAddon(D.NodeAddonCommand.Monitor, methon, arg)
+            const result = NodeAddon.Instance.ExeAddon(D.NodeAddonCommand.Monitor, methon, arg)
             return result
         })
 
         ipcMain.handle(`Renderer:NodeAddon:Serve`, async (e, methon: TSingleton.ServeMethonType, arg: Record<string, unknown>) => {
-            const result = await NodeAddon.Instance.ExeAddon(D.NodeAddonCommand.Serve, methon, arg)
+            const result = NodeAddon.Instance.ExeAddon(D.NodeAddonCommand.Serve, methon, arg)
             return result
         })
 
         ipcMain.handle(`Renderer:NodeAddon:Wallpaper`, async (e, methon: TSingleton.WallpaperMethonType, arg: Record<string, unknown>) => {
-            const result = await NodeAddon.Instance.ExeAddon(D.NodeAddonCommand.Wallpaper, methon, arg)
+            const result = NodeAddon.Instance.ExeAddon(D.NodeAddonCommand.Wallpaper, methon, arg)
             return result
         })
 
         ipcMain.handle(`Renderer:NodeAddon:Window`, async (e, methon: TSingleton.WindowMethonType, arg: Record<string, unknown>) => {
-            const result = await NodeAddon.Instance.ExeAddon(D.NodeAddonCommand.Window, methon, arg)
+            const result = NodeAddon.Instance.ExeAddon(D.NodeAddonCommand.Window, methon, arg)
             return result
         })
     }
