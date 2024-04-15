@@ -96,11 +96,11 @@ const Renderer = {
             return path
         },
         GetSelectResourcesPath: async (options) => {
-            const path = await ipcRenderer.invoke(`Renderer:Resource:Select`, options)
+            const path = await ipcRenderer.invoke(`Renderer:Resource:SelectResourcesPath`, options)
             return path
         },
         GetSaveResourcesPath: async (options) => {
-            const path = await ipcRenderer.invoke(`Renderer:Resource:Save`, options)
+            const path = await ipcRenderer.invoke(`Renderer:Resource:SaveResourcesPath`, options)
             return path
         },
         IsPathExists: async (path) => {
@@ -108,11 +108,11 @@ const Renderer = {
             return result
         },
         ReadDirFiles: async (dir) => {
-            const files = await ipcRenderer.invoke(`Renderer:Resource:Read`, dir)
+            const files = await ipcRenderer.invoke(`Renderer:Resource:ReadDirFiles`, dir)
             return files
         },
         CreateDir: async (dir) => {
-            const result = await ipcRenderer.invoke(`Renderer:Resource:Create`, dir)
+            const result = await ipcRenderer.invoke(`Renderer:Resource:CreateDir`, dir)
             return result
         },
         RemoveDir: async (dir) => {
@@ -128,12 +128,28 @@ const Renderer = {
             return result
         },
         CopyFile: async (path, newPath) => {
-            const result = await ipcRenderer.invoke(`Renderer:Resource:Copy`, path, newPath)
+            const result = await ipcRenderer.invoke(`Renderer:Resource:CopyFile`, path, newPath)
+            return result
+        },
+        GetFileMetadata: async (path) => {
+            const result = await ipcRenderer.invoke(`Renderer:Resource:GetFileMetadata`, path)
             return result
         },
         Download: (url) => {
             return ipcRenderer.postMessage(`Renderer:Resource:Download`, url)
         },
+        WriteStringToFile: async (path, str) => {
+            const result = await ipcRenderer.invoke(`Renderer:Resource:WriteStringToFile`, path, str)
+            return result
+        },
+        AppendStringToFile: async (path, str, newline = true) => {
+            const result = await ipcRenderer.invoke(`Renderer:Resource:AppendStringToFile`, path, str, newline)
+            return result
+        },
+        ReadStringFromFile: async (path) => {
+            const result = await ipcRenderer.invoke(`Renderer:Resource:ReadStringFromFile`, path)
+            return result
+        }
     },
     Clipboard: {
         WriteText: (text) => {

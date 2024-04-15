@@ -167,7 +167,7 @@ class IpcMainHandle {
             return path
         })
 
-        ipcMain.handle(`Renderer:Resource:Select`, (e, options: TSingleton.SelectOptions) => {
+        ipcMain.handle(`Renderer:Resource:SelectResourcesPath`, (e, options: TSingleton.SelectOptions) => {
             const window = WindowPool.Instance.GetWindowById(e.sender.id)
             const features: Array<"multiSelections" | "openDirectory" | "openFile"> = []
             if (options.multiple) {
@@ -188,7 +188,7 @@ class IpcMainHandle {
             return path
         })
 
-        ipcMain.handle(`Renderer:Resource:Save`, (e, options: TSingleton.SaveOptions) => {
+        ipcMain.handle(`Renderer:Resource:SaveResourcesPath`, (e, options: TSingleton.SaveOptions) => {
             const window = WindowPool.Instance.GetWindowById(e.sender.id)
             const path = dialog.showSaveDialog(window.widget, {
                 title: options.title,
@@ -203,7 +203,7 @@ class IpcMainHandle {
             return result
         })
 
-        ipcMain.handle(`Renderer:Resource:Read`, async (e, dir: string) => {
+        ipcMain.handle(`Renderer:Resource:ReadDirFiles`, async (e, dir: string) => {
             return await new Promise((resolve, reject) => {
                 F.readdir(dir, (err, files) => {
                     if (err) {
@@ -214,7 +214,7 @@ class IpcMainHandle {
             })
         })
 
-        ipcMain.handle(`Renderer:Resource:Create`, async (e, dir: string) => {
+        ipcMain.handle(`Renderer:Resource:CreateDir`, async (e, dir: string) => {
             return await new Promise((resolve, reject) => {
                 F.mkdir(dir, (err) => {
                     if (err) {
@@ -258,7 +258,7 @@ class IpcMainHandle {
             })
         })
 
-        ipcMain.handle(`Renderer:Resource:Copy`, async (e, path: string, newPath: string) => {
+        ipcMain.handle(`Renderer:Resource:CopyFile`, async (e, path: string, newPath: string) => {
             return await new Promise((resolve, reject) => {
                 F.copyFile(path, newPath, (err) => {
                     if (err) {
@@ -271,6 +271,54 @@ class IpcMainHandle {
 
         ipcMain.on(`Renderer:Resource:Download`, (e, url: string) => {
             Download.Instance.DownloadFromUrl(url)
+        })
+
+        ipcMain.handle(`Renderer:Resource:WriteStringToFile`, async (e, path: string, str: string) => {
+            return await new Promise((resolve, reject) => {
+                F.writeFile(path, str, (err) => {
+                    if (err) {
+                        resolve(false)
+                    }
+                    resolve(true)
+                })
+            })
+        })
+
+        ipcMain.handle(`Renderer:Resource:ReadStringFromFile`, async (e, path: string) => {
+            return await new Promise((resolve, reject) => {
+                F.readFile(path, (err, data) => {
+                    if (err) {
+                        resolve({})
+                    }
+                    resolve(data.toString())
+                })
+            })
+        })
+
+        ipcMain.handle(`Renderer:Resource:AppendStringToFile`, async (e, path: string, str: string, newline: boolean) => {
+            return await new Promise((resolve, reject) => {
+                F.appendFile(path, newline ? `\n${str}` : str, (err) => {
+                    if (err) {
+                        resolve(false)
+                    }
+                    resolve(true)
+                })
+            })
+        })
+
+        ipcMain.handle(`Renderer:Resource:GetFileMetadata`, async (e, path: string) => {
+            return await new Promise((resolve, reject) => {
+                F.stat(path, (err, data) => {
+                    if (err) {
+                        resolve({})
+                    }
+                    resolve({
+                        ...data,
+                        file: data.isFile(),
+                        directory: data.isDirectory()
+                    })
+                })
+            })
         })
     }
 

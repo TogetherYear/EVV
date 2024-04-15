@@ -56,7 +56,7 @@ declare namespace Renderer {
         /**
          * 内部调用事件分发 请勿使用
          */
-        export function Listen(callback: (e: Record<string, unknown>) => void): void
+        export function Listen(callback: (e: Record<string, unknown> | unknown | any) => void): void
         /**
          * 最小化
          */
@@ -191,9 +191,29 @@ declare namespace Renderer {
         export function CopyFile(path: string, newPath: string): Promise<boolean>
 
         /**
+         * 获取文件元数据 
+         */
+        export function GetFileMetadata(path: string): Promise<Record<string, unknown>>
+
+        /**
          * 下载文件
          */
         export function Download(url: string): void
+
+        /**
+         * 将字符串写入文件
+         */
+        export function WriteStringToFile(path: string, str: string): Promise<boolean>
+
+        /**
+         * 将字符串追加到文件尾部( 默认换行 )
+         */
+        export function AppendStringToFile(path: string, str: string, newline?: boolean): Promise<boolean>
+
+        /**
+         * 读取文件内容转换为字符串
+         */
+        export function ReadStringFromFile(str: string): Promise<Record<string, unknown>>
     }
 
     /**

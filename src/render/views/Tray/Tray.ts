@@ -14,7 +14,7 @@ class Tray extends AActor {
 
     public Run() {
         onMounted(() => {
-
+            this.ListenEvents()
         })
         onUnmounted(() => {
             this.Destroy()
@@ -22,6 +22,10 @@ class Tray extends AActor {
     }
 
     protected Destroy() {
+
+    }
+
+    private ListenEvents() {
 
     }
 

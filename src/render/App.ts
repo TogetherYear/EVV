@@ -21,9 +21,8 @@ class App extends AActor {
     public Run() {
         onMounted(() => {
             this.CreateEvents()
-            this.ListenEvents()
-            this.State()
             this.FileDropHandle()
+            Renderer.Widget.Listen(this.OnMessage.bind(this))
         })
 
         onUnmounted(() => {
@@ -41,32 +40,8 @@ class App extends AActor {
         this.AddKey(D.IpcRendererEvent.FileDrop)
     }
 
-    private ListenEvents() {
-        Renderer.Widget.Listen((e: any) => {
-            this.OnMessage(e)
-        })
-    }
-
     private OnMessage(e: D.IpcRendererSendMessage) {
-        if (e.type == D.IpcRendererEvent.SecondInstance) {
-            Message.error('已关闭第二个实例')
-            Renderer.Widget.Show()
-        }
         this.Emit(e.type, e)
-    }
-
-    private async State() {
-        if (location.href.indexOf("Application") != -1) {
-            Renderer.Widget.SetSize({
-                width: parseInt(localStorage.getItem("width") || '1000'),
-                height: parseInt(localStorage.getItem("height") || '560')
-            })
-            Renderer.Widget.Center()
-            window.addEventListener('resize', (e: UIEvent) => {
-                localStorage.setItem("width", `${window.innerWidth}`)
-                localStorage.setItem("height", `${window.innerHeight}`)
-            })
-        }
     }
 
     private FileDropHandle() {
