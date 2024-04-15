@@ -1,26 +1,12 @@
 import fs from 'fs'
 import { ResourceLoad } from '@main/manager/ResourceLoad'
 
-interface IConfigs {
-    /**
-     * 是否开启 Debug
-     */
-    debug: boolean
-    /**
-     * 软件版本
-     */
-    version: string
-}
-
-/**
- * 主线程 环境变量 在 Need/Configs 中配置 我这里啥都没有
- */
 class Configuration {
     private constructor() { }
 
     private static instance = new Configuration()
 
-    public configs: IConfigs = {
+    public configs: Main.IConfigs = {
         debug: false,
         version: ""
     }

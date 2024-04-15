@@ -38,6 +38,7 @@ class App extends AActor {
         this.AddKey(D.IpcRendererEvent.SecondInstance)
         this.AddKey(D.IpcRendererEvent.GlobalShortcut)
         this.AddKey(D.IpcRendererEvent.FileDrop)
+        this.AddKey(D.IpcRendererEvent.ThemeUpdate)
     }
 
     private OnMessage(e: D.IpcRendererSendMessage) {

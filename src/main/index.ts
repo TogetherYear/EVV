@@ -12,6 +12,7 @@ import { AppTray } from './manager/AppTray'
 import { SingleInstance } from './manager/SingleInstance'
 import { D } from '@decorators/D'
 import { Download } from './manager/Download'
+import { CommonEvent } from './manager/CommonEvent'
 
 app.commandLine.appendSwitch('disable-web-security')
 
@@ -43,6 +44,8 @@ app.on('ready', () => {
     AppMainWindow.Instance.Run()
 
     AppTray.Instance.Run()
+
+    CommonEvent.Instance.Run()
 })
 
 app.on('window-all-closed', () => {
