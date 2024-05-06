@@ -128,6 +128,9 @@ class NodeAddon {
         }
         else if (command == D.NodeAddonCommand.Serve) {
             if (methon == "CreateStaticFileServe") {
+                /**
+                 * 自己用的时候 去用 子线程调用这个方法 不要去阻塞主线程
+                 */
                 const result = this.Serve.CreateStaticFileServe(arg.path as string, arg.onOpen as (...args: Array<unknown>) => unknown)
                 return result
             }

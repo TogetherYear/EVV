@@ -32,11 +32,15 @@ declare namespace TSingleton {
 
     export type ImageMethonType = "ConvertImageFormat"
 
-    export type MonitorMethonType = "GetAllMonitors" | "GetMonitorFromPoint" | "GetCurrentMouseMonitor" | "GetPrimaryMonitor"
+    export type MonitorMethonType = "GetAllMonitors" |
+        "GetMonitorFromPoint" |
+        "GetCurrentMouseMonitor" |
+        "GetPrimaryMonitor"
 
     export type ServeMethonType = "CreateStaticFileServe"
 
-    export type WallpaperMethonType = "GetWallpaper" | "SetWallpaper"
+    export type WallpaperMethonType = "GetWallpaper" |
+        "SetWallpaper"
 
     export type WindowMethonType = "GetAllWindows"
 
