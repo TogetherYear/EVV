@@ -4,10 +4,14 @@ import { AActor } from "@render/libs/AActor"
 import { onMounted, onUnmounted } from "vue"
 
 class Application extends AActor {
-    public constructor() { super() }
+    public constructor() {
+        super()
+    }
 
     public InitStates() {
-        return {}
+        return {
+
+        }
     }
 
     public InitHooks() {
@@ -18,7 +22,6 @@ class Application extends AActor {
         onMounted(() => {
             this.ListenEvents()
             this.State()
-            this.Test()
         })
         onUnmounted(() => {
             this.Destroy()
@@ -52,18 +55,6 @@ class Application extends AActor {
                 localStorage.setItem("height", `${window.innerHeight}`)
             })
         }
-    }
-
-    public Test() {
-        setTimeout(async () => {
-            // await Renderer.NodeAddon.Automatic("SetMousePosition", { x: 100, y: 200 })
-            // await Renderer.NodeAddon.Automatic("SetButtonClick", { button: D.NodeAddon.MosueButton.Left })
-            // await Renderer.NodeAddon.Automatic("WriteText", { content: "ADASDASDASDASd" })
-
-            // Renderer.Resource.GetFileMetadata("D:/Web/Test.json").then(res => {
-            //     Debug.Log(res)
-            // })
-        }, 3000);
     }
 }
 
