@@ -37,12 +37,10 @@ declare namespace TSingleton {
         "GetCurrentMouseMonitor" |
         "GetPrimaryMonitor"
 
-    export type ServeMethonType = "CreateStaticFileServe"
-
     export type WallpaperMethonType = "GetWallpaper" |
         "SetWallpaper"
 
     export type WindowMethonType = "GetAllWindows"
 
-    export type NodeAddonMethonType = AutomaticMethonType | ImageMethonType | MonitorMethonType | ServeMethonType | WallpaperMethonType | WindowMethonType
+    export type NodeAddonMethonType = AutomaticMethonType | ImageMethonType | MonitorMethonType | WallpaperMethonType | WindowMethonType
 }

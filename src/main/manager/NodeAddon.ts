@@ -20,8 +20,6 @@ class NodeAddon {
 
     private monitor!: D.NodeAddon.Monitor
 
-    private serve!: D.NodeAddon.Serve
-
     private wallpaper!: D.NodeAddon.Wallpaper
 
     private window!: D.NodeAddon.Window
@@ -38,10 +36,6 @@ class NodeAddon {
         return this.monitor
     }
 
-    public get Serve() {
-        return this.serve
-    }
-
     public get Wallpaper() {
         return this.wallpaper
     }
@@ -54,7 +48,6 @@ class NodeAddon {
         this.automatic = require(`${ResourceLoad.Instance.GetAddonByName("Automatic.win32-x64-msvc")}`)
         this.image = require(`${ResourceLoad.Instance.GetAddonByName("Image.win32-x64-msvc")}`)
         this.monitor = require(`${ResourceLoad.Instance.GetAddonByName("Monitor.win32-x64-msvc")}`)
-        this.serve = require(`${ResourceLoad.Instance.GetAddonByName("Serve.win32-x64-msvc")}`)
         this.wallpaper = require(`${ResourceLoad.Instance.GetAddonByName("Wallpaper.win32-x64-msvc")}`)
         this.window = require(`${ResourceLoad.Instance.GetAddonByName("Window.win32-x64-msvc")}`)
     }
@@ -123,15 +116,6 @@ class NodeAddon {
             }
             else if (methon == "GetPrimaryMonitor") {
                 const result = this.TransformMonitorToRenderer(this.Monitor.GetPrimaryMonitor())
-                return result
-            }
-        }
-        else if (command == D.NodeAddonCommand.Serve) {
-            if (methon == "CreateStaticFileServe") {
-                /**
-                 * 自己用的时候 去用 子线程调用这个方法 不要去阻塞主线程
-                 */
-                const result = this.Serve.CreateStaticFileServe(arg.path as string, arg.onOpen as (...args: Array<unknown>) => unknown)
                 return result
             }
         }

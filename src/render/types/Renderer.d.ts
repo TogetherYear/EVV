@@ -276,11 +276,6 @@ declare namespace Renderer {
         export function Monitor(methon: TSingleton.MonitorMethonType, arg?: Record<string, unknown>): Promise<unknown>
 
         /**
-         * 静态文件服务器
-         */
-        export function Serve(methon: TSingleton.ServeMethonType, arg?: Record<string, unknown>): Promise<unknown>
-
-        /**
          * 壁纸
          */
         export function Wallpaper(methon: TSingleton.WallpaperMethonType, arg?: Record<string, unknown>): Promise<unknown>

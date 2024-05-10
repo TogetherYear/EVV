@@ -68,7 +68,6 @@ namespace D {
         Automatic,
         Image,
         Monitor,
-        Serve,
         Wallpaper,
         Window,
     }
