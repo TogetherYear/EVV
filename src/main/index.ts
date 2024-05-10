@@ -13,6 +13,7 @@ import { SingleInstance } from './manager/SingleInstance'
 import { D } from '@decorators/D'
 import { Download } from './manager/Download'
 import { CommonEvent } from './manager/CommonEvent'
+import { FileServer } from './manager/FileServer'
 
 app.commandLine.appendSwitch('disable-web-security')
 
@@ -33,6 +34,8 @@ WindowPool.Instance.Run()
 NodeAddon.Instance.Run()
 
 IpcMainHandle.Instance.Run()
+
+FileServer.Instance.Run()
 
 app.on('ready', () => {
     GlobalShortcut.Instance.Run()

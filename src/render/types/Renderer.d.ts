@@ -146,6 +146,11 @@ declare namespace Renderer {
         export function GetPathByName(name: string): Promise<string>
 
         /**
+         * 通过名称获取文件文件服务器路径 ( 仅限 Need 文件夹 ) 例如: Images/window.ico
+         */
+        export function GetFileServerPathByName(name: string): string
+
+        /**
          * 从文件资源管理器选择资源
          */
         export function GetSelectResourcesPath(options?: TSingleton.SelectOptions): Promise<Array<string> | undefined>

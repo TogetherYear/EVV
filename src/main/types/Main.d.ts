@@ -7,6 +7,6 @@ declare namespace Main {
         /**
          * 软件版本
          */
-        version: string
+        version: string,
     }
 }

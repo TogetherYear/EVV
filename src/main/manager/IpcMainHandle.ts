@@ -358,11 +358,6 @@ class IpcMainHandle {
             return result
         })
 
-        ipcMain.handle(`Renderer:NodeAddon:Serve`, async (e, methon: TSingleton.ServeMethonType, arg: Record<string, unknown>) => {
-            const result = NodeAddon.Instance.ExeAddon(D.NodeAddonCommand.Serve, methon, arg)
-            return result
-        })
-
         ipcMain.handle(`Renderer:NodeAddon:Wallpaper`, async (e, methon: TSingleton.WallpaperMethonType, arg: Record<string, unknown>) => {
             const result = NodeAddon.Instance.ExeAddon(D.NodeAddonCommand.Wallpaper, methon, arg)
             return result

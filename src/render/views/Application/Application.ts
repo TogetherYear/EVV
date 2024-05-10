@@ -50,6 +50,7 @@ class Application extends AActor {
                 height: parseInt(localStorage.getItem("height") || '560')
             })
             Renderer.Widget.Center()
+            Renderer.Widget.Show()
             window.addEventListener('resize', (e: UIEvent) => {
                 localStorage.setItem("width", `${window.innerWidth}`)
                 localStorage.setItem("height", `${window.innerHeight}`)

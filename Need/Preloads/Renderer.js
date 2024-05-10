@@ -95,6 +95,10 @@ const Renderer = {
             const path = await ipcRenderer.invoke(`Renderer:Resource:Name`, name)
             return path
         },
+        GetFileServerPathByName: (name) => {
+            const path = `http://localhost:8676/${name}`
+            return path
+        },
         GetSelectResourcesPath: async (options) => {
             const path = await ipcRenderer.invoke(`Renderer:Resource:SelectResourcesPath`, options)
             return path
@@ -186,10 +190,6 @@ const Renderer = {
         },
         Monitor: async (methon, arg = {}) => {
             const result = await ipcRenderer.invoke(`Renderer:NodeAddon:Monitor`, methon, arg)
-            return result
-        },
-        Serve: async (methon, arg = {}) => {
-            const result = await ipcRenderer.invoke(`Renderer:NodeAddon:Serve`, methon, arg)
             return result
         },
         Wallpaper: async (methon, arg = {}) => {

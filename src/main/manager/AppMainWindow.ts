@@ -50,8 +50,7 @@ class AppMainWindow extends TWindow {
         })
 
         this.widget.once('ready-to-show', () => {
-            this.widget.show()
-            this.widget.focus()
+            // this.widget.show()
         })
 
         //这样并不会生效 详情去issues看 链接：https://github.com/electron/electron/issues/26726
