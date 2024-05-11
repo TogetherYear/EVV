@@ -34,7 +34,7 @@ class FileServer {
         e.use(express.static(ResourceLoad.Instance.GetExtraFolder()))
         e.set('port', 8676)
         this.server = H.createServer(e)
-        this.server.listen(8676)
+        this.server.listen(8676, '127.0.0.1')
         this.server.on('listening', () => {
             console.log(`FileServer:8676`)
         })
