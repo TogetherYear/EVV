@@ -243,7 +243,7 @@ declare namespace Renderer {
         /**
          * 注册快捷键
          */
-        export function Register(accelerator: Electron.Accelerator): Promise<boolean>
+        export function Register(accelerator: Electron.Accelerator, callback: () => void): Promise<boolean>
 
         /**
          * 取消快捷键

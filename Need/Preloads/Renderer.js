@@ -1,5 +1,7 @@
 const { ipcRenderer, clipboard } = require("electron")
 
+const globalShortcutEvents = new Map()
+
 const Renderer = {
     App: {
         Close: () => {
@@ -33,6 +35,9 @@ const Renderer = {
     Widget: {
         Listen: (callback) => {
             return ipcRenderer.on("RendererMessage", (e, data) => {
+                if (data.type == 'GlobalShortcut' && globalShortcutEvents.has(data.send.accelerator)) {
+                    globalShortcutEvents.get(data.send.accelerator)()
+                }
                 callback(data)
             })
         },
@@ -164,11 +169,16 @@ const Renderer = {
         },
     },
     GlobalShortcut: {
-        Register: async (accelerator) => {
+        events: new Map(),
+        Register: async (accelerator, callback) => {
             const result = await ipcRenderer.invoke('Renderer:GlobalShortcut:Register', accelerator)
+            if (result) {
+                globalShortcutEvents.set(accelerator, callback)
+            }
             return result
         },
         Unregister: (accelerator) => {
+            globalShortcutEvents.delete(accelerator)
             return ipcRenderer.postMessage(`Renderer:GlobalShortcut:Unregister`, accelerator)
         },
         IsRegistered: async (accelerator) => {
@@ -176,6 +186,7 @@ const Renderer = {
             return result
         },
         UnregisterAll: () => {
+            globalShortcutEvents.clear()
             return ipcRenderer.postMessage(`Renderer:GlobalShortcut:UnregisterAll`)
         },
     },
