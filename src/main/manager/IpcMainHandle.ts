@@ -7,7 +7,6 @@ import { GlobalShortcut } from "./GlobalShortcut"
 import { WindowPool } from "./WindowPool"
 import * as F from 'fs'
 import { Download } from "./Download"
-import { NodeAddon } from "./NodeAddon"
 
 /**
  * 主线程 Ipc 监听 
@@ -29,7 +28,6 @@ class IpcMainHandle {
         this.OnScreenIPC()
         this.OnResourceIPC()
         this.OnGlobalShortcutIPC()
-        this.OnNodeAddonIPC()
     }
 
     private OnAppIPC() {
@@ -338,33 +336,6 @@ class IpcMainHandle {
 
         ipcMain.handle(`Renderer:GlobalShortcut:IsRegistered`, async (e, accelerator: Electron.Accelerator) => {
             const result = GlobalShortcut.Instance.IsRegistered(accelerator)
-            return result
-        })
-    }
-
-    private OnNodeAddonIPC() {
-        ipcMain.handle(`Renderer:NodeAddon:Automatic`, async (e, methon: TSingleton.AutomaticMethonType, arg: Record<string, unknown>) => {
-            const result = NodeAddon.Instance.ExeAddon(D.NodeAddonCommand.Automatic, methon, arg)
-            return result
-        })
-
-        ipcMain.handle(`Renderer:NodeAddon:Image`, async (e, methon: TSingleton.ImageMethonType, arg: Record<string, unknown>) => {
-            const result = NodeAddon.Instance.ExeAddon(D.NodeAddonCommand.Image, methon, arg)
-            return result
-        })
-
-        ipcMain.handle(`Renderer:NodeAddon:Monitor`, async (e, methon: TSingleton.MonitorMethonType, arg: Record<string, unknown>) => {
-            const result = NodeAddon.Instance.ExeAddon(D.NodeAddonCommand.Monitor, methon, arg)
-            return result
-        })
-
-        ipcMain.handle(`Renderer:NodeAddon:Wallpaper`, async (e, methon: TSingleton.WallpaperMethonType, arg: Record<string, unknown>) => {
-            const result = NodeAddon.Instance.ExeAddon(D.NodeAddonCommand.Wallpaper, methon, arg)
-            return result
-        })
-
-        ipcMain.handle(`Renderer:NodeAddon:Window`, async (e, methon: TSingleton.WindowMethonType, arg: Record<string, unknown>) => {
-            const result = NodeAddon.Instance.ExeAddon(D.NodeAddonCommand.Window, methon, arg)
             return result
         })
     }

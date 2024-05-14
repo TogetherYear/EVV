@@ -260,34 +260,4 @@ declare namespace Renderer {
          */
         export function UnregisterAll(): void
     }
-
-    /**
-     * Node拓展 函数参数 自己对照填写 不写函数重载了 参数名一样写入对象
-     */
-    export namespace NodeAddon {
-        /**
-         * 自动化
-         */
-        export function Automatic(methon: TSingleton.AutomaticMethonType, arg?: Record<string, unknown>): Promise<unknown>
-
-        /**
-         * 图片
-         */
-        export function Image(methon: TSingleton.ImageMethonType, arg?: Record<string, unknown>): Promise<unknown>
-
-        /**
-         * 显示器
-         */
-        export function Monitor(methon: TSingleton.MonitorMethonType, arg?: Record<string, unknown>): Promise<unknown>
-
-        /**
-         * 壁纸
-         */
-        export function Wallpaper(methon: TSingleton.WallpaperMethonType, arg?: Record<string, unknown>): Promise<unknown>
-
-        /**
-         * 应用窗口
-         */
-        export function Window(methon: TSingleton.WindowMethonType, arg?: Record<string, unknown>): Promise<unknown>
-    }
 }

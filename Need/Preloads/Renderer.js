@@ -189,28 +189,6 @@ const Renderer = {
             globalShortcutEvents.clear()
             return ipcRenderer.postMessage(`Renderer:GlobalShortcut:UnregisterAll`)
         },
-    },
-    NodeAddon: {
-        Automatic: async (methon, arg = {}) => {
-            const result = await ipcRenderer.invoke(`Renderer:NodeAddon:Automatic`, methon, arg)
-            return result
-        },
-        Image: async (methon, arg = {}) => {
-            const result = await ipcRenderer.invoke(`Renderer:NodeAddon:Image`, methon, arg)
-            return result
-        },
-        Monitor: async (methon, arg = {}) => {
-            const result = await ipcRenderer.invoke(`Renderer:NodeAddon:Monitor`, methon, arg)
-            return result
-        },
-        Wallpaper: async (methon, arg = {}) => {
-            const result = await ipcRenderer.invoke(`Renderer:NodeAddon:Wallpaper`, methon, arg)
-            return result
-        },
-        Window: async (methon, arg = {}) => {
-            const result = await ipcRenderer.invoke(`Renderer:NodeAddon:Window`, methon, arg)
-            return result
-        },
     }
 }
 

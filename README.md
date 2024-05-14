@@ -29,3 +29,7 @@ npm run build
 ```
 环境变量 electron 在 Need/Configs 中配置 .env.development 和.env.production 是前端页面使用的 前端页面使用的变量添加后在 env.d.ts 中添加说明确保有代码提示
 ```
+
+```
+只适配 windows 其他暂不考虑
+```
