@@ -100,7 +100,7 @@ const Renderer = {
             const path = await ipcRenderer.invoke(`Renderer:Resource:Name`, name)
             return path
         },
-        GetFileServerPathByName: (name) => {
+        GetFileByNameFromLocalServer: (name) => {
             const path = `http://localhost:8676/${name}`
             return path
         },

@@ -148,7 +148,7 @@ declare namespace Renderer {
         /**
          * 通过名称获取文件文件服务器路径 ( 仅限 Need 文件夹 ) 例如: Images/window.ico
          */
-        export function GetFileServerPathByName(name: string): string
+        export function GetFileByNameFromLocalServer(name: string): string
 
         /**
          * 从文件资源管理器选择资源
