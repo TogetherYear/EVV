@@ -237,13 +237,6 @@ namespace D {
         }
 
         /**
-         * 静态文件服务器
-         */
-        export type Serve = {
-            CreateStaticFileServe: (path: string, onOpen: (...args: unknown[]) => unknown) => void
-        }
-
-        /**
          * 壁纸
          */
         export type Wallpaper = {

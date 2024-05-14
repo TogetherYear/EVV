@@ -1,18 +1,21 @@
 import express from 'express'
 import * as H from 'http'
 import { ResourceLoad } from './ResourceLoad'
+import * as core from "express-serve-static-core";
 
 /**
- * 文件服务器
+ * 本地服务器
  */
-class FileServer {
+class LocalServer {
     private constructor() { }
 
-    private static instance = new FileServer()
+    private static instance = new LocalServer()
 
     public static get Instance() {
         return this.instance
     }
+
+    private app!: core.Express
 
     private server!: H.Server<typeof H.IncomingMessage, typeof H.ServerResponse>
 
@@ -21,8 +24,8 @@ class FileServer {
     }
 
     private CreateServer() {
-        const e = express()
-        e.use((req, res, next) => {
+        this.app = express()
+        this.app.use((req, res, next) => {
             res.header('Access-Control-Allow-Origin', "*")
             res.header('Access-Control-Allow-Methods', 'GET,POST')
             res.header('Access-Control-Allow-Headers', 'Content-Type')
@@ -31,14 +34,29 @@ class FileServer {
             res.header("Cross-Origin-Opener-Policy", "same-origin");
             next()
         })
-        e.use(express.static(ResourceLoad.Instance.GetExtraFolder()))
-        e.set('port', 8676)
-        this.server = H.createServer(e)
+
+        this.SetHttpServer()
+
+        this.SetStaticFile()
+
+        this.app.set('port', 8676)
+        this.server = H.createServer(this.app)
         this.server.listen(8676, '127.0.0.1')
         this.server.on('listening', () => {
-            console.log(`FileServer:8676`)
+            console.log(`LocalServer:8676`)
         })
+    }
+
+    private SetHttpServer() {
+        this.app.get("/Test", (req, res) => {
+            res.write("Test")
+            res.end()
+        })
+    }
+
+    private SetStaticFile() {
+        this.app.use(express.static(ResourceLoad.Instance.GetExtraFolder()))
     }
 }
 
-export { FileServer }
+export { LocalServer }
