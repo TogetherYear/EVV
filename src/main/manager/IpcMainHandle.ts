@@ -322,7 +322,7 @@ class IpcMainHandle {
 
     private OnGlobalShortcutIPC() {
         ipcMain.handle(`Renderer:GlobalShortcut:Register`, async (e, accelerator: Electron.Accelerator) => {
-            const result = GlobalShortcut.Instance.Register(accelerator)
+            const result = GlobalShortcut.Instance.Register(accelerator, () => { })
             return result
         })
 
