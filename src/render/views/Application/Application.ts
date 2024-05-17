@@ -22,13 +22,6 @@ class Application extends AActor {
         onMounted(() => {
             this.ListenEvents()
             this.State()
-
-            setTimeout(() => {
-                Renderer.App.CreateCustomWindow({
-                    label: "Test",
-                    url: 'https://www.electronjs.org/zh/docs/latest/api/global-shortcut#globalshortcutregisteraccelerator-callback',
-                })
-            }, 3000);
         })
         onUnmounted(() => {
             this.Destroy()
@@ -41,12 +34,6 @@ class Application extends AActor {
 
     private ListenEvents() {
         App.Instance.AddListen(D.IpcRendererEvent.SecondInstance, this, this.OnSecondInstance)
-        App.Instance.AddListen(D.IpcRendererEvent.WidgetCreate, this, (e) => {
-            Debug.Log(e)
-        })
-        App.Instance.AddListen(D.IpcRendererEvent.WidgetDestroy, this, (e) => {
-            Debug.Log(e)
-        })
     }
 
     private OnSecondInstance(e: D.IpcRendererSendMessage) {

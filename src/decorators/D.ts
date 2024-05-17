@@ -31,7 +31,8 @@ namespace D {
         FileDrop = 'FileDrop',
         WidgetCreate = 'WidgetCreate',
         WidgetDestroy = 'WidgetDestroy',
-        ThemeUpdate = 'ThemeUpdate'
+        ThemeUpdate = 'ThemeUpdate',
+        WidgetEmpty = 'WidgetEmpty'
     }
 
     export enum IpcRendererWindow {

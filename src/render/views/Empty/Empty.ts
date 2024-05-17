@@ -19,7 +19,9 @@ class Empty extends AActor {
 
     public Run() {
         onMounted(() => {
-
+            Renderer.Widget.PostMessage({
+                reason: "Empty"
+            })
         })
 
         onUnmounted(() => {

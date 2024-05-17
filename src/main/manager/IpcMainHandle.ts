@@ -115,9 +115,9 @@ class IpcMainHandle {
 
         ipcMain.on(`Renderer:Widget:Message`, (e, d: D.IIpcRendererReceiveMessage) => {
             switch (e.sender.id) {
-                case AppMainWindow.Instance.widget.webContents.id: this.OnMessage({ ...d, type: D.IpcRendererWindow.Main }); return;
-                case AppTray.Instance.widget.webContents.id: this.OnMessage({ ...d, type: D.IpcRendererWindow.Tray }); return;
-                default: this.OnMessage({ ...d, type: D.IpcRendererWindow.Other }); return;
+                case AppMainWindow.Instance.widget.webContents.id: this.OnMessage({ ...d, type: D.IpcRendererWindow.Main, id: e.sender.id }); return;
+                case AppTray.Instance.widget.webContents.id: this.OnMessage({ ...d, type: D.IpcRendererWindow.Tray, id: e.sender.id }); return;
+                default: this.OnMessage({ ...d, type: D.IpcRendererWindow.Other, id: e.sender.id }); return;
             }
         })
 
@@ -354,7 +354,7 @@ class IpcMainHandle {
         })
     }
 
-    private OnMessage(e: D.IIpcRendererReceiveMessage & { type: D.IpcRendererWindow }) {
+    private OnMessage(e: D.IIpcRendererReceiveMessage & { type: D.IpcRendererWindow, id: number }) {
         if (e.type == D.IpcRendererWindow.Main) {
 
         }
@@ -362,7 +362,16 @@ class IpcMainHandle {
 
         }
         else {
-
+            if (e.reason == "Empty") {
+                const target = CustomWidget.Instance.FindWidget(e.id)
+                WindowPool.Instance.PostMessage({
+                    type: D.IpcRendererEvent.WidgetEmpty,
+                    widgets: [D.IpcRendererWindow.Main],
+                    send: {
+                        label: target?.lable
+                    }
+                })
+            }
         }
     }
 }

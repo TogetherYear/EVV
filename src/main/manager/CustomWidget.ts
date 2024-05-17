@@ -17,7 +17,7 @@ class CustomWidget extends EventSystem {
         return this.instance
     }
 
-    private widgets = new Map<string, BrowserWindow>()
+    private widgets = new Map<string, { widget: BrowserWindow, lable: string }>()
 
     public Run() {
 
@@ -54,7 +54,7 @@ class CustomWidget extends EventSystem {
             widget.webContents.openDevTools()
         }
 
-        this.widgets.set(options.label, widget)
+        this.widgets.set(options.label, { widget, lable: options.label })
 
         WindowPool.Instance.PostMessage({
             type: D.IpcRendererEvent.WidgetCreate,
@@ -77,23 +77,23 @@ class CustomWidget extends EventSystem {
     }
 
     public HandleWidgetEvents(id: number, cmd: DM.CustomWidgetCmd, options?: Record<string, unknown> | any) {
-        const widget = this.FindWidget(id)
-        if (widget) {
+        const target = this.FindWidget(id)
+        if (target) {
             switch (cmd) {
-                case DM.CustomWidgetCmd.Min: this.OnMin(widget); return;
-                case DM.CustomWidgetCmd.Max: this.OnMax(widget); return;
-                case DM.CustomWidgetCmd.Hide: this.OnHide(widget); return;
-                case DM.CustomWidgetCmd.Show: this.OnShow(widget); return;
-                case DM.CustomWidgetCmd.Center: this.OnCenter(widget); return;
-                case DM.CustomWidgetCmd.Position: this.OnSetPosition(widget, options); return;
-                case DM.CustomWidgetCmd.Size: this.OnSetSize(widget, options); return;
+                case DM.CustomWidgetCmd.Min: this.OnMin(target.widget); return;
+                case DM.CustomWidgetCmd.Max: this.OnMax(target.widget); return;
+                case DM.CustomWidgetCmd.Hide: this.OnHide(target.widget); return;
+                case DM.CustomWidgetCmd.Show: this.OnShow(target.widget); return;
+                case DM.CustomWidgetCmd.Center: this.OnCenter(target.widget); return;
+                case DM.CustomWidgetCmd.Position: this.OnSetPosition(target.widget, options); return;
+                case DM.CustomWidgetCmd.Size: this.OnSetSize(target.widget, options); return;
             }
         }
     }
 
-    private FindWidget(id: number) {
+    public FindWidget(id: number) {
         for (let w of this.widgets) {
-            if (w[1].webContents.id == id) {
+            if (w[1].widget.webContents.id == id) {
                 return w[1]
             }
         }
