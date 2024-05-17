@@ -1,4 +1,4 @@
-import { app, globalShortcut } from 'electron'
+import { app } from 'electron'
 import { ResourceLoad } from './manager/ResourceLoad'
 import { Configuration } from './manager/Configuration'
 import { ProcessPool } from './manager/ProcessPool'
@@ -13,6 +13,7 @@ import { D } from '@decorators/D'
 import { Download } from './manager/Download'
 import { CommonEvent } from './manager/CommonEvent'
 import { LocalServer } from './manager/LocalServer'
+import { CustomWidget } from './manager/CustomWidget'
 
 app.commandLine.appendSwitch('disable-web-security')
 
@@ -40,6 +41,8 @@ app.on('ready', () => {
     CustomProtocol.Instance.Run()
 
     Download.Instance.Run()
+
+    CustomWidget.Instance.Run()
 
     AppMainWindow.Instance.Run()
 

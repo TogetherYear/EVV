@@ -29,6 +29,8 @@ namespace D {
         SecondInstance = 'SecondInstance',
         GlobalShortcut = 'GlobalShortcut',
         FileDrop = 'FileDrop',
+        WidgetCreate = 'WidgetCreate',
+        WidgetDestroy = 'WidgetDestroy',
         ThemeUpdate = 'ThemeUpdate'
     }
 

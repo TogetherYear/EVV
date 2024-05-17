@@ -18,4 +18,12 @@ declare namespace TSingleton {
             name: string;
         }>
     }
+
+    export type CustomWidgetOptions = {
+        label: string,
+        url: string,
+        width?: number,
+        height?: number,
+        frame?: boolean
+    }
 }

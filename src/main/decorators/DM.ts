@@ -56,5 +56,15 @@ namespace DM {
     export interface IChildrenProcessSendMessage extends IChildrenProcessReceiveMessage {
 
     }
+
+    export enum CustomWidgetCmd {
+        Min,
+        Max,
+        Hide,
+        Show,
+        Center,
+        Position,
+        Size
+    }
 }
 export { DM }

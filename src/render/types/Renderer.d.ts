@@ -22,6 +22,11 @@ declare namespace Renderer {
          * 设置是否开机自启
          */
         export function SetAutostart(enable: boolean): void
+
+        /**
+         * 打开自定义窗口
+         */
+        export function CreateCustomWindow(options: TSingleton.CustomWidgetOptions): Promise<void>
     }
 
     /**

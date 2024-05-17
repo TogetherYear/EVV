@@ -7,6 +7,8 @@ import { GlobalShortcut } from "./GlobalShortcut"
 import { WindowPool } from "./WindowPool"
 import * as F from 'fs'
 import { Download } from "./Download"
+import { CustomWidget } from "./CustomWidget"
+import { DM } from "@main/decorators/DM"
 
 /**
  * 主线程 Ipc 监听 
@@ -50,18 +52,25 @@ class IpcMainHandle {
             const enable = app.getLoginItemSettings().openAtLogin
             return enable
         })
+
+        ipcMain.handle(`Renderer:App:CreateCustomWindow`, async (e, options: TSingleton.CustomWidgetOptions) => {
+            const result = CustomWidget.Instance.CreateWindow(options)
+            return result
+        })
     }
 
     private OnWidgetIPC() {
         ipcMain.on(`Renderer:Widget:Min`, (e) => {
             switch (e.sender.id) {
                 case AppMainWindow.Instance.widget.webContents.id: AppMainWindow.Instance.OnMin(); return;
+                default: CustomWidget.Instance.HandleWidgetEvents(e.sender.id, DM.CustomWidgetCmd.Min); return
             }
         })
 
         ipcMain.on(`Renderer:Widget:Max`, (e) => {
             switch (e.sender.id) {
                 case AppMainWindow.Instance.widget.webContents.id: AppMainWindow.Instance.OnMax(); return;
+                default: CustomWidget.Instance.HandleWidgetEvents(e.sender.id, DM.CustomWidgetCmd.Max); return
             }
         })
 
@@ -69,6 +78,7 @@ class IpcMainHandle {
             switch (e.sender.id) {
                 case AppMainWindow.Instance.widget.webContents.id: AppMainWindow.Instance.OnHide(); return;
                 case AppTray.Instance.widget.webContents.id: AppTray.Instance.OnHide(); return;
+                default: CustomWidget.Instance.HandleWidgetEvents(e.sender.id, DM.CustomWidgetCmd.Hide); return
             }
         })
 
@@ -76,12 +86,14 @@ class IpcMainHandle {
             switch (e.sender.id) {
                 case AppMainWindow.Instance.widget.webContents.id: AppMainWindow.Instance.OnShow(); return;
                 case AppTray.Instance.widget.webContents.id: AppTray.Instance.OnShow(); return;
+                default: CustomWidget.Instance.HandleWidgetEvents(e.sender.id, DM.CustomWidgetCmd.Show); return
             }
         })
 
         ipcMain.on(`Renderer:Widget:Center`, (e) => {
             switch (e.sender.id) {
                 case AppMainWindow.Instance.widget.webContents.id: AppMainWindow.Instance.OnCenter(); return;
+                default: CustomWidget.Instance.HandleWidgetEvents(e.sender.id, DM.CustomWidgetCmd.Center); return
             }
         })
 
@@ -89,6 +101,7 @@ class IpcMainHandle {
             switch (e.sender.id) {
                 case AppMainWindow.Instance.widget.webContents.id: AppMainWindow.Instance.OnSetPosition(position); return;
                 case AppTray.Instance.widget.webContents.id: AppTray.Instance.OnSetPosition(position); return;
+                default: CustomWidget.Instance.HandleWidgetEvents(e.sender.id, DM.CustomWidgetCmd.Position, position); return
             }
         })
 
@@ -96,6 +109,7 @@ class IpcMainHandle {
             switch (e.sender.id) {
                 case AppMainWindow.Instance.widget.webContents.id: AppMainWindow.Instance.OnSetSize(size); return;
                 case AppTray.Instance.widget.webContents.id: AppTray.Instance.OnSetSize(size); return;
+                default: CustomWidget.Instance.HandleWidgetEvents(e.sender.id, DM.CustomWidgetCmd.Size, size); return
             }
         })
 

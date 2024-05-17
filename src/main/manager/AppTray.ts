@@ -70,9 +70,6 @@ class AppTray extends TWindow {
 
         this.widget.loadURL(ResourceLoad.Instance.GetPageByName('Tray'))
 
-        // 我这里取消了默认的菜单栏 你可以自定义
-        Menu.setApplicationMenu(null)
-
         WindowPool.Instance.RegisterWindow(D.IpcRendererWindow.Tray, this)
     }
 

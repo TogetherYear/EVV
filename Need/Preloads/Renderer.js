@@ -16,6 +16,10 @@ const Renderer = {
         },
         SetAutostart: (enable) => {
             return ipcRenderer.postMessage(`Renderer:App:SetAutostart`, enable)
+        },
+        CreateCustomWindow: async (options) => {
+            const result = await ipcRenderer.invoke(`Renderer:App:CreateCustomWindow`, options)
+            return result
         }
     },
     Tray: {
@@ -189,7 +193,9 @@ const Renderer = {
             globalShortcutEvents.clear()
             return ipcRenderer.postMessage(`Renderer:GlobalShortcut:UnregisterAll`)
         },
-    }
+    },
 }
 
 window.Renderer = Renderer
+
+window['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true'

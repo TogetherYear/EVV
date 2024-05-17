@@ -39,6 +39,8 @@ class App extends AActor {
         this.AddKey(D.IpcRendererEvent.GlobalShortcut)
         this.AddKey(D.IpcRendererEvent.FileDrop)
         this.AddKey(D.IpcRendererEvent.ThemeUpdate)
+        this.AddKey(D.IpcRendererEvent.WidgetCreate)
+        this.AddKey(D.IpcRendererEvent.WidgetDestroy)
     }
 
     private OnMessage(e: D.IpcRendererSendMessage) {
