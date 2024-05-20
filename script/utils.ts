@@ -3,7 +3,7 @@ import { get } from "http";
 import { green } from "chalk";
 
 /** 轮询监听 vite 启动 */
-export function waitOn(arg0: { port: string | number; interval?: number }) {
+export function WaitOn(arg0: { port: string | number; interval?: number }) {
     return new Promise((resolve) => {
         const { port, interval = 149 } = arg0;
         const url = `http://localhost:${port}`;
@@ -25,5 +25,5 @@ export function waitOn(arg0: { port: string | number; interval?: number }) {
 }
 
 /** node.js builtins module */
-export const builtins = () =>
+export const Builtins = () =>
     builtinModules.filter((x) => !/^_|^(internal|v8|node-inspect)\/|\//.test(x));

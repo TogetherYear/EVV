@@ -9,22 +9,22 @@ import commonjs from '@rollup/plugin-commonjs'
 import typescript from '@rollup/plugin-typescript'
 import alias from '@rollup/plugin-alias'
 import json from '@rollup/plugin-json'
-import { builtins } from './utils'
+import { Builtins } from './utils'
 import minimist from 'minimist'
 import chalk from 'chalk'
 import ora from 'ora'
 import electron from 'electron'
-import { waitOn } from './utils'
+import { WaitOn } from './utils'
 import { main } from '../package.json'
 
 //运行参数
 const argv = minimist(process.argv.slice(2))
-const opts = configFactory(argv.env)
+const opts = ConfigFactory(argv.env)
 const TAG = '[build-main.ts]'
 const spinner = ora(`${TAG} Electron build...`)
 
 if (argv.watch) {
-    waitOn({ port: 6768 }).then(msg => {
+    WaitOn({ port: 6768 }).then(msg => {
         const watcher = watch(opts)
         let child: ChildProcess
         watcher.on('change', filename => {
@@ -57,7 +57,7 @@ if (argv.watch) {
         })
 }
 
-function configFactory(env = 'production') {
+function ConfigFactory(env = 'production') {
     const options: RollupOptions = {
         input: join(__dirname, '../src/main/index.ts'),
         output: {
@@ -82,7 +82,7 @@ function configFactory(env = 'production') {
                 ]
             })
         ],
-        external: [...builtins(), 'electron']
+        external: [...Builtins(), 'electron']
     }
 
     return options
