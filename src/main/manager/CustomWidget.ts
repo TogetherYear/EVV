@@ -30,8 +30,11 @@ class CustomWidget extends EventSystem {
             height: options.height || 560,
             useContentSize: true,
             frame: options.frame || true,
-            backgroundColor: '#212121',
-            icon: ResourceLoad.Instance.GetImageByName('window.ico'),
+            backgroundColor: options.backgroundColor || '#ff212121',
+            alwaysOnTop: options.alwaysOnTop || false,
+            transparent: options.transparent || false,
+            skipTaskbar: options.skipTaskbar || false,
+            icon: options.icon || ResourceLoad.Instance.GetImageByName('window.ico'),
             show: true,
             webPreferences: {
                 // 同源
@@ -45,7 +48,7 @@ class CustomWidget extends EventSystem {
                 // https 运行 http
                 allowRunningInsecureContent: true,
                 // 预加载脚本 仅为示例
-                preload: ResourceLoad.Instance.GetPreloadByName('Renderer')
+                preload: options.preload || ResourceLoad.Instance.GetPreloadByName('Renderer')
             }
         })
         widget.loadURL(options.url)

@@ -24,6 +24,12 @@ declare namespace TSingleton {
         url: string,
         width?: number,
         height?: number,
-        frame?: boolean
+        frame?: boolean,
+        backgroundColor?: string,
+        alwaysOnTop?: boolean,
+        transparent?: boolean,
+        skipTaskbar?: boolean,
+        icon?: string,
+        preload?: string,
     }
 }
