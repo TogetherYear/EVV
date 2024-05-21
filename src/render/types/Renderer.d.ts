@@ -107,17 +107,27 @@ declare namespace Renderer {
         /**
          * 获取当前鼠标位置的屏幕
          */
-        export function GetHoldCursor(): Promise<Electron.Display>
+        export function GetHoldCursor(): Promise<TSingleton.IScreen>
 
         /**
          * 获取所有屏幕
          */
-        export function GetAll(): Promise<Array<Electron.Display>>
+        export function GetAll(): Promise<Array<TSingleton.IScreen>>
 
         /**
          * 获取主屏幕
          */
-        export function GetPrimary(): Promise<Electron.Display>
+        export function GetPrimary(): Promise<TSingleton.IScreen>
+    }
+
+    /**
+     * 窗口
+     */
+    export namespace Window {
+        /**
+         * 获取所有窗口
+         */
+        export function GetAll(): Promise<Array<TSingleton.IWindow>>
     }
 
     /**

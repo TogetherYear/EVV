@@ -1,5 +1,5 @@
 import { AppMainWindow } from "@main/manager/AppMainWindow"
-import { BrowserWindow, app, ipcMain, screen, shell, dialog, session } from "electron"
+import { BrowserWindow, app, ipcMain, screen, shell, dialog } from "electron"
 import { ResourceLoad } from "@main/manager/ResourceLoad"
 import { AppTray } from "@main/manager/AppTray"
 import { D } from "@decorators/D"
@@ -9,6 +9,9 @@ import * as F from 'fs'
 import { Download } from "./Download"
 import { CustomWidget } from "./CustomWidget"
 import { DM } from "@main/decorators/DM"
+import * as NS from 'node-screenshots'
+import * as FS from 'fs'
+import { CustomProtocol } from "./CustomProtocol"
 
 /**
  * 主线程 Ipc 监听 
@@ -28,6 +31,7 @@ class IpcMainHandle {
         this.OnShellIPC()
         this.OnTrayIPC()
         this.OnScreenIPC()
+        this.OnWindowIPC()
         this.OnResourceIPC()
         this.OnGlobalShortcutIPC()
     }
@@ -161,16 +165,82 @@ class IpcMainHandle {
 
     private OnScreenIPC() {
         ipcMain.handle(`Renderer:Screen:Cursor`, async (e) => {
-            return screen.getDisplayNearestPoint(screen.getCursorScreenPoint())
+            const point = screen.getCursorScreenPoint()
+            const monitor = NS.Monitor.fromPoint(point.x, point.y) as NS.Monitor
+            return this.TransformScreen(monitor)
         })
 
         ipcMain.handle(`Renderer:Screen:All`, async () => {
-            return screen.getAllDisplays()
+            const monitors = NS.Monitor.all().map(m => this.TransformScreen(m))
+            return monitors
         })
 
         ipcMain.handle(`Renderer:Screen:Primary`, async () => {
-            return screen.getPrimaryDisplay()
+            const monitor = NS.Monitor.all().find(a => a.isPrimary) as NS.Monitor
+            return this.TransformScreen(monitor)
         })
+
+        ipcMain.handle(`Renderer:Screen:Capture`, async (e, id: number, path: string) => {
+            const monitor = NS.Monitor.all().find(m => m.id == id) as NS.Monitor
+            const image = monitor.captureImageSync()
+            const buffer = image.toPngSync()
+            const target = ResourceLoad.Instance.GetResourcePathByName(path)
+            return await new Promise((resolve, reject) => {
+                FS.writeFile(target, buffer, (err => {
+                    if (err) {
+                        resolve("")
+                    }
+                    resolve(target)
+                }))
+            })
+        })
+    }
+
+    private TransformScreen(monitor: NS.Monitor): Omit<TSingleton.IScreen, "Capture"> {
+        return {
+            id: monitor.id,
+            width: monitor.width,
+            height: monitor.height,
+            x: monitor.x,
+            y: monitor.y,
+            isPrimary: monitor.isPrimary,
+        }
+    }
+
+    private OnWindowIPC() {
+        ipcMain.handle(`Renderer:Window:All`, async () => {
+            const windows = NS.Window.all().map(w => this.TransformWindow(w))
+            return windows
+        })
+
+        ipcMain.handle(`Renderer:Window:Capture`, async (e, id: number, path: string) => {
+            const window = NS.Window.all().find(w => w.id == id) as NS.Window
+            const image = window.captureImageSync()
+            const buffer = image.toPngSync()
+            const target = ResourceLoad.Instance.GetResourcePathByName(path)
+            return await new Promise((resolve, reject) => {
+                FS.writeFile(target, buffer, (err => {
+                    if (err) {
+                        resolve("")
+                    }
+                    resolve(target)
+                }))
+            })
+        })
+    }
+
+    private TransformWindow(window: NS.Window): Omit<TSingleton.IWindow, "Capture"> {
+        return {
+            id: window.id,
+            name: window.appName,
+            //@ts-ignore
+            screen: this.TransformScreen(window.currentMonitor),
+            width: window.width,
+            height: window.height,
+            isMinimized: window.isMinimized,
+            x: window.x,
+            y: window.y,
+        }
     }
 
     private OnResourceIPC() {

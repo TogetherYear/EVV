@@ -33,4 +33,32 @@ declare namespace TSingleton {
         preload?: string,
         show?: boolean
     }
+
+    export interface IScreen {
+        id: number,
+        width: number,
+        height: number,
+        isPrimary: boolean,
+        x: number,
+        y: number,
+        /**
+         * ( 仅限 Need 文件夹 和 png 格式 ) 例如: Images/Capture.png
+         */
+        Capture: (path: string) => Promise<string>
+    }
+
+    export interface IWindow {
+        id: number,
+        name: string,
+        screen: IScreen,
+        width: number,
+        height: number,
+        isMinimized: boolean,
+        x: number,
+        y: number,
+        /**
+         * ( 仅限 Need 文件夹 和 png 格式 ) 例如: Images/Capture.png
+         */
+        Capture: (path: string) => Promise<string>
+    }
 }

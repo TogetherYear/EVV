@@ -82,7 +82,7 @@ function ConfigFactory(env = 'production') {
                 ]
             })
         ],
-        external: [...Builtins(), 'electron']
+        external: [...Builtins(), 'electron', 'node-screenshots']
     }
 
     return options
