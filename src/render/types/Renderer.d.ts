@@ -62,50 +62,61 @@ declare namespace Renderer {
          * 内部调用事件分发 请勿使用
          */
         export function Listen(callback: (e: Record<string, unknown> | unknown | any) => void): void
+
         /**
          * 最小化
          */
-        export function Min(): void
+        export function Min(): Promise<void>
+
         /**
          * 最大化或者恢复最大化之前状态
          */
-        export function Max(): void
+        export function Max(): Promise<void>
+
         /**
          * 隐藏
          */
-        export function Hide(): void
+        export function Hide(): Promise<void>
+
         /**
          * 关闭
          */
-        export function Close(): void
+        export function Close(): Promise<void>
+
         /**
          * 显示
          */
-        export function Show(): void
+        export function Show(): Promise<void>
+
         /**
          * 设置在最上层
          */
-        export function SetAlwaysOnTop(type: boolean): void
+        export function SetAlwaysOnTop(flag: boolean): Promise<void>
+
         /**
          * 窗口屏幕居中
          */
-        export function Center(): void
+        export function Center(): Promise<void>
+
         /**
          * 设置窗口位置
          */
-        export function SetPosition(position: { x: number, y: number }): void
+        export function SetPosition(position: { x: number, y: number }): Promise<void>
+
         /**
          * 调整大小
          */
-        export function SetSize(size: { height: number; width: number; }): void
+        export function SetSize(size: { height: number; width: number; }): Promise<void>
+
         /**
          * 获取当前窗口的Bounds
          */
         export function GetBounds(): Promise<Electron.Rectangle>
+
         /**
          * 发送自定义消息
          */
-        export function PostMessage(e: Record<string, unknown>): Promise<Electron.Rectangle>
+        export function PostMessage(e: Record<string, unknown>): Promise<void>
     }
 
     /**

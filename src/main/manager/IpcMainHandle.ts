@@ -64,69 +64,69 @@ class IpcMainHandle {
     }
 
     private OnWidgetIPC() {
-        ipcMain.on(`Renderer:Widget:Min`, (e) => {
+        ipcMain.handle(`Renderer:Widget:Min`, async (e) => {
             switch (e.sender.id) {
                 case AppMainWindow.Instance.widget.webContents.id: AppMainWindow.Instance.OnMin(); return;
-                default: CustomWidget.Instance.HandleWidgetEvents(e.sender.id, DM.CustomWidgetCmd.Min); return
+                default: CustomWidget.Instance.HandleWidgetEvents(e.sender.id, DM.CustomWidgetCmd.Min); return;
             }
         })
 
-        ipcMain.on(`Renderer:Widget:Max`, (e) => {
+        ipcMain.handle(`Renderer:Widget:Max`, async (e) => {
             switch (e.sender.id) {
                 case AppMainWindow.Instance.widget.webContents.id: AppMainWindow.Instance.OnMax(); return;
-                default: CustomWidget.Instance.HandleWidgetEvents(e.sender.id, DM.CustomWidgetCmd.Max); return
+                default: CustomWidget.Instance.HandleWidgetEvents(e.sender.id, DM.CustomWidgetCmd.Max); return;
             }
         })
 
-        ipcMain.on(`Renderer:Widget:Hide`, (e) => {
+        ipcMain.handle(`Renderer:Widget:Hide`, async (e) => {
             switch (e.sender.id) {
                 case AppMainWindow.Instance.widget.webContents.id: AppMainWindow.Instance.OnHide(); return;
                 case AppTray.Instance.widget.webContents.id: AppTray.Instance.OnHide(); return;
-                default: CustomWidget.Instance.HandleWidgetEvents(e.sender.id, DM.CustomWidgetCmd.Hide); return
+                default: CustomWidget.Instance.HandleWidgetEvents(e.sender.id, DM.CustomWidgetCmd.Hide); return;
             }
         })
 
-        ipcMain.on(`Renderer:Widget:Close`, (e) => {
+        ipcMain.handle(`Renderer:Widget:Close`, async (e) => {
             switch (e.sender.id) {
-                default: CustomWidget.Instance.HandleWidgetEvents(e.sender.id, DM.CustomWidgetCmd.Close); return
+                default: CustomWidget.Instance.HandleWidgetEvents(e.sender.id, DM.CustomWidgetCmd.Close); return;
             }
         })
 
-        ipcMain.on(`Renderer:Widget:Show`, (e) => {
+        ipcMain.handle(`Renderer:Widget:Show`, async (e) => {
             switch (e.sender.id) {
                 case AppMainWindow.Instance.widget.webContents.id: AppMainWindow.Instance.OnShow(); return;
                 case AppTray.Instance.widget.webContents.id: AppTray.Instance.OnShow(); return;
-                default: CustomWidget.Instance.HandleWidgetEvents(e.sender.id, DM.CustomWidgetCmd.Show); return
+                default: CustomWidget.Instance.HandleWidgetEvents(e.sender.id, DM.CustomWidgetCmd.Show); return;
             }
         })
 
-        ipcMain.on(`Renderer:Widget:Center`, (e) => {
+        ipcMain.handle(`Renderer:Widget:Center`, async (e) => {
             switch (e.sender.id) {
                 case AppMainWindow.Instance.widget.webContents.id: AppMainWindow.Instance.OnCenter(); return;
-                default: CustomWidget.Instance.HandleWidgetEvents(e.sender.id, DM.CustomWidgetCmd.Center); return
+                default: CustomWidget.Instance.HandleWidgetEvents(e.sender.id, DM.CustomWidgetCmd.Center); return;
             }
         })
 
-        ipcMain.on(`Renderer:Widget:Position`, (e, position: { x: number, y: number }) => {
+        ipcMain.handle(`Renderer:Widget:Position`, async (e, position: { x: number, y: number }) => {
             switch (e.sender.id) {
                 case AppMainWindow.Instance.widget.webContents.id: AppMainWindow.Instance.OnSetPosition(position); return;
                 case AppTray.Instance.widget.webContents.id: AppTray.Instance.OnSetPosition(position); return;
-                default: CustomWidget.Instance.HandleWidgetEvents(e.sender.id, DM.CustomWidgetCmd.Position, position); return
+                default: CustomWidget.Instance.HandleWidgetEvents(e.sender.id, DM.CustomWidgetCmd.Position, position); return;
             }
         })
 
-        ipcMain.on(`Renderer:Widget:Size`, (e, size: { width: number, height: number }) => {
+        ipcMain.handle(`Renderer:Widget:Size`, async (e, size: { width: number, height: number }) => {
             switch (e.sender.id) {
                 case AppMainWindow.Instance.widget.webContents.id: AppMainWindow.Instance.OnSetSize(size); return;
                 case AppTray.Instance.widget.webContents.id: AppTray.Instance.OnSetSize(size); return;
-                default: CustomWidget.Instance.HandleWidgetEvents(e.sender.id, DM.CustomWidgetCmd.Size, size); return
+                default: CustomWidget.Instance.HandleWidgetEvents(e.sender.id, DM.CustomWidgetCmd.Size, size); return;
             }
         })
 
-        ipcMain.on(`Renderer:Widget:Top`, (e, type: boolean) => {
+        ipcMain.handle(`Renderer:Widget:Top`, async (e, flag: boolean) => {
             switch (e.sender.id) {
-                case AppMainWindow.Instance.widget.webContents.id: AppMainWindow.Instance.OnSetTop(type); return;
-                default: CustomWidget.Instance.HandleWidgetEvents(e.sender.id, DM.CustomWidgetCmd.Top, type); return
+                case AppMainWindow.Instance.widget.webContents.id: AppMainWindow.Instance.OnSetTop(flag); return;
+                default: CustomWidget.Instance.HandleWidgetEvents(e.sender.id, DM.CustomWidgetCmd.Top, flag); return;
             }
         })
 

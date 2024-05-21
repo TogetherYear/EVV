@@ -36,21 +36,21 @@ class Application extends AActor {
         App.Instance.AddListen(D.IpcRendererEvent.SecondInstance, this, this.OnSecondInstance)
     }
 
-    private OnSecondInstance(e: D.IpcRendererSendMessage) {
+    private async OnSecondInstance(e: D.IpcRendererSendMessage) {
         if (e.type == D.IpcRendererEvent.SecondInstance) {
             Message.error('已关闭第二个实例')
-            Renderer.Widget.Show()
+            await Renderer.Widget.Show()
         }
     }
 
     private async State() {
         if (location.href.indexOf("Application") != -1) {
-            Renderer.Widget.SetSize({
+            await Renderer.Widget.SetSize({
                 width: parseInt(localStorage.getItem("width") || '1000'),
                 height: parseInt(localStorage.getItem("height") || '560')
             })
-            Renderer.Widget.Center()
-            Renderer.Widget.Show()
+            await Renderer.Widget.Center()
+            await Renderer.Widget.Show()
             window.addEventListener('resize', (e: UIEvent) => {
                 localStorage.setItem("width", `${window.innerWidth}`)
                 localStorage.setItem("height", `${window.innerHeight}`)

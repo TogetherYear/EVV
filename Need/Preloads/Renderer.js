@@ -58,32 +58,41 @@ class Renderer {
                     callback(data)
                 })
             },
-            Min: () => {
-                return ipcRenderer.postMessage(`Renderer:Widget:Min`)
+            Min: async () => {
+                const result = await ipcRenderer.invoke('Renderer:Widget:Min')
+                return result
             },
-            Max: () => {
-                return ipcRenderer.postMessage(`Renderer:Widget:Max`)
+            Max: async () => {
+                const result = await ipcRenderer.invoke('Renderer:Widget:Max')
+                return result
             },
-            Hide: () => {
-                return ipcRenderer.postMessage(`Renderer:Widget:Hide`)
+            Hide: async () => {
+                const result = await ipcRenderer.invoke('Renderer:Widget:Hide')
+                return result
             },
-            Close: () => {
-                return ipcRenderer.postMessage(`Renderer:Widget:Close`)
+            Close: async () => {
+                const result = await ipcRenderer.invoke('Renderer:Widget:Close')
+                return result
             },
-            SetAlwaysOnTop: (type) => {
-                return ipcRenderer.postMessage(`Renderer:Widget:Top`, type)
+            SetAlwaysOnTop: async (flag) => {
+                const result = await ipcRenderer.invoke('Renderer:Widget:Top', flag)
+                return result
             },
-            Show: () => {
-                return ipcRenderer.postMessage(`Renderer:Widget:Show`)
+            Show: async () => {
+                const result = await ipcRenderer.invoke('Renderer:Widget:Show')
+                return result
             },
-            SetSize: (size) => {
-                return ipcRenderer.postMessage(`Renderer:Widget:Size`, size)
+            SetSize: async (size) => {
+                const result = await ipcRenderer.invoke('Renderer:Widget:Size', size)
+                return result
             },
-            Center: () => {
-                return ipcRenderer.postMessage(`Renderer:Widget:Center`)
+            Center: async () => {
+                const result = await ipcRenderer.invoke('Renderer:Widget:Center')
+                return result
             },
-            SetPosition: (position) => {
-                return ipcRenderer.postMessage(`Renderer:Widget:Position`, position)
+            SetPosition: async (position) => {
+                const result = await ipcRenderer.invoke('Renderer:Widget:Position', position)
+                return result
             },
             GetBounds: async () => {
                 const bounds = await ipcRenderer.invoke('Renderer:Widget:Bounds')

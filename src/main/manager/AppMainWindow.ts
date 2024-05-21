@@ -120,8 +120,8 @@ class AppMainWindow extends TWindow {
         this.widget.setSize(size.width, size.height)
     }
 
-    public OnSetTop(type: boolean) {
-        this.widget.setAlwaysOnTop(type)
+    public OnSetTop(flag: boolean) {
+        this.widget.setAlwaysOnTop(flag)
     }
 }
 

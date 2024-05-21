@@ -104,8 +104,8 @@ class CustomWidget extends EventSystem {
         }
     }
 
-    public OnTop(widget: BrowserWindow, type: boolean) {
-        widget.setAlwaysOnTop(type)
+    public OnTop(widget: BrowserWindow, flag: boolean) {
+        widget.setAlwaysOnTop(flag)
     }
 
     public OnMin(widget: BrowserWindow) {

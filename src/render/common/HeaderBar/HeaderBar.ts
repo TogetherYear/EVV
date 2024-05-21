@@ -16,15 +16,15 @@ class HeaderBar extends AActor {
         { type: 'Hide', icon: hideIcon, label: '隐藏' }
     ])
 
-    public OptionClick(type: string) {
+    public async OptionClick(type: string) {
         if (type == 'Min') {
-            Renderer.Widget.Min()
+            await Renderer.Widget.Min()
         }
         else if (type == 'Max') {
-            Renderer.Widget.Max()
+            await Renderer.Widget.Max()
         }
         else if (type == 'Hide') {
-            Renderer.Widget.Hide()
+            await Renderer.Widget.Hide()
         }
     }
 
