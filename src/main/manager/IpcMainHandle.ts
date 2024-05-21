@@ -86,6 +86,12 @@ class IpcMainHandle {
             }
         })
 
+        ipcMain.on(`Renderer:Widget:Close`, (e) => {
+            switch (e.sender.id) {
+                default: CustomWidget.Instance.HandleWidgetEvents(e.sender.id, DM.CustomWidgetCmd.Close); return
+            }
+        })
+
         ipcMain.on(`Renderer:Widget:Show`, (e) => {
             switch (e.sender.id) {
                 case AppMainWindow.Instance.widget.webContents.id: AppMainWindow.Instance.OnShow(); return;
@@ -114,6 +120,13 @@ class IpcMainHandle {
                 case AppMainWindow.Instance.widget.webContents.id: AppMainWindow.Instance.OnSetSize(size); return;
                 case AppTray.Instance.widget.webContents.id: AppTray.Instance.OnSetSize(size); return;
                 default: CustomWidget.Instance.HandleWidgetEvents(e.sender.id, DM.CustomWidgetCmd.Size, size); return
+            }
+        })
+
+        ipcMain.on(`Renderer:Widget:Top`, (e, type: boolean) => {
+            switch (e.sender.id) {
+                case AppMainWindow.Instance.widget.webContents.id: AppMainWindow.Instance.OnSetTop(type); return;
+                default: CustomWidget.Instance.HandleWidgetEvents(e.sender.id, DM.CustomWidgetCmd.Top, type); return
             }
         })
 

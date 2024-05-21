@@ -67,6 +67,12 @@ class Renderer {
             Hide: () => {
                 return ipcRenderer.postMessage(`Renderer:Widget:Hide`)
             },
+            Close: () => {
+                return ipcRenderer.postMessage(`Renderer:Widget:Close`)
+            },
+            SetAlwaysOnTop: (type) => {
+                return ipcRenderer.postMessage(`Renderer:Widget:Top`, type)
+            },
             Show: () => {
                 return ipcRenderer.postMessage(`Renderer:Widget:Show`)
             },

@@ -64,7 +64,9 @@ namespace DM {
         Show,
         Center,
         Position,
-        Size
+        Size,
+        Close,
+        Top,
     }
 }
 export { DM }

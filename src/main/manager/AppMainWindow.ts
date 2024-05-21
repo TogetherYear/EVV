@@ -119,6 +119,10 @@ class AppMainWindow extends TWindow {
     public OnSetSize(size: { width: number, height: number }) {
         this.widget.setSize(size.width, size.height)
     }
+
+    public OnSetTop(type: boolean) {
+        this.widget.setAlwaysOnTop(type)
+    }
 }
 
 export { AppMainWindow }

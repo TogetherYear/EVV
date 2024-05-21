@@ -90,6 +90,8 @@ class CustomWidget extends EventSystem {
                 case DM.CustomWidgetCmd.Center: this.OnCenter(target.widget); return;
                 case DM.CustomWidgetCmd.Position: this.OnSetPosition(target.widget, options); return;
                 case DM.CustomWidgetCmd.Size: this.OnSetSize(target.widget, options); return;
+                case DM.CustomWidgetCmd.Close: this.OnClose(target.widget); return;
+                case DM.CustomWidgetCmd.Top: this.OnTop(target.widget, options); return;
             }
         }
     }
@@ -100,6 +102,10 @@ class CustomWidget extends EventSystem {
                 return w[1]
             }
         }
+    }
+
+    public OnTop(widget: BrowserWindow, type: boolean) {
+        widget.setAlwaysOnTop(type)
     }
 
     public OnMin(widget: BrowserWindow) {
@@ -117,6 +123,10 @@ class CustomWidget extends EventSystem {
 
     public OnHide(widget: BrowserWindow) {
         widget.hide()
+    }
+
+    public OnClose(widget: BrowserWindow) {
+        widget.close()
     }
 
     public OnShow(widget: BrowserWindow) {

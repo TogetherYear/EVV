@@ -75,9 +75,17 @@ declare namespace Renderer {
          */
         export function Hide(): void
         /**
+         * 关闭
+         */
+        export function Close(): void
+        /**
          * 显示
          */
         export function Show(): void
+        /**
+         * 设置在最上层
+         */
+        export function SetAlwaysOnTop(type: boolean): void
         /**
          * 窗口屏幕居中
          */
