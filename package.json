@@ -57,7 +57,8 @@
     "express": "^4.19.2",
     "node-screenshots": "^0.2.0",
     "vue": "^3.4.15",
-    "vue-router": "^4.2.5"
+    "vue-router": "^4.2.5",
+    "leafer-ui": "^1.0.0-rc.21"
   },
   "devDependencies": {
     "@rollup/plugin-alias": "^5.0.0",
