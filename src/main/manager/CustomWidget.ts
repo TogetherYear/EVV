@@ -35,7 +35,7 @@ class CustomWidget extends EventSystem {
             transparent: options.transparent || false,
             skipTaskbar: options.skipTaskbar || false,
             icon: options.icon || ResourceLoad.Instance.GetImageByName('window.ico'),
-            show: true,
+            show: options.show || true,
             webPreferences: {
                 // 同源
                 webSecurity: false,

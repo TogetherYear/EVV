@@ -31,5 +31,6 @@ declare namespace TSingleton {
         skipTaskbar?: boolean,
         icon?: string,
         preload?: string,
+        show?: boolean
     }
 }
