@@ -43,7 +43,7 @@ class LocalServer {
         this.server = H.createServer(this.app)
         this.server.listen(8676, '127.0.0.1')
         this.server.on('listening', () => {
-            console.log(`LocalServer:8676`)
+
         })
     }
 
