@@ -265,6 +265,14 @@ class Renderer {
             },
         }
     }
+
+    get Tool() {
+        return {
+            CreateSuspendScreenshotWidget: () => {
+                return ipcRenderer.postMessage(`Renderer:Tool:Suspend`)
+            }
+        }
+    }
 }
 
 window.Renderer = Renderer.Instance

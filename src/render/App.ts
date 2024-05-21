@@ -42,6 +42,7 @@ class App extends AActor {
         this.AddKey(D.IpcRendererEvent.WidgetCreate)
         this.AddKey(D.IpcRendererEvent.WidgetDestroy)
         this.AddKey(D.IpcRendererEvent.WidgetEmpty)
+        this.AddKey(D.IpcRendererEvent.Suspend)
     }
 
     private OnMessage(e: D.IpcRendererSendMessage) {

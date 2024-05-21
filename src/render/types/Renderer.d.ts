@@ -294,4 +294,14 @@ declare namespace Renderer {
          */
         export function UnregisterAll(): void
     }
+
+    /**
+     * 工具
+     */
+    export namespace Tool {
+        /**
+         * 截图固定工具
+         */
+        export function CreateSuspendScreenshotWidget(): void
+    }
 }

@@ -34,6 +34,7 @@ class IpcMainHandle {
         this.OnWindowIPC()
         this.OnResourceIPC()
         this.OnGlobalShortcutIPC()
+        this.OnToolIPC()
     }
 
     private OnAppIPC() {
@@ -434,6 +435,12 @@ class IpcMainHandle {
         ipcMain.handle(`Renderer:GlobalShortcut:IsRegistered`, async (e, accelerator: Electron.Accelerator) => {
             const result = GlobalShortcut.Instance.IsRegistered(accelerator)
             return result
+        })
+    }
+
+    private OnToolIPC() {
+        ipcMain.on(`Renderer:Tool:Suspend`, (e) => {
+
         })
     }
 
