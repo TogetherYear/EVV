@@ -104,6 +104,11 @@ declare namespace Renderer {
         export function SetPosition(position: { x: number, y: number }): Promise<void>
 
         /**
+         * 设置窗口位置
+         */
+        export function GetPosition(): Promise<{ x: number, y: number }>
+
+        /**
          * 调整大小
          */
         export function SetSize(size: { height: number; width: number; }): Promise<void>
@@ -293,15 +298,5 @@ declare namespace Renderer {
          * 取消所有快捷键
          */
         export function UnregisterAll(): void
-    }
-
-    /**
-     * 工具
-     */
-    export namespace Tool {
-        /**
-         * 截图固定工具
-         */
-        export function CreateSuspendScreenshotWidget(): void
     }
 }

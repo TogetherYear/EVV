@@ -11,7 +11,6 @@ import { CustomWidget } from "./CustomWidget"
 import { DM } from "@main/decorators/DM"
 import * as NS from 'node-screenshots'
 import * as FS from 'fs'
-import { CustomProtocol } from "./CustomProtocol"
 
 /**
  * 主线程 Ipc 监听 
@@ -34,7 +33,6 @@ class IpcMainHandle {
         this.OnWindowIPC()
         this.OnResourceIPC()
         this.OnGlobalShortcutIPC()
-        this.OnToolIPC()
     }
 
     private OnAppIPC() {
@@ -108,11 +106,19 @@ class IpcMainHandle {
             }
         })
 
-        ipcMain.handle(`Renderer:Widget:Position`, async (e, position: { x: number, y: number }) => {
+        ipcMain.handle(`Renderer:Widget:SetPosition`, async (e, position: { x: number, y: number }) => {
             switch (e.sender.id) {
                 case AppMainWindow.Instance.widget.webContents.id: AppMainWindow.Instance.OnSetPosition(position); return;
                 case AppTray.Instance.widget.webContents.id: AppTray.Instance.OnSetPosition(position); return;
-                default: CustomWidget.Instance.HandleWidgetEvents(e.sender.id, DM.CustomWidgetCmd.Position, position); return;
+                default: CustomWidget.Instance.HandleWidgetEvents(e.sender.id, DM.CustomWidgetCmd.SetPosition, position); return;
+            }
+        })
+
+        ipcMain.handle(`Renderer:Widget:GetPosition`, async (e,) => {
+            switch (e.sender.id) {
+                case AppMainWindow.Instance.widget.webContents.id: return AppMainWindow.Instance.OnGetPosition();
+                case AppTray.Instance.widget.webContents.id: return AppTray.Instance.OnGetPosition();
+                default: return CustomWidget.Instance.HandleWidgetEvents(e.sender.id, DM.CustomWidgetCmd.GetPosition);
             }
         })
 
@@ -435,12 +441,6 @@ class IpcMainHandle {
         ipcMain.handle(`Renderer:GlobalShortcut:IsRegistered`, async (e, accelerator: Electron.Accelerator) => {
             const result = GlobalShortcut.Instance.IsRegistered(accelerator)
             return result
-        })
-    }
-
-    private OnToolIPC() {
-        ipcMain.on(`Renderer:Tool:Suspend`, (e) => {
-
         })
     }
 

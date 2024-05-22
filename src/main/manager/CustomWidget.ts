@@ -57,7 +57,7 @@ class CustomWidget extends EventSystem {
             widget.webContents.openDevTools()
         }
 
-        this.widgets.set(options.label, { widget, lable: options.label })
+        this.RegisterWidget(options.label, widget)
 
         WindowPool.Instance.PostMessage({
             type: D.IpcRendererEvent.WidgetCreate,
@@ -68,7 +68,7 @@ class CustomWidget extends EventSystem {
         })
 
         widget.on('close', () => {
-            this.widgets.delete(options.label)
+            this.DeleteWidget(options.label)
             WindowPool.Instance.PostMessage({
                 type: D.IpcRendererEvent.WidgetDestroy,
                 widgets: [D.IpcRendererWindow.Main],
@@ -88,7 +88,8 @@ class CustomWidget extends EventSystem {
                 case DM.CustomWidgetCmd.Hide: this.OnHide(target.widget); return;
                 case DM.CustomWidgetCmd.Show: this.OnShow(target.widget); return;
                 case DM.CustomWidgetCmd.Center: this.OnCenter(target.widget); return;
-                case DM.CustomWidgetCmd.Position: this.OnSetPosition(target.widget, options); return;
+                case DM.CustomWidgetCmd.SetPosition: this.OnSetPosition(target.widget, options); return;
+                case DM.CustomWidgetCmd.GetPosition: return this.OnGetPosition(target.widget);
                 case DM.CustomWidgetCmd.Size: this.OnSetSize(target.widget, options); return;
                 case DM.CustomWidgetCmd.Close: this.OnClose(target.widget); return;
                 case DM.CustomWidgetCmd.Top: this.OnTop(target.widget, options); return;
@@ -101,6 +102,22 @@ class CustomWidget extends EventSystem {
             if (w[1].widget.webContents.id == id) {
                 return w[1]
             }
+        }
+    }
+
+    public RegisterWidget(label: string, widget: BrowserWindow) {
+        this.widgets.set(label, { widget, lable: label })
+    }
+
+    public DeleteWidget(label: string,) {
+        this.widgets.delete(label)
+    }
+
+    public OnGetPosition(widget: BrowserWindow,) {
+        const position = widget.getPosition()
+        return {
+            x: position[0],
+            y: position[1]
         }
     }
 

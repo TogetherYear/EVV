@@ -33,7 +33,6 @@ namespace D {
         WidgetDestroy = 'WidgetDestroy',
         ThemeUpdate = 'ThemeUpdate',
         WidgetEmpty = 'WidgetEmpty',
-        Suspend = 'Suspend'
     }
 
     export enum IpcRendererWindow {

@@ -91,7 +91,11 @@ class Renderer {
                 return result
             },
             SetPosition: async (position) => {
-                const result = await ipcRenderer.invoke('Renderer:Widget:Position', position)
+                const result = await ipcRenderer.invoke('Renderer:Widget:SetPosition', position)
+                return result
+            },
+            GetPosition: async () => {
+                const result = await ipcRenderer.invoke('Renderer:Widget:GetPosition')
                 return result
             },
             GetBounds: async () => {
@@ -263,14 +267,6 @@ class Renderer {
                 this.globalShortcutEvents.clear()
                 return ipcRenderer.postMessage(`Renderer:GlobalShortcut:UnregisterAll`)
             },
-        }
-    }
-
-    get Tool() {
-        return {
-            CreateSuspendScreenshotWidget: () => {
-                return ipcRenderer.postMessage(`Renderer:Tool:Suspend`)
-            }
         }
     }
 }

@@ -107,6 +107,14 @@ class AppTray extends TWindow {
         this.widget.setPosition(position.x, position.y)
     }
 
+    public OnGetPosition() {
+        const position = this.widget.getPosition()
+        return {
+            x: position[0],
+            y: position[1]
+        }
+    }
+
     public OnSetSize(size: { width: number, height: number }) {
         this.widget.setSize(size.width, size.height)
     }
