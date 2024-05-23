@@ -61,7 +61,7 @@ class AppTray extends TWindow {
         })
 
         this.widget.on('blur', () => {
-            this.OnHide()
+            this.widget.hide()
         })
 
         if (Configuration.Instance.configs.debug) {
@@ -82,37 +82,20 @@ class AppTray extends TWindow {
             this.tray.setToolTip('去码头整点薯条')
 
             this.tray.on('right-click', () => {
-                const point = screen.getCursorScreenPoint()
-                const size = this.widget.getSize()
-                this.OnSetPosition({ x: point.x - size[0] + 2, y: point.y - size[1] + 2 })
-                this.OnShow()
+                this.FixPositionToCursor()
             })
 
             this.tray.on('double-click', () => {
-                AppMainWindow.Instance.OnShow()
+                AppMainWindow.Instance.widget.show()
             })
         }
     }
 
-    public OnHide() {
-        this.widget.hide()
-    }
-
-    public OnShow() {
-        this.widget.setAlwaysOnTop(true)
+    private FixPositionToCursor() {
+        const point = screen.getCursorScreenPoint()
+        const size = this.widget.getSize()
+        this.widget.setPosition(point.x - size[0] + 2, point.y - size[1] + 2)
         this.widget.show()
-    }
-
-    public OnSetPosition(position: { x: number, y: number }) {
-        this.widget.setPosition(position.x, position.y)
-    }
-
-    public OnGetPosition() {
-        const position = this.widget.getPosition()
-        return {
-            x: position[0],
-            y: position[1]
-        }
     }
 
     public OnSetSize(size: { width: number, height: number }) {

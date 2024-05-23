@@ -64,77 +64,64 @@ class IpcMainHandle {
 
     private OnWidgetIPC() {
         ipcMain.handle(`Renderer:Widget:Min`, async (e) => {
-            switch (e.sender.id) {
-                case AppMainWindow.Instance.widget.webContents.id: AppMainWindow.Instance.OnMin(); return;
-                default: CustomWidget.Instance.HandleWidgetEvents(e.sender.id, DM.CustomWidgetCmd.Min); return;
-            }
+            const widget = BrowserWindow.fromWebContents(e.sender) as BrowserWindow
+            return widget.minimize()
         })
 
         ipcMain.handle(`Renderer:Widget:Max`, async (e) => {
-            switch (e.sender.id) {
-                case AppMainWindow.Instance.widget.webContents.id: AppMainWindow.Instance.OnMax(); return;
-                default: CustomWidget.Instance.HandleWidgetEvents(e.sender.id, DM.CustomWidgetCmd.Max); return;
+            const widget = BrowserWindow.fromWebContents(e.sender) as BrowserWindow
+            if (widget.isMaximized()) {
+                widget.unmaximize()
             }
+            else {
+                widget.maximize()
+            }
+            return
         })
 
         ipcMain.handle(`Renderer:Widget:Hide`, async (e) => {
-            switch (e.sender.id) {
-                case AppMainWindow.Instance.widget.webContents.id: AppMainWindow.Instance.OnHide(); return;
-                case AppTray.Instance.widget.webContents.id: AppTray.Instance.OnHide(); return;
-                default: CustomWidget.Instance.HandleWidgetEvents(e.sender.id, DM.CustomWidgetCmd.Hide); return;
-            }
+            const widget = BrowserWindow.fromWebContents(e.sender) as BrowserWindow
+            return widget.hide()
         })
 
         ipcMain.handle(`Renderer:Widget:Close`, async (e) => {
-            switch (e.sender.id) {
-                default: CustomWidget.Instance.HandleWidgetEvents(e.sender.id, DM.CustomWidgetCmd.Close); return;
-            }
+            const widget = BrowserWindow.fromWebContents(e.sender) as BrowserWindow
+            return widget.close()
         })
 
         ipcMain.handle(`Renderer:Widget:Show`, async (e) => {
-            switch (e.sender.id) {
-                case AppMainWindow.Instance.widget.webContents.id: AppMainWindow.Instance.OnShow(); return;
-                case AppTray.Instance.widget.webContents.id: AppTray.Instance.OnShow(); return;
-                default: CustomWidget.Instance.HandleWidgetEvents(e.sender.id, DM.CustomWidgetCmd.Show); return;
-            }
+            const widget = BrowserWindow.fromWebContents(e.sender) as BrowserWindow
+            widget.show()
+            return
         })
 
         ipcMain.handle(`Renderer:Widget:Center`, async (e) => {
-            switch (e.sender.id) {
-                case AppMainWindow.Instance.widget.webContents.id: AppMainWindow.Instance.OnCenter(); return;
-                default: CustomWidget.Instance.HandleWidgetEvents(e.sender.id, DM.CustomWidgetCmd.Center); return;
-            }
+            const widget = BrowserWindow.fromWebContents(e.sender) as BrowserWindow
+            return widget.center()
         })
 
         ipcMain.handle(`Renderer:Widget:SetPosition`, async (e, position: { x: number, y: number }) => {
-            switch (e.sender.id) {
-                case AppMainWindow.Instance.widget.webContents.id: AppMainWindow.Instance.OnSetPosition(position); return;
-                case AppTray.Instance.widget.webContents.id: AppTray.Instance.OnSetPosition(position); return;
-                default: CustomWidget.Instance.HandleWidgetEvents(e.sender.id, DM.CustomWidgetCmd.SetPosition, position); return;
-            }
+            const widget = BrowserWindow.fromWebContents(e.sender) as BrowserWindow
+            return widget.setPosition(position.x, position.y)
         })
 
         ipcMain.handle(`Renderer:Widget:GetPosition`, async (e,) => {
-            switch (e.sender.id) {
-                case AppMainWindow.Instance.widget.webContents.id: return AppMainWindow.Instance.OnGetPosition();
-                case AppTray.Instance.widget.webContents.id: return AppTray.Instance.OnGetPosition();
-                default: return CustomWidget.Instance.HandleWidgetEvents(e.sender.id, DM.CustomWidgetCmd.GetPosition);
+            const widget = BrowserWindow.fromWebContents(e.sender) as BrowserWindow
+            const position = widget.getPosition()
+            return {
+                x: position[0],
+                y: position[1]
             }
         })
 
         ipcMain.handle(`Renderer:Widget:Size`, async (e, size: { width: number, height: number }) => {
-            switch (e.sender.id) {
-                case AppMainWindow.Instance.widget.webContents.id: AppMainWindow.Instance.OnSetSize(size); return;
-                case AppTray.Instance.widget.webContents.id: AppTray.Instance.OnSetSize(size); return;
-                default: CustomWidget.Instance.HandleWidgetEvents(e.sender.id, DM.CustomWidgetCmd.Size, size); return;
-            }
+            const widget = BrowserWindow.fromWebContents(e.sender) as BrowserWindow
+            return widget.setSize(size.width, size.height)
         })
 
         ipcMain.handle(`Renderer:Widget:Top`, async (e, flag: boolean) => {
-            switch (e.sender.id) {
-                case AppMainWindow.Instance.widget.webContents.id: AppMainWindow.Instance.OnSetTop(flag); return;
-                default: CustomWidget.Instance.HandleWidgetEvents(e.sender.id, DM.CustomWidgetCmd.Top, flag); return;
-            }
+            const widget = BrowserWindow.fromWebContents(e.sender) as BrowserWindow
+            return widget.setAlwaysOnTop(flag)
         })
 
         ipcMain.on(`Renderer:Widget:Message`, (e, d: D.IIpcRendererReceiveMessage) => {
