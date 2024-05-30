@@ -1,5 +1,5 @@
 {
-  "name": "Application",
+  "name": "v3-ts-electron",
   "version": "0.0.0",
   "main": "dist/main/index.js",
   "description": "Application",
