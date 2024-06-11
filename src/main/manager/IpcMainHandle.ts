@@ -114,17 +114,17 @@ class IpcMainHandle {
             }
         })
 
-        ipcMain.handle(`Renderer:Widget:Size`, async (e, size: { width: number, height: number }) => {
+        ipcMain.handle(`Renderer:Widget:SetSize`, async (e, size: { width: number, height: number }) => {
             const widget = BrowserWindow.fromWebContents(e.sender) as BrowserWindow
             return widget.setSize(size.width, size.height)
         })
 
-        ipcMain.handle(`Renderer:Widget:Top`, async (e, flag: boolean) => {
+        ipcMain.handle(`Renderer:Widget:SetAlwaysOnTop`, async (e, flag: boolean) => {
             const widget = BrowserWindow.fromWebContents(e.sender) as BrowserWindow
             return widget.setAlwaysOnTop(flag)
         })
 
-        ipcMain.on(`Renderer:Widget:Message`, (e, d: D.IIpcRendererReceiveMessage) => {
+        ipcMain.on(`Renderer:Widget:PostMessage`, (e, d: D.IIpcRendererReceiveMessage) => {
             switch (e.sender.id) {
                 case AppMainWindow.Instance.widget.webContents.id: this.OnMessage({ ...d, type: D.IpcRendererWindow.Main, id: e.sender.id }); return;
                 case AppTray.Instance.widget.webContents.id: this.OnMessage({ ...d, type: D.IpcRendererWindow.Tray, id: e.sender.id }); return;
@@ -132,9 +132,19 @@ class IpcMainHandle {
             }
         })
 
-        ipcMain.handle(`Renderer:Widget:Bounds`, async (e) => {
+        ipcMain.handle(`Renderer:Widget:GetBounds`, async (e) => {
             const widget = BrowserWindow.fromWebContents(e.sender) as BrowserWindow
             return widget.getBounds()
+        })
+
+        ipcMain.handle(`Renderer:Widget:SetShadow`, async (e, flag: boolean) => {
+            const widget = BrowserWindow.fromWebContents(e.sender) as BrowserWindow
+            return widget.shadow = flag
+        })
+
+        ipcMain.handle(`Renderer:Widget:SetIgnoreCursorEvents`, async (e, flag: boolean) => {
+            const widget = BrowserWindow.fromWebContents(e.sender) as BrowserWindow
+            return widget.setIgnoreMouseEvents(flag)
         })
     }
 
@@ -143,11 +153,11 @@ class IpcMainHandle {
             shell.beep()
         })
 
-        ipcMain.on(`Renderer:Shell:Folder`, (e, path: string) => {
+        ipcMain.on(`Renderer:Shell:OpenInFolder`, (e, path: string) => {
             shell.showItemInFolder(path)
         })
 
-        ipcMain.on(`Renderer:Shell:Default`, (e, path: string) => {
+        ipcMain.on(`Renderer:Shell:OpenPathByDefault`, (e, path: string) => {
             shell.openPath(path)
         })
     }
@@ -171,18 +181,18 @@ class IpcMainHandle {
     }
 
     private OnScreenIPC() {
-        ipcMain.handle(`Renderer:Screen:Cursor`, async (e) => {
+        ipcMain.handle(`Renderer:Screen:GetHoldCursor`, async (e) => {
             const point = screen.getCursorScreenPoint()
             const monitor = NS.Monitor.fromPoint(point.x, point.y) as NS.Monitor
             return this.TransformScreen(monitor)
         })
 
-        ipcMain.handle(`Renderer:Screen:All`, async () => {
+        ipcMain.handle(`Renderer:Screen:GetAll`, async () => {
             const monitors = NS.Monitor.all().map(m => this.TransformScreen(m))
             return monitors
         })
 
-        ipcMain.handle(`Renderer:Screen:Primary`, async () => {
+        ipcMain.handle(`Renderer:Screen:GetPrimary`, async () => {
             const monitor = NS.Monitor.all().find(a => a.isPrimary) as NS.Monitor
             return this.TransformScreen(monitor)
         })
@@ -215,7 +225,7 @@ class IpcMainHandle {
     }
 
     private OnWindowIPC() {
-        ipcMain.handle(`Renderer:Window:All`, async () => {
+        ipcMain.handle(`Renderer:Window:GetAll`, async () => {
             const windows = NS.Window.all().map(w => this.TransformWindow(w))
             return windows
         })
@@ -251,7 +261,7 @@ class IpcMainHandle {
     }
 
     private OnResourceIPC() {
-        ipcMain.handle(`Renderer:Resource:Name`, async (e, name: string) => {
+        ipcMain.handle(`Renderer:Resource:GetPathByName`, async (e, name: string) => {
             const path = ResourceLoad.Instance.GetResourcePathByName(name)
             return path
         })
@@ -277,7 +287,7 @@ class IpcMainHandle {
             return path
         })
 
-        ipcMain.handle(`Renderer:Resource:SaveResourcesPath`, async (e, options: TSingleton.SaveOptions) => {
+        ipcMain.handle(`Renderer:Resource:GetSaveResourcesPath`, async (e, options: TSingleton.SaveOptions) => {
             const window = WindowPool.Instance.GetWindowById(e.sender.id)
             const path = dialog.showSaveDialog(window.widget, {
                 title: options.title,
@@ -287,7 +297,7 @@ class IpcMainHandle {
             return path
         })
 
-        ipcMain.handle(`Renderer:Resource:Exists`, async (e, path: string) => {
+        ipcMain.handle(`Renderer:Resource:IsPathExists`, async (e, path: string) => {
             const result = F.existsSync(path)
             return result
         })

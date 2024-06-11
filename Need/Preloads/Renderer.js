@@ -75,7 +75,7 @@ class Renderer {
                 return result
             },
             SetAlwaysOnTop: async (flag) => {
-                const result = await ipcRenderer.invoke('Renderer:Widget:Top', flag)
+                const result = await ipcRenderer.invoke('Renderer:Widget:SetAlwaysOnTop', flag)
                 return result
             },
             Show: async () => {
@@ -83,7 +83,7 @@ class Renderer {
                 return result
             },
             SetSize: async (size) => {
-                const result = await ipcRenderer.invoke('Renderer:Widget:Size', size)
+                const result = await ipcRenderer.invoke('Renderer:Widget:SetSize', size)
                 return result
             },
             Center: async () => {
@@ -99,11 +99,17 @@ class Renderer {
                 return result
             },
             GetBounds: async () => {
-                const bounds = await ipcRenderer.invoke('Renderer:Widget:Bounds')
+                const bounds = await ipcRenderer.invoke('Renderer:Widget:GetBounds')
                 return bounds
             },
             PostMessage: (e) => {
-                return ipcRenderer.postMessage(`Renderer:Widget:Message`, e)
+                return ipcRenderer.postMessage(`Renderer:Widget:PostMessage`, e)
+            },
+            SetShadow: async (flag) => {
+                return ipcRenderer.postMessage(`Renderer:Widget:SetShadow`, flag)
+            },
+            SetIgnoreCursorEvents: async (flag) => {
+                return ipcRenderer.postMessage(`Renderer:Widget:SetIgnoreCursorEvents`, flag)
             }
         }
     }
@@ -111,15 +117,15 @@ class Renderer {
     get Screen() {
         return {
             GetHoldCursor: async () => {
-                const screen = await ipcRenderer.invoke('Renderer:Screen:Cursor')
+                const screen = await ipcRenderer.invoke('Renderer:Screen:GetHoldCursor')
                 return this.Screen.TransformScreen(screen)
             },
             GetAll: async () => {
-                const screens = await ipcRenderer.invoke('Renderer:Screen:All')
+                const screens = await ipcRenderer.invoke('Renderer:Screen:GetAll')
                 return screens.map(s => this.Screen.TransformScreen(s))
             },
             GetPrimary: async () => {
-                const screen = await ipcRenderer.invoke('Renderer:Screen:Primary')
+                const screen = await ipcRenderer.invoke('Renderer:Screen:GetPrimary')
                 return this.Screen.TransformScreen(screen)
             },
             TransformScreen: (screen) => {
@@ -137,7 +143,7 @@ class Renderer {
     get Window() {
         return {
             GetAll: async () => {
-                const windows = await ipcRenderer.invoke('Renderer:Window:All')
+                const windows = await ipcRenderer.invoke('Renderer:Window:GetAll')
                 return windows.map(w => this.Window.TransformWindow(w))
             },
             TransformWindow: (window) => {
@@ -159,10 +165,10 @@ class Renderer {
                 return ipcRenderer.postMessage(`Renderer:Shell:Beep`)
             },
             OpenInFolder: (path) => {
-                return ipcRenderer.postMessage(`Renderer:Shell:Folder`, path)
+                return ipcRenderer.postMessage(`Renderer:Shell:OpenInFolder`, path)
             },
             OpenPathByDefault: (path) => {
-                return ipcRenderer.postMessage(`Renderer:Shell:Default`, path)
+                return ipcRenderer.postMessage(`Renderer:Shell:OpenPathByDefault`, path)
             },
         }
     }
@@ -170,7 +176,7 @@ class Renderer {
     get Resource() {
         return {
             GetPathByName: async (name) => {
-                const path = await ipcRenderer.invoke(`Renderer:Resource:Name`, name)
+                const path = await ipcRenderer.invoke(`Renderer:Resource:GetPathByName`, name)
                 return path
             },
             GetFileByNameFromLocalServer: (name) => {
@@ -182,11 +188,11 @@ class Renderer {
                 return path
             },
             GetSaveResourcesPath: async (options) => {
-                const path = await ipcRenderer.invoke(`Renderer:Resource:SaveResourcesPath`, options)
+                const path = await ipcRenderer.invoke(`Renderer:Resource:GetSaveResourcesPath`, options)
                 return path
             },
             IsPathExists: async (path) => {
-                const result = await ipcRenderer.invoke(`Renderer:Resource:Exists`, path)
+                const result = await ipcRenderer.invoke(`Renderer:Resource:IsPathExists`, path)
                 return result
             },
             ReadDirFiles: async (dir) => {

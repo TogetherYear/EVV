@@ -122,6 +122,10 @@ declare namespace Renderer {
          * 发送自定义消息
          */
         export function PostMessage(e: Record<string, unknown>): Promise<void>
+
+        export function SetShadow(flag: boolean): Promise<void>
+
+        export function SetIgnoreCursorEvents(flag: boolean): Promise<void>
     }
 
     /**
