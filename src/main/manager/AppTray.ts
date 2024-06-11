@@ -43,6 +43,7 @@ class AppTray extends TWindow {
             alwaysOnTop: true,
             transparent: true,
             skipTaskbar: true,
+            hasShadow: false,
             icon: ResourceLoad.Instance.GetImageByName('tray.ico'),
             webPreferences: {
                 // 同源
