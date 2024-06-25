@@ -1,4 +1,5 @@
 import { D } from "@decorators/D"
+import { Time } from "@libs/Time"
 import { App } from "@render/App"
 import { AActor } from "@render/libs/AActor"
 import { onMounted, onUnmounted } from "vue"

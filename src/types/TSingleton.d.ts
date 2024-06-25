@@ -63,6 +63,15 @@ declare namespace TSingleton {
     }
 
     export type MouseMoveOptions = {
-
+        type: "relative" | "absolute";
+        x: number,
+        y: number
     }
+
+    export type MouseScrollOptions = {
+        type: "x" | "y";
+        length: number,
+    }
+
+    export type MouseBtn = "Left" | "Middle" | "Right" | "Back" | "Forward";
 }

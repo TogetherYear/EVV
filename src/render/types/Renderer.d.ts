@@ -309,5 +309,30 @@ declare namespace Renderer {
          * 鼠标移动
          */
         export function MouseMove(options: TSingleton.MouseMoveOptions): Promise<void>
+
+        /**
+         * 鼠标滚动
+         */
+        export function MouseScroll(options: TSingleton.MouseScrollOptions): Promise<void>
+
+        /**
+         * 鼠标按键按下
+         */
+        export function MouseDown(btn: TSingleton.MouseBtn): Promise<void>
+
+        /**
+         * 鼠标按键松开
+         */
+        export function MouseUp(btn: TSingleton.MouseBtn): Promise<void>
+
+        /**
+         * 鼠标按键点击
+         */
+        export function MouseClick(btn: TSingleton.MouseBtn): Promise<void>
+
+        /**
+         * 获取鼠标位置
+         */
+        export function GetMousePosition(): Promise<{ x: number, y: number }>
     }
 }

@@ -294,6 +294,26 @@ class Renderer {
                 const result = await ipcRenderer.invoke('Renderer:Simulate:MouseMove', options)
                 return result
             },
+            MouseScroll: async (options) => {
+                const result = await ipcRenderer.invoke('Renderer:Simulate:MouseScroll', options)
+                return result
+            },
+            MouseDown: async (btn) => {
+                const result = await ipcRenderer.invoke('Renderer:Simulate:MouseDown', btn)
+                return result
+            },
+            MouseUp: async (btn) => {
+                const result = await ipcRenderer.invoke('Renderer:Simulate:MouseUp', btn)
+                return result
+            },
+            MouseClick: async (btn) => {
+                const result = await ipcRenderer.invoke('Renderer:Simulate:MouseClick', btn)
+                return result
+            },
+            GetMousePosition: async () => {
+                const result = await ipcRenderer.invoke('Renderer:Simulate:GetMousePosition')
+                return result
+            }
         }
     }
 }

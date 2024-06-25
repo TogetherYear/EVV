@@ -453,14 +453,45 @@ class IpcMainHandle {
     }
 
     private OnSimulateIPC() {
-        ipcMain.handle(`Renderer:Simulate:MouseMove`, async (e, accelerator: Electron.Accelerator) => {
+        ipcMain.handle(`Renderer:Simulate:MouseMove`, async (e, options: TSingleton.MouseMoveOptions) => {
             const result = RN.mouseMove({
-                type: 'absolute',
+                type: options.type,
                 data: {
-                    x: 0,
-                    y: 0
+                    x: options.x,
+                    y: options.y
                 }
             })
+            return result
+        })
+
+        ipcMain.handle(`Renderer:Simulate:MouseScroll`, async (e, options: TSingleton.MouseScrollOptions) => {
+            if (options.type === 'x') {
+                const result = RN.mouseScrollX(options.length)
+                return result
+            }
+            else {
+                const result = RN.mouseScrollY(options.length)
+                return result
+            }
+        })
+
+        ipcMain.handle(`Renderer:Simulate:MouseDown`, async (e, btn: TSingleton.MouseBtn) => {
+            const result = RN.mouseDown(btn)
+            return result
+        })
+
+        ipcMain.handle(`Renderer:Simulate:MouseUp`, async (e, btn: TSingleton.MouseBtn) => {
+            const result = RN.mouseUp(btn)
+            return result
+        })
+
+        ipcMain.handle(`Renderer:Simulate:GetMousePosition`, async (e) => {
+            const result = RN.mouseLocaion()
+            return result
+        })
+
+        ipcMain.handle(`Renderer:Simulate:MouseClick`, async (e, btn: TSingleton.MouseBtn) => {
+            const result = RN.mouseClick(btn)
             return result
         })
     }
