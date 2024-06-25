@@ -21,7 +21,7 @@ declare namespace Renderer {
         /**
          * 设置是否开机自启
          */
-        export function SetAutostart(enable: boolean): void
+        export function SetAutostart(enable: boolean): Promise<void>
 
         /**
          * 打开自定义窗口
@@ -165,17 +165,17 @@ declare namespace Renderer {
         /**
          * 播放提示音
          */
-        export function Beep(): void
+        export function Beep(): Promise<void>
 
         /**
          * 在文件管理器中打开路径
          */
-        export function OpenInFolder(path: string): void
+        export function OpenInFolder(path: string): Promise<void>
 
         /**
          * 使用默认方式打开路径
          */
-        export function OpenPathByDefault(path: string): void
+        export function OpenPathByDefault(path: string): Promise<void>
     }
 
     /**
@@ -291,7 +291,7 @@ declare namespace Renderer {
         /**
          * 取消快捷键
          */
-        export function Unregister(accelerator: Electron.Accelerator): void
+        export function Unregister(accelerator: Electron.Accelerator): Promise<void>
 
         /**
          * 是否已经注册快键键
@@ -301,6 +301,13 @@ declare namespace Renderer {
         /**
          * 取消所有快捷键
          */
-        export function UnregisterAll(): void
+        export function UnregisterAll(): Promise<void>
+    }
+
+    export namespace Simulate {
+        /**
+         * 鼠标移动
+         */
+        export function MouseMove(options: TSingleton.MouseMoveOptions): Promise<void>
     }
 }

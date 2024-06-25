@@ -8,9 +8,9 @@ import { WindowPool } from "./WindowPool"
 import * as F from 'fs'
 import { Download } from "./Download"
 import { CustomWidget } from "./CustomWidget"
-import { DM } from "@main/decorators/DM"
 import * as NS from 'node-screenshots'
 import * as FS from 'fs'
+import * as RN from 'rubick-native'
 
 /**
  * 主线程 Ipc 监听 
@@ -33,6 +33,7 @@ class IpcMainHandle {
         this.OnWindowIPC()
         this.OnResourceIPC()
         this.OnGlobalShortcutIPC()
+        this.OnSimulateIPC()
     }
 
     private OnAppIPC() {
@@ -40,10 +41,11 @@ class IpcMainHandle {
             app.exit(0)
         })
 
-        ipcMain.on(`Renderer:App:SetAutostart`, (e, enable: boolean) => {
-            app.setLoginItemSettings({
+        ipcMain.handle(`Renderer:App:SetAutostart`, async (e, enable: boolean) => {
+            const result = app.setLoginItemSettings({
                 openAtLogin: enable
             })
+            return result
         })
 
         ipcMain.on(`Renderer:App:Relaunch`, (e) => {
@@ -149,34 +151,41 @@ class IpcMainHandle {
     }
 
     private OnShellIPC() {
-        ipcMain.on(`Renderer:Shell:Beep`, () => {
-            shell.beep()
+        ipcMain.handle(`Renderer:Shell:Beep`, async () => {
+            const result = shell.beep()
+            return result
         })
 
-        ipcMain.on(`Renderer:Shell:OpenInFolder`, (e, path: string) => {
-            shell.showItemInFolder(path)
+        ipcMain.handle(`Renderer:Shell:OpenInFolder`, async (e, path: string) => {
+            const result = shell.showItemInFolder(path)
+            return result
         })
 
-        ipcMain.on(`Renderer:Shell:OpenPathByDefault`, (e, path: string) => {
-            shell.openPath(path)
+        ipcMain.handle(`Renderer:Shell:OpenPathByDefault`, async (e, path: string) => {
+            const result = shell.openPath(path)
+            return result
         })
     }
 
     private OnTrayIPC() {
-        ipcMain.on(`Renderer:Tray:Icon`, (e, icon: string) => {
-            AppTray.Instance.OnSetIcon(icon)
+        ipcMain.handle(`Renderer:Tray:Icon`, async (e, icon: string) => {
+            const result = AppTray.Instance.OnSetIcon(icon)
+            return result
         })
 
-        ipcMain.on(`Renderer:Tray:Tooltip`, (e, tooltip: string) => {
-            AppTray.Instance.OnSetTooltip(tooltip)
+        ipcMain.handle(`Renderer:Tray:Tooltip`, async (e, tooltip: string) => {
+            const result = AppTray.Instance.OnSetTooltip(tooltip)
+            return result
         })
 
-        ipcMain.on(`Renderer:Tray:Flash`, (e, icon: string) => {
-            AppTray.Instance.OnFlash(icon)
+        ipcMain.handle(`Renderer:Tray:Flash`, async (e, icon: string) => {
+            const result = AppTray.Instance.OnFlash(icon)
+            return result
         })
 
-        ipcMain.on(`Renderer:Tray:StopFlash`, (e, icon: string) => {
-            AppTray.Instance.OnStopFlash(icon)
+        ipcMain.handle(`Renderer:Tray:StopFlash`, async (e, icon: string) => {
+            const result = AppTray.Instance.OnStopFlash(icon)
+            return result
         })
     }
 
@@ -427,16 +436,31 @@ class IpcMainHandle {
             return result
         })
 
-        ipcMain.on(`Renderer:GlobalShortcut:Unregister`, (e, accelerator: Electron.Accelerator) => {
-            GlobalShortcut.Instance.Unregister(accelerator)
+        ipcMain.handle(`Renderer:GlobalShortcut:Unregister`, async (e, accelerator: Electron.Accelerator) => {
+            const result = GlobalShortcut.Instance.Unregister(accelerator)
+            return result
         })
 
-        ipcMain.on(`Renderer:GlobalShortcut:UnregisterAll`, (e) => {
-            GlobalShortcut.Instance.UnregisterAll()
+        ipcMain.handle(`Renderer:GlobalShortcut:UnregisterAll`, (e) => {
+            const result = GlobalShortcut.Instance.UnregisterAll()
+            return result
         })
 
         ipcMain.handle(`Renderer:GlobalShortcut:IsRegistered`, async (e, accelerator: Electron.Accelerator) => {
             const result = GlobalShortcut.Instance.IsRegistered(accelerator)
+            return result
+        })
+    }
+
+    private OnSimulateIPC() {
+        ipcMain.handle(`Renderer:Simulate:MouseMove`, async (e, accelerator: Electron.Accelerator) => {
+            const result = RN.mouseMove({
+                type: 'absolute',
+                data: {
+                    x: 0,
+                    y: 0
+                }
+            })
             return result
         })
     }

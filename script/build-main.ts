@@ -82,7 +82,7 @@ function ConfigFactory(env = 'production') {
                 ]
             })
         ],
-        external: [...Builtins(), 'electron', 'node-screenshots']
+        external: [...Builtins(), 'electron', 'node-screenshots', 'rubick-native']
     }
 
     return options

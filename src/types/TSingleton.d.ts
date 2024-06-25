@@ -61,4 +61,8 @@ declare namespace TSingleton {
          */
         Capture: (path: string) => Promise<string>
     }
+
+    export type MouseMoveOptions = {
+
+    }
 }

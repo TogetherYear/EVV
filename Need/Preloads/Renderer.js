@@ -21,8 +21,9 @@ class Renderer {
                 const enable = await ipcRenderer.invoke('Renderer:App:IsAutostart')
                 return enable
             },
-            SetAutostart: (enable) => {
-                return ipcRenderer.postMessage(`Renderer:App:SetAutostart`, enable)
+            SetAutostart: async (enable) => {
+                const result = await ipcRenderer.invoke('Renderer:App:SetAutostart', enable)
+                return result
             },
             CreateCustomWindow: async (options) => {
                 const result = await ipcRenderer.invoke(`Renderer:App:CreateCustomWindow`, options)
@@ -33,17 +34,21 @@ class Renderer {
 
     get Tray() {
         return {
-            SetTrayIcon: (icon) => {
-                return ipcRenderer.postMessage(`Renderer:Tray:Icon`, icon)
+            SetTrayIcon: async (icon) => {
+                const result = await ipcRenderer.invoke('Renderer:Tray:Icon', icon)
+                return result
             },
-            SetTrayTooltip: (tooltip) => {
-                return ipcRenderer.postMessage(`Renderer:Tray:Tooltip`, tooltip)
+            SetTrayTooltip: async (tooltip) => {
+                const result = await ipcRenderer.invoke('Renderer:Tray:Tooltip', tooltip)
+                return result
             },
-            Flash: (icon) => {
-                return ipcRenderer.postMessage(`Renderer:Tray:Flash`, icon)
+            Flash: async (icon) => {
+                const result = await ipcRenderer.invoke('Renderer:Tray:Flash', icon)
+                return result
             },
-            StopFlash: (icon) => {
-                return ipcRenderer.postMessage(`Renderer:Tray:StopFlash`, icon)
+            StopFlash: async (icon) => {
+                const result = await ipcRenderer.invoke('Renderer:Tray:StopFlash', icon)
+                return result
             },
         }
     }
@@ -106,10 +111,12 @@ class Renderer {
                 return ipcRenderer.postMessage(`Renderer:Widget:PostMessage`, e)
             },
             SetShadow: async (flag) => {
-                return ipcRenderer.postMessage(`Renderer:Widget:SetShadow`, flag)
+                const result = await ipcRenderer.invoke('Renderer:Widget:SetShadow', flag)
+                return result
             },
             SetIgnoreCursorEvents: async (flag) => {
-                return ipcRenderer.postMessage(`Renderer:Widget:SetIgnoreCursorEvents`, flag)
+                const result = await ipcRenderer.invoke('Renderer:Widget:SetIgnoreCursorEvents', flag)
+                return result
             }
         }
     }
@@ -161,14 +168,17 @@ class Renderer {
 
     get Shell() {
         return {
-            Beep: () => {
-                return ipcRenderer.postMessage(`Renderer:Shell:Beep`)
+            Beep: async () => {
+                const result = await ipcRenderer.invoke('Renderer:Shell:Beep')
+                return result
             },
-            OpenInFolder: (path) => {
-                return ipcRenderer.postMessage(`Renderer:Shell:OpenInFolder`, path)
+            OpenInFolder: async (path) => {
+                const result = await ipcRenderer.invoke('Renderer:Shell:OpenInFolder', path)
+                return result
             },
-            OpenPathByDefault: (path) => {
-                return ipcRenderer.postMessage(`Renderer:Shell:OpenPathByDefault`, path)
+            OpenPathByDefault: async (path) => {
+                const result = await ipcRenderer.invoke('Renderer:Shell:OpenPathByDefault', path)
+                return result
             },
         }
     }
@@ -261,17 +271,28 @@ class Renderer {
                 }
                 return result
             },
-            Unregister: (accelerator) => {
+            Unregister: async (accelerator) => {
                 this.globalShortcutEvents.delete(accelerator)
-                return ipcRenderer.postMessage(`Renderer:GlobalShortcut:Unregister`, accelerator)
+                const result = await ipcRenderer.invoke('Renderer:GlobalShortcut:Unregister', accelerator)
+                return result
             },
             IsRegistered: async (accelerator) => {
                 const result = await ipcRenderer.invoke('Renderer:GlobalShortcut:IsRegistered', accelerator)
                 return result
             },
-            UnregisterAll: () => {
+            UnregisterAll: async () => {
                 this.globalShortcutEvents.clear()
-                return ipcRenderer.postMessage(`Renderer:GlobalShortcut:UnregisterAll`)
+                const result = await ipcRenderer.invoke('Renderer:GlobalShortcut:UnregisterAll')
+                return result
+            },
+        }
+    }
+
+    get Simulate() {
+        return {
+            MouseMove: async (options) => {
+                const result = await ipcRenderer.invoke('Renderer:Simulate:MouseMove', options)
+                return result
             },
         }
     }
