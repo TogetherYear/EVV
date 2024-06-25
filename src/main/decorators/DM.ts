@@ -18,8 +18,8 @@ namespace DM {
     export function FunctionDec() {
         return function (target: Object, propertyKey: string | symbol, descriptor: PropertyDescriptor) {
             const original = descriptor.value.bind(target)
-            descriptor.value = () => {
-                original()
+            descriptor.value = (...args: Array<unknown>) => {
+                original(...args)
 
             }
         }
