@@ -55,7 +55,7 @@ class LocalServer {
     }
 
     private SetStaticFile() {
-        this.app.use(express.static(ResourceLoad.Instance.GetExtraFolder()))
+        this.app.use("/Static", express.static(ResourceLoad.Instance.GetExtraFolder()))
     }
 }
 

@@ -190,7 +190,7 @@ class Renderer {
                 return path
             },
             GetFileByNameFromLocalServer: (name) => {
-                const path = `http://localhost:8676/${name}`
+                const path = `http://localhost:8676/Static/${name}`
                 return path
             },
             GetSelectResourcesPath: async (options) => {
