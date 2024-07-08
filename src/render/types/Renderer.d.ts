@@ -304,6 +304,9 @@ declare namespace Renderer {
         export function UnregisterAll(): Promise<void>
     }
 
+    /**
+     * 按键模拟
+     */
     export namespace Simulate {
         /**
          * 鼠标移动
@@ -334,5 +337,15 @@ declare namespace Renderer {
          * 获取鼠标位置
          */
         export function GetMousePosition(): Promise<{ x: number, y: number }>
+    }
+
+    /**
+     * 图片处理
+     */
+    export namespace Image {
+        /**
+         * 图片格式转换
+         */
+        export function Transformer(options: TSingleton.ImageTransformerOptions): Promise<void>
     }
 }

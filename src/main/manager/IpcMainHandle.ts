@@ -11,6 +11,7 @@ import { CustomWidget } from "./CustomWidget"
 import * as NS from 'node-screenshots'
 import * as FS from 'fs'
 import * as RN from 'rubick-native'
+import * as IN from '@napi-rs/image'
 
 /**
  * 主线程 Ipc 监听 
@@ -34,6 +35,7 @@ class IpcMainHandle {
         this.OnResourceIPC()
         this.OnGlobalShortcutIPC()
         this.OnSimulateIPC()
+        this.OnImageIPC()
     }
 
     private OnAppIPC() {
@@ -492,6 +494,27 @@ class IpcMainHandle {
 
         ipcMain.handle(`Renderer:Simulate:MouseClick`, async (e, btn: TSingleton.MouseBtn) => {
             const result = RN.mouseClick(btn)
+            return result
+        })
+    }
+
+    private OnImageIPC() {
+        ipcMain.handle(`Renderer:Image:Transformer`, async (e, options: TSingleton.ImageTransformerOptions) => {
+            const t = new IN.Transformer(FS.readFileSync(options.inputPath))
+            let buffer!: Buffer;
+            switch (options.outputFormat) {
+                case "Webp": buffer = await t.webp(); break;
+                case "Avif": buffer = await t.avif(); break;
+                case "Png": buffer = await t.png(); break;
+                case "Jpeg": buffer = await t.jpeg(); break;
+                case "Bmp": buffer = await t.bmp(); break;
+                case "Ico": buffer = await t.ico(); break;
+                case "Tiff": buffer = await t.tiff(); break;
+                case "Pnm": buffer = await t.pnm(); break;
+                case "Tga": buffer = await t.tga(); break;
+                case "Farbfeld": buffer = await t.farbfeld(); break;
+            }
+            const result = FS.writeFileSync(options.outputPath, buffer)
             return result
         })
     }

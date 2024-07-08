@@ -316,6 +316,15 @@ class Renderer {
             }
         }
     }
+
+    get Image() {
+        return {
+            Transformer: async (options) => {
+                const result = await ipcRenderer.invoke('Renderer:Image:Transformer', options)
+                return result
+            },
+        }
+    }
 }
 
 window.Renderer = Renderer.Instance
