@@ -1,7 +1,7 @@
 import { UtilityProcess, utilityProcess } from 'electron'
-import { ResourceLoad } from '@main/manager/ResourceLoad'
+import { ResourceLoad } from '@Main/Manager/ResourceLoad'
 import * as fs from 'fs'
-import { DM } from '@main/decorators/DM'
+import { DM } from '@Main/Decorators/DM'
 
 class ProcessPool {
     private constructor() { }

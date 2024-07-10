@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { provide } from 'vue';
-import HeaderBarVue from '@render/common/HeaderBar/HeaderBar.vue';
-import { Application } from './Application'
+import HeaderBarVue from '@Render/Common/HeaderBar/HeaderBar.vue';
+import { Application } from './Application';
 
 const instance = new Application()
 

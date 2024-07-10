@@ -1,6 +1,6 @@
 import { app } from 'electron'
 import path from 'path'
-import { CustomProtocol } from '@main/manager/CustomProtocol'
+import { CustomProtocol } from '@Main/Manager/CustomProtocol'
 
 class ResourceLoad {
     private constructor() { }
@@ -17,7 +17,7 @@ class ResourceLoad {
 
     public GetPageByName(name: string) {
         return app.isPackaged
-            ? `file://${path.join(__dirname, `../render/index.html#/${name}`)}`.replaceAll('\\', '/')
+            ? `file://${path.join(__dirname, `../Render/index.html#/${name}`)}`.replaceAll('\\', '/')
             : `http://localhost:6768/#/${name}`
     }
 

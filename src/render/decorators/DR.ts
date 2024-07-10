@@ -1,4 +1,4 @@
-import { D } from "@decorators/D"
+import { D } from "@Decorators/D"
 import { onMounted, onUnmounted } from "vue"
 
 namespace DR {

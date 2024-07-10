@@ -1,6 +1,6 @@
 import { nativeTheme } from 'electron'
 import { WindowPool } from './WindowPool'
-import { D } from '@decorators/D'
+import { D } from '@Decorators/D'
 
 class CommonEvent {
     private constructor() { }

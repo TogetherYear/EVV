@@ -1,7 +1,6 @@
-import { D } from "@decorators/D"
-import { Time } from "@libs/Time"
-import { App } from "@render/App"
-import { AActor } from "@render/libs/AActor"
+import { D } from "@Decorators/D"
+import { App } from "@Render/App"
+import { AActor } from "@Render/Libs/AActor"
 import { onMounted, onUnmounted } from "vue"
 
 class Application extends AActor {

@@ -1,4 +1,4 @@
-import { AActor } from "@render/libs/AActor"
+import { AActor } from "@Render/Libs/AActor"
 import { onMounted, onUnmounted } from "vue"
 
 class Tray extends AActor {

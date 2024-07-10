@@ -1,4 +1,4 @@
-import { EventSystem } from "@libs/EventSystem";
+import { EventSystem } from "@Libs/EventSystem";
 import { BrowserWindow } from "electron";
 
 abstract class TWindow extends EventSystem {

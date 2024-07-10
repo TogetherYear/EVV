@@ -1,5 +1,5 @@
 import fs from 'fs'
-import { ResourceLoad } from '@main/manager/ResourceLoad'
+import { ResourceLoad } from '@Main/Manager/ResourceLoad'
 
 class Configuration {
     private constructor() { }

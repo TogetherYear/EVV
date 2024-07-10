@@ -10,24 +10,24 @@ export default defineConfig({
             }
         }),
     ],
-    root: join(__dirname, 'src/render'),
+    root: join(__dirname, 'Src/Render'),
     base: './',
-    envDir: join(__dirname, 'env'),
+    envDir: join(__dirname, 'Env'),
     server: {
         port: 6768
     },
     resolve: {
         alias: {
-            '@render': join(__dirname, 'src/render'),
-            '@main': join(__dirname, 'src/main'),
-            '@libs': join(__dirname, 'src/libs'),
-            '@decorators': join(__dirname, 'src/decorators'),
-            '@src': join(__dirname, 'src'),
-            '@root': __dirname
+            '@Render': join(__dirname, 'Src/Render'),
+            '@Main': join(__dirname, 'Src/Main'),
+            '@Libs': join(__dirname, 'Src/Libs'),
+            '@Decorators': join(__dirname, 'Src/Decorators'),
+            '@Src': join(__dirname, 'Src'),
+            '@Root': __dirname
         }
     },
     build: {
-        outDir: join(__dirname, 'dist/render'),
+        outDir: join(__dirname, 'Dist/Render'),
         emptyOutDir: true,
         minify: 'esbuild',
         assetsDir: '', // 相对路径 加载问题
@@ -37,7 +37,7 @@ export default defineConfig({
             output: {
                 manualChunks: (id: string) => {
                     if (id.includes('node_modules')) {
-                        return 'vendor'
+                        return 'Vendor'
                     }
                 }
             }

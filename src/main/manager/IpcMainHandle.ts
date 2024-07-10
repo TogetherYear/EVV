@@ -1,8 +1,8 @@
-import { AppMainWindow } from "@main/manager/AppMainWindow"
+import { AppMainWindow } from "@Main/Manager/AppMainWindow"
 import { BrowserWindow, app, ipcMain, screen, shell, dialog } from "electron"
-import { ResourceLoad } from "@main/manager/ResourceLoad"
-import { AppTray } from "@main/manager/AppTray"
-import { D } from "@decorators/D"
+import { ResourceLoad } from "@Main/Manager/ResourceLoad"
+import { AppTray } from "@Main/Manager/AppTray"
+import { D } from "@Decorators/D"
 import { GlobalShortcut } from "./GlobalShortcut"
 import { WindowPool } from "./WindowPool"
 import * as F from 'fs'

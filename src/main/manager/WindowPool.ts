@@ -1,5 +1,5 @@
-import { D } from "@decorators/D"
-import { TWindow } from "@main/libs/TWindow"
+import { D } from "@Decorators/D"
+import { TWindow } from "@Main/Libs/TWindow"
 
 class WindowPool {
     private constructor() { }

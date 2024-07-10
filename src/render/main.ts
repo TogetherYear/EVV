@@ -2,14 +2,14 @@ import { createApp } from 'vue'
 
 import AppVue from './App.vue'
 
-import router from './router'
+import router from './Router'
 
-import { naive } from "./naive"
+import { naive } from "./Naive"
 
-import { Debug } from './plugins/Debug'
+import { Debug } from './Plugins/Debug'
 Debug.Instance.Run()
 
-import { FieldObserver } from './plugins/FieldObserver'
+import { FieldObserver } from './Plugins/FieldObserver'
 FieldObserver.Instance.Run()
 
 createApp(AppVue)

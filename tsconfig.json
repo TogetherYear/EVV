@@ -16,22 +16,22 @@
       "dom"
     ],
     "paths": {
-      "@render/*": [
-        "src/render/*"
+      "@Render/*": [
+        "Src/Render/*"
       ],
-      "@main/*": [
-        "src/main/*"
+      "@Main/*": [
+        "Src/Main/*"
       ],
-      "@libs/*": [
-        "src/libs/*"
+      "@Libs/*": [
+        "Src/Libs/*"
       ],
-      "@decorators/*": [
-        "src/decorators/*"
+      "@Decorators/*": [
+        "Src/Decorators/*"
       ],
-      "@src/*": [
-        "src/*"
+      "@Src/*": [
+        "Src/*"
       ],
-      "@root/*": [
+      "@Root/*": [
         "./*"
       ]
     },

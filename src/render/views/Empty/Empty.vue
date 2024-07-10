@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import HeaderBarVue from '@render/common/HeaderBar/HeaderBar.vue';
+import HeaderBarVue from '@Render/Common/HeaderBar/HeaderBar.vue';
 import { Empty } from './Empty'
 const instance = new Empty()
 

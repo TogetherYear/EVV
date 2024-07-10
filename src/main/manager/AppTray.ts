@@ -1,10 +1,10 @@
-import { ResourceLoad } from '@main/manager/ResourceLoad'
+import { ResourceLoad } from '@Main/Manager/ResourceLoad'
 import { Menu, Tray, BrowserWindow, screen } from 'electron'
-import { AppMainWindow } from '@main/manager/AppMainWindow'
-import { TWindow } from '@main/libs/TWindow'
-import { Configuration } from '@main/manager/Configuration'
-import { WindowPool } from '@main/manager/WindowPool'
-import { D } from '@decorators/D'
+import { AppMainWindow } from '@Main/Manager/AppMainWindow'
+import { TWindow } from '@Main/Libs/TWindow'
+import { Configuration } from '@Main/Manager/Configuration'
+import { WindowPool } from '@Main/Manager/WindowPool'
+import { D } from '@Decorators/D'
 
 class AppTray extends TWindow {
     private constructor() {

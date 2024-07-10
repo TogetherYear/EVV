@@ -1,9 +1,9 @@
 import { ref, onMounted, onUnmounted } from 'vue'
-import minIcon from '@render/assets/mc/min.png'
-import maxIcon from '@render/assets/mc/max.png'
-import hideIcon from '@render/assets/mc/hide.png'
-import { AActor } from '@render/libs/AActor'
-import { DR } from '@render/decorators/DR'
+import minIcon from '@Render/Assets/Images/min.png'
+import maxIcon from '@Render/Assets/Images/max.png'
+import hideIcon from '@Render/Assets/Images/hide.png'
+import { AActor } from '@Render/Libs/AActor'
+import { DR } from '@Render/Decorators/DR'
 
 class HeaderBar extends AActor {
     public constructor() {

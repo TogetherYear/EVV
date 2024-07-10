@@ -1,10 +1,10 @@
-import { EventSystem } from '@libs/EventSystem'
+import { EventSystem } from '@Libs/EventSystem'
 import { BrowserWindow } from 'electron'
 import { WindowPool } from './WindowPool'
-import { D } from '@decorators/D'
+import { D } from '@Decorators/D'
 import { ResourceLoad } from './ResourceLoad'
 import { Configuration } from './Configuration'
-import { DM } from '@main/decorators/DM'
+import { DM } from '@Main/Decorators/DM'
 
 class CustomWidget extends EventSystem {
     private constructor() {

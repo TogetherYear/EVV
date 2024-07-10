@@ -1,4 +1,4 @@
-import { Time } from '@libs/Time'
+import { Time } from '@Libs/Time'
 import { app } from 'electron'
 
 class SingleInstance {

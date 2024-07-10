@@ -1,6 +1,6 @@
-import { D } from "@decorators/D"
-import { DR } from "./decorators/DR"
-import { AActor } from "./libs/AActor"
+import { D } from "@Decorators/D"
+import { DR } from "./Decorators/DR"
+import { AActor } from "./Libs/AActor"
 import { onMounted, onUnmounted } from "vue"
 
 class App extends AActor {
