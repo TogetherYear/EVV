@@ -16,6 +16,7 @@ export default defineConfig({
     server: {
         port: 6768
     },
+    publicDir: 'Public',
     resolve: {
         alias: {
             '@Render': join(__dirname, 'Src/Render'),
