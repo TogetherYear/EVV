@@ -30,7 +30,7 @@ export default defineConfig({
         outDir: join(__dirname, 'Dist/Render'),
         emptyOutDir: true,
         minify: 'esbuild',
-        assetsDir: '', // 相对路径 加载问题
+        assetsDir: 'Source',
         sourcemap: false,
         target: 'esnext',
         rollupOptions: {
