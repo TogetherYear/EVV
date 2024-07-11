@@ -9,7 +9,6 @@ import { CustomProtocol } from './Manager/CustomProtocol'
 import { AppMainWindow } from './Manager/AppMainWindow'
 import { AppTray } from './Manager/AppTray'
 import { SingleInstance } from './Manager/SingleInstance'
-import { D } from '@Decorators/D'
 import { Download } from './Manager/Download'
 import { CommonEvent } from './Manager/CommonEvent'
 import { LocalServer } from './Manager/LocalServer'
@@ -62,5 +61,5 @@ app.on('will-quit', () => {
 })
 
 app.on('second-instance', () => {
-    WindowPool.Instance.PostMessage({ type: D.IpcRendererEvent.SecondInstance, widgets: [D.IpcRendererWindow.Main] })
+    SingleInstance.Instance.OnSecondInstance()
 })

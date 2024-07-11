@@ -1,5 +1,7 @@
 import { Time } from '@Libs/Time'
 import { app } from 'electron'
+import { WindowPool } from './WindowPool'
+import { D } from '@Decorators/D'
 
 class SingleInstance {
     private constructor() { }
@@ -16,6 +18,10 @@ class SingleInstance {
         if (!lock) {
             app.exit(0)
         }
+    }
+
+    public OnSecondInstance() {
+        WindowPool.Instance.PostMessage({ type: D.IpcRendererEvent.SecondInstance, widgets: [D.IpcRendererWindow.Main] })
     }
 }
 
