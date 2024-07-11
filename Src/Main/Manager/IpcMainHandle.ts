@@ -75,12 +75,11 @@ class IpcMainHandle {
         ipcMain.handle(`Renderer:Widget:Max`, async (e) => {
             const widget = BrowserWindow.fromWebContents(e.sender) as BrowserWindow
             if (widget.isMaximized()) {
-                widget.unmaximize()
+                return widget.unmaximize()
             }
             else {
-                widget.maximize()
+                return widget.maximize()
             }
-            return
         })
 
         ipcMain.handle(`Renderer:Widget:Hide`, async (e) => {
@@ -95,8 +94,7 @@ class IpcMainHandle {
 
         ipcMain.handle(`Renderer:Widget:Show`, async (e) => {
             const widget = BrowserWindow.fromWebContents(e.sender) as BrowserWindow
-            widget.show()
-            return
+            return widget.show()
         })
 
         ipcMain.handle(`Renderer:Widget:Center`, async (e) => {
