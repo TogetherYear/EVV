@@ -305,7 +305,7 @@ declare namespace Renderer {
     }
 
     /**
-     * 按键模拟
+     * 鼠标模拟
      */
     export namespace Simulate {
         /**
