@@ -396,7 +396,7 @@ class IpcMainHandle {
             return await new Promise((resolve, reject) => {
                 F.readFile(path, (err, data) => {
                     if (err) {
-                        resolve({})
+                        resolve("Error")
                     }
                     resolve(data.toString())
                 })

@@ -261,7 +261,7 @@ declare namespace Renderer {
         /**
          * 读取文件内容转换为字符串
          */
-        export function ReadStringFromFile(str: string): Promise<Record<string, unknown>>
+        export function ReadStringFromFile(str: string): Promise<string>
     }
 
     /**
