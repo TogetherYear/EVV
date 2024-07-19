@@ -37,10 +37,8 @@ class Application extends AActor {
     }
 
     private async OnSecondInstance(e: D.IpcRendererSendMessage) {
-        if (e.type == D.IpcRendererEvent.SecondInstance) {
-            Message.error('已关闭第二个实例')
-            await Renderer.Widget.Show()
-        }
+        Message.error('已关闭第二个实例')
+        await Renderer.Widget.Show()
     }
 
     private async State() {
