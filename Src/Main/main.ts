@@ -18,7 +18,7 @@ app.commandLine.appendSwitch('disable-web-security')
 
 app.commandLine.appendSwitch('wm-window-animations-disabled')
 
-// app.commandLine.appendSwitch('enable-features', 'SharedArrayBuffer')
+app.commandLine.appendSwitch('enable-features', 'SharedArrayBuffer')
 
 SingleInstance.Instance.Run()
 

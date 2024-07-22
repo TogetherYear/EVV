@@ -1,4 +1,4 @@
-import { UtilityProcess, utilityProcess } from 'electron'
+import { fork, ChildProcess } from 'child_process'
 import { ResourceLoad } from '@Main/Manager/ResourceLoad'
 import * as fs from 'fs'
 import { DM } from '@Main/Decorators/DM'
@@ -12,13 +12,13 @@ class ProcessPool {
         return this.instance
     }
 
-    private pool = new Map<DM.ChildrenProcessType, UtilityProcess>()
+    private pool = new Map<DM.ChildrenProcessType, ChildProcess>()
 
     public Run() {
         this.RunChildren()
     }
 
-    public RegisterProcess(t: DM.ChildrenProcessType, p: UtilityProcess) {
+    public RegisterProcess(t: DM.ChildrenProcessType, p: ChildProcess) {
         this.pool.set(t, p)
     }
 
@@ -36,7 +36,7 @@ class ProcessPool {
             if (c.indexOf('.js') != -1) {
                 const name = c.split('.js')[0]
                 const type = this.TransformType(name)
-                const process = utilityProcess.fork(ResourceLoad.Instance.GetChildProcessesByName(name))
+                const process = fork(ResourceLoad.Instance.GetChildProcessesByName(name))
                 process.on('message', (e: DM.IChildrenProcessReceiveMessage) => {
                     this.OnMessage({ ...e, type })
                 })
@@ -55,7 +55,7 @@ class ProcessPool {
     }
 
     private GetPoolKV() {
-        const result: Array<{ key: DM.ChildrenProcessType, value: UtilityProcess }> = []
+        const result: Array<{ key: DM.ChildrenProcessType, value: ChildProcess }> = []
         for (let p of this.pool) {
             result.push({ key: p[0], value: p[1] })
         }
@@ -82,19 +82,19 @@ class ProcessPool {
             for (let p of e.processes) {
                 const process = this.GetProcess(p)
                 if (process) {
-                    process.postMessage(e)
+                    process.send(e)
                 }
             }
         }
         else if (e.excludeProcesses && e.excludeProcesses.length != 0) {
             const need = this.GetPoolKV().filter(c => (e.excludeProcesses || []).indexOf(c.key) == -1)
             for (let p of need) {
-                p.value.postMessage(e)
+                p.value.send(e)
             }
         }
         else {
             for (let p of this.pool) {
-                p[1].postMessage(e)
+                p[1].send(e)
             }
         }
     }

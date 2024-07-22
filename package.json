@@ -76,8 +76,8 @@
     "acorn": "^8.8.0",
     "chalk": "^4.1.2",
     "concurrently": "^6.5.1",
-    "electron": "26.1.0",
-    "electron-builder": "^24.6.3",
+    "electron": "31.2.1",
+    "electron-builder": "^24.13.3",
     "minimist": "^1.2.6",
     "naive-ui": "^2.37.3",
     "ora": "^5.4.1",
@@ -85,6 +85,7 @@
     "rollup-plugin-esbuild": "^5.0.0",
     "sass": "^1.70.0",
     "ts-node": "^10.9.1",
+    "tslib": "^2.6.3",
     "typescript": "^5.3.3",
     "vite": "^4.5.1",
     "vue-tsc": "^1.8.27"

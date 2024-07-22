@@ -1,7 +1,7 @@
-process.parentPort.postMessage({
+process.send({
     message: `Log.js 丨 Run`
 })
 
-process.parentPort.on('message', (e) => {
+process.on('message', (e) => {
 
 })
