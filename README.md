@@ -23,7 +23,7 @@ npm run build
 ```
 
 ```
-如果你在主进程使用自己安装的模块想要使用 import 去 Src/Build/Server.ts 中的 external 添加额外的模块 ( 在 'electron' 后面接着写 )
+如果你在主进程使用自己安装的模块想要使用 import 去 Src/Build/Server.ts 中的 external 添加额外的模块 ( 在 'electron' 后面接着写 目前已经额外添加过几个 )
 ```
 
 ```
