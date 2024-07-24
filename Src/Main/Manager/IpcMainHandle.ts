@@ -209,7 +209,7 @@ class IpcMainHandle {
         ipcMain.handle(`Renderer:Screen:Capture`, async (e, id: number, path: string) => {
             const monitor = NS.Monitor.all().find(m => m.id == id) as NS.Monitor
             const image = monitor.captureImageSync()
-            const buffer = image.toPngSync()
+            const buffer = Uint8Array.from(image.toPngSync())
             const target = ResourceLoad.Instance.GetResourcePathByName(path)
             return await new Promise((resolve, reject) => {
                 FS.writeFile(target, buffer, (err => {
@@ -242,7 +242,7 @@ class IpcMainHandle {
         ipcMain.handle(`Renderer:Window:Capture`, async (e, id: number, path: string) => {
             const window = NS.Window.all().find(w => w.id == id) as NS.Window
             const image = window.captureImageSync()
-            const buffer = image.toPngSync()
+            const buffer = Uint8Array.from(image.toPngSync())
             const target = ResourceLoad.Instance.GetResourcePathByName(path)
             return await new Promise((resolve, reject) => {
                 FS.writeFile(target, buffer, (err => {
@@ -512,7 +512,7 @@ class IpcMainHandle {
                 case "Tga": buffer = await t.tga(); break;
                 case "Farbfeld": buffer = await t.farbfeld(); break;
             }
-            const result = FS.writeFileSync(options.outputPath, buffer)
+            const result = FS.writeFileSync(options.outputPath, Uint8Array.from(buffer))
             return result
         })
     }

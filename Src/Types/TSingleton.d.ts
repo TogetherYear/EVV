@@ -75,9 +75,11 @@ declare namespace TSingleton {
 
     export type MouseBtn = "Left" | "Middle" | "Right" | "Back" | "Forward";
 
+    export type ImageFormat = "Webp" | "Avif" | "Png" | "Jpeg" | "Bmp" | "Ico" | "Tiff" | "Pnm" | "Tga" | "Farbfeld"
+
     export type ImageTransformerOptions = {
         inputPath: string,
         outputPath: string,
-        outputFormat: "Webp" | "Avif" | "Png" | "Jpeg" | "Bmp" | "Ico" | "Tiff" | "Pnm" | "Tga" | "Farbfeld"
+        outputFormat: ImageFormat
     }
 }
