@@ -1,19 +1,7 @@
 class Debug {
-    private constructor() { }
-
-    private static instance = new Debug()
-
-    public static get Instance() { return this.instance }
-
     public mode = import.meta.env.MODE == 'development' ? 0 : 1
 
     public get IsProd() { return this.mode == 1 }
-
-    public Run() {
-        if (!window.Debug) {
-            window.Debug = this
-        }
-    }
 
     public Log(...args: Array<unknown>) {
         if (this.mode == 0) {
@@ -41,4 +29,6 @@ class Debug {
 
 }
 
-export { Debug }
+const DebugInstance = new Debug()
+
+export { DebugInstance as Debug }

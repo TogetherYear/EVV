@@ -33,7 +33,7 @@ class Application extends AActor {
     }
 
     private ListenEvents() {
-        App.Instance.AddListen(D.IpcRendererEvent.SecondInstance, this, this.OnSecondInstance)
+        App.AddListen(D.IpcRendererEvent.SecondInstance, this, this.OnSecondInstance)
     }
 
     private async OnSecondInstance(e: D.IpcRendererSendMessage) {

@@ -1,12 +1,6 @@
 const { ipcRenderer, clipboard } = require("electron")
 
 class Renderer {
-    static instance = new Renderer()
-
-    static get Instance() {
-        return this.instance
-    }
-
     globalShortcutEvents = new Map()
 
     get App() {
@@ -327,6 +321,6 @@ class Renderer {
     }
 }
 
-window.Renderer = Renderer.Instance
+window.Renderer = new Renderer()
 
 window['ELECTRON_DISABLE_SECURITY_WARNINGS'] = true
