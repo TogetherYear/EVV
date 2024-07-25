@@ -20,34 +20,34 @@ app.commandLine.appendSwitch('wm-window-animations-disabled')
 
 app.commandLine.appendSwitch('enable-features', 'SharedArrayBuffer')
 
-SingleInstance.Instance.Run()
+SingleInstance.Run()
 
-ResourceLoad.Instance.Run()
+ResourceLoad.Run()
 
-Configuration.Instance.Run()
+Configuration.Run()
 
-ProcessPool.Instance.Run()
+ProcessPool.Run()
 
-WindowPool.Instance.Run()
+WindowPool.Run()
 
-IpcMainHandle.Instance.Run()
+IpcMainHandle.Run()
 
-LocalServer.Instance.Run()
+LocalServer.Run()
 
 app.on('ready', () => {
-    GlobalShortcut.Instance.Run()
+    GlobalShortcut.Run()
 
-    CustomProtocol.Instance.Run()
+    CustomProtocol.Run()
 
-    Download.Instance.Run()
+    Download.Run()
 
-    CustomWidget.Instance.Run()
+    CustomWidget.Run()
 
-    AppMainWindow.Instance.Run()
+    AppMainWindow.Run()
 
-    AppTray.Instance.Run()
+    AppTray.Run()
 
-    CommonEvent.Instance.Run()
+    CommonEvent.Run()
 })
 
 app.on('window-all-closed', () => {
@@ -57,9 +57,9 @@ app.on('window-all-closed', () => {
 })
 
 app.on('will-quit', () => {
-    GlobalShortcut.Instance.UnregisterAll()
+    GlobalShortcut.UnregisterAll()
 })
 
 app.on('second-instance', () => {
-    SingleInstance.Instance.OnSecondInstance()
+    SingleInstance.OnSecondInstance()
 })

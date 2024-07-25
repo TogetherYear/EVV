@@ -3,14 +3,6 @@ import path from 'path'
 import { CustomProtocol } from '@Main/Manager/CustomProtocol'
 
 class ResourceLoad {
-    private constructor() { }
-
-    private static instance = new ResourceLoad()
-
-    public static get Instance() {
-        return this.instance
-    }
-
     public Run() {
 
     }
@@ -55,8 +47,10 @@ class ResourceLoad {
      * 渲染进程使用
      */
     public GetResourcePathByName(name: string) {
-        return `${this.GetExtraFolder()}/${name}`.replace('file', CustomProtocol.Instance.fileProtocol)
+        return `${this.GetExtraFolder()}/${name}`.replace('file', CustomProtocol.fileProtocol)
     }
 }
 
-export { ResourceLoad }
+const ResourceLoadInstance = new ResourceLoad()
+
+export { ResourceLoadInstance as ResourceLoad }

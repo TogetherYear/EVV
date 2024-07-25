@@ -17,14 +17,6 @@ import * as IN from '@napi-rs/image'
  * 主线程 Ipc 监听 
  */
 class IpcMainHandle {
-    private constructor() { }
-
-    private static instance: IpcMainHandle = new IpcMainHandle()
-
-    public static get Instance(): IpcMainHandle {
-        return this.instance
-    }
-
     public Run() {
         this.OnAppIPC()
         this.OnWidgetIPC()
@@ -61,7 +53,7 @@ class IpcMainHandle {
         })
 
         ipcMain.handle(`Renderer:App:CreateCustomWindow`, async (e, options: TSingleton.CustomWidgetOptions) => {
-            const result = CustomWidget.Instance.CreateWindow(options)
+            const result = CustomWidget.CreateWindow(options)
             return result
         })
     }
@@ -128,8 +120,8 @@ class IpcMainHandle {
 
         ipcMain.on(`Renderer:Widget:PostMessage`, (e, d: D.IIpcRendererReceiveMessage) => {
             switch (e.sender.id) {
-                case AppMainWindow.Instance.widget.webContents.id: this.OnMessage({ ...d, type: D.IpcRendererWindow.Main, id: e.sender.id }); return;
-                case AppTray.Instance.widget.webContents.id: this.OnMessage({ ...d, type: D.IpcRendererWindow.Tray, id: e.sender.id }); return;
+                case AppMainWindow.widget.webContents.id: this.OnMessage({ ...d, type: D.IpcRendererWindow.Main, id: e.sender.id }); return;
+                case AppTray.widget.webContents.id: this.OnMessage({ ...d, type: D.IpcRendererWindow.Tray, id: e.sender.id }); return;
                 default: this.OnMessage({ ...d, type: D.IpcRendererWindow.Other, id: e.sender.id }); return;
             }
         })
@@ -169,22 +161,22 @@ class IpcMainHandle {
 
     private OnTrayIPC() {
         ipcMain.handle(`Renderer:Tray:Icon`, async (e, icon: string) => {
-            const result = AppTray.Instance.OnSetIcon(icon)
+            const result = AppTray.OnSetIcon(icon)
             return result
         })
 
         ipcMain.handle(`Renderer:Tray:Tooltip`, async (e, tooltip: string) => {
-            const result = AppTray.Instance.OnSetTooltip(tooltip)
+            const result = AppTray.OnSetTooltip(tooltip)
             return result
         })
 
         ipcMain.handle(`Renderer:Tray:Flash`, async (e, icon: string) => {
-            const result = AppTray.Instance.OnFlash(icon)
+            const result = AppTray.OnFlash(icon)
             return result
         })
 
         ipcMain.handle(`Renderer:Tray:StopFlash`, async (e, icon: string) => {
-            const result = AppTray.Instance.OnStopFlash(icon)
+            const result = AppTray.OnStopFlash(icon)
             return result
         })
     }
@@ -210,7 +202,7 @@ class IpcMainHandle {
             const monitor = NS.Monitor.all().find(m => m.id == id) as NS.Monitor
             const image = monitor.captureImageSync()
             const buffer = Uint8Array.from(image.toPngSync())
-            const target = ResourceLoad.Instance.GetResourcePathByName(path)
+            const target = ResourceLoad.GetResourcePathByName(path)
             return await new Promise((resolve, reject) => {
                 FS.writeFile(target, buffer, (err => {
                     if (err) {
@@ -243,7 +235,7 @@ class IpcMainHandle {
             const window = NS.Window.all().find(w => w.id == id) as NS.Window
             const image = window.captureImageSync()
             const buffer = Uint8Array.from(image.toPngSync())
-            const target = ResourceLoad.Instance.GetResourcePathByName(path)
+            const target = ResourceLoad.GetResourcePathByName(path)
             return await new Promise((resolve, reject) => {
                 FS.writeFile(target, buffer, (err => {
                     if (err) {
@@ -271,12 +263,12 @@ class IpcMainHandle {
 
     private OnResourceIPC() {
         ipcMain.handle(`Renderer:Resource:GetPathByName`, async (e, name: string) => {
-            const path = ResourceLoad.Instance.GetResourcePathByName(name)
+            const path = ResourceLoad.GetResourcePathByName(name)
             return path
         })
 
         ipcMain.handle(`Renderer:Resource:SelectResourcesPath`, async (e, options: TSingleton.SelectOptions) => {
-            const window = WindowPool.Instance.GetWindowById(e.sender.id)
+            const window = WindowPool.GetWindowById(e.sender.id)
             const features: Array<"multiSelections" | "openDirectory" | "openFile"> = []
             if (options.multiple) {
                 features.push("multiSelections")
@@ -297,7 +289,7 @@ class IpcMainHandle {
         })
 
         ipcMain.handle(`Renderer:Resource:GetSaveResourcesPath`, async (e, options: TSingleton.SaveOptions) => {
-            const window = WindowPool.Instance.GetWindowById(e.sender.id)
+            const window = WindowPool.GetWindowById(e.sender.id)
             const path = dialog.showSaveDialog(window.widget, {
                 title: options.title,
                 defaultPath: options.defaultPath,
@@ -378,7 +370,7 @@ class IpcMainHandle {
         })
 
         ipcMain.on(`Renderer:Resource:Download`, (e, url: string) => {
-            Download.Instance.DownloadFromUrl(url)
+            Download.DownloadFromUrl(url)
         })
 
         ipcMain.handle(`Renderer:Resource:WriteStringToFile`, async (e, path: string, str: string) => {
@@ -432,22 +424,22 @@ class IpcMainHandle {
 
     private OnGlobalShortcutIPC() {
         ipcMain.handle(`Renderer:GlobalShortcut:Register`, async (e, accelerator: Electron.Accelerator) => {
-            const result = GlobalShortcut.Instance.Register(accelerator, () => { })
+            const result = GlobalShortcut.Register(accelerator, () => { })
             return result
         })
 
         ipcMain.handle(`Renderer:GlobalShortcut:Unregister`, async (e, accelerator: Electron.Accelerator) => {
-            const result = GlobalShortcut.Instance.Unregister(accelerator)
+            const result = GlobalShortcut.Unregister(accelerator)
             return result
         })
 
         ipcMain.handle(`Renderer:GlobalShortcut:UnregisterAll`, (e) => {
-            const result = GlobalShortcut.Instance.UnregisterAll()
+            const result = GlobalShortcut.UnregisterAll()
             return result
         })
 
         ipcMain.handle(`Renderer:GlobalShortcut:IsRegistered`, async (e, accelerator: Electron.Accelerator) => {
-            const result = GlobalShortcut.Instance.IsRegistered(accelerator)
+            const result = GlobalShortcut.IsRegistered(accelerator)
             return result
         })
     }
@@ -526,8 +518,8 @@ class IpcMainHandle {
         }
         else {
             if (e.reason == "Empty") {
-                const target = CustomWidget.Instance.FindWidget(e.id)
-                WindowPool.Instance.PostMessage({
+                const target = CustomWidget.FindWidget(e.id)
+                WindowPool.PostMessage({
                     type: D.IpcRendererEvent.WidgetEmpty,
                     widgets: [D.IpcRendererWindow.Main],
                     send: {
@@ -539,4 +531,6 @@ class IpcMainHandle {
     }
 }
 
-export { IpcMainHandle }
+const IpcMainHandleInstance = new IpcMainHandle()
+
+export { IpcMainHandleInstance as IpcMainHandle }

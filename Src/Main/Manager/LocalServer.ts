@@ -7,14 +7,6 @@ import * as core from "express-serve-static-core";
  * 本地服务器
  */
 class LocalServer {
-    private constructor() { }
-
-    private static instance = new LocalServer()
-
-    public static get Instance() {
-        return this.instance
-    }
-
     private app!: core.Express
 
     private server!: H.Server<typeof H.IncomingMessage, typeof H.ServerResponse>
@@ -55,8 +47,10 @@ class LocalServer {
     }
 
     private SetStaticFile() {
-        this.app.use("/Static", express.static(ResourceLoad.Instance.GetExtraFolder()))
+        this.app.use("/Static", express.static(ResourceLoad.GetExtraFolder()))
     }
 }
 
-export { LocalServer }
+const LocalServerInstance = new LocalServer()
+
+export { LocalServerInstance as LocalServer }

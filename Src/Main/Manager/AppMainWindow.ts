@@ -6,16 +6,6 @@ import { D } from '@Decorators/D'
 import { WindowPool } from './WindowPool'
 
 class AppMainWindow extends TWindow {
-    private constructor() {
-        super()
-    }
-
-    private static instance: AppMainWindow = new AppMainWindow()
-
-    public static get Instance(): AppMainWindow {
-        return this.instance
-    }
-
     public async Run() {
         this.CreateWidget()
     }
@@ -32,7 +22,7 @@ class AppMainWindow extends TWindow {
             useContentSize: true,
             frame: false,
             backgroundColor: '#212121',
-            icon: ResourceLoad.Instance.GetImageByName('window.ico'),
+            icon: ResourceLoad.GetImageByName('window.ico'),
             webPreferences: {
                 // 同源
                 webSecurity: false,
@@ -41,11 +31,11 @@ class AppMainWindow extends TWindow {
                 // 是否独立线程运行 api 和 preload
                 contextIsolation: false,
                 // 设为false则禁用devtool开发者调试工具
-                devTools: Configuration.Instance.configs.debug,
+                devTools: Configuration.configs.debug,
                 // https 运行 http
                 allowRunningInsecureContent: true,
                 // 预加载脚本 仅为示例
-                preload: ResourceLoad.Instance.GetPreloadByName('Renderer')
+                preload: ResourceLoad.GetPreloadByName('Renderer')
             }
         })
 
@@ -69,17 +59,19 @@ class AppMainWindow extends TWindow {
             this.widget.hide()
         })
 
-        if (Configuration.Instance.configs.debug) {
+        if (Configuration.configs.debug) {
             this.widget.webContents.openDevTools()
         }
 
-        this.widget.loadURL(ResourceLoad.Instance.GetPageByName('Application'))
+        this.widget.loadURL(ResourceLoad.GetPageByName('Application'))
 
         // 我这里取消了默认的菜单栏 你可以自定义
         Menu.setApplicationMenu(null)
 
-        WindowPool.Instance.RegisterWindow(D.IpcRendererWindow.Main, this)
+        WindowPool.RegisterWindow(D.IpcRendererWindow.Main, this)
     }
 }
 
-export { AppMainWindow }
+const AppMainWindowInstance = new AppMainWindow()
+
+export { AppMainWindowInstance as AppMainWindow }

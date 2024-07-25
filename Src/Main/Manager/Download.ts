@@ -5,20 +5,12 @@ import { ResourceLoad } from "./ResourceLoad"
  * 下载管理器
  */
 class Download {
-    private constructor() { }
-
-    private static instance = new Download()
-
-    public static get Instance() {
-        return this.instance
-    }
-
     private get S() {
         return session.defaultSession
     }
 
     public Run() {
-        this.S.setDownloadPath(ResourceLoad.Instance.GetDownloadsFolder())
+        this.S.setDownloadPath(ResourceLoad.GetDownloadsFolder())
         this.ListenEvents()
     }
 
@@ -33,4 +25,6 @@ class Download {
     }
 }
 
-export { Download }
+const DownloadInstance = new Download()
+
+export { DownloadInstance as Download }

@@ -4,15 +4,7 @@ import { protocol, net } from "electron"
  * 自定义协议
  */
 class CustomProtocol {
-    private constructor() { }
-
-    private static instance = new CustomProtocol()
-
     public fileProtocol = 'tfile'
-
-    public static get Instance() {
-        return this.instance
-    }
 
     public Run() {
         this.GenerateFileProtocol()
@@ -25,4 +17,6 @@ class CustomProtocol {
     }
 }
 
-export { CustomProtocol }
+const CustomProtocolInstance = new CustomProtocol()
+
+export { CustomProtocolInstance as CustomProtocol }

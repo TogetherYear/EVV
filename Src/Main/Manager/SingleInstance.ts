@@ -4,14 +4,6 @@ import { WindowPool } from './WindowPool'
 import { D } from '@Decorators/D'
 
 class SingleInstance {
-    private constructor() { }
-
-    private static instance = new SingleInstance()
-
-    public static get Instance() {
-        return this.instance
-    }
-
     public Run() {
         const additionalData = { key: "TSingleton", Time: Time.GetTime() }
         const lock = app.requestSingleInstanceLock(additionalData)
@@ -21,8 +13,10 @@ class SingleInstance {
     }
 
     public OnSecondInstance() {
-        WindowPool.Instance.PostMessage({ type: D.IpcRendererEvent.SecondInstance, widgets: [D.IpcRendererWindow.Main] })
+        WindowPool.PostMessage({ type: D.IpcRendererEvent.SecondInstance, widgets: [D.IpcRendererWindow.Main] })
     }
 }
 
-export { SingleInstance }
+const SingleInstanceInstance = new SingleInstance()
+
+export { SingleInstanceInstance as SingleInstance }

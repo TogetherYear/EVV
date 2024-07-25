@@ -2,14 +2,6 @@ import { D } from "@Decorators/D"
 import { TWindow } from "@Main/Libs/TWindow"
 
 class WindowPool {
-    private constructor() { }
-
-    private static instance = new WindowPool()
-
-    public static get Instance() {
-        return this.instance
-    }
-
     private pool = new Map<D.IpcRendererWindow, TWindow>()
 
     public Run() {
@@ -73,4 +65,6 @@ class WindowPool {
 
 }
 
-export { WindowPool }
+const WindowPoolInstance = new WindowPool()
+
+export { WindowPoolInstance as WindowPool }

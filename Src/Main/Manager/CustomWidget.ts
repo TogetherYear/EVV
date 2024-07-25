@@ -7,16 +7,6 @@ import { Configuration } from './Configuration'
 import { DM } from '@Main/Decorators/DM'
 
 class CustomWidget extends EventSystem {
-    private constructor() {
-        super()
-    }
-
-    private static instance = new CustomWidget()
-
-    public static get Instance() {
-        return this.instance
-    }
-
     private widgets = new Map<string, { widget: BrowserWindow, lable: string }>()
 
     public Run() {
@@ -36,7 +26,7 @@ class CustomWidget extends EventSystem {
                 alwaysOnTop: options.alwaysOnTop || false,
                 transparent: options.transparent || false,
                 skipTaskbar: options.skipTaskbar || false,
-                icon: options.icon || ResourceLoad.Instance.GetImageByName('window.ico'),
+                icon: options.icon || ResourceLoad.GetImageByName('window.ico'),
                 show: options.show || true,
                 webPreferences: {
                     // 同源
@@ -46,22 +36,22 @@ class CustomWidget extends EventSystem {
                     // 是否独立线程运行 api 和 preload
                     contextIsolation: false,
                     // 设为false则禁用devtool开发者调试工具
-                    devTools: Configuration.Instance.configs.debug,
+                    devTools: Configuration.configs.debug,
                     // https 运行 http
                     allowRunningInsecureContent: true,
                     // 预加载脚本 仅为示例
-                    preload: options.preload || ResourceLoad.Instance.GetPreloadByName('Renderer')
+                    preload: options.preload || ResourceLoad.GetPreloadByName('Renderer')
                 }
             })
             widget.loadURL(options.url)
 
-            if (Configuration.Instance.configs.debug) {
+            if (Configuration.configs.debug) {
                 widget.webContents.openDevTools()
             }
 
             this.RegisterWidget(options.label, widget)
 
-            WindowPool.Instance.PostMessage({
+            WindowPool.PostMessage({
                 type: D.IpcRendererEvent.WidgetCreate,
                 widgets: [D.IpcRendererWindow.Main],
                 send: {
@@ -71,7 +61,7 @@ class CustomWidget extends EventSystem {
 
             widget.on('close', () => {
                 this.DeleteWidget(options.label)
-                WindowPool.Instance.PostMessage({
+                WindowPool.PostMessage({
                     type: D.IpcRendererEvent.WidgetDestroy,
                     widgets: [D.IpcRendererWindow.Main],
                     send: {
@@ -110,4 +100,6 @@ class CustomWidget extends EventSystem {
     }
 }
 
-export { CustomWidget }
+const CustomWidgetInstance = new CustomWidget()
+
+export { CustomWidgetInstance as CustomWidget }

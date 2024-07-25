@@ -4,16 +4,6 @@ import { D } from '@Decorators/D'
 import { EventSystem } from '@Libs/EventSystem'
 
 class GlobalShortcut extends EventSystem {
-    private constructor() {
-        super()
-    }
-
-    private static instance = new GlobalShortcut()
-
-    public static get Instance() {
-        return this.instance
-    }
-
     public Run() {
 
     }
@@ -22,7 +12,7 @@ class GlobalShortcut extends EventSystem {
         if (!globalShortcut.isRegistered(accelerator)) {
             return globalShortcut.register(accelerator, () => {
                 callback()
-                WindowPool.Instance.PostMessage({
+                WindowPool.PostMessage({
                     type: D.IpcRendererEvent.GlobalShortcut,
                     send: { accelerator }
                 })
@@ -44,4 +34,6 @@ class GlobalShortcut extends EventSystem {
     }
 }
 
-export { GlobalShortcut }
+const GlobalShortcutInstance = new GlobalShortcut()
+
+export { GlobalShortcutInstance as GlobalShortcut }

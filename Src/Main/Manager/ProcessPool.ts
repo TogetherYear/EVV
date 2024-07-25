@@ -4,14 +4,6 @@ import * as fs from 'fs'
 import { DM } from '@Main/Decorators/DM'
 
 class ProcessPool {
-    private constructor() { }
-
-    private static instance = new ProcessPool()
-
-    public static get Instance() {
-        return this.instance
-    }
-
     private pool = new Map<DM.ChildrenProcessType, ChildProcess>()
 
     public Run() {
@@ -31,12 +23,12 @@ class ProcessPool {
     }
 
     private RunChildren() {
-        const children = fs.readdirSync(ResourceLoad.Instance.GetChildProcessesFolder())
+        const children = fs.readdirSync(ResourceLoad.GetChildProcessesFolder())
         for (let c of children) {
             if (c.indexOf('.js') != -1) {
                 const name = c.split('.js')[0]
                 const type = this.TransformType(name)
-                const process = fork(ResourceLoad.Instance.GetChildProcessesByName(name))
+                const process = fork(ResourceLoad.GetChildProcessesByName(name))
                 process.on('message', (e: DM.IChildrenProcessReceiveMessage) => {
                     this.OnMessage({ ...e, type })
                 })
@@ -100,4 +92,6 @@ class ProcessPool {
     }
 }
 
-export { ProcessPool }
+const ProcessPoolInstance = new ProcessPool()
+
+export { ProcessPoolInstance as ProcessPool }

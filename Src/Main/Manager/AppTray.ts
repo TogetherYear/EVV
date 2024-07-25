@@ -7,16 +7,6 @@ import { WindowPool } from '@Main/Manager/WindowPool'
 import { D } from '@Decorators/D'
 
 class AppTray extends TWindow {
-    private constructor() {
-        super()
-    }
-
-    private static instance: AppTray = new AppTray()
-
-    public static get Instance(): AppTray {
-        return this.instance
-    }
-
     public tray!: Tray
 
     private flashTimer: NodeJS.Timeout | null = null
@@ -44,7 +34,7 @@ class AppTray extends TWindow {
             transparent: true,
             skipTaskbar: true,
             hasShadow: false,
-            icon: ResourceLoad.Instance.GetImageByName('tray.ico'),
+            icon: ResourceLoad.GetImageByName('tray.ico'),
             webPreferences: {
                 // 同源
                 webSecurity: false,
@@ -53,11 +43,11 @@ class AppTray extends TWindow {
                 // 是否独立线程运行 api 和 preload
                 contextIsolation: false,
                 // 设为false则禁用devtool开发者调试工具
-                devTools: Configuration.Instance.configs.debug,
+                devTools: Configuration.configs.debug,
                 // https 运行 http
                 allowRunningInsecureContent: true,
                 // 预加载脚本 仅为示例
-                preload: ResourceLoad.Instance.GetPreloadByName('Renderer')
+                preload: ResourceLoad.GetPreloadByName('Renderer')
             }
         })
 
@@ -65,19 +55,19 @@ class AppTray extends TWindow {
             this.widget.hide()
         })
 
-        if (Configuration.Instance.configs.debug) {
+        if (Configuration.configs.debug) {
             this.widget.webContents.openDevTools()
         }
 
-        this.widget.loadURL(ResourceLoad.Instance.GetPageByName('Tray'))
+        this.widget.loadURL(ResourceLoad.GetPageByName('Tray'))
 
-        WindowPool.Instance.RegisterWindow(D.IpcRendererWindow.Tray, this)
+        WindowPool.RegisterWindow(D.IpcRendererWindow.Tray, this)
     }
 
     private CreateTray() {
         if (process.platform == 'win32') {
             //系统托盘图标
-            this.tray = new Tray(ResourceLoad.Instance.GetImageByName('tray.ico'))
+            this.tray = new Tray(ResourceLoad.GetImageByName('tray.ico'))
 
             //设置此托盘图标的悬停提示内容
             this.tray.setToolTip('去码头整点薯条')
@@ -87,7 +77,7 @@ class AppTray extends TWindow {
             })
 
             this.tray.on('double-click', () => {
-                AppMainWindow.Instance.widget.show()
+                AppMainWindow.widget.show()
             })
         }
     }
@@ -104,7 +94,7 @@ class AppTray extends TWindow {
     }
 
     public OnSetIcon(icon: string) {
-        const showIcon = ResourceLoad.Instance.GetImageByName(icon)
+        const showIcon = ResourceLoad.GetImageByName(icon)
         this.tray.setImage(showIcon)
     }
 
@@ -114,8 +104,8 @@ class AppTray extends TWindow {
 
     public OnFlash(icon: string) {
         let show = true
-        const emptyIcon = ResourceLoad.Instance.GetImageByName("empty.ico")
-        const showIcon = ResourceLoad.Instance.GetImageByName(icon)
+        const emptyIcon = ResourceLoad.GetImageByName("empty.ico")
+        const showIcon = ResourceLoad.GetImageByName(icon)
         this.flashTimer = setInterval(() => {
             if (show) {
                 this.tray.setImage(emptyIcon)
@@ -128,7 +118,7 @@ class AppTray extends TWindow {
     }
 
     public OnStopFlash(icon: string) {
-        const showIcon = ResourceLoad.Instance.GetImageByName(icon)
+        const showIcon = ResourceLoad.GetImageByName(icon)
         if (this.flashTimer) {
             clearInterval(this.flashTimer)
             this.flashTimer = null
@@ -137,4 +127,6 @@ class AppTray extends TWindow {
     }
 }
 
-export { AppTray }
+const AppTrayInstance = new AppTray()
+
+export { AppTrayInstance as AppTray }
