@@ -13,7 +13,10 @@ class SingleInstance {
     }
 
     public OnSecondInstance() {
-        WindowPool.PostMessage({ type: D.IpcRendererEvent.SecondInstance, widgets: [D.IpcRendererWindow.Main] });
+        WindowPool.PostMessage({
+            type: D.IpcRendererEvent.SecondInstance,
+            widgets: [D.IpcRendererWindow.Main]
+        });
     }
 }
 

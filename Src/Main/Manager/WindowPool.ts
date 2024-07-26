@@ -38,7 +38,9 @@ class WindowPool {
                 }
             }
         } else if (e.excludeWidgets && e.excludeWidgets.length != 0) {
-            const need = this.GetPoolKV().filter((c) => (e.excludeWidgets || []).indexOf(c.key) == -1);
+            const need = this.GetPoolKV().filter(
+                (c) => (e.excludeWidgets || []).indexOf(c.key) == -1
+            );
             for (let c of need) {
                 c.value.widget.webContents.postMessage('RendererMessage', e);
             }

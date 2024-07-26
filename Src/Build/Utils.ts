@@ -11,7 +11,11 @@ export function WaitOn(arg0: { port: string | number; interval?: number }) {
         const timer: NodeJS.Timeout = setInterval(() => {
             get(url, (res) => {
                 clearInterval(timer);
-                console.log('[waitOn]', green(`"${url}" are already responsive.`), `(${res.statusCode}: ${res.statusMessage})`);
+                console.log(
+                    '[waitOn]',
+                    green(`"${url}" are already responsive.`),
+                    `(${res.statusCode}: ${res.statusMessage})`
+                );
                 resolve(res.statusCode);
             }).on('error', (err) => {
                 console.log('[waitOn]', `counter: ${counter++}`);
@@ -21,4 +25,5 @@ export function WaitOn(arg0: { port: string | number; interval?: number }) {
 }
 
 /** node.js builtins module */
-export const Builtins = () => builtinModules.filter((x) => !/^_|^(internal|v8|node-inspect)\/|\//.test(x));
+export const Builtins = () =>
+    builtinModules.filter((x) => !/^_|^(internal|v8|node-inspect)\/|\//.test(x));

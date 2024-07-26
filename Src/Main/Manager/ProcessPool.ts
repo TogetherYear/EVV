@@ -75,7 +75,9 @@ class ProcessPool {
                 }
             }
         } else if (e.excludeProcesses && e.excludeProcesses.length != 0) {
-            const need = this.GetPoolKV().filter((c) => (e.excludeProcesses || []).indexOf(c.key) == -1);
+            const need = this.GetPoolKV().filter(
+                (c) => (e.excludeProcesses || []).indexOf(c.key) == -1
+            );
             for (let p of need) {
                 p.value.send(e);
             }

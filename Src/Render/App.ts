@@ -55,11 +55,20 @@ class App extends AActor {
         });
     }
 
-    public override AddListen(key: D.IpcRendererEvent, scope: Object, callback: DR.AppMessageCallback, once?: boolean): void {
+    public override AddListen(
+        key: D.IpcRendererEvent,
+        scope: Object,
+        callback: DR.AppMessageCallback,
+        once?: boolean
+    ): void {
         super.AddListen(key, scope, callback, once);
     }
 
-    public override RemoveListen(key: D.IpcRendererEvent, scope: Object, callback: DR.AppMessageCallback): void {
+    public override RemoveListen(
+        key: D.IpcRendererEvent,
+        scope: Object,
+        callback: DR.AppMessageCallback
+    ): void {
         super.RemoveListen(key, scope, callback);
     }
 

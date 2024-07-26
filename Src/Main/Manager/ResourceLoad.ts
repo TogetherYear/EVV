@@ -6,11 +6,18 @@ class ResourceLoad {
     public Run() {}
 
     public GetPageByName(name: string) {
-        return app.isPackaged ? `file://${path.join(__dirname, `../Render/index.html#/${name}`)}`.replaceAll('\\', '/') : `http://localhost:6768/#/${name}`;
+        return app.isPackaged
+            ? `file://${path.join(__dirname, `../Render/index.html#/${name}`)}`.replaceAll(
+                  '\\',
+                  '/'
+              )
+            : `http://localhost:6768/#/${name}`;
     }
 
     public GetExtraFolder() {
-        return app.isPackaged ? path.join(process.resourcesPath, `/Need`) : path.join(__dirname, `../../Need`);
+        return app.isPackaged
+            ? path.join(process.resourcesPath, `/Need`)
+            : path.join(__dirname, `../../Need`);
     }
 
     public GetImageByName(name: string) {
