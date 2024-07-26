@@ -1,20 +1,18 @@
-import { EventSystem } from '@Libs/EventSystem'
-import { BrowserWindow } from 'electron'
-import { WindowPool } from './WindowPool'
-import { D } from '@Decorators/D'
-import { ResourceLoad } from './ResourceLoad'
-import { Configuration } from './Configuration'
-import { DM } from '@Main/Decorators/DM'
+import { EventSystem } from '@Libs/EventSystem';
+import { BrowserWindow } from 'electron';
+import { WindowPool } from './WindowPool';
+import { D } from '@Decorators/D';
+import { ResourceLoad } from './ResourceLoad';
+import { Configuration } from './Configuration';
+import { DM } from '@Main/Decorators/DM';
 
 class CustomWidget extends EventSystem {
-    private widgets = new Map<string, { widget: BrowserWindow, lable: string }>()
+    private widgets = new Map<string, { widget: BrowserWindow; lable: string }>();
 
-    public Run() {
-
-    }
+    public Run() {}
 
     public CreateWindow(options: TSingleton.CustomWidgetOptions) {
-        const target = this.widgets.get(options.label)
+        const target = this.widgets.get(options.label);
         if (!target) {
             const widget = new BrowserWindow({
                 title: options.label,
@@ -42,14 +40,14 @@ class CustomWidget extends EventSystem {
                     // 预加载脚本 仅为示例
                     preload: options.preload || ResourceLoad.GetPreloadByName('Renderer')
                 }
-            })
-            widget.loadURL(options.url)
+            });
+            widget.loadURL(options.url);
 
             if (Configuration.configs.debug) {
-                widget.webContents.openDevTools()
+                widget.webContents.openDevTools();
             }
 
-            this.RegisterWidget(options.label, widget)
+            this.RegisterWidget(options.label, widget);
 
             WindowPool.PostMessage({
                 type: D.IpcRendererEvent.WidgetCreate,
@@ -57,49 +55,48 @@ class CustomWidget extends EventSystem {
                 send: {
                     label: options.label
                 }
-            })
+            });
 
             widget.on('close', () => {
-                this.DeleteWidget(options.label)
+                this.DeleteWidget(options.label);
                 WindowPool.PostMessage({
                     type: D.IpcRendererEvent.WidgetDestroy,
                     widgets: [D.IpcRendererWindow.Main],
                     send: {
                         label: options.label
                     }
-                })
-            })
-        }
-        else {
-            target.widget.show()
+                });
+            });
+        } else {
+            target.widget.show();
         }
     }
 
     public FindWidget(id: number) {
         for (let w of this.widgets) {
             if (w[1].widget.webContents.id == id) {
-                return w[1]
+                return w[1];
             }
         }
     }
 
     public RegisterWidget(label: string, widget: BrowserWindow) {
-        this.widgets.set(label, { widget, lable: label })
+        this.widgets.set(label, { widget, lable: label });
     }
 
-    public DeleteWidget(label: string,) {
-        this.widgets.delete(label)
+    public DeleteWidget(label: string) {
+        this.widgets.delete(label);
     }
 
-    public OnGetPosition(widget: BrowserWindow,) {
-        const position = widget.getPosition()
+    public OnGetPosition(widget: BrowserWindow) {
+        const position = widget.getPosition();
         return {
             x: position[0],
             y: position[1]
-        }
+        };
     }
 }
 
-const CustomWidgetInstance = new CustomWidget()
+const CustomWidgetInstance = new CustomWidget();
 
-export { CustomWidgetInstance as CustomWidget }
+export { CustomWidgetInstance as CustomWidget };

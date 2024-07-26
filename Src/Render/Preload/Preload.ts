@@ -1,8 +1,8 @@
-import { EventSystem } from "@Libs/EventSystem"
-import { useDialog, useMessage, useNotification } from "naive-ui"
-import { NotificationApiInjection } from "naive-ui/es/notification/src/NotificationProvider"
-import { DialogApiInjection } from "naive-ui/lib/dialog/src/DialogProvider"
-import { MessageApiInjection } from "naive-ui/lib/message/src/MessageProvider"
+import { EventSystem } from '@Libs/EventSystem';
+import { useDialog, useMessage, useNotification } from 'naive-ui';
+import { NotificationApiInjection } from 'naive-ui/es/notification/src/NotificationProvider';
+import { DialogApiInjection } from 'naive-ui/lib/dialog/src/DialogProvider';
+import { MessageApiInjection } from 'naive-ui/lib/message/src/MessageProvider';
 
 class Preload extends EventSystem {
     public message!: MessageApiInjection;
@@ -12,7 +12,7 @@ class Preload extends EventSystem {
     public notification!: NotificationApiInjection;
 
     public Run() {
-        this.CreateNaive()
+        this.CreateNaive();
     }
 
     private CreateNaive() {
@@ -22,6 +22,6 @@ class Preload extends EventSystem {
     }
 }
 
-const PreloadInstance = new Preload()
+const PreloadInstance = new Preload();
 
-export { PreloadInstance as Preload }
+export { PreloadInstance as Preload };

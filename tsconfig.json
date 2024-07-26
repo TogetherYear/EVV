@@ -1,45 +1,30 @@
 {
-  "compilerOptions": {
-    "target": "esnext",
-    "module": "esnext",
-    "moduleResolution": "node",
-    "importHelpers": true,
-    "jsx": "preserve",
-    "esModuleInterop": true,
-    "resolveJsonModule": true,
-    "experimentalDecorators": true,
-    "sourceMap": true,
-    "baseUrl": "./",
-    "strict": true,
-    "lib": [
-      "esnext",
-      "dom"
-    ],
-    "paths": {
-      "@Render/*": [
-        "Src/Render/*"
-      ],
-      "@Main/*": [
-        "Src/Main/*"
-      ],
-      "@Libs/*": [
-        "Src/Libs/*"
-      ],
-      "@Decorators/*": [
-        "Src/Decorators/*"
-      ],
-      "@Src/*": [
-        "Src/*"
-      ],
-      "@Root/*": [
-        "./*"
-      ]
-    },
-    "allowSyntheticDefaultImports": true
-  },
-  "ts-node": {
     "compilerOptions": {
-      "module": "CommonJS"
+        "target": "esnext",
+        "module": "esnext",
+        "moduleResolution": "node",
+        "importHelpers": true,
+        "jsx": "preserve",
+        "esModuleInterop": true,
+        "resolveJsonModule": true,
+        "experimentalDecorators": true,
+        "sourceMap": true,
+        "baseUrl": "./",
+        "strict": true,
+        "lib": ["esnext", "dom"],
+        "paths": {
+            "@Render/*": ["Src/Render/*"],
+            "@Main/*": ["Src/Main/*"],
+            "@Libs/*": ["Src/Libs/*"],
+            "@Decorators/*": ["Src/Decorators/*"],
+            "@Src/*": ["Src/*"],
+            "@Root/*": ["./*"]
+        },
+        "allowSyntheticDefaultImports": true
+    },
+    "ts-node": {
+        "compilerOptions": {
+            "module": "CommonJS"
+        }
     }
-  }
 }

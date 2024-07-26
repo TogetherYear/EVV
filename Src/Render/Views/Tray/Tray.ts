@@ -1,37 +1,33 @@
-import { AActor } from "@Render/Libs/AActor"
-import { onMounted, onUnmounted } from "vue"
+import { AActor } from '@Render/Libs/AActor';
+import { onMounted, onUnmounted } from 'vue';
 
 class Tray extends AActor {
-    public constructor() { super() }
+    public constructor() {
+        super();
+    }
 
     public InitStates() {
-        return {}
+        return {};
     }
 
-    public InitHooks() {
-
-    }
+    public InitHooks() {}
 
     public Run() {
         onMounted(() => {
-            this.ListenEvents()
-        })
+            this.ListenEvents();
+        });
         onUnmounted(() => {
-            this.Destroy()
-        })
+            this.Destroy();
+        });
     }
 
-    protected Destroy() {
+    protected Destroy() {}
 
-    }
-
-    private ListenEvents() {
-
-    }
+    private ListenEvents() {}
 
     public OnClose() {
-        Renderer.App.Close()
+        Renderer.App.Close();
     }
 }
 
-export { Tray }
+export { Tray };

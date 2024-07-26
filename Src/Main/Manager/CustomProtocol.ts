@@ -1,22 +1,22 @@
-import { protocol, net } from "electron"
+import { protocol, net } from 'electron';
 
 /**
  * 自定义协议
  */
 class CustomProtocol {
-    public fileProtocol = 'tfile'
+    public fileProtocol = 'tfile';
 
     public Run() {
-        this.GenerateFileProtocol()
+        this.GenerateFileProtocol();
     }
 
     private GenerateFileProtocol() {
         protocol.handle(this.fileProtocol, (request) => {
-            return net.fetch('file://' + request.url.slice(this.fileProtocol.length))
-        })
+            return net.fetch('file://' + request.url.slice(this.fileProtocol.length));
+        });
     }
 }
 
-const CustomProtocolInstance = new CustomProtocol()
+const CustomProtocolInstance = new CustomProtocol();
 
-export { CustomProtocolInstance as CustomProtocol }
+export { CustomProtocolInstance as CustomProtocol };

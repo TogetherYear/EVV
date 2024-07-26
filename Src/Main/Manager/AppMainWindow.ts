@@ -1,13 +1,13 @@
-import { BrowserWindow, Menu } from 'electron'
-import { ResourceLoad } from '@Main/Manager/ResourceLoad'
-import { Configuration } from '@Main/Manager/Configuration'
-import { TWindow } from '@Main/Libs/TWindow'
-import { D } from '@Decorators/D'
-import { WindowPool } from './WindowPool'
+import { BrowserWindow, Menu } from 'electron';
+import { ResourceLoad } from '@Main/Manager/ResourceLoad';
+import { Configuration } from '@Main/Manager/Configuration';
+import { TWindow } from '@Main/Libs/TWindow';
+import { D } from '@Decorators/D';
+import { WindowPool } from './WindowPool';
 
 class AppMainWindow extends TWindow {
     public async Run() {
-        this.CreateWidget()
+        this.CreateWidget();
     }
 
     private CreateWidget() {
@@ -37,41 +37,41 @@ class AppMainWindow extends TWindow {
                 // 预加载脚本 仅为示例
                 preload: ResourceLoad.GetPreloadByName('Renderer')
             }
-        })
+        });
 
         this.widget.once('ready-to-show', () => {
             // this.widget.show()
-        })
+        });
 
         //这样并不会生效 详情去issues看 链接：https://github.com/electron/electron/issues/26726
         this.widget.on('system-context-menu', (e) => {
-            e.preventDefault()
-        })
+            e.preventDefault();
+        });
 
         //目前临时解决方法 链接：https://github.com/electron/electron/issues/24893#issuecomment-1109262719
         this.widget.hookWindowMessage(0x0116, () => {
-            this.widget.setEnabled(false)
-            this.widget.setEnabled(true)
-        })
+            this.widget.setEnabled(false);
+            this.widget.setEnabled(true);
+        });
 
         this.widget.on('close', (e) => {
-            e.preventDefault()
-            this.widget.hide()
-        })
+            e.preventDefault();
+            this.widget.hide();
+        });
 
         if (Configuration.configs.debug) {
-            this.widget.webContents.openDevTools()
+            this.widget.webContents.openDevTools();
         }
 
-        this.widget.loadURL(ResourceLoad.GetPageByName('Application'))
+        this.widget.loadURL(ResourceLoad.GetPageByName('Application'));
 
         // 我这里取消了默认的菜单栏 你可以自定义
-        Menu.setApplicationMenu(null)
+        Menu.setApplicationMenu(null);
 
-        WindowPool.RegisterWindow(D.IpcRendererWindow.Main, this)
+        WindowPool.RegisterWindow(D.IpcRendererWindow.Main, this);
     }
 }
 
-const AppMainWindowInstance = new AppMainWindow()
+const AppMainWindowInstance = new AppMainWindow();
 
-export { AppMainWindowInstance as AppMainWindow }
+export { AppMainWindowInstance as AppMainWindow };

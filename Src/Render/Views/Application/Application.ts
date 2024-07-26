@@ -1,61 +1,55 @@
-import { D } from "@Decorators/D"
-import { App } from "@Render/App"
-import { AActor } from "@Render/Libs/AActor"
-import { Preload } from "@Render/Preload/Preload"
-import { onMounted, onUnmounted } from "vue"
+import { D } from '@Decorators/D';
+import { App } from '@Render/App';
+import { AActor } from '@Render/Libs/AActor';
+import { Preload } from '@Render/Preload/Preload';
+import { onMounted, onUnmounted } from 'vue';
 
 class Application extends AActor {
     public constructor() {
-        super()
+        super();
     }
 
     public InitStates() {
-        return {
-
-        }
+        return {};
     }
 
-    public InitHooks() {
-
-    }
+    public InitHooks() {}
 
     public Run() {
         onMounted(() => {
-            this.ListenEvents()
-            this.State()
-        })
+            this.ListenEvents();
+            this.State();
+        });
         onUnmounted(() => {
-            this.Destroy()
-        })
+            this.Destroy();
+        });
     }
 
-    protected Destroy() {
-
-    }
+    protected Destroy() {}
 
     private ListenEvents() {
-        App.AddListen(D.IpcRendererEvent.SecondInstance, this, this.OnSecondInstance)
+        App.AddListen(D.IpcRendererEvent.SecondInstance, this, this.OnSecondInstance);
     }
 
     private async OnSecondInstance(e: D.IpcRendererSendMessage) {
-        Preload.message.error('已关闭第二个实例')
-        await Renderer.Widget.Show()
+        Preload.message.error('已关闭第二个实例');
+        await Renderer.Widget.Show();
     }
 
     private async State() {
-        if (location.href.indexOf("Application") != -1) {
+        if (location.href.indexOf('Application') != -1) {
             await Renderer.Widget.SetSize({
-                width: parseInt(localStorage.getItem("width") || '1000'),
-                height: parseInt(localStorage.getItem("height") || '560')
-            })
-            await Renderer.Widget.Center()
-            await Renderer.Widget.Show()
+                width: parseInt(localStorage.getItem('width') || '1000'),
+                height: parseInt(localStorage.getItem('height') || '560')
+            });
+            await Renderer.Widget.Center();
+            await Renderer.Widget.Show();
             window.addEventListener('resize', (e: UIEvent) => {
-                localStorage.setItem("width", `${window.innerWidth}`)
-                localStorage.setItem("height", `${window.innerHeight}`)
-            })
+                localStorage.setItem('width', `${window.innerWidth}`);
+                localStorage.setItem('height', `${window.innerHeight}`);
+            });
         }
     }
 }
 
-export { Application }
+export { Application };

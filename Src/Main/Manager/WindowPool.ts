@@ -1,31 +1,29 @@
-import { D } from "@Decorators/D"
-import { TWindow } from "@Main/Libs/TWindow"
+import { D } from '@Decorators/D';
+import { TWindow } from '@Main/Libs/TWindow';
 
 class WindowPool {
-    private pool = new Map<D.IpcRendererWindow, TWindow>()
+    private pool = new Map<D.IpcRendererWindow, TWindow>();
 
-    public Run() {
-
-    }
+    public Run() {}
 
     public RegisterWindow(t: D.IpcRendererWindow, w: TWindow) {
-        this.pool.set(t, w)
+        this.pool.set(t, w);
     }
 
     public CancelWindow(t: D.IpcRendererWindow) {
-        this.pool.delete(t)
+        this.pool.delete(t);
     }
 
     public GetWindow(t: D.IpcRendererWindow) {
-        return this.pool.get(t)
+        return this.pool.get(t);
     }
 
     public GetPoolKV() {
-        const result: Array<{ key: D.IpcRendererWindow, value: TWindow }> = []
+        const result: Array<{ key: D.IpcRendererWindow; value: TWindow }> = [];
         for (let p of this.pool) {
-            result.push({ key: p[0], value: p[1] })
+            result.push({ key: p[0], value: p[1] });
         }
-        return result
+        return result;
     }
 
     /**
@@ -34,37 +32,33 @@ class WindowPool {
     public PostMessage(e: D.IpcRendererSendMessage) {
         if (e.widgets && e.widgets.length != 0) {
             for (let w of e.widgets) {
-                const window = this.GetWindow(w)
+                const window = this.GetWindow(w);
                 if (window) {
-                    window.widget.webContents.postMessage("RendererMessage", e)
+                    window.widget.webContents.postMessage('RendererMessage', e);
                 }
             }
-        }
-        else if (e.excludeWidgets && e.excludeWidgets.length != 0) {
-            const need = this.GetPoolKV().filter(c => (e.excludeWidgets || []).indexOf(c.key) == -1)
+        } else if (e.excludeWidgets && e.excludeWidgets.length != 0) {
+            const need = this.GetPoolKV().filter((c) => (e.excludeWidgets || []).indexOf(c.key) == -1);
             for (let c of need) {
-                c.value.widget.webContents.postMessage("RendererMessage", e)
+                c.value.widget.webContents.postMessage('RendererMessage', e);
             }
-        }
-        else {
+        } else {
             for (let c of this.pool) {
-                c[1].widget.webContents.postMessage("RendererMessage", e)
+                c[1].widget.webContents.postMessage('RendererMessage', e);
             }
         }
-
     }
 
     public GetWindowById(id: number): TWindow {
         for (let p of this.pool) {
             if (p[1].widget.id == id) {
-                return p[1]
+                return p[1];
             }
         }
-        return this.GetWindow(D.IpcRendererWindow.Main) as TWindow
+        return this.GetWindow(D.IpcRendererWindow.Main) as TWindow;
     }
-
 }
 
-const WindowPoolInstance = new WindowPool()
+const WindowPoolInstance = new WindowPool();
 
-export { WindowPoolInstance as WindowPool }
+export { WindowPoolInstance as WindowPool };

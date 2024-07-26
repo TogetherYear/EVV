@@ -1,4 +1,4 @@
-import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
+import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router';
 
 const routes: Array<RouteRecordRaw> = [
     {
@@ -14,23 +14,23 @@ const routes: Array<RouteRecordRaw> = [
     {
         path: '/Empty',
         name: 'Empty',
-        component: () => import('@Render/Views/Empty/Empty.vue'),
+        component: () => import('@Render/Views/Empty/Empty.vue')
     },
     {
         path: '/Application',
         name: 'Application',
-        component: () => import('@Render/Views/Application/Application.vue'),
+        component: () => import('@Render/Views/Application/Application.vue')
     },
     {
         path: '/Tray',
         name: 'Tray',
-        component: () => import('@Render/Views/Tray/Tray.vue'),
-    },
-]
+        component: () => import('@Render/Views/Tray/Tray.vue')
+    }
+];
 
 const router = createRouter({
     history: createWebHashHistory(),
     routes
-})
+});
 
-export default router
+export default router;

@@ -1,12 +1,12 @@
-import { EventSystem } from "@Libs/EventSystem";
-import { BrowserWindow } from "electron";
+import { EventSystem } from '@Libs/EventSystem';
+import { BrowserWindow } from 'electron';
 
 abstract class TWindow extends EventSystem {
     public constructor() {
-        super()
+        super();
     }
 
-    public widget!: BrowserWindow
+    public widget!: BrowserWindow;
 }
 
-export { TWindow }
+export { TWindow };

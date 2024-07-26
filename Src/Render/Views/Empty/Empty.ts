@@ -1,37 +1,30 @@
-import { AActor } from "@Render/Libs/AActor"
-import { onMounted, onUnmounted } from "vue"
+import { AActor } from '@Render/Libs/AActor';
+import { onMounted, onUnmounted } from 'vue';
 
 class Empty extends AActor {
     public constructor() {
-        super()
+        super();
     }
-
 
     public InitStates() {
-        return {
-
-        }
+        return {};
     }
 
-    public InitHooks() {
-
-    }
+    public InitHooks() {}
 
     public Run() {
         onMounted(() => {
             Renderer.Widget.PostMessage({
-                reason: "Empty"
-            })
-        })
+                reason: 'Empty'
+            });
+        });
 
         onUnmounted(() => {
-            this.Destroy()
-        })
+            this.Destroy();
+        });
     }
 
-    protected Destroy() {
-
-    }
+    protected Destroy() {}
 }
 
-export { Empty }
+export { Empty };

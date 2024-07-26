@@ -3,58 +3,52 @@ namespace DM {
         return function <T extends new (...args: Array<any>) => Object>(C: T) {
             return class extends C {
                 constructor(...args: Array<any>) {
-                    super(...args)
-                    this.Hooks()
+                    super(...args);
+                    this.Hooks();
                 }
 
-                private Hooks() {
-
-                }
-
-            }
-        }
+                private Hooks() {}
+            };
+        };
     }
 
     export function FunctionDec() {
         return function (target: Object, propertyKey: string | symbol, descriptor: PropertyDescriptor) {
-            const original = descriptor.value.bind(target)
+            const original = descriptor.value.bind(target);
             descriptor.value = (...args: Array<unknown>) => {
-                original(...args)
-
-            }
-        }
+                original(...args);
+            };
+        };
     }
 
     export enum ChildrenProcessType {
         Log = 'Log',
         Push = 'Push',
         Custom = 'Custom',
-        Other = 'Other',
+        Other = 'Other'
     }
 
     export enum ChildrenProcessEvent {
-        Message = 'Message',
+        Message = 'Message'
     }
 
     export interface IChildrenProcessReceiveMessage {
-        [key: string]: unknown
+        [key: string]: unknown;
     }
 
     export type ChildrenProcessSendMessage = {
-        type: ChildrenProcessEvent,
+        type: ChildrenProcessEvent;
         /**
          * 要发送消息的子进程 与 excludeProcesses 冲突 二者填一个 此参数优先级高
          */
-        processes?: Array<ChildrenProcessType>,
+        processes?: Array<ChildrenProcessType>;
         /**
          * 不要发送消息的子进程 与 processes 冲突 二者填一个
          */
-        excludeProcesses?: Array<ChildrenProcessType>,
-        send?: IChildrenProcessSendMessage
-    }
+        excludeProcesses?: Array<ChildrenProcessType>;
+        send?: IChildrenProcessSendMessage;
+    };
 
-    export interface IChildrenProcessSendMessage extends IChildrenProcessReceiveMessage {
-
-    }
+    export interface IChildrenProcessSendMessage extends IChildrenProcessReceiveMessage {}
 }
-export { DM }
+export { DM };

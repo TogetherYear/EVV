@@ -1,39 +1,37 @@
-import { globalShortcut } from 'electron'
-import { WindowPool } from './WindowPool'
-import { D } from '@Decorators/D'
-import { EventSystem } from '@Libs/EventSystem'
+import { globalShortcut } from 'electron';
+import { WindowPool } from './WindowPool';
+import { D } from '@Decorators/D';
+import { EventSystem } from '@Libs/EventSystem';
 
 class GlobalShortcut extends EventSystem {
-    public Run() {
-
-    }
+    public Run() {}
 
     public Register(accelerator: Electron.Accelerator, callback: () => void) {
         if (!globalShortcut.isRegistered(accelerator)) {
             return globalShortcut.register(accelerator, () => {
-                callback()
+                callback();
                 WindowPool.PostMessage({
                     type: D.IpcRendererEvent.GlobalShortcut,
                     send: { accelerator }
-                })
-            })
+                });
+            });
         }
-        return true
+        return true;
     }
 
     public Unregister(accelerator: Electron.Accelerator) {
-        globalShortcut.unregister(accelerator)
+        globalShortcut.unregister(accelerator);
     }
 
     public IsRegistered(accelerator: Electron.Accelerator) {
-        return globalShortcut.isRegistered(accelerator)
+        return globalShortcut.isRegistered(accelerator);
     }
 
     public UnregisterAll() {
-        globalShortcut.unregisterAll()
+        globalShortcut.unregisterAll();
     }
 }
 
-const GlobalShortcutInstance = new GlobalShortcut()
+const GlobalShortcutInstance = new GlobalShortcut();
 
-export { GlobalShortcutInstance as GlobalShortcut }
+export { GlobalShortcutInstance as GlobalShortcut };

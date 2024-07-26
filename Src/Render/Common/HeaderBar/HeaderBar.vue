@@ -1,19 +1,20 @@
 <script lang="ts" setup>
-import { HeaderBar } from './HeaderBar'
+import { HeaderBar } from './HeaderBar';
 
-const attribute = withDefaults(defineProps<{
-    bgc?: string
-}>(), {
-    bgc: '#212121',
-})
+const attribute = withDefaults(
+    defineProps<{
+        bgc?: string;
+    }>(),
+    {
+        bgc: '#212121'
+    }
+);
 
-const instance = new HeaderBar()
+const instance = new HeaderBar();
 
-const {
-    options
-} = instance.InitStates()
-instance.InitHooks()
-instance.Run()
+const { options } = instance.InitStates();
+instance.InitHooks();
+instance.Run();
 </script>
 
 <template>
@@ -28,5 +29,5 @@ instance.Run()
 </template>
 
 <style lang="scss" scoped>
-@import "./HeaderBar.scss";
+@import './HeaderBar.scss';
 </style>

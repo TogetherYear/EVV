@@ -1,19 +1,20 @@
-import { nativeTheme } from 'electron'
-import { WindowPool } from './WindowPool'
-import { D } from '@Decorators/D'
+import { nativeTheme } from 'electron';
+import { WindowPool } from './WindowPool';
+import { D } from '@Decorators/D';
 
 class CommonEvent {
     public Run() {
-        nativeTheme.on("updated", () => {
+        nativeTheme.on('updated', () => {
             WindowPool.PostMessage({
-                type: D.IpcRendererEvent.ThemeUpdate, send: {
+                type: D.IpcRendererEvent.ThemeUpdate,
+                send: {
                     theme: nativeTheme.themeSource
                 }
-            })
-        })
+            });
+        });
     }
 }
 
-const CommonEventInstance = new CommonEvent()
+const CommonEventInstance = new CommonEvent();
 
-export { CommonEventInstance as CommonEvent }
+export { CommonEventInstance as CommonEvent };

@@ -1,45 +1,39 @@
-import { D } from "@Decorators/D"
-import { onMounted, onUnmounted } from "vue"
+import { D } from '@Decorators/D';
+import { onMounted, onUnmounted } from 'vue';
 
 namespace DR {
     export function ClassDec() {
         return function <T extends new (...args: Array<any>) => Object>(C: T) {
             return class extends C {
                 constructor(...args: Array<any>) {
-                    super(...args)
-                    this.Hooks()
+                    super(...args);
+                    this.Hooks();
                 }
 
                 private Hooks() {
-                    onMounted(() => {
+                    onMounted(() => {});
 
-                    })
-
-                    onUnmounted(() => {
-
-                    })
+                    onUnmounted(() => {});
                 }
-
-            }
-        }
+            };
+        };
     }
 
     export function FunctionDec() {
         return function (target: Object, propertyKey: string | symbol, descriptor: PropertyDescriptor) {
-            const original = descriptor.value.bind(target)
+            const original = descriptor.value.bind(target);
             descriptor.value = (...args: Array<unknown>) => {
-                original(...args)
-
-            }
-        }
+                original(...args);
+            };
+        };
     }
 
-    export type AppMessageCallback = (e: D.IpcRendererSendMessage) => void
+    export type AppMessageCallback = (e: D.IpcRendererSendMessage) => void;
 
     export interface IHeaderBarOptionItem {
-        type: string,
-        icon: string,
-        label: string
+        type: string;
+        icon: string;
+        label: string;
     }
 }
-export { DR }
+export { DR };
