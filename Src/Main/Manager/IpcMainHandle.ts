@@ -52,13 +52,10 @@ class IpcMainHandle {
             return enable;
         });
 
-        ipcMain.handle(
-            `Renderer:App:CreateCustomWindow`,
-            async (e, options: TSingleton.CustomWidgetOptions) => {
-                const result = CustomWidget.CreateWindow(options);
-                return result;
-            }
-        );
+        ipcMain.handle(`Renderer:App:CreateCustomWindow`, async (e, options: TSingleton.CustomWidgetOptions) => {
+            const result = CustomWidget.CreateWindow(options);
+            return result;
+        });
     }
 
     private OnWidgetIPC() {
@@ -96,13 +93,10 @@ class IpcMainHandle {
             return widget.center();
         });
 
-        ipcMain.handle(
-            `Renderer:Widget:SetPosition`,
-            async (e, position: { x: number; y: number }) => {
-                const widget = BrowserWindow.fromWebContents(e.sender) as BrowserWindow;
-                return widget.setPosition(position.x, position.y);
-            }
-        );
+        ipcMain.handle(`Renderer:Widget:SetPosition`, async (e, position: { x: number; y: number }) => {
+            const widget = BrowserWindow.fromWebContents(e.sender) as BrowserWindow;
+            return widget.setPosition(position.x, position.y);
+        });
 
         ipcMain.handle(`Renderer:Widget:GetPosition`, async (e) => {
             const widget = BrowserWindow.fromWebContents(e.sender) as BrowserWindow;
@@ -113,13 +107,10 @@ class IpcMainHandle {
             };
         });
 
-        ipcMain.handle(
-            `Renderer:Widget:SetSize`,
-            async (e, size: { width: number; height: number }) => {
-                const widget = BrowserWindow.fromWebContents(e.sender) as BrowserWindow;
-                return widget.setSize(size.width, size.height);
-            }
-        );
+        ipcMain.handle(`Renderer:Widget:SetSize`, async (e, size: { width: number; height: number }) => {
+            const widget = BrowserWindow.fromWebContents(e.sender) as BrowserWindow;
+            return widget.setSize(size.width, size.height);
+        });
 
         ipcMain.handle(`Renderer:Widget:SetAlwaysOnTop`, async (e, flag: boolean) => {
             const widget = BrowserWindow.fromWebContents(e.sender) as BrowserWindow;
@@ -281,41 +272,35 @@ class IpcMainHandle {
             return path;
         });
 
-        ipcMain.handle(
-            `Renderer:Resource:SelectResourcesPath`,
-            async (e, options: TSingleton.SelectOptions) => {
-                const window = WindowPool.GetWindowById(e.sender.id);
-                const features: Array<'multiSelections' | 'openDirectory' | 'openFile'> = [];
-                if (options.multiple) {
-                    features.push('multiSelections');
-                }
-                if (options.directory) {
-                    features.push('openDirectory');
-                } else {
-                    features.push('openFile');
-                }
-                const path = dialog.showOpenDialogSync(window.widget, {
-                    title: options.title,
-                    defaultPath: options.defaultPath,
-                    filters: options.filters,
-                    properties: features
-                });
-                return path;
+        ipcMain.handle(`Renderer:Resource:SelectResourcesPath`, async (e, options: TSingleton.SelectOptions) => {
+            const window = WindowPool.GetWindowById(e.sender.id);
+            const features: Array<'multiSelections' | 'openDirectory' | 'openFile'> = [];
+            if (options.multiple) {
+                features.push('multiSelections');
             }
-        );
+            if (options.directory) {
+                features.push('openDirectory');
+            } else {
+                features.push('openFile');
+            }
+            const path = dialog.showOpenDialogSync(window.widget, {
+                title: options.title,
+                defaultPath: options.defaultPath,
+                filters: options.filters,
+                properties: features
+            });
+            return path;
+        });
 
-        ipcMain.handle(
-            `Renderer:Resource:GetSaveResourcesPath`,
-            async (e, options: TSingleton.SaveOptions) => {
-                const window = WindowPool.GetWindowById(e.sender.id);
-                const path = dialog.showSaveDialog(window.widget, {
-                    title: options.title,
-                    defaultPath: options.defaultPath,
-                    filters: options.filters
-                });
-                return path;
-            }
-        );
+        ipcMain.handle(`Renderer:Resource:GetSaveResourcesPath`, async (e, options: TSingleton.SaveOptions) => {
+            const window = WindowPool.GetWindowById(e.sender.id);
+            const path = dialog.showSaveDialog(window.widget, {
+                title: options.title,
+                defaultPath: options.defaultPath,
+                filters: options.filters
+            });
+            return path;
+        });
 
         ipcMain.handle(`Renderer:Resource:IsPathExists`, async (e, path: string) => {
             const result = F.existsSync(path);
@@ -392,19 +377,16 @@ class IpcMainHandle {
             Download.DownloadFromUrl(url);
         });
 
-        ipcMain.handle(
-            `Renderer:Resource:WriteStringToFile`,
-            async (e, path: string, str: string) => {
-                return await new Promise((resolve, reject) => {
-                    F.writeFile(path, str, (err) => {
-                        if (err) {
-                            resolve(false);
-                        }
-                        resolve(true);
-                    });
+        ipcMain.handle(`Renderer:Resource:WriteStringToFile`, async (e, path: string, str: string) => {
+            return await new Promise((resolve, reject) => {
+                F.writeFile(path, str, (err) => {
+                    if (err) {
+                        resolve(false);
+                    }
+                    resolve(true);
                 });
-            }
-        );
+            });
+        });
 
         ipcMain.handle(`Renderer:Resource:ReadStringFromFile`, async (e, path: string) => {
             return await new Promise((resolve, reject) => {
@@ -417,19 +399,16 @@ class IpcMainHandle {
             });
         });
 
-        ipcMain.handle(
-            `Renderer:Resource:AppendStringToFile`,
-            async (e, path: string, str: string, newline: boolean) => {
-                return await new Promise((resolve, reject) => {
-                    F.appendFile(path, newline ? `\n${str}` : str, (err) => {
-                        if (err) {
-                            resolve(false);
-                        }
-                        resolve(true);
-                    });
+        ipcMain.handle(`Renderer:Resource:AppendStringToFile`, async (e, path: string, str: string, newline: boolean) => {
+            return await new Promise((resolve, reject) => {
+                F.appendFile(path, newline ? `\n${str}` : str, (err) => {
+                    if (err) {
+                        resolve(false);
+                    }
+                    resolve(true);
                 });
-            }
-        );
+            });
+        });
 
         ipcMain.handle(`Renderer:Resource:GetFileMetadata`, async (e, path: string) => {
             return await new Promise((resolve, reject) => {
@@ -448,63 +427,48 @@ class IpcMainHandle {
     }
 
     private OnGlobalShortcutIPC() {
-        ipcMain.handle(
-            `Renderer:GlobalShortcut:Register`,
-            async (e, accelerator: Electron.Accelerator) => {
-                const result = GlobalShortcut.Register(accelerator, () => {});
-                return result;
-            }
-        );
+        ipcMain.handle(`Renderer:GlobalShortcut:Register`, async (e, accelerator: Electron.Accelerator) => {
+            const result = GlobalShortcut.Register(accelerator, () => {});
+            return result;
+        });
 
-        ipcMain.handle(
-            `Renderer:GlobalShortcut:Unregister`,
-            async (e, accelerator: Electron.Accelerator) => {
-                const result = GlobalShortcut.Unregister(accelerator);
-                return result;
-            }
-        );
+        ipcMain.handle(`Renderer:GlobalShortcut:Unregister`, async (e, accelerator: Electron.Accelerator) => {
+            const result = GlobalShortcut.Unregister(accelerator);
+            return result;
+        });
 
         ipcMain.handle(`Renderer:GlobalShortcut:UnregisterAll`, (e) => {
             const result = GlobalShortcut.UnregisterAll();
             return result;
         });
 
-        ipcMain.handle(
-            `Renderer:GlobalShortcut:IsRegistered`,
-            async (e, accelerator: Electron.Accelerator) => {
-                const result = GlobalShortcut.IsRegistered(accelerator);
-                return result;
-            }
-        );
+        ipcMain.handle(`Renderer:GlobalShortcut:IsRegistered`, async (e, accelerator: Electron.Accelerator) => {
+            const result = GlobalShortcut.IsRegistered(accelerator);
+            return result;
+        });
     }
 
     private OnSimulateIPC() {
-        ipcMain.handle(
-            `Renderer:Simulate:MouseMove`,
-            async (e, options: TSingleton.MouseMoveOptions) => {
-                const result = RN.mouseMove({
-                    type: options.type,
-                    data: {
-                        x: options.x,
-                        y: options.y
-                    }
-                });
+        ipcMain.handle(`Renderer:Simulate:MouseMove`, async (e, options: TSingleton.MouseMoveOptions) => {
+            const result = RN.mouseMove({
+                type: options.type,
+                data: {
+                    x: options.x,
+                    y: options.y
+                }
+            });
+            return result;
+        });
+
+        ipcMain.handle(`Renderer:Simulate:MouseScroll`, async (e, options: TSingleton.MouseScrollOptions) => {
+            if (options.type === 'x') {
+                const result = RN.mouseScrollX(options.length);
+                return result;
+            } else {
+                const result = RN.mouseScrollY(options.length);
                 return result;
             }
-        );
-
-        ipcMain.handle(
-            `Renderer:Simulate:MouseScroll`,
-            async (e, options: TSingleton.MouseScrollOptions) => {
-                if (options.type === 'x') {
-                    const result = RN.mouseScrollX(options.length);
-                    return result;
-                } else {
-                    const result = RN.mouseScrollY(options.length);
-                    return result;
-                }
-            }
-        );
+        });
 
         ipcMain.handle(`Renderer:Simulate:MouseDown`, async (e, btn: TSingleton.MouseBtn) => {
             const result = RN.mouseDown(btn);
@@ -528,47 +492,44 @@ class IpcMainHandle {
     }
 
     private OnImageIPC() {
-        ipcMain.handle(
-            `Renderer:Image:Transformer`,
-            async (e, options: TSingleton.ImageTransformerOptions) => {
-                const t = new IN.Transformer(FS.readFileSync(options.inputPath));
-                let buffer!: Buffer;
-                switch (options.outputFormat) {
-                    case 'Webp':
-                        buffer = await t.webp();
-                        break;
-                    case 'Avif':
-                        buffer = await t.avif();
-                        break;
-                    case 'Png':
-                        buffer = await t.png();
-                        break;
-                    case 'Jpeg':
-                        buffer = await t.jpeg();
-                        break;
-                    case 'Bmp':
-                        buffer = await t.bmp();
-                        break;
-                    case 'Ico':
-                        buffer = await t.ico();
-                        break;
-                    case 'Tiff':
-                        buffer = await t.tiff();
-                        break;
-                    case 'Pnm':
-                        buffer = await t.pnm();
-                        break;
-                    case 'Tga':
-                        buffer = await t.tga();
-                        break;
-                    case 'Farbfeld':
-                        buffer = await t.farbfeld();
-                        break;
-                }
-                const result = FS.writeFileSync(options.outputPath, Uint8Array.from(buffer));
-                return result;
+        ipcMain.handle(`Renderer:Image:Transformer`, async (e, options: TSingleton.ImageTransformerOptions) => {
+            const t = new IN.Transformer(FS.readFileSync(options.inputPath));
+            let buffer!: Buffer;
+            switch (options.outputFormat) {
+                case 'Webp':
+                    buffer = await t.webp();
+                    break;
+                case 'Avif':
+                    buffer = await t.avif();
+                    break;
+                case 'Png':
+                    buffer = await t.png();
+                    break;
+                case 'Jpeg':
+                    buffer = await t.jpeg();
+                    break;
+                case 'Bmp':
+                    buffer = await t.bmp();
+                    break;
+                case 'Ico':
+                    buffer = await t.ico();
+                    break;
+                case 'Tiff':
+                    buffer = await t.tiff();
+                    break;
+                case 'Pnm':
+                    buffer = await t.pnm();
+                    break;
+                case 'Tga':
+                    buffer = await t.tga();
+                    break;
+                case 'Farbfeld':
+                    buffer = await t.farbfeld();
+                    break;
             }
-        );
+            const result = FS.writeFileSync(options.outputPath, Uint8Array.from(buffer));
+            return result;
+        });
     }
 
     private OnMessage(e: D.IIpcRendererReceiveMessage & { type: D.IpcRendererWindow; id: number }) {

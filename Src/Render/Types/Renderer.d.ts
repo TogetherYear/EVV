@@ -61,9 +61,7 @@ declare namespace Renderer {
         /**
          * 内部调用事件分发 请勿使用
          */
-        export function Listen(
-            callback: (e: Record<string, unknown> | unknown | any) => void
-        ): void;
+        export function Listen(callback: (e: Record<string, unknown> | unknown | any) => void): void;
 
         /**
          * 最小化
@@ -197,16 +195,12 @@ declare namespace Renderer {
         /**
          * 从文件资源管理器选择资源
          */
-        export function GetSelectResourcesPath(
-            options?: TSingleton.SelectOptions
-        ): Promise<Array<string> | undefined>;
+        export function GetSelectResourcesPath(options?: TSingleton.SelectOptions): Promise<Array<string> | undefined>;
 
         /**
          * 从文件资源管理器选择保存资源路径
          */
-        export function GetSaveResourcesPath(
-            options?: TSingleton.SaveOptions
-        ): Promise<Electron.SaveDialogReturnValue>;
+        export function GetSaveResourcesPath(options?: TSingleton.SaveOptions): Promise<Electron.SaveDialogReturnValue>;
 
         /**
          * 判断路径是否存在
@@ -261,11 +255,7 @@ declare namespace Renderer {
         /**
          * 将字符串追加到文件尾部( 默认换行 )
          */
-        export function AppendStringToFile(
-            path: string,
-            str: string,
-            newline?: boolean
-        ): Promise<boolean>;
+        export function AppendStringToFile(path: string, str: string, newline?: boolean): Promise<boolean>;
 
         /**
          * 读取文件内容转换为字符串
@@ -295,10 +285,7 @@ declare namespace Renderer {
         /**
          * 注册快捷键
          */
-        export function Register(
-            accelerator: Electron.Accelerator,
-            callback: () => void
-        ): Promise<boolean>;
+        export function Register(accelerator: Electron.Accelerator, callback: () => void): Promise<boolean>;
 
         /**
          * 取消快捷键

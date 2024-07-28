@@ -51,10 +51,7 @@ class Renderer {
         return {
             Listen: (callback) => {
                 return ipcRenderer.on('RendererMessage', (e, data) => {
-                    if (
-                        data.type == 'GlobalShortcut' &&
-                        this.globalShortcutEvents.has(data.send.accelerator)
-                    ) {
+                    if (data.type == 'GlobalShortcut' && this.globalShortcutEvents.has(data.send.accelerator)) {
                         this.globalShortcutEvents.get(data.send.accelerator)();
                     }
                     callback(data);
@@ -112,10 +109,7 @@ class Renderer {
                 return result;
             },
             SetIgnoreCursorEvents: async (flag) => {
-                const result = await ipcRenderer.invoke(
-                    'Renderer:Widget:SetIgnoreCursorEvents',
-                    flag
-                );
+                const result = await ipcRenderer.invoke('Renderer:Widget:SetIgnoreCursorEvents', flag);
                 return result;
             }
         };
@@ -139,11 +133,7 @@ class Renderer {
                 return {
                     ...screen,
                     Capture: async (path) => {
-                        const result = await ipcRenderer.invoke(
-                            'Renderer:Screen:Capture',
-                            screen.id,
-                            path
-                        );
+                        const result = await ipcRenderer.invoke('Renderer:Screen:Capture', screen.id, path);
                         return result;
                     }
                 };
@@ -162,11 +152,7 @@ class Renderer {
                     ...window,
                     screen: this.Screen.TransformScreen(window.screen),
                     Capture: async (path) => {
-                        const result = await ipcRenderer.invoke(
-                            'Renderer:Window:Capture',
-                            window.id,
-                            path
-                        );
+                        const result = await ipcRenderer.invoke('Renderer:Window:Capture', window.id, path);
                         return result;
                     }
                 };
@@ -202,17 +188,11 @@ class Renderer {
                 return path;
             },
             GetSelectResourcesPath: async (options) => {
-                const path = await ipcRenderer.invoke(
-                    `Renderer:Resource:SelectResourcesPath`,
-                    options
-                );
+                const path = await ipcRenderer.invoke(`Renderer:Resource:SelectResourcesPath`, options);
                 return path;
             },
             GetSaveResourcesPath: async (options) => {
-                const path = await ipcRenderer.invoke(
-                    `Renderer:Resource:GetSaveResourcesPath`,
-                    options
-                );
+                const path = await ipcRenderer.invoke(`Renderer:Resource:GetSaveResourcesPath`, options);
                 return path;
             },
             IsPathExists: async (path) => {
@@ -240,11 +220,7 @@ class Renderer {
                 return result;
             },
             CopyFile: async (path, newPath) => {
-                const result = await ipcRenderer.invoke(
-                    `Renderer:Resource:CopyFile`,
-                    path,
-                    newPath
-                );
+                const result = await ipcRenderer.invoke(`Renderer:Resource:CopyFile`, path, newPath);
                 return result;
             },
             GetFileMetadata: async (path) => {
@@ -255,27 +231,15 @@ class Renderer {
                 return ipcRenderer.postMessage(`Renderer:Resource:Download`, url);
             },
             WriteStringToFile: async (path, str) => {
-                const result = await ipcRenderer.invoke(
-                    `Renderer:Resource:WriteStringToFile`,
-                    path,
-                    str
-                );
+                const result = await ipcRenderer.invoke(`Renderer:Resource:WriteStringToFile`, path, str);
                 return result;
             },
             AppendStringToFile: async (path, str, newline = true) => {
-                const result = await ipcRenderer.invoke(
-                    `Renderer:Resource:AppendStringToFile`,
-                    path,
-                    str,
-                    newline
-                );
+                const result = await ipcRenderer.invoke(`Renderer:Resource:AppendStringToFile`, path, str, newline);
                 return result;
             },
             ReadStringFromFile: async (path) => {
-                const result = await ipcRenderer.invoke(
-                    `Renderer:Resource:ReadStringFromFile`,
-                    path
-                );
+                const result = await ipcRenderer.invoke(`Renderer:Resource:ReadStringFromFile`, path);
                 return result;
             }
         };
@@ -295,10 +259,7 @@ class Renderer {
     get GlobalShortcut() {
         return {
             Register: async (accelerator, callback) => {
-                const result = await ipcRenderer.invoke(
-                    'Renderer:GlobalShortcut:Register',
-                    accelerator
-                );
+                const result = await ipcRenderer.invoke('Renderer:GlobalShortcut:Register', accelerator);
                 if (result) {
                     this.globalShortcutEvents.set(accelerator, callback);
                 }
@@ -306,17 +267,11 @@ class Renderer {
             },
             Unregister: async (accelerator) => {
                 this.globalShortcutEvents.delete(accelerator);
-                const result = await ipcRenderer.invoke(
-                    'Renderer:GlobalShortcut:Unregister',
-                    accelerator
-                );
+                const result = await ipcRenderer.invoke('Renderer:GlobalShortcut:Unregister', accelerator);
                 return result;
             },
             IsRegistered: async (accelerator) => {
-                const result = await ipcRenderer.invoke(
-                    'Renderer:GlobalShortcut:IsRegistered',
-                    accelerator
-                );
+                const result = await ipcRenderer.invoke('Renderer:GlobalShortcut:IsRegistered', accelerator);
                 return result;
             },
             UnregisterAll: async () => {
