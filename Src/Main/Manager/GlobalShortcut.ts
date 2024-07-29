@@ -1,6 +1,6 @@
 import { globalShortcut } from 'electron';
 import { WindowPool } from './WindowPool';
-import { D } from '@Decorators/D';
+import { D } from '@Src/Instructions/D';
 import { EventSystem } from '@Libs/EventSystem';
 
 class GlobalShortcut extends EventSystem {

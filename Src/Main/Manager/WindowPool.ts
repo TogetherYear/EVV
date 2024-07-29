@@ -1,4 +1,4 @@
-import { D } from '@Decorators/D';
+import { D } from '@Src/Instructions/D';
 import { TWindow } from '@Main/Libs/TWindow';
 
 class WindowPool {

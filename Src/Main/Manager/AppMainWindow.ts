@@ -2,7 +2,7 @@ import { BrowserWindow, Menu } from 'electron';
 import { ResourceLoad } from '@Main/Manager/ResourceLoad';
 import { Configuration } from '@Main/Manager/Configuration';
 import { TWindow } from '@Main/Libs/TWindow';
-import { D } from '@Decorators/D';
+import { D } from '@Src/Instructions/D';
 import { WindowPool } from './WindowPool';
 
 class AppMainWindow extends TWindow {

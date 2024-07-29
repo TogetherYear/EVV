@@ -1,7 +1,7 @@
 import { Time } from '@Libs/Time';
 import { app } from 'electron';
 import { WindowPool } from './WindowPool';
-import { D } from '@Decorators/D';
+import { D } from '@Src/Instructions/D';
 
 class SingleInstance {
     public Run() {

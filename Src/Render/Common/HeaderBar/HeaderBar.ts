@@ -3,7 +3,7 @@ import minIcon from '@Render/Assets/Images/min.png';
 import maxIcon from '@Render/Assets/Images/max.png';
 import hideIcon from '@Render/Assets/Images/hide.png';
 import { AActor } from '@Render/Libs/AActor';
-import { DR } from '@Render/Decorators/DR';
+import { DR } from '@Render/Instructions/DR';
 
 class HeaderBar extends AActor {
     public constructor() {

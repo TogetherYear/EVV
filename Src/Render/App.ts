@@ -1,5 +1,5 @@
-import { D } from '@Decorators/D';
-import { DR } from './Decorators/DR';
+import { D } from '@Src/Instructions/D';
+import { DR } from './Instructions/DR';
 import { AActor } from './Libs/AActor';
 import { onMounted, onUnmounted } from 'vue';
 

@@ -1,4 +1,4 @@
-import { D } from '@Decorators/D';
+import { D } from '@Src/Instructions/D';
 
 namespace DR {
     export type AppMessageCallback = (e: D.IpcRendererSendMessage) => void;

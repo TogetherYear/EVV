@@ -1,4 +1,4 @@
-import { D } from '@Decorators/D';
+import { D } from '@Src/Instructions/D';
 import { App } from '@Render/App';
 import { AActor } from '@Render/Libs/AActor';
 import { Preload } from '@Render/Preload/Preload';

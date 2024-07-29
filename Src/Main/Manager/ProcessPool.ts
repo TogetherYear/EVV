@@ -1,7 +1,7 @@
 import { fork, ChildProcess } from 'child_process';
 import { ResourceLoad } from '@Main/Manager/ResourceLoad';
 import * as fs from 'fs';
-import { DM } from '@Main/Decorators/DM';
+import { DM } from '@Main/Instructions/DM';
 
 class ProcessPool {
     private pool = new Map<DM.ChildrenProcessType, ChildProcess>();

@@ -1,10 +1,10 @@
 import { EventSystem } from '@Libs/EventSystem';
 import { BrowserWindow } from 'electron';
 import { WindowPool } from './WindowPool';
-import { D } from '@Decorators/D';
+import { D } from '@Src/Instructions/D';
 import { ResourceLoad } from './ResourceLoad';
 import { Configuration } from './Configuration';
-import { DM } from '@Main/Decorators/DM';
+import { DM } from '@Main/Instructions/DM';
 
 class CustomWidget extends EventSystem {
     private widgets = new Map<string, { widget: BrowserWindow; lable: string }>();

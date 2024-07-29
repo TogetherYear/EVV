@@ -4,7 +4,7 @@ import { AppMainWindow } from '@Main/Manager/AppMainWindow';
 import { TWindow } from '@Main/Libs/TWindow';
 import { Configuration } from '@Main/Manager/Configuration';
 import { WindowPool } from '@Main/Manager/WindowPool';
-import { D } from '@Decorators/D';
+import { D } from '@Src/Instructions/D';
 
 class AppTray extends TWindow {
     public tray!: Tray;
