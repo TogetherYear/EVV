@@ -28,9 +28,6 @@ export default defineConfig(({ command, mode }) => {
                 '@Root': __dirname
             }
         },
-        esbuild: {
-            drop: command === 'serve' ? [] : ['console', 'debugger']
-        },
         build: {
             outDir: join(__dirname, 'Dist/Render'),
             emptyOutDir: true,
