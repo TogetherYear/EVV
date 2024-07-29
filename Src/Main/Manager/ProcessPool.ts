@@ -1,24 +1,24 @@
 import { fork, ChildProcess } from 'child_process';
 import { ResourceLoad } from '@Main/Manager/ResourceLoad';
 import * as fs from 'fs';
-import { DM } from '@Main/Instructions/DM';
+import { IM } from '@Main/Instructions/IM';
 
 class ProcessPool {
-    private pool = new Map<DM.ChildrenProcessType, ChildProcess>();
+    private pool = new Map<IM.ChildrenProcessType, ChildProcess>();
 
     public Run() {
         this.RunChildren();
     }
 
-    public RegisterProcess(t: DM.ChildrenProcessType, p: ChildProcess) {
+    public RegisterProcess(t: IM.ChildrenProcessType, p: ChildProcess) {
         this.pool.set(t, p);
     }
 
-    public CancelProcess(t: DM.ChildrenProcessType) {
+    public CancelProcess(t: IM.ChildrenProcessType) {
         this.pool.delete(t);
     }
 
-    public GetProcess(t: DM.ChildrenProcessType) {
+    public GetProcess(t: IM.ChildrenProcessType) {
         return this.pool.get(t);
     }
 
@@ -29,7 +29,7 @@ class ProcessPool {
                 const name = c.split('.js')[0];
                 const type = this.TransformType(name);
                 const process = fork(ResourceLoad.GetChildProcessesByName(name));
-                process.on('message', (e: DM.IChildrenProcessReceiveMessage) => {
+                process.on('message', (e: IM.IChildrenProcessReceiveMessage) => {
                     this.OnMessage({ ...e, type });
                 });
                 this.RegisterProcess(type, process);
@@ -40,33 +40,33 @@ class ProcessPool {
     private TransformType(e: string) {
         switch (e) {
             case 'Log':
-                return DM.ChildrenProcessType.Log;
+                return IM.ChildrenProcessType.Log;
             case 'Push':
-                return DM.ChildrenProcessType.Push;
+                return IM.ChildrenProcessType.Push;
             case 'Custom':
-                return DM.ChildrenProcessType.Custom;
+                return IM.ChildrenProcessType.Custom;
             default:
-                return DM.ChildrenProcessType.Other;
+                return IM.ChildrenProcessType.Other;
         }
     }
 
     private GetPoolKV() {
-        const result: Array<{ key: DM.ChildrenProcessType; value: ChildProcess }> = [];
+        const result: Array<{ key: IM.ChildrenProcessType; value: ChildProcess }> = [];
         for (let p of this.pool) {
             result.push({ key: p[0], value: p[1] });
         }
         return result;
     }
 
-    private OnMessage(e: DM.IChildrenProcessReceiveMessage & { type: DM.ChildrenProcessType }) {
-        if (e.type == DM.ChildrenProcessType.Log) {
-        } else if (e.type == DM.ChildrenProcessType.Push) {
-        } else if (e.type == DM.ChildrenProcessType.Custom) {
+    private OnMessage(e: IM.IChildrenProcessReceiveMessage & { type: IM.ChildrenProcessType }) {
+        if (e.type == IM.ChildrenProcessType.Log) {
+        } else if (e.type == IM.ChildrenProcessType.Push) {
+        } else if (e.type == IM.ChildrenProcessType.Custom) {
         } else {
         }
     }
 
-    public PostMessage(e: DM.ChildrenProcessSendMessage) {
+    public PostMessage(e: IM.ChildrenProcessSendMessage) {
         if (e.processes && e.processes.length != 0) {
             for (let p of e.processes) {
                 const process = this.GetProcess(p);

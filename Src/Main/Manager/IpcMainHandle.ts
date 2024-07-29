@@ -2,7 +2,7 @@ import { AppMainWindow } from '@Main/Manager/AppMainWindow';
 import { BrowserWindow, app, ipcMain, screen, shell, dialog } from 'electron';
 import { ResourceLoad } from '@Main/Manager/ResourceLoad';
 import { AppTray } from '@Main/Manager/AppTray';
-import { D } from '@Src/Instructions/D';
+import { I } from '@Src/Instructions/I';
 import { GlobalShortcut } from './GlobalShortcut';
 import { WindowPool } from './WindowPool';
 import * as F from 'fs';
@@ -117,16 +117,16 @@ class IpcMainHandle {
             return widget.setAlwaysOnTop(flag);
         });
 
-        ipcMain.on(`Renderer:Widget:PostMessage`, (e, d: D.IIpcRendererReceiveMessage) => {
+        ipcMain.on(`Renderer:Widget:PostMessage`, (e, d: I.IIpcRendererReceiveMessage) => {
             switch (e.sender.id) {
                 case AppMainWindow.widget.webContents.id:
-                    this.OnMessage({ ...d, type: D.IpcRendererWindow.Main, id: e.sender.id });
+                    this.OnMessage({ ...d, type: I.IpcRendererWindow.Main, id: e.sender.id });
                     return;
                 case AppTray.widget.webContents.id:
-                    this.OnMessage({ ...d, type: D.IpcRendererWindow.Tray, id: e.sender.id });
+                    this.OnMessage({ ...d, type: I.IpcRendererWindow.Tray, id: e.sender.id });
                     return;
                 default:
-                    this.OnMessage({ ...d, type: D.IpcRendererWindow.Other, id: e.sender.id });
+                    this.OnMessage({ ...d, type: I.IpcRendererWindow.Other, id: e.sender.id });
                     return;
             }
         });
@@ -532,15 +532,15 @@ class IpcMainHandle {
         });
     }
 
-    private OnMessage(e: D.IIpcRendererReceiveMessage & { type: D.IpcRendererWindow; id: number }) {
-        if (e.type == D.IpcRendererWindow.Main) {
-        } else if (e.type == D.IpcRendererWindow.Tray) {
+    private OnMessage(e: I.IIpcRendererReceiveMessage & { type: I.IpcRendererWindow; id: number }) {
+        if (e.type == I.IpcRendererWindow.Main) {
+        } else if (e.type == I.IpcRendererWindow.Tray) {
         } else {
             if (e.reason == 'Empty') {
                 const target = CustomWidget.FindWidget(e.id);
                 WindowPool.PostMessage({
-                    type: D.IpcRendererEvent.WidgetEmpty,
-                    widgets: [D.IpcRendererWindow.Main],
+                    type: I.IpcRendererEvent.WidgetEmpty,
+                    widgets: [I.IpcRendererWindow.Main],
                     send: {
                         label: target?.lable
                     }

@@ -1,4 +1,4 @@
-namespace DM {
+namespace IM {
     export enum ChildrenProcessType {
         Log = 'Log',
         Push = 'Push',
@@ -29,4 +29,4 @@ namespace DM {
 
     export interface IChildrenProcessSendMessage extends IChildrenProcessReceiveMessage {}
 }
-export { DM };
+export { IM };

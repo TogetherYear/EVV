@@ -3,14 +3,14 @@ import minIcon from '@Render/Assets/Images/min.png';
 import maxIcon from '@Render/Assets/Images/max.png';
 import hideIcon from '@Render/Assets/Images/hide.png';
 import { AActor } from '@Render/Libs/AActor';
-import { DR } from '@Render/Instructions/DR';
+import { IR } from '@Render/Instructions/IR';
 
 class HeaderBar extends AActor {
     public constructor() {
         super();
     }
 
-    private options = ref<Array<DR.IHeaderBarOptionItem>>([
+    private options = ref<Array<IR.IHeaderBarOptionItem>>([
         { type: 'Min', icon: minIcon, label: '最小化' },
         { type: 'Max', icon: maxIcon, label: '最大化' },
         { type: 'Hide', icon: hideIcon, label: '隐藏' }

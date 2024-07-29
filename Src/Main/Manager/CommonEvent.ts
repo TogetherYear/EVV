@@ -1,12 +1,12 @@
 import { nativeTheme } from 'electron';
 import { WindowPool } from './WindowPool';
-import { D } from '@Src/Instructions/D';
+import { I } from '@Src/Instructions/I';
 
 class CommonEvent {
     public Run() {
         nativeTheme.on('updated', () => {
             WindowPool.PostMessage({
-                type: D.IpcRendererEvent.ThemeUpdate,
+                type: I.IpcRendererEvent.ThemeUpdate,
                 send: {
                     theme: nativeTheme.themeSource
                 }

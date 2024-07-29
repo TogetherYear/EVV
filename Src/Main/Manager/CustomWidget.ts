@@ -1,10 +1,10 @@
 import { EventSystem } from '@Libs/EventSystem';
 import { BrowserWindow } from 'electron';
 import { WindowPool } from './WindowPool';
-import { D } from '@Src/Instructions/D';
+import { I } from '@Src/Instructions/I';
 import { ResourceLoad } from './ResourceLoad';
 import { Configuration } from './Configuration';
-import { DM } from '@Main/Instructions/DM';
+import { IM } from '@Main/Instructions/IM';
 
 class CustomWidget extends EventSystem {
     private widgets = new Map<string, { widget: BrowserWindow; lable: string }>();
@@ -50,8 +50,8 @@ class CustomWidget extends EventSystem {
             this.RegisterWidget(options.label, widget);
 
             WindowPool.PostMessage({
-                type: D.IpcRendererEvent.WidgetCreate,
-                widgets: [D.IpcRendererWindow.Main],
+                type: I.IpcRendererEvent.WidgetCreate,
+                widgets: [I.IpcRendererWindow.Main],
                 send: {
                     label: options.label
                 }
@@ -60,8 +60,8 @@ class CustomWidget extends EventSystem {
             widget.on('close', () => {
                 this.DeleteWidget(options.label);
                 WindowPool.PostMessage({
-                    type: D.IpcRendererEvent.WidgetDestroy,
-                    widgets: [D.IpcRendererWindow.Main],
+                    type: I.IpcRendererEvent.WidgetDestroy,
+                    widgets: [I.IpcRendererWindow.Main],
                     send: {
                         label: options.label
                     }

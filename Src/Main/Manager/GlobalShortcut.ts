@@ -1,6 +1,6 @@
 import { globalShortcut } from 'electron';
 import { WindowPool } from './WindowPool';
-import { D } from '@Src/Instructions/D';
+import { I } from '@Src/Instructions/I';
 import { EventSystem } from '@Libs/EventSystem';
 
 class GlobalShortcut extends EventSystem {
@@ -11,7 +11,7 @@ class GlobalShortcut extends EventSystem {
             return globalShortcut.register(accelerator, () => {
                 callback();
                 WindowPool.PostMessage({
-                    type: D.IpcRendererEvent.GlobalShortcut,
+                    type: I.IpcRendererEvent.GlobalShortcut,
                     send: { accelerator }
                 });
             });

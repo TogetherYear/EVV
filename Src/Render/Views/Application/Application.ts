@@ -1,4 +1,4 @@
-import { D } from '@Src/Instructions/D';
+import { I } from '@Src/Instructions/I';
 import { App } from '@Render/App';
 import { AActor } from '@Render/Libs/AActor';
 import { Preload } from '@Render/Preload/Preload';
@@ -28,10 +28,10 @@ class Application extends AActor {
     protected Destroy() {}
 
     private ListenEvents() {
-        App.AddListen(D.IpcRendererEvent.SecondInstance, this, this.OnSecondInstance);
+        App.AddListen(I.IpcRendererEvent.SecondInstance, this, this.OnSecondInstance);
     }
 
-    private async OnSecondInstance(e: D.IpcRendererSendMessage) {
+    private async OnSecondInstance(e: I.IpcRendererSendMessage) {
         Preload.message.error('已关闭第二个实例');
         await Renderer.Widget.Show();
     }

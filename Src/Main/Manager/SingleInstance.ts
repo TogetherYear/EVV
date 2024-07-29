@@ -1,7 +1,7 @@
 import { Time } from '@Libs/Time';
 import { app } from 'electron';
 import { WindowPool } from './WindowPool';
-import { D } from '@Src/Instructions/D';
+import { I } from '@Src/Instructions/I';
 
 class SingleInstance {
     public Run() {
@@ -14,8 +14,8 @@ class SingleInstance {
 
     public OnSecondInstance() {
         WindowPool.PostMessage({
-            type: D.IpcRendererEvent.SecondInstance,
-            widgets: [D.IpcRendererWindow.Main]
+            type: I.IpcRendererEvent.SecondInstance,
+            widgets: [I.IpcRendererWindow.Main]
         });
     }
 }

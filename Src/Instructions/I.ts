@@ -1,4 +1,4 @@
-namespace D {
+namespace I {
     const debounceMap = new Map<string, NodeJS.Timeout>();
 
     const throttleMap = new Map<string, number>();
@@ -93,4 +93,4 @@ namespace D {
 
     export interface IIpcRendererSendMessage extends IIpcRendererReceiveMessage {}
 }
-export { D };
+export { I };

@@ -1,5 +1,5 @@
-import { D } from '@Src/Instructions/D';
-import { DR } from './Instructions/DR';
+import { I } from '@Src/Instructions/I';
+import { IR } from './Instructions/IR';
 import { AActor } from './Libs/AActor';
 import { onMounted, onUnmounted } from 'vue';
 
@@ -25,16 +25,16 @@ class App extends AActor {
     protected Destroy() {}
 
     private CreateEvents() {
-        this.AddKey(D.IpcRendererEvent.SecondInstance);
-        this.AddKey(D.IpcRendererEvent.GlobalShortcut);
-        this.AddKey(D.IpcRendererEvent.FileDrop);
-        this.AddKey(D.IpcRendererEvent.ThemeUpdate);
-        this.AddKey(D.IpcRendererEvent.WidgetCreate);
-        this.AddKey(D.IpcRendererEvent.WidgetDestroy);
-        this.AddKey(D.IpcRendererEvent.WidgetEmpty);
+        this.AddKey(I.IpcRendererEvent.SecondInstance);
+        this.AddKey(I.IpcRendererEvent.GlobalShortcut);
+        this.AddKey(I.IpcRendererEvent.FileDrop);
+        this.AddKey(I.IpcRendererEvent.ThemeUpdate);
+        this.AddKey(I.IpcRendererEvent.WidgetCreate);
+        this.AddKey(I.IpcRendererEvent.WidgetDestroy);
+        this.AddKey(I.IpcRendererEvent.WidgetEmpty);
     }
 
-    private OnMessage(e: D.IpcRendererSendMessage) {
+    private OnMessage(e: I.IpcRendererSendMessage) {
         this.Emit(e.type, e);
     }
 
@@ -42,8 +42,8 @@ class App extends AActor {
         document.addEventListener('drop', (e) => {
             e.preventDefault();
             e.stopPropagation();
-            this.Emit(D.IpcRendererEvent.FileDrop, {
-                type: D.IpcRendererEvent.FileDrop,
+            this.Emit(I.IpcRendererEvent.FileDrop, {
+                type: I.IpcRendererEvent.FileDrop,
                 send: {
                     files: e.dataTransfer?.files
                 }
@@ -55,15 +55,15 @@ class App extends AActor {
         });
     }
 
-    public override AddListen(key: D.IpcRendererEvent, scope: Object, callback: DR.AppMessageCallback, once?: boolean): void {
+    public override AddListen(key: I.IpcRendererEvent, scope: Object, callback: IR.AppMessageCallback, once?: boolean): void {
         super.AddListen(key, scope, callback, once);
     }
 
-    public override RemoveListen(key: D.IpcRendererEvent, scope: Object, callback: DR.AppMessageCallback): void {
+    public override RemoveListen(key: I.IpcRendererEvent, scope: Object, callback: IR.AppMessageCallback): void {
         super.RemoveListen(key, scope, callback);
     }
 
-    public Emit(key: string, data: D.IpcRendererSendMessage): void {
+    public Emit(key: string, data: I.IpcRendererSendMessage): void {
         super.Emit(key, data);
     }
 }

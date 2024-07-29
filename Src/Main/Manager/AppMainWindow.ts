@@ -2,7 +2,7 @@ import { BrowserWindow, Menu } from 'electron';
 import { ResourceLoad } from '@Main/Manager/ResourceLoad';
 import { Configuration } from '@Main/Manager/Configuration';
 import { TWindow } from '@Main/Libs/TWindow';
-import { D } from '@Src/Instructions/D';
+import { I } from '@Src/Instructions/I';
 import { WindowPool } from './WindowPool';
 
 class AppMainWindow extends TWindow {
@@ -68,7 +68,7 @@ class AppMainWindow extends TWindow {
         // 我这里取消了默认的菜单栏 你可以自定义
         Menu.setApplicationMenu(null);
 
-        WindowPool.RegisterWindow(D.IpcRendererWindow.Main, this);
+        WindowPool.RegisterWindow(I.IpcRendererWindow.Main, this);
     }
 }
 

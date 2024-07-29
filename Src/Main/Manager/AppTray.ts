@@ -4,7 +4,7 @@ import { AppMainWindow } from '@Main/Manager/AppMainWindow';
 import { TWindow } from '@Main/Libs/TWindow';
 import { Configuration } from '@Main/Manager/Configuration';
 import { WindowPool } from '@Main/Manager/WindowPool';
-import { D } from '@Src/Instructions/D';
+import { I } from '@Src/Instructions/I';
 
 class AppTray extends TWindow {
     public tray!: Tray;
@@ -61,7 +61,7 @@ class AppTray extends TWindow {
 
         this.widget.loadURL(ResourceLoad.GetPageByName('Tray'));
 
-        WindowPool.RegisterWindow(D.IpcRendererWindow.Tray, this);
+        WindowPool.RegisterWindow(I.IpcRendererWindow.Tray, this);
     }
 
     private CreateTray() {
