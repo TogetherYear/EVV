@@ -1,4 +1,4 @@
-import { Time } from '@Libs/Time';
+import { Time } from '@Src/Utils/Time';
 import { app } from 'electron';
 import { WindowPool } from './WindowPool';
 import { I } from '@Src/Instructions/I';
