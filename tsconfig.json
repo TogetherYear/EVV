@@ -15,8 +15,6 @@
         "paths": {
             "@Render/*": ["Src/Render/*"],
             "@Main/*": ["Src/Main/*"],
-            "@Libs/*": ["Src/Libs/*"],
-            "@Decorators/*": ["Src/Decorators/*"],
             "@Src/*": ["Src/*"],
             "@Root/*": ["./*"]
         },

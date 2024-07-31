@@ -31,8 +31,6 @@ function ConfigFactory(env: string) {
                 entries: [
                     { find: '@Render', replacement: join(__dirname, '../Render') },
                     { find: '@Main', replacement: join(__dirname, '../Main') },
-                    { find: '@Libs', replacement: join(__dirname, '../Libs') },
-                    { find: '@Decorators', replacement: join(__dirname, '../Decorators') },
                     { find: '@Src', replacement: join(__dirname, '../') },
                     { find: '@Root', replacement: join(__dirname, '../../') }
                 ]

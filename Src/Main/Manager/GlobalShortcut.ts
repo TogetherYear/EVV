@@ -1,7 +1,7 @@
 import { globalShortcut } from 'electron';
 import { WindowPool } from './WindowPool';
 import { I } from '@Src/Instructions/I';
-import { EventSystem } from '@Libs/EventSystem';
+import { EventSystem } from '@Src/Libs/EventSystem';
 
 class GlobalShortcut extends EventSystem {
     public Run() {}

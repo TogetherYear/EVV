@@ -22,8 +22,6 @@ export default defineConfig(({ command, mode }) => {
             alias: {
                 '@Render': join(__dirname, 'Src/Render'),
                 '@Main': join(__dirname, 'Src/Main'),
-                '@Libs': join(__dirname, 'Src/Libs'),
-                '@Decorators': join(__dirname, 'Src/Decorators'),
                 '@Src': join(__dirname, 'Src'),
                 '@Root': __dirname
             }

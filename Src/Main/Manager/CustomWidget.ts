@@ -1,4 +1,4 @@
-import { EventSystem } from '@Libs/EventSystem';
+import { EventSystem } from '@Src/Libs/EventSystem';
 import { BrowserWindow } from 'electron';
 import { WindowPool } from './WindowPool';
 import { I } from '@Src/Instructions/I';
