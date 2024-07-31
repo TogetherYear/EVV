@@ -80,7 +80,6 @@
         "electron": "31.2.1",
         "electron-builder": "^24.13.3",
         "minimist": "^1.2.6",
-        "naive-ui": "^2.39.0",
         "ora": "^5.4.1",
         "prettier": "^3.3.3",
         "rimraf": "^3.0.2",
