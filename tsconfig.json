@@ -19,7 +19,7 @@
             "@Root/*": ["./*"]
         },
         "allowSyntheticDefaultImports": true,
-        "types": ["element-plus/global"]
+        "types": ["element-plus/global", "node", "express"]
     },
     "ts-node": {
         "compilerOptions": {
