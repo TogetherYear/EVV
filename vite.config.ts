@@ -1,6 +1,10 @@
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import { join } from 'path';
+import AutoImport from 'unplugin-auto-import/vite';
+import Components from 'unplugin-vue-components/vite';
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers';
+import ElementPlus from 'unplugin-element-plus/vite';
 
 export default defineConfig(({ command, mode }) => {
     return {
@@ -9,7 +13,14 @@ export default defineConfig(({ command, mode }) => {
                 script: {
                     defineModel: true
                 }
-            })
+            }),
+            AutoImport({
+                resolvers: [ElementPlusResolver()]
+            }),
+            Components({
+                resolvers: [ElementPlusResolver()]
+            }),
+            ElementPlus({})
         ],
         root: join(__dirname, 'Src/Render'),
         base: './',
@@ -25,6 +36,9 @@ export default defineConfig(({ command, mode }) => {
                 '@Src': join(__dirname, 'Src'),
                 '@Root': __dirname
             }
+        },
+        esbuild: {
+            drop: command === 'serve' ? [] : ['console', 'debugger']
         },
         build: {
             outDir: join(__dirname, 'Dist/Render'),

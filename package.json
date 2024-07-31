@@ -57,6 +57,7 @@
     },
     "dependencies": {
         "@napi-rs/image": "^1.9.2",
+        "element-plus": "^2.7.8",
         "express": "^4.19.2",
         "node-screenshots": "^0.2.0",
         "rubick-native": "^0.0.16-beta",
@@ -88,6 +89,9 @@
         "ts-node": "^10.9.1",
         "tslib": "^2.6.3",
         "typescript": "^5.5.4",
+        "unplugin-auto-import": "^0.18.2",
+        "unplugin-element-plus": "^0.8.0",
+        "unplugin-vue-components": "^0.27.3",
         "vite": "^5.3.5",
         "vue-tsc": "^2.0.29"
     }

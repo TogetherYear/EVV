@@ -18,7 +18,8 @@
             "@Src/*": ["Src/*"],
             "@Root/*": ["./*"]
         },
-        "allowSyntheticDefaultImports": true
+        "allowSyntheticDefaultImports": true,
+        "types": ["element-plus/global"]
     },
     "ts-node": {
         "compilerOptions": {
