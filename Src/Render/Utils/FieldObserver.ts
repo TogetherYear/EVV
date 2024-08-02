@@ -2,9 +2,6 @@ import { EventSystem } from '@Src/Libs/EventSystem';
 
 interface IObserver {
     dom: HTMLElement;
-    /**
-     * 默认 true 只监听一次
-     */
     once?: boolean;
     OnShow?: () => void;
     OnHide?: () => void;
@@ -37,7 +34,7 @@ class Observer {
         if (!this.isEnter) {
             this.isEnter = true;
             this.options.OnShow && this.options.OnShow();
-            if (this.options.once == undefined || this.options.once == true) {
+            if (this.options.once) {
                 this.Destroy();
             }
         }
