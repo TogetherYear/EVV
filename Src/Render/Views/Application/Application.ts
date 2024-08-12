@@ -37,14 +37,14 @@ class Application extends AActor {
     private async State() {
         if (location.href.indexOf('Application') != -1) {
             await Renderer.Widget.SetSize({
-                width: parseInt(localStorage.getItem('width') || '1000'),
-                height: parseInt(localStorage.getItem('height') || '560')
+                width: parseInt(localStorage.getItem('Application_Width') || '1000'),
+                height: parseInt(localStorage.getItem('Application_Height') || '560')
             });
             await Renderer.Widget.Center();
             await Renderer.Widget.Show();
             window.addEventListener('resize', (e: UIEvent) => {
-                localStorage.setItem('width', `${window.innerWidth}`);
-                localStorage.setItem('height', `${window.innerHeight}`);
+                localStorage.setItem('Application_Width', `${window.innerWidth}`);
+                localStorage.setItem('Application_Height', `${window.innerHeight}`);
             });
         }
     }
