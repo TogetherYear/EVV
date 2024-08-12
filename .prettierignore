@@ -1,2 +1,4 @@
 Dist
 Src/Render/Public
+Src/Render/auto-imports.d.ts
+Src/Render/components.d.ts
