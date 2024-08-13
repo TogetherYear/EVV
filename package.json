@@ -10,8 +10,7 @@
         "dev:all": "concurrently -n=vue,pre,ele -c=green,blue \"npm run dev:vue\" \"npm run dev:ele\"",
         "dev:vue": "vite",
         "dev:ele": "node -r ts-node/register Src/Build/Server --env=development --watch",
-        "prettier:all": "prettier --write .",
-        "prettier": "prettier --write",
+        "prettier": "prettier --write .",
         "build:vue": "vite build",
         "build:ele": "node -r ts-node/register Src/Build/Server --env=production",
         "build": "rimraf dist && npm run build:vue && npm run build:ele && electron-builder"
