@@ -1,4 +1,4 @@
-import { app } from 'electron';
+import { app, Menu } from 'electron';
 import { ResourceLoad } from './Manager/ResourceLoad';
 import { Configuration } from './Manager/Configuration';
 import { ProcessPool } from './Manager/ProcessPool';
@@ -19,6 +19,8 @@ app.commandLine.appendSwitch('disable-web-security');
 app.commandLine.appendSwitch('wm-window-animations-disabled');
 
 app.commandLine.appendSwitch('enable-features', 'SharedArrayBuffer');
+
+Menu.setApplicationMenu(null);
 
 SingleInstance.Run();
 

@@ -1,5 +1,5 @@
 import { ResourceLoad } from '@Main/Manager/ResourceLoad';
-import { Menu, Tray, BrowserWindow, screen } from 'electron';
+import { Tray, BrowserWindow, screen } from 'electron';
 import { AppMainWindow } from '@Main/Manager/AppMainWindow';
 import { TWindow } from '@Main/Libs/TWindow';
 import { Configuration } from '@Main/Manager/Configuration';
