@@ -1,5 +1,5 @@
 import { AppMainWindow } from '@Main/Manager/AppMainWindow';
-import { BrowserWindow, app, ipcMain, screen, shell, dialog } from 'electron';
+import { BrowserWindow, app, ipcMain, shell, dialog } from 'electron';
 import { ResourceLoad } from '@Main/Manager/ResourceLoad';
 import { AppTray } from '@Main/Manager/AppTray';
 import { I } from '@Src/Instructions/I';
@@ -8,10 +8,7 @@ import { WindowPool } from './WindowPool';
 import * as F from 'fs';
 import { Download } from './Download';
 import { CustomWidget } from './CustomWidget';
-import * as NS from 'node-screenshots';
-import * as FS from 'fs';
-import * as RN from 'rubick-native';
-import * as IN from '@napi-rs/image';
+import * as HMC from 'hmc-win32';
 
 /**
  * 主线程 Ipc 监听
@@ -22,12 +19,8 @@ class IpcMainHandle {
         this.OnWidgetIPC();
         this.OnShellIPC();
         this.OnTrayIPC();
-        this.OnScreenIPC();
-        this.OnWindowIPC();
         this.OnResourceIPC();
         this.OnGlobalShortcutIPC();
-        this.OnSimulateIPC();
-        this.OnImageIPC();
     }
 
     private OnAppIPC() {
@@ -184,86 +177,6 @@ class IpcMainHandle {
             const result = AppTray.OnStopFlash(icon);
             return result;
         });
-    }
-
-    private OnScreenIPC() {
-        ipcMain.handle(`Renderer:Screen:GetHoldCursor`, async (e) => {
-            const point = screen.getCursorScreenPoint();
-            const monitor = NS.Monitor.fromPoint(point.x, point.y) as NS.Monitor;
-            return this.TransformScreen(monitor);
-        });
-
-        ipcMain.handle(`Renderer:Screen:GetAll`, async () => {
-            const monitors = NS.Monitor.all().map((m) => this.TransformScreen(m));
-            return monitors;
-        });
-
-        ipcMain.handle(`Renderer:Screen:GetPrimary`, async () => {
-            const monitor = NS.Monitor.all().find((a) => a.isPrimary) as NS.Monitor;
-            return this.TransformScreen(monitor);
-        });
-
-        ipcMain.handle(`Renderer:Screen:Capture`, async (e, id: number, path: string) => {
-            const monitor = NS.Monitor.all().find((m) => m.id == id) as NS.Monitor;
-            const image = monitor.captureImageSync();
-            const buffer = Uint8Array.from(image.toPngSync());
-            const target = ResourceLoad.GetResourcePathByName(path);
-            return await new Promise((resolve, reject) => {
-                FS.writeFile(target, buffer, (err) => {
-                    if (err) {
-                        resolve('');
-                    }
-                    resolve(target);
-                });
-            });
-        });
-    }
-
-    private TransformScreen(monitor: NS.Monitor): Omit<TSingleton.IScreen, 'Capture'> {
-        return {
-            id: monitor.id,
-            width: monitor.width,
-            height: monitor.height,
-            x: monitor.x,
-            y: monitor.y,
-            isPrimary: monitor.isPrimary
-        };
-    }
-
-    private OnWindowIPC() {
-        ipcMain.handle(`Renderer:Window:GetAll`, async () => {
-            const windows = NS.Window.all().map((w) => this.TransformWindow(w));
-            return windows;
-        });
-
-        ipcMain.handle(`Renderer:Window:Capture`, async (e, id: number, path: string) => {
-            const window = NS.Window.all().find((w) => w.id == id) as NS.Window;
-            const image = window.captureImageSync();
-            const buffer = Uint8Array.from(image.toPngSync());
-            const target = ResourceLoad.GetResourcePathByName(path);
-            return await new Promise((resolve, reject) => {
-                FS.writeFile(target, buffer, (err) => {
-                    if (err) {
-                        resolve('');
-                    }
-                    resolve(target);
-                });
-            });
-        });
-    }
-
-    private TransformWindow(window: NS.Window): Omit<TSingleton.IWindow, 'Capture'> {
-        return {
-            id: window.id,
-            name: window.appName,
-            //@ts-ignore
-            screen: this.TransformScreen(window.currentMonitor),
-            width: window.width,
-            height: window.height,
-            isMinimized: window.isMinimized,
-            x: window.x,
-            y: window.y
-        };
     }
 
     private OnResourceIPC() {
@@ -444,90 +357,6 @@ class IpcMainHandle {
 
         ipcMain.handle(`Renderer:GlobalShortcut:IsRegistered`, async (e, accelerator: Electron.Accelerator) => {
             const result = GlobalShortcut.IsRegistered(accelerator);
-            return result;
-        });
-    }
-
-    private OnSimulateIPC() {
-        ipcMain.handle(`Renderer:Simulate:MouseMove`, async (e, options: TSingleton.MouseMoveOptions) => {
-            const result = RN.mouseMove({
-                type: options.type,
-                data: {
-                    x: options.x,
-                    y: options.y
-                }
-            });
-            return result;
-        });
-
-        ipcMain.handle(`Renderer:Simulate:MouseScroll`, async (e, options: TSingleton.MouseScrollOptions) => {
-            if (options.type === 'x') {
-                const result = RN.mouseScrollX(options.length);
-                return result;
-            } else {
-                const result = RN.mouseScrollY(options.length);
-                return result;
-            }
-        });
-
-        ipcMain.handle(`Renderer:Simulate:MouseDown`, async (e, btn: TSingleton.MouseBtn) => {
-            const result = RN.mouseDown(btn);
-            return result;
-        });
-
-        ipcMain.handle(`Renderer:Simulate:MouseUp`, async (e, btn: TSingleton.MouseBtn) => {
-            const result = RN.mouseUp(btn);
-            return result;
-        });
-
-        ipcMain.handle(`Renderer:Simulate:GetMousePosition`, async (e) => {
-            const result = RN.mouseLocaion();
-            return result;
-        });
-
-        ipcMain.handle(`Renderer:Simulate:MouseClick`, async (e, btn: TSingleton.MouseBtn) => {
-            const result = RN.mouseClick(btn);
-            return result;
-        });
-    }
-
-    private OnImageIPC() {
-        ipcMain.handle(`Renderer:Image:Transformer`, async (e, options: TSingleton.ImageTransformerOptions) => {
-            const t = new IN.Transformer(FS.readFileSync(options.inputPath));
-            let buffer!: Buffer;
-            switch (options.outputFormat) {
-                case 'Webp':
-                    buffer = await t.webp();
-                    break;
-                case 'Avif':
-                    buffer = await t.avif();
-                    break;
-                case 'Png':
-                    buffer = await t.png();
-                    break;
-                case 'Jpeg':
-                    buffer = await t.jpeg();
-                    break;
-                case 'Bmp':
-                    buffer = await t.bmp();
-                    break;
-                case 'Ico':
-                    buffer = await t.ico();
-                    break;
-                case 'Tiff':
-                    buffer = await t.tiff();
-                    break;
-                case 'Pnm':
-                    buffer = await t.pnm();
-                    break;
-                case 'Tga':
-                    buffer = await t.tga();
-                    break;
-                case 'Farbfeld':
-                    buffer = await t.farbfeld();
-                    break;
-            }
-            const result = FS.writeFileSync(options.outputPath, Uint8Array.from(buffer));
             return result;
         });
     }

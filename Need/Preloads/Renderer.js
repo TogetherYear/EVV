@@ -115,51 +115,6 @@ class Renderer {
         };
     }
 
-    get Screen() {
-        return {
-            GetHoldCursor: async () => {
-                const screen = await ipcRenderer.invoke('Renderer:Screen:GetHoldCursor');
-                return this.Screen.TransformScreen(screen);
-            },
-            GetAll: async () => {
-                const screens = await ipcRenderer.invoke('Renderer:Screen:GetAll');
-                return screens.map((s) => this.Screen.TransformScreen(s));
-            },
-            GetPrimary: async () => {
-                const screen = await ipcRenderer.invoke('Renderer:Screen:GetPrimary');
-                return this.Screen.TransformScreen(screen);
-            },
-            TransformScreen: (screen) => {
-                return {
-                    ...screen,
-                    Capture: async (path) => {
-                        const result = await ipcRenderer.invoke('Renderer:Screen:Capture', screen.id, path);
-                        return result;
-                    }
-                };
-            }
-        };
-    }
-
-    get Window() {
-        return {
-            GetAll: async () => {
-                const windows = await ipcRenderer.invoke('Renderer:Window:GetAll');
-                return windows.map((w) => this.Window.TransformWindow(w));
-            },
-            TransformWindow: (window) => {
-                return {
-                    ...window,
-                    screen: this.Screen.TransformScreen(window.screen),
-                    Capture: async (path) => {
-                        const result = await ipcRenderer.invoke('Renderer:Window:Capture', window.id, path);
-                        return result;
-                    }
-                };
-            }
-        };
-    }
-
     get Shell() {
         return {
             Beep: async () => {
@@ -277,44 +232,6 @@ class Renderer {
             UnregisterAll: async () => {
                 this.globalShortcutEvents.clear();
                 const result = await ipcRenderer.invoke('Renderer:GlobalShortcut:UnregisterAll');
-                return result;
-            }
-        };
-    }
-
-    get Simulate() {
-        return {
-            MouseMove: async (options) => {
-                const result = await ipcRenderer.invoke('Renderer:Simulate:MouseMove', options);
-                return result;
-            },
-            MouseScroll: async (options) => {
-                const result = await ipcRenderer.invoke('Renderer:Simulate:MouseScroll', options);
-                return result;
-            },
-            MouseDown: async (btn) => {
-                const result = await ipcRenderer.invoke('Renderer:Simulate:MouseDown', btn);
-                return result;
-            },
-            MouseUp: async (btn) => {
-                const result = await ipcRenderer.invoke('Renderer:Simulate:MouseUp', btn);
-                return result;
-            },
-            MouseClick: async (btn) => {
-                const result = await ipcRenderer.invoke('Renderer:Simulate:MouseClick', btn);
-                return result;
-            },
-            GetMousePosition: async () => {
-                const result = await ipcRenderer.invoke('Renderer:Simulate:GetMousePosition');
-                return result;
-            }
-        };
-    }
-
-    get Image() {
-        return {
-            Transformer: async (options) => {
-                const result = await ipcRenderer.invoke('Renderer:Image:Transformer', options);
                 return result;
             }
         };

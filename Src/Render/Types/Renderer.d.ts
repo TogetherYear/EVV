@@ -129,36 +129,6 @@ declare namespace Renderer {
     }
 
     /**
-     * 屏幕
-     */
-    export namespace Screen {
-        /**
-         * 获取当前鼠标位置的屏幕
-         */
-        export function GetHoldCursor(): Promise<TSingleton.IScreen>;
-
-        /**
-         * 获取所有屏幕
-         */
-        export function GetAll(): Promise<Array<TSingleton.IScreen>>;
-
-        /**
-         * 获取主屏幕
-         */
-        export function GetPrimary(): Promise<TSingleton.IScreen>;
-    }
-
-    /**
-     * 窗口
-     */
-    export namespace Window {
-        /**
-         * 获取所有窗口
-         */
-        export function GetAll(): Promise<Array<TSingleton.IWindow>>;
-    }
-
-    /**
      * 额外集成
      */
     export namespace Shell {
@@ -301,50 +271,5 @@ declare namespace Renderer {
          * 取消所有快捷键
          */
         export function UnregisterAll(): Promise<void>;
-    }
-
-    /**
-     * 鼠标模拟
-     */
-    export namespace Simulate {
-        /**
-         * 鼠标移动
-         */
-        export function MouseMove(options: TSingleton.MouseMoveOptions): Promise<void>;
-
-        /**
-         * 鼠标滚动
-         */
-        export function MouseScroll(options: TSingleton.MouseScrollOptions): Promise<void>;
-
-        /**
-         * 鼠标按键按下
-         */
-        export function MouseDown(btn: TSingleton.MouseBtn): Promise<void>;
-
-        /**
-         * 鼠标按键松开
-         */
-        export function MouseUp(btn: TSingleton.MouseBtn): Promise<void>;
-
-        /**
-         * 鼠标按键点击
-         */
-        export function MouseClick(btn: TSingleton.MouseBtn): Promise<void>;
-
-        /**
-         * 获取鼠标位置
-         */
-        export function GetMousePosition(): Promise<{ x: number; y: number }>;
-    }
-
-    /**
-     * 图片处理
-     */
-    export namespace Image {
-        /**
-         * 图片格式转换
-         */
-        export function Transformer(options: TSingleton.ImageTransformerOptions): Promise<void>;
     }
 }

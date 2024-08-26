@@ -55,12 +55,9 @@
         }
     },
     "dependencies": {
-        "@napi-rs/image": "^1.9.2",
         "element-plus": "^2.7.8",
         "express": "^4.19.2",
-        "node-screenshots": "^0.2.0",
-        "rubick-native": "^0.0.16-beta",
-        "rubick-native-addon-win32-x64-msvc": "^0.0.15-beta",
+        "hmc-win32": "^1.4.92",
         "vue": "^3.4.34",
         "vue-router": "^4.4.0"
     },

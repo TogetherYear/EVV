@@ -36,7 +36,7 @@ function ConfigFactory(env: string) {
                 ]
             })
         ],
-        external: [...Builtins(), 'electron', 'node-screenshots', 'rubick-native', '@napi-rs/image']
+        external: [...Builtins(), 'electron', 'hmc-win32']
     };
 
     return options;
