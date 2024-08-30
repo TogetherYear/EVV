@@ -10,7 +10,9 @@ import json from '@rollup/plugin-json';
 import { Builtins, WaitOn } from './Utils';
 import electron from 'electron';
 
-function ConfigFactory(env: string) {
+const boundEnv = process.argv.slice(-1)[0];
+
+function ConfigFactory() {
     const options: RollupOptions = {
         input: join(__dirname, '../Main/main.ts'),
         output: {
@@ -40,8 +42,8 @@ function ConfigFactory(env: string) {
     return options;
 }
 
-const boundEnv = process.argv.slice(-1)[0];
-const opts = ConfigFactory(boundEnv);
+const opts = ConfigFactory();
+
 const TAG = '[Server.ts]';
 
 if (boundEnv === 'development') {
