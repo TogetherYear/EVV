@@ -7,7 +7,7 @@
     "license": "MIT",
     "scripts": {
         "dev": "npm run dev:all",
-        "dev:all": "concurrently -n=vue,pre,ele -c=green,blue \"npm run dev:vue\" \"npm run dev:ele\"",
+        "dev:all": "concurrently -n=web,node -c=#80dd80,#dd8080 \"npm run dev:vue\" \"npm run dev:ele\"",
         "dev:vue": "vite",
         "dev:ele": "node -r ts-node/register Src/Build/Server development",
         "prettier": "prettier --write .",
@@ -66,6 +66,7 @@
         "@types/express": "^4.17.21",
         "@types/node": "^20.14.12",
         "@vitejs/plugin-vue": "^5.1.0",
+        "concurrently": "^8.2.2",
         "electron": "31.2.1",
         "electron-builder": "^24.13.3",
         "element-plus": "^2.7.8",
@@ -81,8 +82,8 @@
         "unplugin-element-plus": "^0.8.0",
         "unplugin-vue-components": "^0.27.3",
         "vite": "^5.3.5",
-        "vue-tsc": "^2.0.29",
         "vue": "^3.4.34",
-        "vue-router": "^4.4.0"
+        "vue-router": "^4.4.0",
+        "vue-tsc": "^2.0.29"
     }
 }
