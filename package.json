@@ -55,11 +55,7 @@
         }
     },
     "dependencies": {
-        "element-plus": "^2.7.8",
-        "express": "^4.19.2",
-        "hmc-win32": "^1.4.92",
-        "vue": "^3.4.34",
-        "vue-router": "^4.4.0"
+        "hmc-win32": "^1.4.92"
     },
     "devDependencies": {
         "@rollup/plugin-alias": "^5.0.0",
@@ -72,6 +68,8 @@
         "@vitejs/plugin-vue": "^5.1.0",
         "electron": "31.2.1",
         "electron-builder": "^24.13.3",
+        "element-plus": "^2.7.8",
+        "express": "^4.19.2",
         "prettier": "^3.3.3",
         "rimraf": "^3.0.2",
         "rollup-plugin-esbuild": "^6.1.1",
@@ -83,6 +81,8 @@
         "unplugin-element-plus": "^0.8.0",
         "unplugin-vue-components": "^0.27.3",
         "vite": "^5.3.5",
-        "vue-tsc": "^2.0.29"
+        "vue-tsc": "^2.0.29",
+        "vue": "^3.4.34",
+        "vue-router": "^4.4.0"
     }
 }
