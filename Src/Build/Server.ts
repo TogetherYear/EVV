@@ -8,17 +8,13 @@ import esbuild from 'rollup-plugin-esbuild';
 import alias from '@rollup/plugin-alias';
 import json from '@rollup/plugin-json';
 import { Builtins, WaitOn } from './Utils';
-import minimist from 'minimist';
-import chalk from 'chalk';
-import ora from 'ora';
 import electron from 'electron';
-import { main } from '../../package.json';
 
 function ConfigFactory(env: string) {
     const options: RollupOptions = {
         input: join(__dirname, '../Main/main.ts'),
         output: {
-            file: join(__dirname, `../../${main}`),
+            file: join(__dirname, `../../Dist/Main/main.js`),
             format: 'cjs',
             name: 'ElectronMainBundle',
             sourcemap: true
@@ -44,42 +40,37 @@ function ConfigFactory(env: string) {
     return options;
 }
 
-//运行参数
-const argv = minimist(process.argv.slice(2));
-const opts = ConfigFactory(argv.env);
+const boundEnv = process.argv.slice(-1)[0];
+const opts = ConfigFactory(boundEnv);
 const TAG = '[Server.ts]';
-const spinner = ora(`${TAG} Electron build...`);
 
-if (argv.watch) {
+if (boundEnv === 'development') {
     WaitOn({ port: 6768 }).then((msg) => {
         const watcher = watch(opts);
         let child: ChildProcess;
         watcher.on('change', (filename) => {
-            const log = chalk.green(`change -- ${filename}`);
-            console.log(TAG, log);
+            console.info(TAG, `change -- ${filename}`);
         });
         watcher.on('event', (ev) => {
             if (ev.code === 'END') {
                 if (child) child.kill();
-                child = spawn(electron as any, [join(__dirname, `../../${main}`)], {
+                child = spawn(electron as any, [join(__dirname, `../../Dist/Main/main.js`)], {
                     stdio: 'inherit',
-                    env: Object.assign(process.env, { NODE_ENV: argv.env })
+                    env: Object.assign(process.env, { NODE_ENV: boundEnv })
                 });
             } else if (ev.code === 'ERROR') {
-                console.log(ev.error);
+                console.error(ev.error);
             }
         });
     });
 } else {
-    spinner.start();
+    console.log(TAG, '主进程打包开始');
     rollup(opts)
         .then((build) => {
-            spinner.stop();
-            console.log(TAG, chalk.green('Electron build successed.'));
+            console.log(TAG, '主进程打包完成');
             build.write(opts.output as OutputOptions);
         })
         .catch((error) => {
-            spinner.stop();
-            console.log(`\n${TAG} ${chalk.red('构建报错')}\n`, error, '\n');
+            console.log(TAG, '打包失败');
         });
 }
