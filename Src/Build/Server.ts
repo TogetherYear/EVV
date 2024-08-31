@@ -47,7 +47,7 @@ const opts = ConfigFactory();
 const TAG = '[Server.ts]';
 
 if (boundEnv === 'development') {
-    WaitOn({ port: 6768 }).then((msg) => {
+    WaitOn().then((msg) => {
         const watcher = watch(opts);
         let child: ChildProcess;
         watcher.on('change', (filename) => {
@@ -66,13 +66,13 @@ if (boundEnv === 'development') {
         });
     });
 } else {
-    console.log(TAG, '主进程打包开始');
+    console.log(TAG, 'Main Build Start');
     rollup(opts)
         .then((build) => {
-            console.log(TAG, '主进程打包完成');
+            console.log(TAG, 'Main Build Finish');
             build.write(opts.output as OutputOptions);
         })
         .catch((error) => {
-            console.log(TAG, '打包失败');
+            console.log(TAG, 'Main Build Error');
         });
 }

@@ -1,22 +1,20 @@
 import { builtinModules } from 'module';
 import { get } from 'http';
-import { green } from 'chalk';
 
 /** 轮询监听 vite 启动 */
-export function WaitOn(arg0: { port: string | number; interval?: number }) {
+export function WaitOn() {
     return new Promise((resolve) => {
-        const { port, interval = 149 } = arg0;
-        const url = `http://localhost:${port}`;
+        const url = `http://localhost:6768`;
         let counter = 0;
         const timer: NodeJS.Timeout = setInterval(() => {
             get(url, (res) => {
                 clearInterval(timer);
-                console.log('[waitOn]', green(`"${url}" are already responsive.`), `(${res.statusCode}: ${res.statusMessage})`);
+                console.log('Web Finish');
                 resolve(res.statusCode);
             }).on('error', (err) => {
-                console.log('[waitOn]', `counter: ${counter++}`);
+                console.log('Wait Web Start:', ++counter);
             });
-        }, interval);
+        }, 1000);
     });
 }
 
