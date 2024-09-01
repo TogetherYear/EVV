@@ -23,12 +23,9 @@
             "output": "Build"
         },
         "files": [
-            "Dist/**"
+            "Dist/**",
+            "Need/**"
         ],
-        "extraResources": {
-            "from": "./Need",
-            "to": "Need"
-        },
         "win": {
             "target": [
                 {
