@@ -29,10 +29,6 @@ npm run build
 ```
 
 ```
-如果你在主进程使用自己安装的模块想要使用 import 去 Src/Build/Server.ts 中的 external 添加额外的模块 ( 在 'electron' 后面接着写 目前已经额外添加过几个 )
-```
-
-```
 环境变量 electron 在 Need/Configs 中配置 .env.development 和.env.production 是前端页面使用的 前端页面使用的变量添加后在 env.d.ts 中添加说明确保有代码提示
 ```
 
