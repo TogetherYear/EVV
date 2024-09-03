@@ -25,7 +25,7 @@ function ConfigFactory() {
             nodeResolve(),
             commonjs(),
             json(),
-            typescript({ sourceMap: false }),
+            typescript({ sourceMap: false, module: 'esnext' }),
             esbuild({ minify: true, target: 'node20' }),
             alias({
                 entries: [
