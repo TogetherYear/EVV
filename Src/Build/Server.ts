@@ -19,13 +19,13 @@ function ConfigFactory() {
             file: join(__dirname, `../../Dist/Main/main.js`),
             format: 'cjs',
             name: 'ElectronMainBundle',
-            sourcemap: true
+            sourcemap: false
         },
         plugins: [
             nodeResolve(),
             commonjs(),
             json(),
-            typescript(),
+            typescript({ sourceMap: false }),
             esbuild({ minify: true, target: 'node20' }),
             alias({
                 entries: [
