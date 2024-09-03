@@ -9,10 +9,10 @@
         "dev": "npm run dev:all",
         "dev:all": "concurrently -n=web,node -c=#80dd80,#dd8080 \"npm run dev:vue\" \"npm run dev:ele\"",
         "dev:vue": "vite",
-        "dev:ele": "node -r ts-node/register Src/Build/Server development",
+        "dev:ele": "ts-node Src/Build/Server development",
         "prettier": "prettier --write .",
         "build:vue": "vite build",
-        "build:ele": "node -r ts-node/register Src/Build/Server production",
+        "build:ele": "ts-node Src/Build/Server production",
         "build": "rimraf dist && npm run build:vue && npm run build:ele && electron-builder"
     },
     "build": {
