@@ -9,6 +9,10 @@ class SingleInstance {
         const lock = app.requestSingleInstanceLock(additionalData);
         if (!lock) {
             app.exit(0);
+        } else {
+            app.on('second-instance', () => {
+                this.OnSecondInstance();
+            });
         }
     }
 

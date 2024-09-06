@@ -61,7 +61,3 @@ app.on('window-all-closed', () => {
 app.on('will-quit', () => {
     GlobalShortcut.UnregisterAll();
 });
-
-app.on('second-instance', () => {
-    SingleInstance.OnSecondInstance();
-});
