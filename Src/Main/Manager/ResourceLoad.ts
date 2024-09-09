@@ -29,10 +29,6 @@ class ResourceLoad {
         return `${this.GetNeedFolder()}/ChildProcesses`;
     }
 
-    public GetDownloadsFolder() {
-        return `${this.GetNeedFolder()}/Downloads`;
-    }
-
     public GetChildProcessesByName(name: string) {
         return `${this.GetChildProcessesFolder()}/${name}.js`;
     }
