@@ -24,20 +24,6 @@ class Component<T extends Component<T> | null = null> extends Entity {
     public get P() {
         return this.parent!;
     }
-
-    /**
-     * 当前页面路由
-     */
-    public get Route() {
-        return TRouter.currentPath.value;
-    }
-
-    /**
-     * 当前页面参数
-     */
-    public get Query() {
-        return TRouter.currentQuery;
-    }
 }
 
 export { Component };
