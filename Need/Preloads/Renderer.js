@@ -182,9 +182,6 @@ class Renderer {
                 const result = await ipcRenderer.invoke(`Renderer:Resource:GetFileMetadata`, path);
                 return result;
             },
-            Download: (url) => {
-                return ipcRenderer.postMessage(`Renderer:Resource:Download`, url);
-            },
             WriteStringToFile: async (path, str) => {
                 const result = await ipcRenderer.invoke(`Renderer:Resource:WriteStringToFile`, path, str);
                 return result;

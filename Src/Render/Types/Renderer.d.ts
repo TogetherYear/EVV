@@ -213,11 +213,6 @@ declare namespace Renderer {
         export function GetFileMetadata(path: string): Promise<Record<string, unknown>>;
 
         /**
-         * 下载文件
-         */
-        export function Download(url: string): void;
-
-        /**
          * 将字符串写入文件
          */
         export function WriteStringToFile(path: string, str: string): Promise<boolean>;

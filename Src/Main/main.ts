@@ -9,7 +9,6 @@ import { CustomProtocol } from './Manager/CustomProtocol';
 import { AppMainWindow } from './Manager/AppMainWindow';
 import { AppTray } from './Manager/AppTray';
 import { SingleInstance } from './Manager/SingleInstance';
-import { Download } from './Manager/Download';
 import { CommonEvent } from './Manager/CommonEvent';
 import { LocalServer } from './Manager/LocalServer';
 import { CustomWidget } from './Manager/CustomWidget';
@@ -40,8 +39,6 @@ app.on('ready', () => {
     GlobalShortcut.Run();
 
     CustomProtocol.Run();
-
-    Download.Run();
 
     CustomWidget.Run();
 

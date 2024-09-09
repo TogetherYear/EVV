@@ -6,7 +6,6 @@ import { I } from '@Src/Instructions/I';
 import { GlobalShortcut } from './GlobalShortcut';
 import { WindowPool } from './WindowPool';
 import * as F from 'fs';
-import { Download } from './Download';
 import { CustomWidget } from './CustomWidget';
 import * as HMC from 'hmc-win32';
 
@@ -284,10 +283,6 @@ class IpcMainHandle {
                     resolve(true);
                 });
             });
-        });
-
-        ipcMain.on(`Renderer:Resource:Download`, (e, url: string) => {
-            Download.DownloadFromUrl(url);
         });
 
         ipcMain.handle(`Renderer:Resource:WriteStringToFile`, async (e, path: string, str: string) => {
