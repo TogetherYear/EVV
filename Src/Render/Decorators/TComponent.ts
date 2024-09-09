@@ -1,6 +1,5 @@
 import { Component } from '@Render/Libs/Component';
 import { onMounted, onUnmounted } from 'vue';
-import { useRoute } from 'vue-router';
 import { TRouter } from './TRouter';
 
 namespace TComponent {
