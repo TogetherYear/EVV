@@ -1,14 +1,9 @@
 import { I } from '@Src/Instructions/I';
 import { App } from '@Render/App/App';
 import { onMounted, onUnmounted } from 'vue';
-import { TRouter } from '@Render/Decorators/TRouter';
 import { Component } from '@Render/Libs/Component';
 import { TEvent } from '@Render/Decorators/TEvent';
 
-@TRouter.View({
-    module: TRouter.Module.Default,
-    duty: TRouter.Duty.Application
-})
 class Application extends Component {
     public constructor() {
         super();

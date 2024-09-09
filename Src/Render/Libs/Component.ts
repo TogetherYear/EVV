@@ -28,12 +28,16 @@ class Component<T extends Component<T> | null = null> extends Entity {
     /**
      * 当前页面路由
      */
-    public tComponent_Generate_Route!: string;
+    public get Route() {
+        return TRouter.currentPath.value;
+    }
 
     /**
      * 当前页面参数
      */
-    public tComponent_Generate_Query!: Record<string, unknown>;
+    public get Query() {
+        return TRouter.currentQuery;
+    }
 }
 
 export { Component };
