@@ -1,18 +1,24 @@
 import { I } from '@Src/Instructions/I';
-import { IR } from './Instructions/IR';
-import { AActor } from './Libs/AActor';
 import { onMounted, onUnmounted } from 'vue';
+import { Manager } from '@Render/Libs/Manager';
+import { TEvent } from '@Render/Decorators/TEvent';
 
-class App extends AActor {
+@TEvent.Create([
+    I.IpcRendererEvent.SecondInstance,
+    I.IpcRendererEvent.GlobalShortcut,
+    I.IpcRendererEvent.FileDrop,
+    I.IpcRendererEvent.ThemeUpdate,
+    I.IpcRendererEvent.WidgetCreate,
+    I.IpcRendererEvent.WidgetDestroy,
+    I.IpcRendererEvent.WidgetEmpty
+])
+class App extends Manager {
     public InitStates() {
         return {};
     }
 
-    public InitHooks() {}
-
     public Run() {
         onMounted(() => {
-            this.CreateEvents();
             this.FileDropHandle();
             Renderer.Widget.Listen(this.OnMessage.bind(this));
         });
@@ -23,16 +29,6 @@ class App extends AActor {
     }
 
     protected Destroy() {}
-
-    private CreateEvents() {
-        this.AddKey(I.IpcRendererEvent.SecondInstance);
-        this.AddKey(I.IpcRendererEvent.GlobalShortcut);
-        this.AddKey(I.IpcRendererEvent.FileDrop);
-        this.AddKey(I.IpcRendererEvent.ThemeUpdate);
-        this.AddKey(I.IpcRendererEvent.WidgetCreate);
-        this.AddKey(I.IpcRendererEvent.WidgetDestroy);
-        this.AddKey(I.IpcRendererEvent.WidgetEmpty);
-    }
 
     private OnMessage(e: I.IpcRendererSendMessage) {
         this.Emit(e.type, e);
@@ -53,18 +49,6 @@ class App extends AActor {
             e.preventDefault();
             e.stopPropagation();
         });
-    }
-
-    public override AddListen(key: I.IpcRendererEvent, scope: Object, callback: IR.AppMessageCallback, once?: boolean): void {
-        super.AddListen(key, scope, callback, once);
-    }
-
-    public override RemoveListen(key: I.IpcRendererEvent, scope: Object, callback: IR.AppMessageCallback): void {
-        super.RemoveListen(key, scope, callback);
-    }
-
-    public Emit(key: string, data: I.IpcRendererSendMessage): void {
-        super.Emit(key, data);
     }
 }
 

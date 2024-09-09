@@ -1,9 +1,15 @@
 import { I } from '@Src/Instructions/I';
-import { App } from '@Render/App';
-import { AActor } from '@Render/Libs/AActor';
+import { App } from '@Render/App/App';
 import { onMounted, onUnmounted } from 'vue';
+import { TRouter } from '@Render/Decorators/TRouter';
+import { Component } from '@Render/Libs/Component';
+import { TEvent } from '@Render/Decorators/TEvent';
 
-class Application extends AActor {
+@TRouter.View({
+    module: TRouter.Module.Default,
+    duty: TRouter.Duty.Application
+})
+class Application extends Component {
     public constructor() {
         super();
     }
@@ -16,7 +22,6 @@ class Application extends AActor {
 
     public Run() {
         onMounted(() => {
-            this.ListenEvents();
             this.State();
         });
         onUnmounted(() => {
@@ -26,10 +31,7 @@ class Application extends AActor {
 
     protected Destroy() {}
 
-    private ListenEvents() {
-        App.AddListen(I.IpcRendererEvent.SecondInstance, this, this.OnSecondInstance);
-    }
-
+    @TEvent.Listen(App, I.IpcRendererEvent.SecondInstance)
     private async OnSecondInstance(e: I.IpcRendererSendMessage) {
         await Renderer.Widget.Show();
     }

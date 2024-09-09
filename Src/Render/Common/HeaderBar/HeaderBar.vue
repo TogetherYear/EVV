@@ -13,7 +13,7 @@ const attribute = withDefaults(
 const instance = new HeaderBar();
 
 const { options } = instance.InitStates();
-instance.InitHooks();
+
 instance.Run();
 </script>
 

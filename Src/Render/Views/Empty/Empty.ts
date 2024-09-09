@@ -1,7 +1,7 @@
-import { AActor } from '@Render/Libs/AActor';
+import { Component } from '@Render/Libs/Component';
 import { onMounted, onUnmounted } from 'vue';
 
-class Empty extends AActor {
+class Empty extends Component {
     public constructor() {
         super();
     }
@@ -9,8 +9,6 @@ class Empty extends AActor {
     public InitStates() {
         return {};
     }
-
-    public InitHooks() {}
 
     public Run() {
         onMounted(() => {

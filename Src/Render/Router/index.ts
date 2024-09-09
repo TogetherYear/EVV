@@ -1,36 +1,15 @@
-import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router';
-
-const routes: Array<RouteRecordRaw> = [
-    {
-        path: '/',
-        name: 'Default',
-        redirect: '/Application'
-    },
-    {
-        path: '/:pathMatch(.*)',
-        name: '404',
-        redirect: '/Empty'
-    },
-    {
-        path: '/Empty',
-        name: 'Empty',
-        component: () => import('@Render/Views/Empty/Empty.vue')
-    },
-    {
-        path: '/Application',
-        name: 'Application',
-        component: () => import('@Render/Views/Application/Application.vue')
-    },
-    {
-        path: '/Tray',
-        name: 'Tray',
-        component: () => import('@Render/Views/Tray/Tray.vue')
-    }
-];
+import { TRouter } from '@Render/Decorators/TRouter';
+import { createRouter, createWebHashHistory } from 'vue-router';
 
 const router = createRouter({
     history: createWebHashHistory(),
-    routes
+    routes: TRouter.routes
 });
 
-export default router;
+router.afterEach((to, from) => {
+    TRouter.RefreshRoute(to, from);
+});
+
+TRouter.InitMenu(router.getRoutes());
+
+export { router };

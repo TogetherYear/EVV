@@ -2,10 +2,10 @@ import { ref, onMounted, onUnmounted } from 'vue';
 import minIcon from '@Render/Assets/Images/min.png';
 import maxIcon from '@Render/Assets/Images/max.png';
 import hideIcon from '@Render/Assets/Images/hide.png';
-import { AActor } from '@Render/Libs/AActor';
 import { IR } from '@Render/Instructions/IR';
+import { Component } from '@Render/Libs/Component';
 
-class HeaderBar extends AActor {
+class HeaderBar extends Component {
     public constructor() {
         super();
     }
@@ -31,8 +31,6 @@ class HeaderBar extends AActor {
             options: this.options
         };
     }
-
-    public InitHooks() {}
 
     public Run() {
         onMounted(() => {});

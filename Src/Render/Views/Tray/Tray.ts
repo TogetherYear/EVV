@@ -1,7 +1,7 @@
-import { AActor } from '@Render/Libs/AActor';
+import { Component } from '@Render/Libs/Component';
 import { onMounted, onUnmounted } from 'vue';
 
-class Tray extends AActor {
+class Tray extends Component {
     public constructor() {
         super();
     }
@@ -13,17 +13,14 @@ class Tray extends AActor {
     public InitHooks() {}
 
     public Run() {
-        onMounted(() => {
-            this.ListenEvents();
-        });
+        onMounted(() => {});
+
         onUnmounted(() => {
             this.Destroy();
         });
     }
 
     protected Destroy() {}
-
-    private ListenEvents() {}
 
     public OnClose() {
         Renderer.App.Close();
