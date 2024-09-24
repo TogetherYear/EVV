@@ -6,7 +6,7 @@ const attribute = withDefaults(
         bgc?: string;
     }>(),
     {
-        bgc: '#212121'
+        bgc: '#212121ff'
     }
 );
 
