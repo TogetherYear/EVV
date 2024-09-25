@@ -74,7 +74,7 @@ class CustomWidget extends EventSystem {
 
     public FindWidget(id: number) {
         for (let w of this.widgets) {
-            if (w[1].widget.webContents.id == id) {
+            if (w[1].widget.webContents.id === id) {
                 return w[1];
             }
         }

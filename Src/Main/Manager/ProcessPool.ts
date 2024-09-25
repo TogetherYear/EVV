@@ -59,9 +59,9 @@ class ProcessPool {
     }
 
     private OnMessage(e: IM.IChildrenProcessReceiveMessage & { type: IM.ChildrenProcessType }) {
-        if (e.type == IM.ChildrenProcessType.Log) {
-        } else if (e.type == IM.ChildrenProcessType.Push) {
-        } else if (e.type == IM.ChildrenProcessType.Custom) {
+        if (e.type === IM.ChildrenProcessType.Log) {
+        } else if (e.type === IM.ChildrenProcessType.Push) {
+        } else if (e.type === IM.ChildrenProcessType.Custom) {
         } else {
         }
     }
@@ -75,7 +75,7 @@ class ProcessPool {
                 }
             }
         } else if (e.excludeProcesses && e.excludeProcesses.length != 0) {
-            const need = this.GetPoolKV().filter((c) => (e.excludeProcesses || []).indexOf(c.key) == -1);
+            const need = this.GetPoolKV().filter((c) => (e.excludeProcesses || []).indexOf(c.key) === -1);
             for (let p of need) {
                 p.value.send(e);
             }

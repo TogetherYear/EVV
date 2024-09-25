@@ -50,7 +50,7 @@ app.on('ready', () => {
 });
 
 app.on('window-all-closed', () => {
-    if (process.platform == 'win32') {
+    if (process.platform === 'win32') {
         app.exit(0);
     }
 });

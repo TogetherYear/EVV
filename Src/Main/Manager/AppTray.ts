@@ -65,7 +65,7 @@ class AppTray extends TWindow {
     }
 
     private CreateTray() {
-        if (process.platform == 'win32') {
+        if (process.platform === 'win32') {
             //系统托盘图标
             this.tray = new Tray(ResourceLoad.GetImageByName('tray.ico'));
 

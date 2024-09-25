@@ -51,7 +51,7 @@ class Renderer {
         return {
             Listen: (callback) => {
                 return ipcRenderer.on('RendererMessage', (e, data) => {
-                    if (data.type == 'GlobalShortcut' && this.globalShortcutEvents.has(data.send.accelerator)) {
+                    if (data.type === 'GlobalShortcut' && this.globalShortcutEvents.has(data.send.accelerator)) {
                         this.globalShortcutEvents.get(data.send.accelerator)();
                     }
                     callback(data);

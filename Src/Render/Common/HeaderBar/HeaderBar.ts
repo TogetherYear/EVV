@@ -17,11 +17,11 @@ class HeaderBar extends Component {
     ]);
 
     public async OptionClick(type: string) {
-        if (type == 'Min') {
+        if ((type = 'Min')) {
             await Renderer.Widget.Min();
-        } else if (type == 'Max') {
+        } else if (type === 'Max') {
             await Renderer.Widget.Max();
-        } else if (type == 'Hide') {
+        } else if (type === 'Hide') {
             await Renderer.Widget.Hide();
         }
     }

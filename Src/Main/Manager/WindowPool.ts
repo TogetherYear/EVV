@@ -38,7 +38,7 @@ class WindowPool {
                 }
             }
         } else if (e.excludeWidgets && e.excludeWidgets.length != 0) {
-            const need = this.GetPoolKV().filter((c) => (e.excludeWidgets || []).indexOf(c.key) == -1);
+            const need = this.GetPoolKV().filter((c) => (e.excludeWidgets || []).indexOf(c.key) === -1);
             for (let c of need) {
                 c.value.widget.webContents.postMessage('RendererMessage', e);
             }
@@ -51,7 +51,7 @@ class WindowPool {
 
     public GetWindowById(id: number): TWindow {
         for (let p of this.pool) {
-            if (p[1].widget.id == id) {
+            if (p[1].widget.id === id) {
                 return p[1];
             }
         }

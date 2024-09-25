@@ -357,10 +357,10 @@ class IpcMainHandle {
     }
 
     private OnMessage(e: I.IIpcRendererReceiveMessage & { type: I.IpcRendererWindow; id: number }) {
-        if (e.type == I.IpcRendererWindow.Main) {
-        } else if (e.type == I.IpcRendererWindow.Tray) {
+        if (e.type === I.IpcRendererWindow.Main) {
+        } else if (e.type === I.IpcRendererWindow.Tray) {
         } else {
-            if (e.reason == 'Empty') {
+            if (e.reason === 'Empty') {
                 const target = CustomWidget.FindWidget(e.id);
                 WindowPool.PostMessage({
                     type: I.IpcRendererEvent.WidgetEmpty,
