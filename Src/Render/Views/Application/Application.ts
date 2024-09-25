@@ -29,23 +29,23 @@ class Application extends Component {
 
     private async SetDefault() {
         await Renderer.Widget.SetSize({
-            width: parseInt(localStorage.getItem('Application_Width') || '1000'),
-            height: parseInt(localStorage.getItem('Application_Height') || '560')
+            width: parseInt(localStorage.getItem(`Application:${this.Route}:Width`) || '1000'),
+            height: parseInt(localStorage.getItem(`Application:${this.Route}:Height`) || '560')
         });
         await Renderer.Widget.Center();
         await Renderer.Widget.Show();
     }
 
-    @TEvent.Listen(App, I.IpcRendererEvent.SecondInstance)
-    private async OnSecondInstance(e: I.IpcRendererSendMessage) {
-        await Renderer.Widget.Show();
-    }
-
-    @TTool.Debounce(100)
+    @TTool.Debounce(300)
     @TEvent.Listen(window, 'resize')
     private OnResized(e: UIEvent) {
-        localStorage.setItem('Application_Width', `${window.innerWidth}`);
-        localStorage.setItem('Application_Height', `${window.innerHeight}`);
+        localStorage.setItem(`Application:${this.Route}:Width`, `${window.innerWidth}`);
+        localStorage.setItem(`Application:${this.Route}:Height`, `${window.innerHeight}`);
+    }
+
+    @TEvent.Listen(App, I.IpcRendererEvent.SecondInstance)
+    private async OnSecondInstance() {
+        await Renderer.Widget.Show();
     }
 }
 

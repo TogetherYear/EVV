@@ -17,7 +17,7 @@ class HeaderBar extends Component {
     ]);
 
     public async OptionClick(type: string) {
-        if ((type = 'Min')) {
+        if (type === 'Min') {
             await Renderer.Widget.Min();
         } else if (type === 'Max') {
             await Renderer.Widget.Max();

@@ -55,8 +55,8 @@ class AppMainWindow extends TWindow {
         });
 
         this.widget.on('close', (e) => {
-            e.preventDefault();
             this.widget.hide();
+            e.preventDefault();
         });
 
         if (Configuration.configs.debug) {
