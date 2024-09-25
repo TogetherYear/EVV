@@ -89,10 +89,6 @@ class AppTray extends TWindow {
         this.widget.show();
     }
 
-    public OnSetSize(size: { width: number; height: number }) {
-        this.widget.setSize(size.width, size.height);
-    }
-
     public OnSetIcon(icon: string) {
         const showIcon = ResourceLoad.GetImageByName(icon);
         this.tray.setImage(showIcon);

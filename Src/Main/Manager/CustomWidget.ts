@@ -87,14 +87,6 @@ class CustomWidget extends EventSystem {
     public DeleteWidget(label: string) {
         this.widgets.delete(label);
     }
-
-    public OnGetPosition(widget: BrowserWindow) {
-        const position = widget.getPosition();
-        return {
-            x: position[0],
-            y: position[1]
-        };
-    }
 }
 
 const CustomWidgetInstance = new CustomWidget();
