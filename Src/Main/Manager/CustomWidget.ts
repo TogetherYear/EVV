@@ -4,7 +4,6 @@ import { WindowPool } from './WindowPool';
 import { I } from '@Src/Instructions/I';
 import { ResourceLoad } from './ResourceLoad';
 import { Configuration } from './Configuration';
-import { IM } from '@Main/Instructions/IM';
 
 class CustomWidget extends EventSystem {
     private widgets = new Map<string, { widget: BrowserWindow; lable: string }>();
@@ -27,17 +26,9 @@ class CustomWidget extends EventSystem {
                 icon: options.icon || ResourceLoad.GetImageByName('window.ico'),
                 show: options.show || true,
                 webPreferences: {
-                    // 同源
-                    webSecurity: false,
-                    // 渲染进程集成 node
                     nodeIntegration: false,
-                    // 是否独立线程运行 api 和 preload
                     contextIsolation: false,
-                    // 设为false则禁用devtool开发者调试工具
                     devTools: Configuration.configs.debug,
-                    // https 运行 http
-                    allowRunningInsecureContent: true,
-                    // 预加载脚本 仅为示例
                     preload: options.preload || ResourceLoad.GetPreloadByName('Renderer')
                 }
             });

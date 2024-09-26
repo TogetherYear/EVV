@@ -24,17 +24,9 @@ class AppMainWindow extends TWindow {
             backgroundColor: '#212121',
             icon: ResourceLoad.GetImageByName('window.ico'),
             webPreferences: {
-                // 同源
-                webSecurity: false,
-                // 渲染进程集成 node
                 nodeIntegration: false,
-                // 是否独立线程运行 api 和 preload
                 contextIsolation: false,
-                // 设为false则禁用devtool开发者调试工具
                 devTools: Configuration.configs.debug,
-                // https 运行 http
-                allowRunningInsecureContent: true,
-                // 预加载脚本 仅为示例
                 preload: ResourceLoad.GetPreloadByName('Renderer')
             }
         });

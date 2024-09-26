@@ -13,11 +13,7 @@ import { CommonEvent } from './Manager/CommonEvent';
 import { LocalServer } from './Manager/LocalServer';
 import { CustomWidget } from './Manager/CustomWidget';
 
-app.commandLine.appendSwitch('disable-web-security');
-
 app.commandLine.appendSwitch('wm-window-animations-disabled');
-
-app.commandLine.appendSwitch('enable-features', 'SharedArrayBuffer');
 
 Menu.setApplicationMenu(null);
 
