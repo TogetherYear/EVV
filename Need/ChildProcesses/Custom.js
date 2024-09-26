@@ -4,5 +4,3 @@ process.send({
 });
 
 process.on('message', (e) => {});
-
-process.parentPort;
