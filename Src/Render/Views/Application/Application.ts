@@ -3,8 +3,9 @@ import { App } from '@Render/App/App';
 import { onMounted, onUnmounted } from 'vue';
 import { Component } from '@Render/Libs/Component';
 import { TEvent } from '@Render/Decorators/TEvent';
-import { TTool } from '@Render/Decorators/TTool';
+import { TWindow } from '@Render/Decorators/TWindow';
 
+@TWindow.State()
 class Application extends Component {
     public constructor() {
         super();
@@ -28,19 +29,8 @@ class Application extends Component {
     protected Destroy() {}
 
     private async SetDefault() {
-        await Renderer.Widget.SetSize({
-            width: parseInt(localStorage.getItem(`Application:${this.Route}:Width`) || '1000'),
-            height: parseInt(localStorage.getItem(`Application:${this.Route}:Height`) || '560')
-        });
         await Renderer.Widget.Center();
         await Renderer.Widget.Show();
-    }
-
-    @TTool.Debounce(300)
-    @TEvent.Listen(window, 'resize')
-    private OnResized(e: UIEvent) {
-        localStorage.setItem(`Application:${this.Route}:Width`, `${window.innerWidth}`);
-        localStorage.setItem(`Application:${this.Route}:Height`, `${window.innerHeight}`);
     }
 
     @TEvent.Listen(App, I.IpcRendererEvent.SecondInstance)
