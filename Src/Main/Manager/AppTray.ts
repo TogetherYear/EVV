@@ -36,8 +36,6 @@ class AppTray extends TWindow {
             hasShadow: false,
             icon: ResourceLoad.GetImageByName('tray.ico'),
             webPreferences: {
-                nodeIntegration: false,
-                contextIsolation: false,
                 devTools: Configuration.configs.debug,
                 preload: ResourceLoad.GetPreloadByName('Renderer')
             }

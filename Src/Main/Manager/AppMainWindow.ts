@@ -24,8 +24,6 @@ class AppMainWindow extends TWindow {
             backgroundColor: '#212121',
             icon: ResourceLoad.GetImageByName('window.ico'),
             webPreferences: {
-                nodeIntegration: false,
-                contextIsolation: false,
                 devTools: Configuration.configs.debug,
                 preload: ResourceLoad.GetPreloadByName('Renderer')
             }

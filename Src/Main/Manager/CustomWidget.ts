@@ -26,8 +26,6 @@ class CustomWidget extends EventSystem {
                 icon: options.icon || ResourceLoad.GetImageByName('window.ico'),
                 show: options.show || true,
                 webPreferences: {
-                    nodeIntegration: false,
-                    contextIsolation: false,
                     devTools: Configuration.configs.debug,
                     preload: options.preload || ResourceLoad.GetPreloadByName('Renderer')
                 }

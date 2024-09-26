@@ -1,4 +1,4 @@
-import { app, Menu } from 'electron';
+import { app } from 'electron';
 import { ResourceLoad } from './Manager/ResourceLoad';
 import { Configuration } from './Manager/Configuration';
 import { ProcessPool } from './Manager/ProcessPool';
@@ -12,10 +12,6 @@ import { SingleInstance } from './Manager/SingleInstance';
 import { CommonEvent } from './Manager/CommonEvent';
 import { LocalServer } from './Manager/LocalServer';
 import { CustomWidget } from './Manager/CustomWidget';
-
-app.commandLine.appendSwitch('wm-window-animations-disabled');
-
-Menu.setApplicationMenu(null);
 
 SingleInstance.Run();
 

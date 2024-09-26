@@ -19,7 +19,7 @@ class App extends Manager {
     public Run() {
         onMounted(() => {
             this.FileDropHandle();
-            Renderer.Widget.Listen(this.OnMessage.bind(this));
+            Renderer.Listen(this.OnMessage.bind(this));
         });
 
         onUnmounted(() => {
@@ -30,6 +30,7 @@ class App extends Manager {
     protected Destroy() {}
 
     private OnMessage(e: I.IpcRendererSendMessage) {
+        console.log(e);
         this.Emit(e.type, e);
     }
 
