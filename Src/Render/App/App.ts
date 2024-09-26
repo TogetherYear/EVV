@@ -5,7 +5,6 @@ import { TEvent } from '@Render/Decorators/TEvent';
 
 @TEvent.Create([
     I.IpcRendererEvent.SecondInstance,
-    I.IpcRendererEvent.GlobalShortcut,
     I.IpcRendererEvent.FileDrop,
     I.IpcRendererEvent.ThemeUpdate,
     I.IpcRendererEvent.WidgetCreate,

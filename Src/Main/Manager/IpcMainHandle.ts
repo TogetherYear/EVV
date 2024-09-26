@@ -3,7 +3,6 @@ import { BrowserWindow, app, ipcMain, shell, dialog } from 'electron';
 import { ResourceLoad } from '@Main/Manager/ResourceLoad';
 import { AppTray } from '@Main/Manager/AppTray';
 import { I } from '@Src/Instructions/I';
-import { GlobalShortcut } from './GlobalShortcut';
 import { WindowPool } from './WindowPool';
 import * as F from 'fs';
 import { CustomWidget } from './CustomWidget';
@@ -19,7 +18,6 @@ class IpcMainHandle {
         this.OnShellIPC();
         this.OnTrayIPC();
         this.OnResourceIPC();
-        this.OnGlobalShortcutIPC();
     }
 
     private OnAppIPC() {
@@ -331,28 +329,6 @@ class IpcMainHandle {
                     });
                 });
             });
-        });
-    }
-
-    private OnGlobalShortcutIPC() {
-        ipcMain.handle(`Renderer:GlobalShortcut:Register`, async (e, accelerator: Electron.Accelerator) => {
-            const result = GlobalShortcut.Register(accelerator, () => {});
-            return result;
-        });
-
-        ipcMain.handle(`Renderer:GlobalShortcut:Unregister`, async (e, accelerator: Electron.Accelerator) => {
-            const result = GlobalShortcut.Unregister(accelerator);
-            return result;
-        });
-
-        ipcMain.handle(`Renderer:GlobalShortcut:UnregisterAll`, (e) => {
-            const result = GlobalShortcut.UnregisterAll();
-            return result;
-        });
-
-        ipcMain.handle(`Renderer:GlobalShortcut:IsRegistered`, async (e, accelerator: Electron.Accelerator) => {
-            const result = GlobalShortcut.IsRegistered(accelerator);
-            return result;
         });
     }
 

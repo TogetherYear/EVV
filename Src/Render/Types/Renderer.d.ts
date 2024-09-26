@@ -242,29 +242,4 @@ declare namespace Renderer {
          */
         export function ReadText(): string;
     }
-
-    /**
-     * 全局快捷键
-     */
-    export namespace GlobalShortcut {
-        /**
-         * 注册快捷键
-         */
-        export function Register(accelerator: Electron.Accelerator, callback: () => void): Promise<boolean>;
-
-        /**
-         * 取消快捷键
-         */
-        export function Unregister(accelerator: Electron.Accelerator): Promise<void>;
-
-        /**
-         * 是否已经注册快键键
-         */
-        export function IsRegistered(accelerator: Electron.Accelerator): Promise<boolean>;
-
-        /**
-         * 取消所有快捷键
-         */
-        export function UnregisterAll(): Promise<void>;
-    }
 }

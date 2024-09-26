@@ -1,7 +1,6 @@
 namespace I {
     export enum IpcRendererEvent {
         SecondInstance = 'SecondInstance',
-        GlobalShortcut = 'GlobalShortcut',
         FileDrop = 'FileDrop',
         WidgetCreate = 'WidgetCreate',
         WidgetDestroy = 'WidgetDestroy',

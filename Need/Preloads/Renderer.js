@@ -1,8 +1,6 @@
 const { ipcRenderer, clipboard } = require('electron');
 
 class Renderer {
-    globalShortcutEvents = new Map();
-
     get App() {
         return {
             Close: () => {
@@ -51,9 +49,6 @@ class Renderer {
         return {
             Listen: (callback) => {
                 return ipcRenderer.on('RendererMessage', (e, data) => {
-                    if (data.type === 'GlobalShortcut' && this.globalShortcutEvents.has(data.send.accelerator)) {
-                        this.globalShortcutEvents.get(data.send.accelerator)();
-                    }
                     callback(data);
                 });
             },
@@ -204,32 +199,6 @@ class Renderer {
             },
             ReadText: () => {
                 return clipboard.readText();
-            }
-        };
-    }
-
-    get GlobalShortcut() {
-        return {
-            Register: async (accelerator, callback) => {
-                const result = await ipcRenderer.invoke('Renderer:GlobalShortcut:Register', accelerator);
-                if (result) {
-                    this.globalShortcutEvents.set(accelerator, callback);
-                }
-                return result;
-            },
-            Unregister: async (accelerator) => {
-                this.globalShortcutEvents.delete(accelerator);
-                const result = await ipcRenderer.invoke('Renderer:GlobalShortcut:Unregister', accelerator);
-                return result;
-            },
-            IsRegistered: async (accelerator) => {
-                const result = await ipcRenderer.invoke('Renderer:GlobalShortcut:IsRegistered', accelerator);
-                return result;
-            },
-            UnregisterAll: async () => {
-                this.globalShortcutEvents.clear();
-                const result = await ipcRenderer.invoke('Renderer:GlobalShortcut:UnregisterAll');
-                return result;
             }
         };
     }
