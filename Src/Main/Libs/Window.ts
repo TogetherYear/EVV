@@ -1,7 +1,7 @@
-import { EventSystem } from '@Src/Libs/EventSystem';
 import { BrowserWindow } from 'electron';
+import { Manager } from './Manager';
 
-abstract class TWindow extends EventSystem {
+abstract class Window extends Manager {
     public constructor() {
         super();
     }
@@ -9,4 +9,4 @@ abstract class TWindow extends EventSystem {
     public widget!: BrowserWindow;
 }
 
-export { TWindow };
+export { Window };

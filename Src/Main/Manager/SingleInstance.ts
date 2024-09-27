@@ -2,8 +2,9 @@ import { Time } from '@Src/Utils/Time';
 import { app } from 'electron';
 import { WindowPool } from './WindowPool';
 import { I } from '@Src/Instructions/I';
+import { Manager } from '@Main/Libs/Manager';
 
-class SingleInstance {
+class SingleInstance extends Manager {
     public Run() {
         const additionalData = { key: 'TSingleton', Time: Time.GetTime() };
         const lock = app.requestSingleInstanceLock(additionalData);

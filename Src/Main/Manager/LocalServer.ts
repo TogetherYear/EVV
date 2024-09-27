@@ -2,11 +2,12 @@ import express from 'express';
 import * as H from 'http';
 import { ResourceLoad } from './ResourceLoad';
 import * as core from 'express-serve-static-core';
+import { Manager } from '@Main/Libs/Manager';
 
 /**
  * 本地服务器
  */
-class LocalServer {
+class LocalServer extends Manager {
     private app!: core.Express;
 
     private server!: H.Server<typeof H.IncomingMessage, typeof H.ServerResponse>;

@@ -1,11 +1,11 @@
 import { BrowserWindow, Menu } from 'electron';
 import { ResourceLoad } from '@Main/Manager/ResourceLoad';
 import { Configuration } from '@Main/Manager/Configuration';
-import { TWindow } from '@Main/Libs/TWindow';
+import { Window } from '@Main/Libs/Window';
 import { I } from '@Src/Instructions/I';
 import { WindowPool } from './WindowPool';
 
-class AppMainWindow extends TWindow {
+class AppMainWindow extends Window {
     public async Run() {
         this.CreateWidget();
     }

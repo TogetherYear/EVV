@@ -1,11 +1,11 @@
-import { EventSystem } from '@Src/Libs/EventSystem';
 import { BrowserWindow } from 'electron';
 import { WindowPool } from './WindowPool';
 import { I } from '@Src/Instructions/I';
 import { ResourceLoad } from './ResourceLoad';
 import { Configuration } from './Configuration';
+import { Manager } from '@Main/Libs/Manager';
 
-class CustomWidget extends EventSystem {
+class CustomWidget extends Manager {
     private widgets = new Map<string, { widget: BrowserWindow; lable: string }>();
 
     public Run() {}

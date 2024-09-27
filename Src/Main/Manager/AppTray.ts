@@ -1,12 +1,12 @@
 import { ResourceLoad } from '@Main/Manager/ResourceLoad';
 import { Tray, BrowserWindow, screen } from 'electron';
 import { AppMainWindow } from '@Main/Manager/AppMainWindow';
-import { TWindow } from '@Main/Libs/TWindow';
+import { Window } from '@Main/Libs/Window';
 import { Configuration } from '@Main/Manager/Configuration';
 import { WindowPool } from '@Main/Manager/WindowPool';
 import { I } from '@Src/Instructions/I';
 
-class AppTray extends TWindow {
+class AppTray extends Window {
     public tray!: Tray;
 
     private flashTimer: NodeJS.Timeout | null = null;

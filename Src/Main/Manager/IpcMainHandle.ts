@@ -7,11 +7,12 @@ import { WindowPool } from './WindowPool';
 import * as F from 'fs';
 import { CustomWidget } from './CustomWidget';
 import * as HMC from 'hmc-win32';
+import { Manager } from '@Main/Libs/Manager';
 
 /**
  * 主线程 Ipc 监听
  */
-class IpcMainHandle {
+class IpcMainHandle extends Manager {
     public Run() {
         this.OnAppIPC();
         this.OnWidgetIPC();

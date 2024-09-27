@@ -1,9 +1,10 @@
+import { Manager } from '@Main/Libs/Manager';
 import { protocol, net } from 'electron';
 
 /**
  * 自定义协议
  */
-class CustomProtocol {
+class CustomProtocol extends Manager {
     public fileProtocol = 'tfile';
 
     public Run() {

@@ -1,8 +1,9 @@
 import fs from 'fs';
 import { ResourceLoad } from '@Main/Manager/ResourceLoad';
 import { app, Menu } from 'electron';
+import { Manager } from '@Main/Libs/Manager';
 
-class Configuration {
+class Configuration extends Manager {
     public configs!: Main.IConfigs;
 
     public Run() {
