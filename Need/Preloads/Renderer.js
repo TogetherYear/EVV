@@ -22,6 +22,10 @@ contextBridge.exposeInMainWorld('Renderer', {
             const result = await ipcRenderer.invoke('Renderer:App:SetAutostart', enable);
             return result;
         },
+        GetName: async () => {
+            const result = await ipcRenderer.invoke('Renderer:App:GetName');
+            return result;
+        },
         CreateCustomWindow: async (options) => {
             const result = await ipcRenderer.invoke(`Renderer:App:CreateCustomWindow`, options);
             return result;

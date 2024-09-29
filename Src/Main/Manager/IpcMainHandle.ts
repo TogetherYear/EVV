@@ -34,6 +34,11 @@ class IpcMainHandle extends Manager {
             return result;
         });
 
+        ipcMain.handle(`Renderer:App:GetName`, async (e) => {
+            const result = app.name;
+            return result;
+        });
+
         ipcMain.on(`Renderer:App:Relaunch`, (e) => {
             app.relaunch();
             app.exit(0);
