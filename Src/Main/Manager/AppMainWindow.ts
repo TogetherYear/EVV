@@ -45,8 +45,8 @@ class AppMainWindow extends Window {
         });
 
         this.widget.on('close', (e) => {
-            this.widget.hide();
             e.preventDefault();
+            this.widget.hide();
         });
 
         if (Configuration.configs.debug) {
