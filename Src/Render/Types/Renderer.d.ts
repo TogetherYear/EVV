@@ -29,6 +29,11 @@ declare namespace Renderer {
         export function SetAutostart(enable: boolean): Promise<void>;
 
         /**
+         * 获取程序名称
+         */
+        export function GetName(): Promise<string>;
+
+        /**
          * 打开自定义窗口
          */
         export function CreateCustomWindow(options: TSingleton.CustomWidgetOptions): Promise<void>;

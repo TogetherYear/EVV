@@ -16,7 +16,7 @@ class HeaderBar extends Component {
         { type: 'Hide', icon: hideIcon, label: '隐藏' }
     ]);
 
-    public async OptionClick(type: string) {
+    public async OnOptionClick(type: string) {
         if (type === 'Min') {
             await Renderer.Widget.Min();
         } else if (type === 'Max') {

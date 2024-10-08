@@ -1,4 +1,4 @@
-import { Entity } from '@Render/Libs/Entity';
+import { Entity } from '@Main/Libs/Entity';
 
 namespace TEntity {
     export function Generate() {

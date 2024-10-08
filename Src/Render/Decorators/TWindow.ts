@@ -51,9 +51,10 @@ namespace TWindow {
                 }
 
                 private async TWindow_State_SetDefault() {
+                    const name = await Renderer.App.GetName();
                     await Renderer.Widget.SetSize({
-                        width: parseInt(localStorage.getItem(`Application:${this.Route}:Width`) || '1000'),
-                        height: parseInt(localStorage.getItem(`Application:${this.Route}:Height`) || '560')
+                        width: parseInt(localStorage.getItem(`${name}:${this.Route}:Width`) || '1000'),
+                        height: parseInt(localStorage.getItem(`${name}:${this.Route}:Height`) || '560')
                     });
                 }
 
@@ -63,12 +64,13 @@ namespace TWindow {
                     window.addEventListener('resize', this.tWindow_Bind_Event);
                 }
 
-                private async OnResized(e: UIEvent) {
+                private OnResized(e: UIEvent) {
                     clearTimeout(this.timer);
                     //@ts-ignore
-                    this.timer = setTimeout(() => {
-                        localStorage.setItem(`Application:${this.Route}:Width`, `${window.innerWidth}`);
-                        localStorage.setItem(`Application:${this.Route}:Height`, `${window.innerHeight}`);
+                    this.timer = setTimeout(async () => {
+                        const name = await Renderer.App.GetName();
+                        localStorage.setItem(`${name}:${this.Route}:Width`, `${window.innerWidth}`);
+                        localStorage.setItem(`${name}:${this.Route}:Height`, `${window.innerHeight}`);
                     }, 300);
                 }
             };

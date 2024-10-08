@@ -1,7 +1,7 @@
 import { globalShortcut } from 'electron';
-import { EventSystem } from '@Src/Libs/EventSystem';
+import { Manager } from '@Main/Libs/Manager';
 
-class GlobalShortcut extends EventSystem {
+class GlobalShortcut extends Manager {
     public Run() {}
 
     public Register(accelerator: Electron.Accelerator, callback: () => void) {

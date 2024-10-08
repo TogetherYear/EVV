@@ -2,8 +2,9 @@ import { fork, ChildProcess } from 'child_process';
 import { ResourceLoad } from '@Main/Manager/ResourceLoad';
 import * as fs from 'fs';
 import { IM } from '@Main/Instructions/IM';
+import { Manager } from '@Main/Libs/Manager';
 
-class ProcessPool {
+class ProcessPool extends Manager {
     private pool = new Map<IM.ChildrenProcessType, ChildProcess>();
 
     public Run() {

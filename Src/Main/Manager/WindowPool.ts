@@ -1,12 +1,12 @@
 import { I } from '@Src/Instructions/I';
-import { TWindow } from '@Main/Libs/TWindow';
+import { Window } from '@Main/Libs/Window';
 
 class WindowPool {
-    private pool = new Map<I.IpcRendererWindow, TWindow>();
+    private pool = new Map<I.IpcRendererWindow, Window>();
 
     public Run() {}
 
-    public RegisterWindow(t: I.IpcRendererWindow, w: TWindow) {
+    public RegisterWindow(t: I.IpcRendererWindow, w: Window) {
         this.pool.set(t, w);
     }
 
@@ -19,7 +19,7 @@ class WindowPool {
     }
 
     public GetPoolKV() {
-        const result: Array<{ key: I.IpcRendererWindow; value: TWindow }> = [];
+        const result: Array<{ key: I.IpcRendererWindow; value: Window }> = [];
         for (let p of this.pool) {
             result.push({ key: p[0], value: p[1] });
         }
@@ -49,13 +49,13 @@ class WindowPool {
         }
     }
 
-    public GetWindowById(id: number): TWindow {
+    public GetWindowById(id: number): Window {
         for (let p of this.pool) {
             if (p[1].widget.id === id) {
                 return p[1];
             }
         }
-        return this.GetWindow(I.IpcRendererWindow.Main) as TWindow;
+        return this.GetWindow(I.IpcRendererWindow.Main) as Window;
     }
 }
 

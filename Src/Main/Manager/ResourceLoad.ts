@@ -1,8 +1,9 @@
 import { app } from 'electron';
 import path from 'path';
 import { CustomProtocol } from '@Main/Manager/CustomProtocol';
+import { Manager } from '@Main/Libs/Manager';
 
-class ResourceLoad {
+class ResourceLoad extends Manager {
     public Run() {}
 
     public GetPageByName(name: string) {

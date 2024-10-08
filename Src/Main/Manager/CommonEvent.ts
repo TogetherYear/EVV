@@ -1,8 +1,9 @@
 import { nativeTheme } from 'electron';
 import { WindowPool } from './WindowPool';
 import { I } from '@Src/Instructions/I';
+import { Manager } from '@Main/Libs/Manager';
 
-class CommonEvent {
+class CommonEvent extends Manager {
     public Run() {
         nativeTheme.on('updated', () => {
             WindowPool.PostMessage({
