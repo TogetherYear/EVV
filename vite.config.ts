@@ -40,6 +40,13 @@ export default defineConfig(({ command, mode }) => {
         esbuild: {
             drop: command === 'serve' ? [] : ['console', 'debugger']
         },
+        css: {
+            preprocessorOptions: {
+                scss: {
+                    api: 'modern-compiler'
+                }
+            }
+        },
         build: {
             outDir: join(__dirname, 'Dist/Render'),
             emptyOutDir: true,
