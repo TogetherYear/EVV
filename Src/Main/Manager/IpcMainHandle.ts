@@ -70,6 +70,11 @@ class IpcMainHandle extends Manager {
             }
         });
 
+        ipcMain.handle(`Renderer:Widget:IsFullscreen`, async (e) => {
+            const widget = BrowserWindow.fromWebContents(e.sender) as BrowserWindow;
+            return widget.isMaximized();
+        });
+
         ipcMain.handle(`Renderer:Widget:Hide`, async (e) => {
             const widget = BrowserWindow.fromWebContents(e.sender) as BrowserWindow;
             return widget.hide();

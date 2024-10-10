@@ -60,6 +60,10 @@ contextBridge.exposeInMainWorld('Renderer', {
             const result = await ipcRenderer.invoke('Renderer:Widget:Max');
             return result;
         },
+        IsFullscreen: async () => {
+            const result = await ipcRenderer.invoke('Renderer:Widget:IsFullscreen');
+            return result;
+        },
         Hide: async () => {
             const result = await ipcRenderer.invoke('Renderer:Widget:Hide');
             return result;
