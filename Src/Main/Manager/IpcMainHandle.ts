@@ -6,9 +6,7 @@ import { I } from '@Src/Instructions/I';
 import { WindowPool } from './WindowPool';
 import * as F from 'fs';
 import { CustomWidget } from './CustomWidget';
-import * as HMC from 'hmc-win32';
 import { Manager } from '@Main/Libs/Manager';
-import { TTool } from '@Main/Decorators/TTool';
 
 /**
  * 主线程 Ipc 监听

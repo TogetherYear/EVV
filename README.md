@@ -41,5 +41,5 @@ npm run build
 ```
 
 ```
-在 dependencies 只写入需要编译成 exe 额外的包 比如 .node 等无法打包的库 其余皆写入 devDependencies 并且在 Build/Server.ts 中添加
+在 dependencies 只写入需要编译成 exe 额外的包 比如 .node 等无法打包的库 其余皆写入 devDependencies 并且在 Build/Server.ts 的 external 中添加 ( 即 打包需要的 用 -S 不然一律用 -D )
 ```

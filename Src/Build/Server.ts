@@ -36,7 +36,7 @@ function ConfigFactory() {
                 ]
             })
         ],
-        external: [...Builtins(), 'electron', 'hmc-win32']
+        external: [...Builtins(), 'electron']
     };
 
     return options;
