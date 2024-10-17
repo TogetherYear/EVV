@@ -15,8 +15,6 @@ class Application extends Component {
         return {};
     }
 
-    public InitHooks() {}
-
     public Run() {
         onMounted(async () => {
             await this.SetDefault();

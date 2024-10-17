@@ -10,8 +10,6 @@ class Tray extends Component {
         return {};
     }
 
-    public InitHooks() {}
-
     public Run() {
         onMounted(() => {});
 
