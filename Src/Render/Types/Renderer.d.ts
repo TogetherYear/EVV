@@ -11,12 +11,12 @@ declare namespace Renderer {
         /**
          * 关闭
          */
-        export function Close(): void;
+        export function Close(): Promise<void>;
 
         /**
          * 重启
          */
-        export function Relaunch(): void;
+        export function Relaunch(): Promise<void>;
 
         /**
          * 是否开机自启
@@ -128,14 +128,14 @@ declare namespace Renderer {
          */
         export function GetBounds(): Promise<Electron.Rectangle>;
 
+        export function SetShadow(flag: boolean): Promise<void>;
+
+        export function SetIgnoreCursorEvents(flag: boolean): Promise<void>;
+
         /**
          * 发送自定义消息
          */
         export function PostMessage(e: Record<string, unknown>): Promise<void>;
-
-        export function SetShadow(flag: boolean): Promise<void>;
-
-        export function SetIgnoreCursorEvents(flag: boolean): Promise<void>;
     }
 
     /**

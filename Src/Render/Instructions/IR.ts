@@ -8,5 +8,12 @@ namespace IR {
         icon: string;
         label: string;
     }
+
+    export type MenuItem = {
+        icon: string;
+        key: string;
+        check: boolean;
+        id: string;
+    };
 }
 export { IR };

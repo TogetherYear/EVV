@@ -8,11 +8,13 @@ contextBridge.exposeInMainWorld('Renderer', {
     },
 
     App: {
-        Close: () => {
-            return ipcRenderer.postMessage(`Renderer:App:Close`);
+        Close: async () => {
+            const result = await ipcRenderer.invoke('Renderer:App:Close');
+            return result;
         },
-        Relaunch: () => {
-            return ipcRenderer.postMessage(`Renderer:App:Relaunch`);
+        Relaunch: async () => {
+            const result = await ipcRenderer.invoke('Renderer:App:Relaunch');
+            return result;
         },
         IsAutostart: async () => {
             const enable = await ipcRenderer.invoke('Renderer:App:IsAutostart');
@@ -100,9 +102,6 @@ contextBridge.exposeInMainWorld('Renderer', {
             const bounds = await ipcRenderer.invoke('Renderer:Widget:GetBounds');
             return bounds;
         },
-        PostMessage: (e) => {
-            return ipcRenderer.postMessage(`Renderer:Widget:PostMessage`, e);
-        },
         SetShadow: async (flag) => {
             const result = await ipcRenderer.invoke('Renderer:Widget:SetShadow', flag);
             return result;
@@ -110,6 +109,9 @@ contextBridge.exposeInMainWorld('Renderer', {
         SetIgnoreCursorEvents: async (flag) => {
             const result = await ipcRenderer.invoke('Renderer:Widget:SetIgnoreCursorEvents', flag);
             return result;
+        },
+        PostMessage: (e) => {
+            return ipcRenderer.postMessage(`Renderer:Widget:PostMessage`, e);
         }
     },
 

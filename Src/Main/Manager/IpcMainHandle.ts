@@ -21,8 +21,8 @@ class IpcMainHandle extends Manager {
     }
 
     private OnAppIPC() {
-        ipcMain.on(`Renderer:App:Close`, (e) => {
-            app.exit(0);
+        ipcMain.handle(`Renderer:App:Close`, async (e) => {
+            return app.exit(0);
         });
 
         ipcMain.handle(`Renderer:App:SetAutostart`, async (e, enable: boolean) => {
@@ -37,9 +37,9 @@ class IpcMainHandle extends Manager {
             return result;
         });
 
-        ipcMain.on(`Renderer:App:Relaunch`, (e) => {
+        ipcMain.handle(`Renderer:App:Relaunch`, async (e) => {
             app.relaunch();
-            app.exit(0);
+            return app.exit(0);
         });
 
         ipcMain.handle(`Renderer:App:IsAutostart`, async (e) => {

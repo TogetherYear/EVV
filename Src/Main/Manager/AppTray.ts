@@ -20,12 +20,8 @@ class AppTray extends Window {
         this.widget = new BrowserWindow({
             title: 'Tray',
             show: false,
-            width: 260,
-            minWidth: 260,
-            maxWidth: 260,
-            height: 303,
-            minHeight: 303,
-            maxHeight: 303,
+            width: 126,
+            height: 68,
             resizable: false,
             useContentSize: true,
             frame: false,
@@ -75,7 +71,7 @@ class AppTray extends Window {
     private FixPositionToCursor() {
         const point = screen.getCursorScreenPoint();
         const size = this.widget.getSize();
-        this.widget.setPosition(point.x - size[0] + 2, point.y - size[1] + 2);
+        this.widget.setPosition(point.x - size[0], point.y - size[1]);
         this.widget.show();
     }
 

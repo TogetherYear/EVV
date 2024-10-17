@@ -1,27 +1,23 @@
 <script lang="ts" setup>
 import { provide } from 'vue';
 import { Tray } from './Tray';
-import closeIcon from '@Render/Assets/Images/close.png';
 
 const instance = new Tray();
 
 provide('instance', instance);
 
-const {} = instance.InitStates();
+const { menu } = instance.InitStates();
 
 instance.Run();
 </script>
 
 <template>
     <div class="Tray">
-        <span class="Content">
-            <span class="Title">Tray</span>
-        </span>
-        <span class="Close" @click="instance.OnClose()">
-            <span class="Icon">
-                <img :src="closeIcon" alt="" />
+        <span :class="{ Item: true, Separator: m.key === 'Separator' }" v-for="m in menu" :key="m.id" @click="instance.OnMenuClick(m)">
+            <span v-if="m.key !== 'Separator'">
+                <span class="Icon"><img v-show="m.check" :src="m.icon" alt="" /></span>
+                <span class="Label">{{ m.key }}</span>
             </span>
-            <span class="Title">退出软件</span>
         </span>
     </div>
 </template>
