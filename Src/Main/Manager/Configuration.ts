@@ -19,10 +19,7 @@ class Configuration extends Manager {
     private SetDefault() {
         Menu.setApplicationMenu(null);
         app.commandLine.appendSwitch('wm-window-animations-disabled');
-        if (this.configs.debug) {
-            process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true';
-        } else {
-        }
+        process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true';
     }
 }
 
