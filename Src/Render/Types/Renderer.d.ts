@@ -94,6 +94,11 @@ declare namespace Renderer {
         export function Close(): Promise<void>;
 
         /**
+         * 销毁
+         */
+        export function Destroy(): Promise<void>;
+
+        /**
          * 显示
          */
         export function Show(): Promise<void>;

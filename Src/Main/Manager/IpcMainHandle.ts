@@ -83,6 +83,11 @@ class IpcMainHandle extends Manager {
             return widget.close();
         });
 
+        ipcMain.handle(`Renderer:Widget:Destroy`, async (e) => {
+            const widget = BrowserWindow.fromWebContents(e.sender) as BrowserWindow;
+            return widget.destroy();
+        });
+
         ipcMain.handle(`Renderer:Widget:Show`, async (e) => {
             const widget = BrowserWindow.fromWebContents(e.sender) as BrowserWindow;
             return widget.show();

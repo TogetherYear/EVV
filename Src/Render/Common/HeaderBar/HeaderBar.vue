@@ -19,12 +19,12 @@ instance.Run();
 
 <template>
     <div class="HeaderBar" :style="{ background: attribute.bgc }">
+        <span class="Drag"></span>
         <span class="Btn">
             <span class="Item" v-for="item in options" :key="item.type" @click="instance.OnOptionClick(item.type)">
                 <img :src="item.icon" :title="item.label" class="Icon" />
             </span>
         </span>
-        <span class="Drag"></span>
     </div>
 </template>
 

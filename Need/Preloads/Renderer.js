@@ -74,6 +74,10 @@ contextBridge.exposeInMainWorld('Renderer', {
             const result = await ipcRenderer.invoke('Renderer:Widget:Close');
             return result;
         },
+        Destroy: async () => {
+            const result = await ipcRenderer.invoke('Renderer:Widget:Destroy');
+            return result;
+        },
         SetAlwaysOnTop: async (flag) => {
             const result = await ipcRenderer.invoke('Renderer:Widget:SetAlwaysOnTop', flag);
             return result;
