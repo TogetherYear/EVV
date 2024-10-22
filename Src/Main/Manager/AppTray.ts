@@ -52,10 +52,8 @@ class AppTray extends Window {
 
     private CreateTray() {
         if (process.platform === 'win32') {
-            //系统托盘图标
             this.tray = new Tray(ResourceLoad.GetImageByName('tray.ico'));
 
-            //设置此托盘图标的悬停提示内容
             this.tray.setToolTip('去码头整点薯条');
 
             this.tray.on('right-click', () => {
