@@ -20,8 +20,6 @@ class AppTray extends Window {
         this.widget = new BrowserWindow({
             title: 'Tray',
             show: false,
-            width: 126,
-            height: 68,
             resizable: false,
             useContentSize: true,
             frame: false,

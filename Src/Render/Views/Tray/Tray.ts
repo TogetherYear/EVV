@@ -40,6 +40,7 @@ class Tray extends Component {
 
     public Run() {
         onMounted(async () => {
+            this.SetDefault();
             this.SetAutostart();
         });
 
@@ -49,6 +50,12 @@ class Tray extends Component {
     }
 
     protected Destroy() {}
+
+    private async SetDefault() {
+        const spe = this.menu.value.filter((m) => m.key === 'Separator').length;
+        const height = (spe + 1) * 8 + (this.menu.value.length - spe) * 24;
+        await Renderer.Widget.SetSize({ width: 126, height });
+    }
 
     private async SetAutostart() {
         const at = this.menu.value.find((m) => m.key === '开机自启');
