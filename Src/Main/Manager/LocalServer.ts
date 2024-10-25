@@ -8,6 +8,8 @@ import { Manager } from '@Main/Libs/Manager';
  * 本地服务器
  */
 class LocalServer extends Manager {
+    public port = 34290;
+
     private app!: core.Express;
 
     private server!: H.Server<typeof H.IncomingMessage, typeof H.ServerResponse>;
@@ -32,9 +34,9 @@ class LocalServer extends Manager {
 
         this.SetStaticFile();
 
-        this.app.set('port', 8676);
+        this.app.set('port', this.port);
         this.server = H.createServer(this.app);
-        this.server.listen(8676, '127.0.0.1');
+        this.server.listen(this.port, '127.0.0.1');
         this.server.on('listening', () => {});
     }
 

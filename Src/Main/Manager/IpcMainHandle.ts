@@ -7,6 +7,7 @@ import { WindowPool } from './WindowPool';
 import * as F from 'fs';
 import { CustomWidget } from './CustomWidget';
 import { Manager } from '@Main/Libs/Manager';
+import { LocalServer } from './LocalServer';
 
 /**
  * 主线程 Ipc 监听
@@ -49,6 +50,16 @@ class IpcMainHandle extends Manager {
 
         ipcMain.handle(`Renderer:App:CreateCustomWindow`, async (e, options: TSingleton.CustomWidgetOptions) => {
             const result = CustomWidget.CreateWindow(options);
+            return result;
+        });
+
+        ipcMain.handle(`Renderer:App:GetLocalServerPort`, async (e) => {
+            const result = LocalServer.port;
+            return result;
+        });
+
+        ipcMain.handle(`Renderer:App:ShowMainWindow`, async (e) => {
+            const result = AppMainWindow.widget.show();
             return result;
         });
     }

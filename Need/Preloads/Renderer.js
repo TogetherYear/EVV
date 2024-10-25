@@ -31,6 +31,10 @@ contextBridge.exposeInMainWorld('Renderer', {
         CreateCustomWindow: async (options) => {
             const result = await ipcRenderer.invoke(`Renderer:App:CreateCustomWindow`, options);
             return result;
+        },
+        ShowMainWindow: async () => {
+            const result = await ipcRenderer.invoke(`Renderer:App:ShowMainWindow`);
+            return result;
         }
     },
 
@@ -139,8 +143,8 @@ contextBridge.exposeInMainWorld('Renderer', {
             const path = await ipcRenderer.invoke(`Renderer:Resource:GetPathByName`, name);
             return path;
         },
-        GetFileByNameFromLocalServer: (name) => {
-            const path = `http://localhost:8676/Static/${name}`;
+        GetFileByNameFromLocalServer: async (name) => {
+            const path = `http://localhost:${await ipcRenderer.invoke('Renderer:App:GetLocalServerPort')}/Static/${name}`;
             return path;
         },
         GetSelectResourcesPath: async (options) => {

@@ -1,6 +1,7 @@
 namespace I {
     export enum IpcRendererEvent {
         SecondInstance = 'SecondInstance',
+        DeepLink = 'DeepLink',
         FileDrop = 'FileDrop',
         WidgetCreate = 'WidgetCreate',
         WidgetDestroy = 'WidgetDestroy',

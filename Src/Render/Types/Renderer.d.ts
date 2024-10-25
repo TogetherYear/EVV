@@ -37,6 +37,11 @@ declare namespace Renderer {
          * 打开自定义窗口
          */
         export function CreateCustomWindow(options: TSingleton.CustomWidgetOptions): Promise<void>;
+
+        /**
+         * 显示主窗口
+         */
+        export function ShowMainWindow(): Promise<void>;
     }
 
     /**
@@ -175,7 +180,7 @@ declare namespace Renderer {
         /**
          * 通过名称获取文件文件服务器路径 ( 仅限 Need 文件夹 ) 例如: Images/window.ico
          */
-        export function GetFileByNameFromLocalServer(name: string): string;
+        export function GetFileByNameFromLocalServer(name: string): Promise<string>;
 
         /**
          * 从文件资源管理器选择资源

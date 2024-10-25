@@ -5,6 +5,7 @@ import { TEvent } from '@Render/Decorators/TEvent';
 
 @TEvent.Create([
     I.IpcRendererEvent.SecondInstance,
+    I.IpcRendererEvent.DeepLink,
     I.IpcRendererEvent.FileDrop,
     I.IpcRendererEvent.ThemeUpdate,
     I.IpcRendererEvent.WidgetCreate,
@@ -30,7 +31,6 @@ class App extends Manager {
     protected Destroy() {}
 
     private OnMessage(e: I.IpcRendererSendMessage) {
-        console.log(e);
         this.Emit(e.type, e);
     }
 

@@ -3,6 +3,9 @@ import openIcon from '@Render/Assets/Images/open.png';
 import { Component } from '@Render/Libs/Component';
 import { Time } from '@Src/Utils/Time';
 import { IR } from '@Render/Instructions/IR';
+import { TEvent } from '@Main/Decorators/TEvent';
+import { App } from '@Render/App/App';
+import { I } from '@Src/Instructions/I';
 
 class Tray extends Component {
     public constructor() {
@@ -72,6 +75,16 @@ class Tray extends Component {
         } else if (m.key === '退出') {
             await Renderer.App.Close();
         }
+    }
+
+    @TEvent.Listen(App, I.IpcRendererEvent.SecondInstance)
+    private async OnSecondInstance() {
+        await Renderer.App.ShowMainWindow();
+    }
+
+    @TEvent.Listen(App, I.IpcRendererEvent.DeepLink)
+    private async OnDeepLink(e: Record<string, unknown>) {
+        console.log(e);
     }
 }
 

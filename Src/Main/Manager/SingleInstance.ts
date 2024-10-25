@@ -3,6 +3,7 @@ import { app } from 'electron';
 import { WindowPool } from './WindowPool';
 import { I } from '@Src/Instructions/I';
 import { Manager } from '@Main/Libs/Manager';
+import { CustomProtocol } from './CustomProtocol';
 
 class SingleInstance extends Manager {
     public Run() {
@@ -11,8 +12,13 @@ class SingleInstance extends Manager {
         if (!lock) {
             app.exit(0);
         } else {
-            app.on('second-instance', () => {
-                this.OnSecondInstance();
+            app.on('second-instance', (event, commandLine, workingDirectory) => {
+                const cmd = commandLine.pop() || '';
+                if (cmd.indexOf(CustomProtocol.deepLinkProtocol) !== -1) {
+                    this.OnDeepLink(cmd);
+                } else {
+                    this.OnSecondInstance();
+                }
             });
         }
     }
@@ -20,7 +26,17 @@ class SingleInstance extends Manager {
     public OnSecondInstance() {
         WindowPool.PostMessage({
             type: I.IpcRendererEvent.SecondInstance,
-            widgets: [I.IpcRendererWindow.Main]
+            widgets: [I.IpcRendererWindow.Tray]
+        });
+    }
+
+    public OnDeepLink(url: string) {
+        WindowPool.PostMessage({
+            type: I.IpcRendererEvent.DeepLink,
+            widgets: [I.IpcRendererWindow.Tray],
+            send: {
+                url
+            }
         });
     }
 }

@@ -73,6 +73,8 @@ namespace TWindow {
                             height: parseInt(localStorage.getItem(`${name}:${this.Route}:Height`) || '560')
                         });
                     }
+                    await Renderer.Widget.Center();
+                    await Renderer.Widget.Show();
                 }
 
                 private TWindow_State_ListenEvents() {
