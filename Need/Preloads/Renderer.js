@@ -90,16 +90,16 @@ contextBridge.exposeInMainWorld('Renderer', {
             const result = await ipcRenderer.invoke('Renderer:Widget:Show');
             return result;
         },
-        SetSize: async (size) => {
-            const result = await ipcRenderer.invoke('Renderer:Widget:SetSize', size);
+        SetSize: async (width, height) => {
+            const result = await ipcRenderer.invoke('Renderer:Widget:SetSize', width, height);
             return result;
         },
         Center: async () => {
             const result = await ipcRenderer.invoke('Renderer:Widget:Center');
             return result;
         },
-        SetPosition: async (position) => {
-            const result = await ipcRenderer.invoke('Renderer:Widget:SetPosition', position);
+        SetPosition: async (x, y) => {
+            const result = await ipcRenderer.invoke('Renderer:Widget:SetPosition', x, y);
             return result;
         },
         GetPosition: async () => {
@@ -144,7 +144,7 @@ contextBridge.exposeInMainWorld('Renderer', {
             return path;
         },
         GetFileByNameFromLocalServer: async (name) => {
-            const path = `http://localhost:${await ipcRenderer.invoke('Renderer:App:GetLocalServerPort')}/Static/${name}`;
+            const path = `http://localhost:${await ipcRenderer.invoke(`Renderer:App:GetLocalServerPort`)}/Static/${name}`;
             return path;
         },
         GetSelectResourcesPath: async (options) => {
