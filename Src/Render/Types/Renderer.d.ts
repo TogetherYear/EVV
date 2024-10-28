@@ -121,7 +121,7 @@ declare namespace Renderer {
         /**
          * 设置窗口位置
          */
-        export function SetPosition(position: { x: number; y: number }): Promise<void>;
+        export function SetPosition(x: number, y: number): Promise<void>;
 
         /**
          * 设置窗口位置
@@ -131,7 +131,7 @@ declare namespace Renderer {
         /**
          * 调整大小
          */
-        export function SetSize(size: { height: number; width: number }): Promise<void>;
+        export function SetSize(width: number, height: number): Promise<void>;
 
         /**
          * 获取当前窗口的Bounds

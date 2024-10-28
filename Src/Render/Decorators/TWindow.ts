@@ -68,10 +68,7 @@ namespace TWindow {
                         await Renderer.Widget.Max();
                     } else {
                         currentState.value = WindowState.Default;
-                        await Renderer.Widget.SetSize({
-                            width: parseInt(localStorage.getItem(`${name}:${this.Route}:Width`) || '1000'),
-                            height: parseInt(localStorage.getItem(`${name}:${this.Route}:Height`) || '560')
-                        });
+                        await Renderer.Widget.SetSize(parseInt(localStorage.getItem(`${name}:${this.Route}:Width`) || '1000'), parseInt(localStorage.getItem(`${name}:${this.Route}:Height`) || '560'));
                     }
                     await Renderer.Widget.Center();
                     await Renderer.Widget.Show();

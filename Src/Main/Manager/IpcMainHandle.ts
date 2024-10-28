@@ -109,9 +109,9 @@ class IpcMainHandle extends Manager {
             return widget.center();
         });
 
-        ipcMain.handle(`Renderer:Widget:SetPosition`, async (e, position: { x: number; y: number }) => {
+        ipcMain.handle(`Renderer:Widget:SetPosition`, async (e, x: number, y: number) => {
             const widget = BrowserWindow.fromWebContents(e.sender) as BrowserWindow;
-            return widget.setPosition(position.x, position.y);
+            return widget.setPosition(x, y);
         });
 
         ipcMain.handle(`Renderer:Widget:GetPosition`, async (e) => {
@@ -123,9 +123,9 @@ class IpcMainHandle extends Manager {
             };
         });
 
-        ipcMain.handle(`Renderer:Widget:SetSize`, async (e, size: { width: number; height: number }) => {
+        ipcMain.handle(`Renderer:Widget:SetSize`, async (e, width: number, height: number) => {
             const widget = BrowserWindow.fromWebContents(e.sender) as BrowserWindow;
-            return widget.setSize(size.width, size.height);
+            return widget.setSize(width, height);
         });
 
         ipcMain.handle(`Renderer:Widget:SetAlwaysOnTop`, async (e, flag: boolean) => {
