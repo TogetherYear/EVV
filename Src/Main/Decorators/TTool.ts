@@ -1,5 +1,6 @@
 import { Entity } from '@Main/Libs/Entity';
 import { Time } from '@Src/Utils/Time';
+import { Resolve } from '.';
 
 namespace TTool {
     /**
@@ -23,10 +24,13 @@ namespace TTool {
                     this.TTool_Generate_Hooks();
                 }
 
+                private tTool_Generate_Interval: Array<number> = [];
+
                 private TTool_Generate_Hooks() {
                     this.TTool_Generate_Debounce();
                     this.TTool_Generate_Throttle();
                     this.TTool_Generaye_Retry();
+                    this.TTool_Generate_Interval();
                 }
 
                 private TTool_Generate_Debounce() {
@@ -142,6 +146,39 @@ namespace TTool {
                         };
                     }
                 }
+
+                private TTool_Generate_Interval() {
+                    Resolve.then(() => {
+                        //@ts-ignore
+                        const interval = (this['tTool_Interval_Need'] || []) as Array<{
+                            propertyKey: string;
+                            condition: boolean | ((instance: Object) => boolean);
+                            time: number | ((instance: Object) => number);
+                        }>;
+
+                        for (let i of interval) {
+                            //@ts-ignore
+                            const original = this[`${i.propertyKey}`].bind(this);
+
+                            const timer = setInterval(
+                                () => {
+                                    if (typeof i.condition === 'function' ? i.condition(this) : i.condition) {
+                                        original();
+                                    }
+                                },
+                                typeof i.time === 'function' ? i.time(this) : i.time
+                            );
+
+                            //@ts-ignore
+                            this.tTool_Generate_Interval.push(timer);
+
+                            //@ts-ignore
+                            this[`${i.propertyKey}`] = function (...args: Array<unknown>) {
+                                original(...args);
+                            };
+                        }
+                    });
+                }
             };
         };
     }
@@ -210,6 +247,23 @@ namespace TTool {
             } else {
                 //@ts-ignore
                 target['tTool_Retry_Need'] = [{ retryCount, retryDelay, PassRetryCondition, propertyKey }];
+            }
+        };
+    }
+
+    /**
+     * 自动间隔时间重复执行 Manager 在构造函数完成的下一次事件循环执行 Component 在 onMounted 后的下一次事件循环执行
+     * condition 是否执行的条件 time 每次执行间隔
+     */
+    export function Interval<T extends Entity>(condition: boolean | ((instance: T) => boolean), time: number | ((instance: T) => number)) {
+        return function (target: Object, propertyKey: string | symbol, descriptor: PropertyDescriptor) {
+            //@ts-ignore
+            if (target['tTool_Interval_Need']) {
+                //@ts-ignore
+                target['tTool_Interval_Need'].push({ propertyKey, condition, time });
+            } else {
+                //@ts-ignore
+                target['tTool_Interval_Need'] = [{ propertyKey, condition, time }];
             }
         };
     }
