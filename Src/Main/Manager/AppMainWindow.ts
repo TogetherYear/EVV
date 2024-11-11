@@ -18,7 +18,7 @@ class AppMainWindow extends Window {
             useContentSize: true,
             frame: false,
             backgroundColor: '#212121',
-            icon: ResourceLoad.GetImageByName('window.ico'),
+            icon: ResourceLoad.GetImageByName('icon.ico'),
             webPreferences: {
                 devTools: Configuration.configs.debug,
                 preload: ResourceLoad.GetPreloadByName('Renderer')

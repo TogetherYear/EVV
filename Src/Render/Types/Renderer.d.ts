@@ -173,12 +173,12 @@ declare namespace Renderer {
      */
     export namespace Resource {
         /**
-         * 通过名称获取文件路径 ( 仅限 Need 文件夹 ) 例如: Images/window.ico
+         * 通过名称获取文件路径 ( 仅限 Need 文件夹 ) 例如: Images/icon.ico
          */
         export function GetPathByName(name: string): Promise<string>;
 
         /**
-         * 通过名称获取文件文件服务器路径 ( 仅限 Need 文件夹 ) 例如: Images/window.ico
+         * 通过名称获取文件文件服务器路径 ( 仅限 Need 文件夹 ) 例如: Images/icon.ico
          */
         export function GetFileByNameFromLocalServer(name: string): Promise<string>;
 

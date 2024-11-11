@@ -82,7 +82,7 @@ class AppTray extends Window {
 
     public OnFlash(icon: string) {
         let show = true;
-        const emptyIcon = ResourceLoad.GetImageByName('empty.ico');
+        const emptyIcon = ResourceLoad.GetImageByName('icon.ico');
         const showIcon = ResourceLoad.GetImageByName(icon);
         this.flashTimer = setInterval(() => {
             if (show) {
