@@ -23,7 +23,7 @@ class CustomWidget extends Manager {
                 alwaysOnTop: options.alwaysOnTop || false,
                 transparent: options.transparent || false,
                 skipTaskbar: options.skipTaskbar || false,
-                icon: options.icon || ResourceLoad.GetImageByName('window.ico'),
+                icon: options.icon || ResourceLoad.GetImageByName('icon.ico'),
                 show: options.show || true,
                 webPreferences: {
                     devTools: Configuration.configs.debug,
