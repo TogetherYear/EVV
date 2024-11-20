@@ -46,7 +46,7 @@ namespace TEvent {
                         for (let e of listen) {
                             const t = typeof e.listenTarget === 'function' ? e.listenTarget(this) : e.listenTarget;
                             //@ts-ignore
-                            t.AddListen(e.eventName, this, this[`${e.funcName}`], e.once);
+                            t.AddListen(e.eventName, this, e.funcName, e.once);
                         }
                     });
                 }
