@@ -15,5 +15,12 @@ namespace IR {
         check: boolean;
         id: string;
     };
+
+    export namespace Theme {
+        export const enum Style {
+            Dark = 'Dark',
+            Light = 'Light'
+        }
+    }
 }
 export { IR };

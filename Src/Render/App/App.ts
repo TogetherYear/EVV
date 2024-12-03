@@ -2,6 +2,8 @@ import { I } from '@Src/Instructions/I';
 import { onMounted, onUnmounted } from 'vue';
 import { Manager } from '@Render/Libs/Manager';
 import { TEvent } from '@Render/Decorators/TEvent';
+import { Theme } from '@Render/Theme/Theme';
+import { IR } from '@Render/Instructions/IR';
 
 @TEvent.Create([
     I.IpcRendererEvent.SecondInstance,
@@ -18,6 +20,7 @@ class App extends Manager {
     }
 
     public Run() {
+        Theme.LoadTheme(IR.Theme.Style.Dark);
         onMounted(() => {
             this.FileDropHandle();
             Renderer.Listen(this.OnMessage.bind(this));
