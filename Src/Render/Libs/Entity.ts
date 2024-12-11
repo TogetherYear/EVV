@@ -1,5 +1,4 @@
 import { TEntity } from '@Render/Decorators/TEntity';
-import { TComponent } from '@Render/Decorators/TComponent';
 import { TRouter } from '@Render/Decorators/TRouter';
 import { EventSystem } from '@Src/Libs/EventSystem';
 import { Time } from '@Src/Utils/Time';
@@ -26,26 +25,6 @@ class Entity extends EventSystem {
      */
     public get Query() {
         return TRouter.currentQuery;
-    }
-
-    /**
-     * 获取当前页面所有存活的 Component
-     */
-    public GetAllComponent() {
-        return TComponent.componentMap.get(TRouter.currentPath.value);
-    }
-
-    /**
-     * 根据条件获取 Component
-     */
-    public GetComponent<T>(Condition: (instance: T & Record<string, unknown>) => boolean): T | null {
-        const current = TComponent.componentMap.get(TRouter.currentPath.value)!;
-        for (let c of current) {
-            if (Condition(c as any)) {
-                return c as T;
-            }
-        }
-        return null;
     }
 }
 
