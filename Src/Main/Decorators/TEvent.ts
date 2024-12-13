@@ -1,5 +1,6 @@
 import { Manager } from '@Main/Libs/Manager';
 import { Resolve } from './index';
+import { Entity } from '@Main/Libs/Entity';
 
 /**
  * 事件相关
@@ -38,12 +39,13 @@ namespace TEvent {
                     Resolve.then(() => {
                         //@ts-ignore
                         const listen = (this['tEvent_Listen_NeedListen'] || []) as Array<{
-                            listenTarget: Object | ((instance: Object) => Object);
+                            listenTarget: Object | ((instance: T) => Object);
                             eventName: string;
                             funcName: string;
                             once: boolean;
                         }>;
                         for (let e of listen) {
+                            //@ts-ignore
                             const t = typeof e.listenTarget === 'function' ? e.listenTarget(this) : e.listenTarget;
                             //@ts-ignore
                             t.AddListen(e.eventName, this, e.funcName, e.once);
@@ -85,8 +87,8 @@ namespace TEvent {
     /**
      * 监听事件
      */
-    export function Listen<T>(es: Manager | ((instance: T) => Manager), eventName: string, once?: boolean) {
-        return function (target: Object, propertyKey: string | symbol, descriptor: PropertyDescriptor) {
+    export function Listen<T extends Entity>(es: Manager | ((instance: T) => Manager), eventName: string, once?: boolean) {
+        return function (target: T, propertyKey: string | symbol, descriptor: PropertyDescriptor) {
             //@ts-ignore
             if (target['tEvent_Listen_NeedListen']) {
                 //@ts-ignore
