@@ -1,4 +1,3 @@
-import { IR } from '@Render/Instructions/IR';
 import { Manager } from '../Libs/Manager';
 
 class Theme extends Manager {
@@ -7,7 +6,7 @@ class Theme extends Manager {
         Light: () => import('./Style/Light.scss')
     };
 
-    public LoadTheme(theme: IR.Theme.Style) {
+    public LoadTheme(theme: keyof typeof this.styles) {
         this.styles[theme]();
         document.getElementById('App')!.className = theme;
     }
