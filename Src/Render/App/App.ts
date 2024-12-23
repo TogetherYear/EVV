@@ -20,7 +20,7 @@ class App extends Manager {
     }
 
     public Run() {
-        Theme.LoadTheme(IR.Theme.Style.Dark);
+        Theme.LoadTheme('Dark');
         onMounted(() => {
             this.FileDropHandle();
             Renderer.Listen(this.OnMessage.bind(this));
