@@ -15,5 +15,13 @@ namespace IR {
         check: boolean;
         id: string;
     };
+
+    export namespace LocalStore {
+        export type LocalStoreKey = {
+            Account: string;
+            Password: string;
+            Token: string;
+        };
+    }
 }
 export { IR };

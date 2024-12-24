@@ -63,6 +63,7 @@
         "@types/express": "^5.0.0",
         "@types/node": "^20.14.12",
         "@vitejs/plugin-vue": "^5.1.4",
+        "axios": "^1.7.7",
         "concurrently": "^9.0.1",
         "electron": "31.2.1",
         "electron-builder": "^24.13.3",
