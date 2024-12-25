@@ -65,7 +65,7 @@ export default defineConfig(({ command, mode }) => {
             }
         },
         optimizeDeps: {
-            include: [],
+            include: ['axios'],
             exclude: ['electron']
         }
     };
