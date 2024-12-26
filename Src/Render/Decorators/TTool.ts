@@ -1,5 +1,4 @@
 import { onMounted, onUnmounted, watch } from 'vue';
-import { useRoute } from 'vue-router';
 import { Resolve } from './index';
 import { TEvent } from './TEvent';
 import { Mathf } from '@Src/Utils/Mathf';
@@ -431,8 +430,7 @@ namespace TTool {
                 }
 
                 private TTool_Cache_Get() {
-                    const route = useRoute();
-                    this.tTool_Cache_Key = `${route.path}:${C.name}`;
+                    this.tTool_Cache_Key = `${this.Route}:${C.name}`;
                     const current = cacheMap.get(this.tTool_Cache_Key);
                     if (current) {
                         for (let c of current) {

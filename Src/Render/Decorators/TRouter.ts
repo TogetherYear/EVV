@@ -1,6 +1,6 @@
 import { Component } from '@Render/Libs/Component';
 import { onMounted, onUnmounted, reactive, ref } from 'vue';
-import { RouteLocationNormalizedGeneric, RouteRecordNormalized, RouteRecordRaw, useRoute } from 'vue-router';
+import { RouteLocationNormalizedGeneric, RouteRecordNormalized, RouteRecordRaw } from 'vue-router';
 
 namespace TRouter {
     /**
@@ -190,8 +190,7 @@ namespace TRouter {
             activeView.module = current.module;
             activeView.duty = current.duty;
         }
-        const route = useRoute();
-        currentQuery = { ...route.query };
+        currentQuery = { ...to.query };
     }
 
     /**
