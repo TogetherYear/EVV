@@ -1,21 +1,11 @@
 import { Component } from '@Render/Libs/Component';
-import { onMounted, onUnmounted, ref } from 'vue';
+import { onMounted, onUnmounted } from 'vue';
 
 namespace TWindow {
     /**
      * 是否保存大小
      */
     export let state = false;
-
-    export const enum WindowState {
-        Default,
-        Full
-    }
-
-    /**
-     * 当前窗口状态
-     */
-    export let currentState = ref<WindowState>(WindowState.Default);
 
     export function Generate() {
         return function <T extends new (...args: Array<any>) => Component>(C: T) {
@@ -62,14 +52,7 @@ namespace TWindow {
 
                 private async TWindow_State_SetDefault() {
                     const name = await Renderer.App.GetName();
-                    const full = localStorage.getItem(`${name}:${this.Route}:Full`) || '0';
-                    if (full === '1') {
-                        currentState.value = WindowState.Full;
-                        await Renderer.Widget.Max();
-                    } else {
-                        currentState.value = WindowState.Default;
-                        await Renderer.Widget.SetSize(parseInt(localStorage.getItem(`${name}:${this.Route}:Width`) || '1000'), parseInt(localStorage.getItem(`${name}:${this.Route}:Height`) || '560'));
-                    }
+                    await Renderer.Widget.SetSize(parseInt(localStorage.getItem(`${name}:${this.Route}:Width`) || '1000'), parseInt(localStorage.getItem(`${name}:${this.Route}:Height`) || '560'));
                     await Renderer.Widget.Center();
                     await Renderer.Widget.Show();
                 }
@@ -84,12 +67,11 @@ namespace TWindow {
                     clearTimeout(this.timer);
                     //@ts-ignore
                     this.timer = setTimeout(async () => {
-                        const full = await Renderer.Widget.IsMaximized();
                         const name = await Renderer.App.GetName();
-                        currentState.value = full ? WindowState.Full : WindowState.Default;
-                        localStorage.setItem(`${name}:${this.Route}:Full`, `${full ? '1' : '0'}`);
-                        localStorage.setItem(`${name}:${this.Route}:Width`, `${window.innerWidth}`);
-                        localStorage.setItem(`${name}:${this.Route}:Height`, `${window.innerHeight}`);
+                        if (!(await Renderer.Widget.IsMaximized())) {
+                            localStorage.setItem(`${name}:${this.Route}:Width`, `${window.innerWidth}`);
+                            localStorage.setItem(`${name}:${this.Route}:Height`, `${window.innerHeight}`);
+                        }
                     }, 300);
                 }
             };
