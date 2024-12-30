@@ -86,7 +86,7 @@ declare namespace Renderer {
         /**
          * 是否是最大化
          */
-        export function IsFullscreen(): Promise<boolean>;
+        export function IsMaximized(): Promise<boolean>;
 
         /**
          * 隐藏
