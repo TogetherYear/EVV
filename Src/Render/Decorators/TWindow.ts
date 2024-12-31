@@ -29,6 +29,7 @@ namespace TWindow {
                 constructor(...args: Array<any>) {
                     super(...args);
                     if (!state) {
+                        state = true;
                         this.TWindow_State_Hooks();
                     }
                 }
@@ -38,7 +39,6 @@ namespace TWindow {
                 private timer = -1;
 
                 private TWindow_State_Hooks() {
-                    state = true;
                     onMounted(async () => {
                         await this.TWindow_State_SetDefault();
                         this.TWindow_State_ListenEvents();
