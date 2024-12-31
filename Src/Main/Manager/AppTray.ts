@@ -1,15 +1,17 @@
 import { ResourceLoad } from '@Main/Manager/ResourceLoad';
 import { Tray, BrowserWindow, screen } from 'electron';
 import { AppMainWindow } from '@Main/Manager/AppMainWindow';
-import { Window } from '@Main/Libs/Window';
 import { Configuration } from '@Main/Manager/Configuration';
 import { WindowPool } from '@Main/Manager/WindowPool';
 import { I } from '@Src/Instructions/I';
+import { Manager } from '@Main/Libs/Manager';
 
-class AppTray extends Window {
+class AppTray extends Manager {
     public tray!: Tray;
 
     private flashTimer: NodeJS.Timeout | null = null;
+
+    public widget!: BrowserWindow;
 
     public Run() {
         this.CreateWidget();

@@ -1,14 +1,16 @@
 import { BrowserWindow, Menu } from 'electron';
 import { ResourceLoad } from '@Main/Manager/ResourceLoad';
 import { Configuration } from '@Main/Manager/Configuration';
-import { Window } from '@Main/Libs/Window';
 import { I } from '@Src/Instructions/I';
 import { WindowPool } from './WindowPool';
+import { Manager } from '@Main/Libs/Manager';
 
-class AppMainWindow extends Window {
+class AppMainWindow extends Manager {
     public async Run() {
         this.CreateWidget();
     }
+
+    public widget!: BrowserWindow;
 
     private CreateWidget() {
         this.widget = new BrowserWindow({
