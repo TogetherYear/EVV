@@ -18,8 +18,8 @@ namespace TRouter {
             path: '/Empty',
             name: 'Empty',
             meta: {
-                menuName: '',
-                menuLabel: '',
+                menuName: '404',
+                menuLabel: '404',
                 menuIcon: '',
                 visibility: false
             },
@@ -29,8 +29,8 @@ namespace TRouter {
             path: '/Application',
             name: 'Application',
             meta: {
-                menuName: '',
-                menuLabel: '',
+                menuName: '应用',
+                menuLabel: '应用',
                 menuIcon: '',
                 visibility: true
             },
@@ -40,8 +40,8 @@ namespace TRouter {
             path: '/Tray',
             name: 'Tray',
             meta: {
-                menuName: '',
-                menuLabel: '',
+                menuName: '托盘',
+                menuLabel: '托盘',
                 menuIcon: '',
                 visibility: true
             },
