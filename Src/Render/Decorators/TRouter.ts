@@ -104,6 +104,11 @@ namespace TRouter {
      */
     let isLoad = false;
 
+    /**
+     * 是否是第一次切换路由
+     */
+    let isFirstPush = true;
+
     export const requestAbort: Array<AbortController> = [];
 
     export function BeforeRouteHandler(to: RouteLocationNormalizedGeneric, from: RouteLocationNormalizedGeneric) {
@@ -111,7 +116,7 @@ namespace TRouter {
     }
 
     function RequestCancelHandler() {
-        if (isLoad) {
+        if (isLoad && !isFirstPush) {
             for (let ra of requestAbort) {
                 if (!ra.signal.aborted) {
                     ra.abort();
@@ -123,6 +128,9 @@ namespace TRouter {
 
     export function AfterRouteHandler(to: RouteLocationNormalizedGeneric, from: RouteLocationNormalizedGeneric) {
         HistoryAndQueryHandler(to, from);
+        if (isFirstPush) {
+            isFirstPush = false;
+        }
     }
 
     function HistoryAndQueryHandler(to: RouteLocationNormalizedGeneric, from: RouteLocationNormalizedGeneric) {
