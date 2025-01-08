@@ -19,7 +19,7 @@ class CustomWidget extends Manager {
                 height: options.height || 560,
                 useContentSize: true,
                 frame: options.frame || true,
-                backgroundColor: options.backgroundColor || '#ff212121',
+                backgroundColor: options.backgroundColor || '#ff13131a',
                 alwaysOnTop: options.alwaysOnTop || false,
                 transparent: options.transparent || false,
                 skipTaskbar: options.skipTaskbar || false,

@@ -1,5 +1,7 @@
 import { I } from '@Src/Instructions/I';
-import { Window } from '@Main/Libs/Window';
+import { BrowserWindow } from 'electron';
+
+type Window = { widget: BrowserWindow };
 
 class WindowPool {
     private pool = new Map<I.IpcRendererWindow, Window>();

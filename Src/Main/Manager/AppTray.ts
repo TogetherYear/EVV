@@ -25,7 +25,7 @@ class AppTray extends Manager {
             resizable: false,
             useContentSize: true,
             frame: false,
-            backgroundColor: '#00212121',
+            backgroundColor: '#0013131a',
             alwaysOnTop: true,
             transparent: true,
             skipTaskbar: true,

@@ -19,7 +19,7 @@ class AppMainWindow extends Manager {
             resizable: true,
             useContentSize: true,
             frame: false,
-            backgroundColor: '#212121',
+            backgroundColor: '#13131a',
             icon: ResourceLoad.GetImageByName('icon.ico'),
             webPreferences: {
                 devTools: Configuration.configs.debug,

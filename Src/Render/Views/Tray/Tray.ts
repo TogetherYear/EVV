@@ -3,9 +3,9 @@ import openIcon from '@Render/Assets/Images/open.png';
 import { Component } from '@Render/Libs/Component';
 import { Time } from '@Src/Utils/Time';
 import { IR } from '@Render/Instructions/IR';
-import { TEvent } from '@Main/Decorators/TEvent';
 import { App } from '@Render/App/App';
 import { I } from '@Src/Instructions/I';
+import { TEvent } from '@Render/Decorators/TEvent';
 
 class Tray extends Component {
     public constructor() {
