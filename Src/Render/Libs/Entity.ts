@@ -41,8 +41,7 @@ class Entity extends EventSystem {
      */
     public GetComponent<T extends Component>(Condition: (instance: T) => boolean): T | null {
         for (let c of TComponent.components) {
-            //@ts-ignore
-            if (Condition(c)) {
+            if (Condition(c as T)) {
                 return c as T;
             }
         }
