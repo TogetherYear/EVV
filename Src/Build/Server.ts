@@ -16,7 +16,7 @@ function ConfigFactory() {
     const options: RollupOptions = {
         input: join(__dirname, '../Main/main.ts'),
         output: {
-            file: join(__dirname, `../../Dist/Main/main.js`),
+            file: join(__dirname, `../../Dist/Main/main.cjs`),
             format: 'cjs',
             name: 'ElectronMainBundle',
             sourcemap: false
@@ -56,7 +56,7 @@ if (boundEnv === 'development') {
         watcher.on('event', (ev) => {
             if (ev.code === 'END') {
                 if (child) child.kill();
-                child = spawn(electron as any, [join(__dirname, `../../Dist/Main/main.js`)], {
+                child = spawn(electron as any, [join(__dirname, `../../Dist/Main/main.cjs`)], {
                     stdio: 'inherit',
                     env: Object.assign(process.env, { NODE_ENV: boundEnv })
                 });
