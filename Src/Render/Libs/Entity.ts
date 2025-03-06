@@ -4,6 +4,7 @@ import { TRouter } from '@Render/Decorators/TRouter';
 import { EventSystem } from '@Src/Libs/EventSystem';
 import { Time } from '@Src/Utils/Time';
 import { Component } from './Component';
+import { createApp, Component as VC } from 'vue';
 
 /**
  * 根 我用来代理一些变量的
@@ -27,6 +28,17 @@ class Entity extends EventSystem {
      */
     public get Query() {
         return TRouter.currentQuery;
+    }
+
+    public Popup(component: VC, options?: Record<string, unknown>) {
+        const div = document.createElement('div');
+        document.body.appendChild(div);
+        const app = createApp(component, options);
+        app.mount(div);
+        app.onUnmount(() => {
+            div.remove();
+        });
+        return app;
     }
 
     /**
