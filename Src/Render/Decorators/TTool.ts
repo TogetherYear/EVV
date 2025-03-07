@@ -4,6 +4,7 @@ import { TEvent } from './TEvent';
 import { Mathf } from '@Src/Utils/Mathf';
 import { Entity } from '@Render/Libs/Entity';
 import { Time } from '@Src/Utils/Time';
+import { Component } from '@Render/Libs/Component';
 
 namespace TTool {
     /**
@@ -408,7 +409,7 @@ namespace TTool {
     /**
      * 简单缓存页面 ( 此装饰器需要放在最下面 ) 参数为字符串
      */
-    export function Cache<V>(needs: Array<keyof V>) {
+    export function Cache<V extends Component>(needs: Array<keyof V>) {
         return function <T extends new (...args: Array<any>) => Entity>(C: T) {
             return class extends C {
                 constructor(...args: Array<any>) {
