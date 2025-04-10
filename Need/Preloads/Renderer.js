@@ -144,7 +144,7 @@ contextBridge.exposeInMainWorld('Renderer', {
             return path;
         },
         GetFileByNameFromLocalServer: async (name) => {
-            const path = `http://localhost:${await ipcRenderer.invoke(`Renderer:App:GetLocalServerPort`)}/Static/${name}`;
+            const path = `http://localhost:${await ipcRenderer.invoke(`Renderer:App:GetLocalServerPort`)}/static/${name}`;
             return path;
         },
         GetSelectResourcesPath: async (options) => {

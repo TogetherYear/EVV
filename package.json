@@ -1,7 +1,7 @@
 {
     "name": "v3-ts-electron",
     "version": "0.0.0",
-    "main": "Dist/Main/main.js",
+    "main": "Dist/Main/main.cjs",
     "description": "Application",
     "author": "Together",
     "license": "MIT",

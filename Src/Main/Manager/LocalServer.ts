@@ -41,14 +41,14 @@ class LocalServer extends Manager {
     }
 
     private SetHttpServer() {
-        this.app.get('/Test', (req, res) => {
+        this.app.get('/test', (req, res) => {
             res.write('Test');
             res.end();
         });
     }
 
     private SetStaticFile() {
-        this.app.use('/Static', express.static(ResourceLoad.GetNeedFolder()));
+        this.app.use('/static', express.static(ResourceLoad.GetNeedFolder()));
     }
 }
 
