@@ -1,5 +1,4 @@
 import fs from 'fs';
-import { ResourceLoad } from '@Main/Manager/ResourceLoad';
 import { app, Menu } from 'electron';
 import { Manager } from '@Main/Libs/Manager';
 
@@ -12,7 +11,7 @@ class Configuration extends Manager {
     }
 
     private LoadConfig() {
-        const data = fs.readFileSync(process.env.NODE_ENV === 'development' ? ResourceLoad.GetConfigByName('Development') : ResourceLoad.GetConfigByName('Production'), 'utf8');
+        const data = fs.readFileSync(process.env.NODE_ENV === 'development' ? this.ctx.ResourceLoad.GetConfigByName('Development') : this.ctx.ResourceLoad.GetConfigByName('Production'), 'utf8');
         this.configs = JSON.parse(data);
     }
 
@@ -23,6 +22,4 @@ class Configuration extends Manager {
     }
 }
 
-const ConfigurationInstance = new Configuration();
-
-export { ConfigurationInstance as Configuration };
+export { Configuration };

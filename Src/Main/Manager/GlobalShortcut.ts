@@ -26,6 +26,4 @@ class GlobalShortcut extends Manager {
     }
 }
 
-const GlobalShortcutInstance = new GlobalShortcut();
-
-export { GlobalShortcutInstance as GlobalShortcut };
+export { GlobalShortcut };

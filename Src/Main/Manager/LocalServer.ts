@@ -1,6 +1,5 @@
 import express from 'express';
 import * as H from 'http';
-import { ResourceLoad } from './ResourceLoad';
 import * as core from 'express-serve-static-core';
 import { Manager } from '@Main/Libs/Manager';
 
@@ -48,10 +47,8 @@ class LocalServer extends Manager {
     }
 
     private SetStaticFile() {
-        this.app.use('/static', express.static(ResourceLoad.GetNeedFolder()));
+        this.app.use('/static', express.static(this.ctx.ResourceLoad.GetNeedFolder()));
     }
 }
 
-const LocalServerInstance = new LocalServer();
-
-export { LocalServerInstance as LocalServer };
+export { LocalServer };

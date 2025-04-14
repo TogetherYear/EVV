@@ -1,6 +1,5 @@
 import { app } from 'electron';
 import path from 'path';
-import { CustomProtocol } from '@Main/Manager/CustomProtocol';
 import { Manager } from '@Main/Libs/Manager';
 
 class ResourceLoad extends Manager {
@@ -38,10 +37,8 @@ class ResourceLoad extends Manager {
      * 渲染进程使用
      */
     public GetResourcePathByName(name: string) {
-        return `${this.GetNeedFolder()}/${name}`.replace('file', CustomProtocol.fileProtocol);
+        return `${this.GetNeedFolder()}/${name}`.replace('file', this.ctx.CustomProtocol.fileProtocol);
     }
 }
 
-const ResourceLoadInstance = new ResourceLoad();
-
-export { ResourceLoadInstance as ResourceLoad };
+export { ResourceLoad };

@@ -12,33 +12,79 @@ import { SingleInstance } from './Manager/SingleInstance';
 import { CommonEvent } from './Manager/CommonEvent';
 import { LocalServer } from './Manager/LocalServer';
 import { CustomWidget } from './Manager/CustomWidget';
+import { IM } from './Instructions/IM';
 
-SingleInstance.Run();
+const target: Partial<IM.IContext> = {};
 
-ResourceLoad.Run();
+/**
+ * 后面可能加东西 先弄一层代理
+ */
+const proxy = Proxy.revocable(target as IM.IContext, {
+    get: (target: IM.IContext, p: keyof IM.IContext, receiver: any) => {
+        return target[p];
+    },
+    set: (target: IM.IContext, p: keyof IM.IContext, newValue: any, receiver: any) => {
+        target[p] = newValue;
+        return true;
+    }
+});
 
-Configuration.Run();
+const ctx = proxy.proxy;
 
-ProcessPool.Run();
+ctx.SingleInstance = new SingleInstance(ctx);
 
-WindowPool.Run();
+ctx.ResourceLoad = new ResourceLoad(ctx);
 
-IpcMainHandle.Run();
+ctx.Configuration = new Configuration(ctx);
 
-LocalServer.Run();
+ctx.ProcessPool = new ProcessPool(ctx);
+
+ctx.WindowPool = new WindowPool(ctx);
+
+ctx.IpcMainHandle = new IpcMainHandle(ctx);
+
+ctx.LocalServer = new LocalServer(ctx);
+
+ctx.GlobalShortcut = new GlobalShortcut(ctx);
+
+ctx.CustomProtocol = new CustomProtocol(ctx);
+
+ctx.CustomProtocol = new CustomProtocol(ctx);
+
+ctx.CustomWidget = new CustomWidget(ctx);
+
+ctx.AppMainWindow = new AppMainWindow(ctx);
+
+ctx.AppTray = new AppTray(ctx);
+
+ctx.CommonEvent = new CommonEvent(ctx);
+
+ctx.SingleInstance.Run();
+
+ctx.ResourceLoad.Run();
+
+ctx.Configuration.Run();
+
+ctx.ProcessPool.Run();
+
+ctx.WindowPool.Run();
+
+ctx.IpcMainHandle.Run();
+
+ctx.LocalServer.Run();
 
 app.on('ready', () => {
-    GlobalShortcut.Run();
+    ctx.GlobalShortcut.Run();
 
-    CustomProtocol.Run();
+    ctx.CustomProtocol.Run();
 
-    CustomWidget.Run();
+    ctx.CustomWidget.Run();
 
-    AppMainWindow.Run();
+    ctx.AppMainWindow.Run();
 
-    AppTray.Run();
+    ctx.AppTray.Run();
 
-    CommonEvent.Run();
+    ctx.CommonEvent.Run();
 });
 
 app.on('window-all-closed', () => {
@@ -48,5 +94,5 @@ app.on('window-all-closed', () => {
 });
 
 app.on('will-quit', () => {
-    GlobalShortcut.UnregisterAll();
+    ctx.GlobalShortcut.UnregisterAll();
 });

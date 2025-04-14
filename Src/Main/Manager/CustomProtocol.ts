@@ -32,6 +32,4 @@ class CustomProtocol extends Manager {
     }
 }
 
-const CustomProtocolInstance = new CustomProtocol();
-
-export { CustomProtocolInstance as CustomProtocol };
+export { CustomProtocol };

@@ -1,13 +1,7 @@
-import { AppMainWindow } from '@Main/Manager/AppMainWindow';
 import { BrowserWindow, app, ipcMain, shell, dialog } from 'electron';
-import { ResourceLoad } from '@Main/Manager/ResourceLoad';
-import { AppTray } from '@Main/Manager/AppTray';
 import { I } from '@Src/Instructions/I';
-import { WindowPool } from './WindowPool';
 import * as F from 'fs';
-import { CustomWidget } from './CustomWidget';
 import { Manager } from '@Main/Libs/Manager';
-import { LocalServer } from './LocalServer';
 
 /**
  * 主线程 Ipc 监听
@@ -49,17 +43,17 @@ class IpcMainHandle extends Manager {
         });
 
         ipcMain.handle(`Renderer:App:CreateCustomWindow`, async (e, options: TSingleton.CustomWidgetOptions) => {
-            const result = CustomWidget.CreateWindow(options);
+            const result = this.ctx.CustomWidget.CreateWindow(options);
             return result;
         });
 
         ipcMain.handle(`Renderer:App:GetLocalServerPort`, async (e) => {
-            const result = LocalServer.port;
+            const result = this.ctx.LocalServer.port;
             return result;
         });
 
         ipcMain.handle(`Renderer:App:ShowMainWindow`, async (e) => {
-            const result = AppMainWindow.widget.show();
+            const result = this.ctx.AppMainWindow.widget.show();
             return result;
         });
     }
@@ -135,10 +129,10 @@ class IpcMainHandle extends Manager {
 
         ipcMain.on(`Renderer:Widget:PostMessage`, (e, d: I.IIpcRendererReceiveMessage) => {
             switch (e.sender.id) {
-                case AppMainWindow.widget.webContents.id:
+                case this.ctx.AppMainWindow.widget.webContents.id:
                     this.OnMessage({ ...d, type: I.IpcRendererWindow.Main, id: e.sender.id });
                     return;
-                case AppTray.widget.webContents.id:
+                case this.ctx.AppTray.widget.webContents.id:
                     this.OnMessage({ ...d, type: I.IpcRendererWindow.Tray, id: e.sender.id });
                     return;
                 default:
@@ -182,34 +176,34 @@ class IpcMainHandle extends Manager {
 
     private OnTrayIPC() {
         ipcMain.handle(`Renderer:Tray:Icon`, async (e, icon: string) => {
-            const result = AppTray.OnSetIcon(icon);
+            const result = this.ctx.AppTray.OnSetIcon(icon);
             return result;
         });
 
         ipcMain.handle(`Renderer:Tray:Tooltip`, async (e, tooltip: string) => {
-            const result = AppTray.OnSetTooltip(tooltip);
+            const result = this.ctx.AppTray.OnSetTooltip(tooltip);
             return result;
         });
 
         ipcMain.handle(`Renderer:Tray:Flash`, async (e, icon: string) => {
-            const result = AppTray.OnFlash(icon);
+            const result = this.ctx.AppTray.OnFlash(icon);
             return result;
         });
 
         ipcMain.handle(`Renderer:Tray:StopFlash`, async (e, icon: string) => {
-            const result = AppTray.OnStopFlash(icon);
+            const result = this.ctx.AppTray.OnStopFlash(icon);
             return result;
         });
     }
 
     private OnResourceIPC() {
         ipcMain.handle(`Renderer:Resource:GetPathByName`, async (e, name: string) => {
-            const path = ResourceLoad.GetResourcePathByName(name);
+            const path = this.ctx.ResourceLoad.GetResourcePathByName(name);
             return path;
         });
 
         ipcMain.handle(`Renderer:Resource:SelectResourcesPath`, async (e, options: TSingleton.SelectOptions) => {
-            const window = WindowPool.GetWindowById(e.sender.id);
+            const window = this.ctx.WindowPool.GetWindowById(e.sender.id);
             const features: Array<'multiSelections' | 'openDirectory' | 'openFile'> = [];
             if (options.multiple) {
                 features.push('multiSelections');
@@ -229,7 +223,7 @@ class IpcMainHandle extends Manager {
         });
 
         ipcMain.handle(`Renderer:Resource:GetSaveResourcesPath`, async (e, options: TSingleton.SaveOptions) => {
-            const window = WindowPool.GetWindowById(e.sender.id);
+            const window = this.ctx.WindowPool.GetWindowById(e.sender.id);
             const path = dialog.showSaveDialog(window.widget, {
                 title: options.title,
                 defaultPath: options.defaultPath,
@@ -363,8 +357,8 @@ class IpcMainHandle extends Manager {
         } else if (e.type === I.IpcRendererWindow.Tray) {
         } else {
             if (e.reason === 'Empty') {
-                const target = CustomWidget.FindWidget(e.id);
-                WindowPool.PostMessage({
+                const target = this.ctx.CustomWidget.FindWidget(e.id);
+                this.ctx.WindowPool.PostMessage({
                     type: I.IpcRendererEvent.WidgetEmpty,
                     widgets: [I.IpcRendererWindow.Main],
                     send: {
@@ -376,6 +370,4 @@ class IpcMainHandle extends Manager {
     }
 }
 
-const IpcMainHandleInstance = new IpcMainHandle();
-
-export { IpcMainHandleInstance as IpcMainHandle };
+export { IpcMainHandle };

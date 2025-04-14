@@ -1,5 +1,4 @@
 import { fork, ChildProcess } from 'child_process';
-import { ResourceLoad } from '@Main/Manager/ResourceLoad';
 import * as fs from 'fs';
 import { IM } from '@Main/Instructions/IM';
 import { Manager } from '@Main/Libs/Manager';
@@ -24,12 +23,12 @@ class ProcessPool extends Manager {
     }
 
     private RunChildren() {
-        const children = fs.readdirSync(ResourceLoad.GetChildProcessesFolder());
+        const children = fs.readdirSync(this.ctx.ResourceLoad.GetChildProcessesFolder());
         for (let c of children) {
             if (c.indexOf('.js') != -1) {
                 const name = c.split('.js')[0];
                 const type = this.TransformType(name);
-                const process = fork(ResourceLoad.GetChildProcessesByName(name));
+                const process = fork(this.ctx.ResourceLoad.GetChildProcessesByName(name));
                 process.on('message', (e: IM.IChildrenProcessReceiveMessage) => {
                     this.OnMessage({ ...e, type });
                 });
@@ -88,6 +87,4 @@ class ProcessPool extends Manager {
     }
 }
 
-const ProcessPoolInstance = new ProcessPool();
-
-export { ProcessPoolInstance as ProcessPool };
+export { ProcessPool };

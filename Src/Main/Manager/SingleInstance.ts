@@ -1,9 +1,7 @@
 import { Time } from '@Src/Utils/Time';
 import { app } from 'electron';
-import { WindowPool } from './WindowPool';
 import { I } from '@Src/Instructions/I';
 import { Manager } from '@Main/Libs/Manager';
-import { CustomProtocol } from './CustomProtocol';
 
 class SingleInstance extends Manager {
     public Run() {
@@ -14,7 +12,7 @@ class SingleInstance extends Manager {
         } else {
             app.on('second-instance', (event, commandLine, workingDirectory) => {
                 const cmd = commandLine.pop() || '';
-                if (cmd.indexOf(CustomProtocol.deepLinkProtocol) !== -1) {
+                if (cmd.indexOf(this.ctx.CustomProtocol.deepLinkProtocol) !== -1) {
                     this.OnDeepLink(cmd);
                 } else {
                     this.OnSecondInstance();
@@ -24,14 +22,14 @@ class SingleInstance extends Manager {
     }
 
     public OnSecondInstance() {
-        WindowPool.PostMessage({
+        this.ctx.WindowPool.PostMessage({
             type: I.IpcRendererEvent.SecondInstance,
             widgets: [I.IpcRendererWindow.Tray]
         });
     }
 
     public OnDeepLink(url: string) {
-        WindowPool.PostMessage({
+        this.ctx.WindowPool.PostMessage({
             type: I.IpcRendererEvent.DeepLink,
             widgets: [I.IpcRendererWindow.Tray],
             send: {
@@ -41,6 +39,4 @@ class SingleInstance extends Manager {
     }
 }
 
-const SingleInstanceInstance = new SingleInstance();
-
-export { SingleInstanceInstance as SingleInstance };
+export { SingleInstance };

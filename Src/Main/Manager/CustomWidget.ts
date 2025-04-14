@@ -1,8 +1,5 @@
 import { BrowserWindow } from 'electron';
-import { WindowPool } from './WindowPool';
 import { I } from '@Src/Instructions/I';
-import { ResourceLoad } from './ResourceLoad';
-import { Configuration } from './Configuration';
 import { Manager } from '@Main/Libs/Manager';
 
 class CustomWidget extends Manager {
@@ -23,22 +20,22 @@ class CustomWidget extends Manager {
                 alwaysOnTop: options.alwaysOnTop || false,
                 transparent: options.transparent || false,
                 skipTaskbar: options.skipTaskbar || false,
-                icon: options.icon || ResourceLoad.GetImageByName('icon.ico'),
+                icon: options.icon || this.ctx.ResourceLoad.GetImageByName('icon.ico'),
                 show: options.show || true,
                 webPreferences: {
-                    devTools: Configuration.configs.debug,
-                    preload: options.preload || ResourceLoad.GetPreloadByName('Renderer')
+                    devTools: this.ctx.Configuration.configs.debug,
+                    preload: options.preload || this.ctx.ResourceLoad.GetPreloadByName('Renderer')
                 }
             });
             widget.loadURL(options.url);
 
-            if (Configuration.configs.debug) {
+            if (this.ctx.Configuration.configs.debug) {
                 widget.webContents.openDevTools();
             }
 
             this.RegisterWidget(options.label, widget);
 
-            WindowPool.PostMessage({
+            this.ctx.WindowPool.PostMessage({
                 type: I.IpcRendererEvent.WidgetCreate,
                 widgets: [I.IpcRendererWindow.Main],
                 send: {
@@ -48,7 +45,7 @@ class CustomWidget extends Manager {
 
             widget.on('close', () => {
                 this.DeleteWidget(options.label);
-                WindowPool.PostMessage({
+                this.ctx.WindowPool.PostMessage({
                     type: I.IpcRendererEvent.WidgetDestroy,
                     widgets: [I.IpcRendererWindow.Main],
                     send: {
@@ -78,6 +75,4 @@ class CustomWidget extends Manager {
     }
 }
 
-const CustomWidgetInstance = new CustomWidget();
-
-export { CustomWidgetInstance as CustomWidget };
+export { CustomWidget };

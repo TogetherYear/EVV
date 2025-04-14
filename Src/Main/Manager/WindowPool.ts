@@ -1,9 +1,10 @@
+import { Manager } from '@Main/Libs/Manager';
 import { I } from '@Src/Instructions/I';
 import { BrowserWindow } from 'electron';
 
 type Window = { widget: BrowserWindow };
 
-class WindowPool {
+class WindowPool extends Manager {
     private pool = new Map<I.IpcRendererWindow, Window>();
 
     public Run() {}
@@ -61,6 +62,4 @@ class WindowPool {
     }
 }
 
-const WindowPoolInstance = new WindowPool();
-
-export { WindowPoolInstance as WindowPool };
+export { WindowPool };

@@ -6,7 +6,7 @@ import { Manager } from '@Main/Libs/Manager';
 class CommonEvent extends Manager {
     public Run() {
         nativeTheme.on('updated', () => {
-            WindowPool.PostMessage({
+            this.ctx.WindowPool.PostMessage({
                 type: I.IpcRendererEvent.ThemeUpdate,
                 send: {
                     theme: nativeTheme.themeSource
@@ -16,6 +16,4 @@ class CommonEvent extends Manager {
     }
 }
 
-const CommonEventInstance = new CommonEvent();
-
-export { CommonEventInstance as CommonEvent };
+export { CommonEvent };

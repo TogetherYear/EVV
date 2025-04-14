@@ -1,8 +1,5 @@
-import { BrowserWindow, Menu } from 'electron';
-import { ResourceLoad } from '@Main/Manager/ResourceLoad';
-import { Configuration } from '@Main/Manager/Configuration';
+import { BrowserWindow } from 'electron';
 import { I } from '@Src/Instructions/I';
-import { WindowPool } from './WindowPool';
 import { Manager } from '@Main/Libs/Manager';
 
 class AppMainWindow extends Manager {
@@ -20,10 +17,10 @@ class AppMainWindow extends Manager {
             useContentSize: true,
             frame: false,
             backgroundColor: '#13131a',
-            icon: ResourceLoad.GetImageByName('icon.ico'),
+            icon: this.ctx.ResourceLoad.GetImageByName('icon.ico'),
             webPreferences: {
-                devTools: Configuration.configs.debug,
-                preload: ResourceLoad.GetPreloadByName('Renderer')
+                devTools: this.ctx.Configuration.configs.debug,
+                preload: this.ctx.ResourceLoad.GetPreloadByName('Renderer')
             }
         });
 
@@ -43,16 +40,14 @@ class AppMainWindow extends Manager {
             this.widget.hide();
         });
 
-        if (Configuration.configs.debug) {
+        if (this.ctx.Configuration.configs.debug) {
             this.widget.webContents.openDevTools();
         }
 
-        this.widget.loadURL(ResourceLoad.GetPageByName('Application'));
+        this.widget.loadURL(this.ctx.ResourceLoad.GetPageByName('Application'));
 
-        WindowPool.RegisterWindow(I.IpcRendererWindow.Main, this);
+        this.ctx.WindowPool.RegisterWindow(I.IpcRendererWindow.Main, this);
     }
 }
 
-const AppMainWindowInstance = new AppMainWindow();
-
-export { AppMainWindowInstance as AppMainWindow };
+export { AppMainWindow };

@@ -1,8 +1,4 @@
-import { ResourceLoad } from '@Main/Manager/ResourceLoad';
 import { Tray, BrowserWindow, screen } from 'electron';
-import { AppMainWindow } from '@Main/Manager/AppMainWindow';
-import { Configuration } from '@Main/Manager/Configuration';
-import { WindowPool } from '@Main/Manager/WindowPool';
 import { I } from '@Src/Instructions/I';
 import { Manager } from '@Main/Libs/Manager';
 
@@ -30,10 +26,10 @@ class AppTray extends Manager {
             transparent: true,
             skipTaskbar: true,
             hasShadow: false,
-            icon: ResourceLoad.GetImageByName('tray.ico'),
+            icon: this.ctx.ResourceLoad.GetImageByName('tray.ico'),
             webPreferences: {
-                devTools: Configuration.configs.debug,
-                preload: ResourceLoad.GetPreloadByName('Renderer')
+                devTools: this.ctx.Configuration.configs.debug,
+                preload: this.ctx.ResourceLoad.GetPreloadByName('Renderer')
             }
         });
 
@@ -41,18 +37,18 @@ class AppTray extends Manager {
             this.widget.hide();
         });
 
-        if (Configuration.configs.debug) {
+        if (this.ctx.Configuration.configs.debug) {
             this.widget.webContents.openDevTools();
         }
 
-        this.widget.loadURL(ResourceLoad.GetPageByName('Tray'));
+        this.widget.loadURL(this.ctx.ResourceLoad.GetPageByName('Tray'));
 
-        WindowPool.RegisterWindow(I.IpcRendererWindow.Tray, this);
+        this.ctx.WindowPool.RegisterWindow(I.IpcRendererWindow.Tray, this);
     }
 
     private CreateTray() {
         if (process.platform === 'win32') {
-            this.tray = new Tray(ResourceLoad.GetImageByName('tray.ico'));
+            this.tray = new Tray(this.ctx.ResourceLoad.GetImageByName('tray.ico'));
 
             this.tray.setToolTip('去码头整点薯条');
 
@@ -61,7 +57,7 @@ class AppTray extends Manager {
             });
 
             this.tray.on('double-click', () => {
-                AppMainWindow.widget.show();
+                this.ctx.AppMainWindow.widget.show();
             });
         }
     }
@@ -74,7 +70,7 @@ class AppTray extends Manager {
     }
 
     public OnSetIcon(icon: string) {
-        const showIcon = ResourceLoad.GetImageByName(icon);
+        const showIcon = this.ctx.ResourceLoad.GetImageByName(icon);
         this.tray.setImage(showIcon);
     }
 
@@ -84,8 +80,8 @@ class AppTray extends Manager {
 
     public OnFlash(icon: string) {
         let show = true;
-        const emptyIcon = ResourceLoad.GetImageByName('icon.ico');
-        const showIcon = ResourceLoad.GetImageByName(icon);
+        const emptyIcon = this.ctx.ResourceLoad.GetImageByName('icon.ico');
+        const showIcon = this.ctx.ResourceLoad.GetImageByName(icon);
         this.flashTimer = setInterval(() => {
             if (show) {
                 this.tray.setImage(emptyIcon);
@@ -97,7 +93,7 @@ class AppTray extends Manager {
     }
 
     public OnStopFlash(icon: string) {
-        const showIcon = ResourceLoad.GetImageByName(icon);
+        const showIcon = this.ctx.ResourceLoad.GetImageByName(icon);
         if (this.flashTimer) {
             clearInterval(this.flashTimer);
             this.flashTimer = null;
@@ -106,6 +102,4 @@ class AppTray extends Manager {
     }
 }
 
-const AppTrayInstance = new AppTray();
-
-export { AppTrayInstance as AppTray };
+export { AppTray };
