@@ -1,5 +1,4 @@
 import { nativeTheme } from 'electron';
-import { WindowPool } from './WindowPool';
 import { I } from '@Src/Instructions/I';
 import { Manager } from '@Main/Libs/Manager';
 
