@@ -1,5 +1,4 @@
 import express from 'express';
-import * as H from 'http';
 import * as core from 'express-serve-static-core';
 import { Manager } from '@Main/Libs/Manager';
 
@@ -11,14 +10,15 @@ class LocalServer extends Manager {
 
     private app!: core.Express;
 
-    private server!: H.Server<typeof H.IncomingMessage, typeof H.ServerResponse>;
-
     public Run() {
         this.CreateServer();
     }
 
     private CreateServer() {
         this.app = express();
+
+        this.app.use(express.json())
+
         this.app.use((req, res, next) => {
             res.header('Access-Control-Allow-Origin', '*');
             res.header('Access-Control-Allow-Methods', 'GET,POST');
@@ -33,10 +33,9 @@ class LocalServer extends Manager {
 
         this.SetStaticFile();
 
-        this.app.set('port', this.port);
-        this.server = H.createServer(this.app);
-        this.server.listen(this.port, '127.0.0.1');
-        this.server.on('listening', () => {});
+        this.app.listen(this.port,'127.0.0.1',()=>{
+
+        })
     }
 
     private SetHttpServer() {
