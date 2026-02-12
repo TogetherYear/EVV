@@ -51,7 +51,13 @@
             "installerHeaderIcon": "./Need/Images/256x256.ico",
             "createDesktopShortcut": true,
             "createStartMenuShortcut": true,
-            "shortcutName": "Application"
+            "shortcutName": "Application",
+            "displayLanguageSelector": false,
+            "language": "2052",
+            "installerLanguages": [
+                "zh_CN",
+                "en_US"
+            ]
         }
     },
     "devDependencies": {
